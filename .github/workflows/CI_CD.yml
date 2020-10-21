@@ -7,7 +7,7 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
     services:
@@ -61,17 +61,24 @@ jobs:
         run: |
           bundle exec rails db:setup
           bundle exec rspec .
-          
+
+  Deployment:
+    needs: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Deploy Main Branch to Heroku
         env:
           HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: "your-app-name-here"
-        if: job.status == 'success'
+          HEROKU_APP_NAME: 'rolodex-portal-main'
+        if: github.ref == 'refs/heads/main'
         run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/main:main
-      
+
       - name: Deploy Dev Branch to Heroku
         env:
           HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: "your-app-name-here"
-        if: job.status == 'success'
+          HEROKU_APP_NAME: 'rolodex-portal-dev'
+        if: github.ref == 'refs/heads/dev'
         run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/dev:dev
