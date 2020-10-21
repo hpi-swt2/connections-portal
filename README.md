@@ -1,4 +1,5 @@
-# rolodex-portal
+# rolodex-portal ![build](https://github.com/hpi-swt2/rolodex-portal/workflows/CI_CD/badge.svg?branch=main) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 A Ruby on Rails application for managing contacts
 
 ## Deployment
