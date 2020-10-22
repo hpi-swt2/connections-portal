@@ -56,7 +56,7 @@ gem 'jquery-rails', '~> 4.4' # https://github.com/rails/jquery-rails
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw], platforms: [:mri, :mingw, :x64_mingw] # https://github.com/deivid-rodriguez/byebug
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] # https://github.com/deivid-rodriguez/byebug
   # RSpec testing framework as a drop-in alternative to Rails' default testing framework, Minitest
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1' # https://github.com/rspec/rspec-rails
   # State of the art fixtures
