@@ -37,14 +37,21 @@ jobs:
       - name: Install yarn packages
         run: yarn install --check-files
       
+      - name: Setup Database
+        run: bundle exec rails db:setup
+      
       - name: Run Tests
-        run: |
-          bundle exec rails db:setup
-          bundle exec rspec .
+        run: bundle exec rspec .
 
   Deployment:
-    needs: CI
+    needs: CI # assures, that the job "CI" completed successful before this job is started
     runs-on: ubuntu-latest
+
+    # The both deployment steps contain two safeguards.
+    # github.event_name == 'push' assures that the pull requests, for which the CI should run too, are not deployed to Heroku
+    # github.ref == 'refs/heads/<branch name>' assures that in the current step, only one of the branches is deployed. 
+    #   This was made because the two different deployments (main and dev) each have their own Heroku-App.
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
