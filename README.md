@@ -1,4 +1,8 @@
-# rolodex-portal ![build: main](https://github.com/hpi-swt2/rolodex-portal/workflows/CI_CD/badge.svg?branch=main) ![build: dev](https://github.com/hpi-swt2/rolodex-portal/workflows/CI_CD/badge.svg?branch=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+# rolodex-portal
+
+![build: main](https://github.com/hpi-swt2/rolodex-portal/workflows/CI_CD/badge.svg?branch=main)
+![build: dev](https://github.com/hpi-swt2/rolodex-portal/workflows/CI_CD/badge.svg?branch=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A Ruby on Rails application for managing contacts
 
