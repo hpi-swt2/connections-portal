@@ -10,19 +10,6 @@ jobs:
   CI:
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: postgres:11
-        ports: ["5432:5432"]
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -32,8 +19,8 @@ jobs:
         with: 
           ruby-version: 2.7.2
 
-      - name: Install Postgres
-        run: sudo apt-get -y install libpq-dev
+      - name: Install SQLite3
+        run: sudo apt install libsqlite3-dev
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
@@ -51,13 +38,6 @@ jobs:
         run: yarn install --check-files
       
       - name: Run Tests
-        env:
-          PG_DATABASE: postgres
-          PG_HOST: localhost
-          PG_USER: postgres
-          PG_PASSWORD: postgres
-          RAILS_ENV: test
-          DISABLE_SPRING: 1
         run: |
           bundle exec rails db:setup
           bundle exec rspec .
