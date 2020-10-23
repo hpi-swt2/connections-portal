@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}.git" }
 
-# ruby version
+# Ruby 2.7.2 released 2020-10-02: https://www.ruby-lang.org/en/news/2020/10/02/ruby-2-7-2-released/
 ruby '2.7.2'
 
 #
