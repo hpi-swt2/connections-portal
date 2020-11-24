@@ -57,16 +57,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Deploy Main Branch to Heroku
-        env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: 'connections-portal-main'
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/main:main
-
-      - name: Deploy Dev Branch to Heroku
-        env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: 'connections-portal-dev'
+        # https://github.com/marketplace/actions/deploy-to-heroku
+      - uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
+          heroku_app_name: "connections-portal-dev" #Must be unique in Heroku
+          heroku_email: "hpi.swt2+heroku@gmail.com"
         if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/dev:dev
+
+        # https://github.com/marketplace/actions/deploy-to-heroku
+      - uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
+          heroku_app_name: "connections-portal-main" #Must be unique in Heroku
+          heroku_email: "hpi.swt2+heroku@gmail.com"
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
