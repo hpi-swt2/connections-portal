@@ -41,7 +41,8 @@ jobs:
         run: bundle exec rails db:setup
       
       - name: Run Tests
-        run: bundle exec rspec .
+        # Don't run with . https://olivierlacan.com/posts/a-tiny-little-dot/
+        run: bundle exec rspec spec/
 
   Deployment:
     needs: CI # assures, that the job "CI" completed successful before this job is started
