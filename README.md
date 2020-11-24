@@ -1,4 +1,4 @@
-# rolodex-portal
+# Contacts-Portal
 A Ruby on Rails application for managing contacts
 
 
