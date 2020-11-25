@@ -1,7 +1,7 @@
 # Connections Portal
 
-![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI_CD/badge.svg?branch=main)
-![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI_CD/badge.svg?branch=dev)
+![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=main)
+![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A web application for organizing and arranging networks, relationships and human connections, written in [Ruby on Rails](https://rubyonrails.org/).
