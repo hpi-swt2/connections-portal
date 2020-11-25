@@ -34,7 +34,7 @@ jobs:
       - name: Checkout repository contents
         uses: actions/checkout@v2
       
-      - name: Install Ruby
+      - name: Install Ruby and Gemfile dependencies
         # The setup-ruby action will automatically install bundler for you
         # https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-ruby#installing-dependencies-with-bundler
         uses: ruby/setup-ruby@v1
@@ -42,9 +42,6 @@ jobs:
           ruby-version: 2.7.2
           # https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-ruby#caching-dependencies
           bundler-cache: true
-
-      - name: Install yarn packages
-        run: yarn install --check-files
 
       - name: Setup test PostgreSQL database & run tests
         env:
