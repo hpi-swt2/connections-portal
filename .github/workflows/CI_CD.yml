@@ -7,42 +7,56 @@ on:
     branches: [ main, dev ]
 
 jobs:
+  # Label of the runner job
   CI:
+    # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
+    # https://docs.github.com/en/free-pro-team@latest/actions/guides/creating-postgresql-service-containers
+    # Service containers to run with `CI`
+    services:
+      postgres:
+      # Docker Hub image
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: test
+          # should not be empty
+          # https://stackoverflow.com/questions/60618118#answer-60618750
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        # Maps tcp port 5432 on service container to the host
+        ports: ["5432:5432"]
+
     steps:
-      - name: Checkout repository
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Checkout repository contents
         uses: actions/checkout@v2
       
       - name: Install Ruby
+        # The setup-ruby action will automatically install bundler for you
+        # https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-ruby#installing-dependencies-with-bundler
         uses: ruby/setup-ruby@v1
         with: 
           ruby-version: 2.7.2
+          # https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-ruby#caching-dependencies
+          bundler-cache: true
 
-      - name: Install SQLite3
-        run: sudo apt install libsqlite3-dev
-
-      - name: Cache Ruby Gems
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-      
-      - name: Install Ruby Gems
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          
       - name: Install yarn packages
         run: yarn install --check-files
-      
-      - name: Setup Database
-        run: bundle exec rails db:setup
-      
-      - name: Run Tests
-        # Don't run with . https://olivierlacan.com/posts/a-tiny-little-dot/
-        run: bundle exec rspec spec/
+
+      - name: Setup test PostgreSQL database & run tests
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+          RAILS_ENV: test
+        # Don't run RSpec with . https://olivierlacan.com/posts/a-tiny-little-dot/
+        run: |
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails db:setup
+          bundle exec rspec spec/
 
   Deployment:
     needs: CI # assures, that the job "CI" completed successful before this job is started
@@ -57,16 +71,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Deploy Main Branch to Heroku
-        env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: 'connections-portal-main'
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/main:main
-
-      - name: Deploy Dev Branch to Heroku
-        env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: 'connections-portal-dev'
+        # https://github.com/marketplace/actions/deploy-to-heroku
+      - uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
+          heroku_app_name: "connections-portal-dev" #Must be unique in Heroku
+          heroku_email: "hpi.swt2+heroku@gmail.com"
         if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/dev:dev
+
+        # https://github.com/marketplace/actions/deploy-to-heroku
+      - uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
+          heroku_app_name: "connections-portal-main" #Must be unique in Heroku
+          heroku_email: "hpi.swt2+heroku@gmail.com"
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
