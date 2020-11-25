@@ -10,8 +10,6 @@ ruby '2.7.2'
 
 # The application framework
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4' # https://github.com/rails/rails
-# Sqlite3 as the database for ActiveRecord.
-gem 'sqlite3', '~> 1.4' # https://www.sqlite.org/index.html
 # Development server
 gem 'puma', '~> 5.0', '>= 5.0.2' # https://github.com/puma/puma
 # Transpile app-like JavaScript, Webpacker is the default JavaScript compiler for Rails 6
@@ -55,6 +53,8 @@ gem 'jquery-rails', '~> 4.4' # https://github.com/rails/jquery-rails
 #
 
 group :development, :test do
+  # Sqlite3 as the database for ActiveRecord.
+  gem 'sqlite3', '~> 1.4' # https://www.sqlite.org/index.html
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] # https://github.com/deivid-rodriguez/byebug
   # RSpec testing framework as a drop-in alternative to Rails' default testing framework, Minitest
@@ -90,4 +90,9 @@ group :test do
   gem 'faker', '~> 2.14' # https://github.com/faker-ruby/faker
   # Provides one-liners to test common rails functionality, that, if written by hand, would be much longer
   gem 'shoulda-matchers', '~> 4.0' # https://github.com/thoughtbot/shoulda-matchers
+end
+
+group :production do
+  # https://devcenter.heroku.com/articles/sqlite3
+  gem "pg" # production database runs on postgres
 end

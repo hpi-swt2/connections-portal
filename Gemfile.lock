@@ -140,6 +140,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    pg (1.2.3)
     popper_js (1.16.0)
     public_suffix (4.0.6)
     puma (5.0.4)
@@ -291,6 +292,7 @@ DEPENDENCIES
   faker (~> 2.14)
   font-awesome-rails (~> 4.7, >= 4.7.0.5)
   jquery-rails (~> 4.4)
+  pg
   puma (~> 5.0, >= 5.0.2)
   rails (~> 6.0.3, >= 6.0.3.4)
   rspec-rails (~> 4.0, >= 4.0.1)
