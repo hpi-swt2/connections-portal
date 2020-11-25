@@ -52,19 +52,16 @@ jobs:
       - name: Install yarn packages
         run: yarn install --check-files
 
-      - name: Setup test PostgreSQL database
+      - name: Setup test PostgreSQL database & run tests
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test
           RAILS_ENV: test
+        # Don't run RSpec with . https://olivierlacan.com/posts/a-tiny-little-dot/
         run: |
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:setup
-      
-      - name: Run RSpec tests
-        run: 
-          # Don't run with . https://olivierlacan.com/posts/a-tiny-little-dot/
           bundle exec rspec spec/
 
   Deployment:
