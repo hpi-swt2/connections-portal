@@ -1,5 +1,6 @@
 test:
   adapter: postgresql
+  host: localhost
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: <%= ENV["POSTGRES_DB"]%>
