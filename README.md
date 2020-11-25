@@ -1,7 +1,9 @@
 # Connections Portal
 
-![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=main)
-![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=dev)
+Main branch: [![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=main)](https://connections-portal-main.herokuapp.com/), deployed version: [Heroku link](https://connections-portal-main.herokuapp.com/)
+
+Dev branch: [![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=dev)](https://connections-portal-dev.herokuapp.com/), deployed version: [Heroku link](https://connections-portal-dev.herokuapp.com/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A web application for organizing and arranging networks, relationships and human connections, written in [Ruby on Rails](https://rubyonrails.org/).
@@ -19,13 +21,6 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 * `rake devise:create_demo_user` Create a demo user (note _email & password_)
 * `rails s` Start the Rails development server (default: _localhost:3000_) and log in using the demo credentials
 * `bundle exec rspec` Run the tests (using the [RSpec](http://rspec.info/) test framework)
-
-## Deployment
-
-The tested main branch and dev branch are automatically deployed to Heroku when all tests run successfully. 
-Further information on the test runs and deployments can be found in the Github-Actions tab.
-
-You can find the currently deployed main version at [https://connections-portal-main.herokuapp.com/](https://connections-portal-main.herokuapp.com/) and the currently deployed dev version at [https://connections-portal-dev.herokuapp.com/](https://connections-portal-dev.herokuapp.com/).
 
 ## Developer Guide
 
