@@ -1,8 +1,13 @@
 # Connections Portal
 
-Main branch: [![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=main)](https://github.com/hpi-swt2/connections-portal/actions?query=workflow%3ACI%2FCD+branch%3Amain), deployed version: [Heroku link](https://connections-portal-main.herokuapp.com/)
+Main branch:
+[![CodeFactor](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/badge/main)](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/overview/main)
+[![build: main](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=main)](https://github.com/hpi-swt2/connections-portal/actions?query=workflow%3ACI%2FCD+branch%3Amain),
+deployed version: [Heroku link](https://connections-portal-main.herokuapp.com/)
 
-Dev branch: [![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=dev)](https://github.com/hpi-swt2/connections-portal/actions?query=workflow%3ACI%2FCD+branch%3Adev), deployed version: [Heroku link](https://connections-portal-dev.herokuapp.com/)
+Dev branch: [![CodeFactor](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/badge/dev)](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/overview/dev) 
+[![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI/CD/badge.svg?branch=dev)](https://github.com/hpi-swt2/connections-portal/actions?query=workflow%3ACI%2FCD+branch%3Adev),
+deployed version: [Heroku link](https://connections-portal-dev.herokuapp.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
