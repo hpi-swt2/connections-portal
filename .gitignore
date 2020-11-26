@@ -44,8 +44,10 @@ build-iPhoneSimulator/
 # Ignore Rails master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore generated assets
 /public/packs
 /public/packs-test
+/public/assets/*
 /node_modules
 /yarn-error.log
 yarn-debug.log*
