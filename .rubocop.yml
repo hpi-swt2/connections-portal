@@ -1,0 +1,33 @@
+# https://github.com/rubocop-hq/rubocop-rails
+# https://github.com/rubocop-hq/rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+# Ignore "Prefer single-quoted strings when you don't need string interpolation or special symbols"
+Style/StringLiterals:
+  Enabled: false
+
+# Ignore "Avoid instance variables – use let, a method call, or a local variable (if possible)"
+RSpec/InstanceVariable:
+  Enabled: false
+
+# Ignore "Missing frozen string literal comment"
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Ignore "Prefer not_to over to_not"
+RSpec/NotToNot:
+  Enabled: false
+
+# Ignore "Add parentheses to nested method call"
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+# Ignore "Use ! instead of not"
+Style/Not:
+  Enabled: false
+
+# Ignore "Missing top-level class documentation comment"
+Style/Documentation:
+  Enabled: false
