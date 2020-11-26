@@ -7,8 +7,7 @@ class NotesController < ApplicationController
   end
 
   # GET /notes/1
-  def show
-  end
+  def show; end
 
   # GET /notes/new
   def new
@@ -16,8 +15,7 @@ class NotesController < ApplicationController
   end
 
   # GET /notes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /notes
   def create
@@ -45,14 +43,15 @@ class NotesController < ApplicationController
     redirect_to notes_url, notice: I18n.t('confirmation.resource_deletion', resource: Note)
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
+  private # Everything below this line is private
 
-    # Only allow a trusted parameter "white list" through.
-    def note_params
-      params.require(:note).permit(:title, :content, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def note_params
+    params.require(:note).permit(:title, :content, :user_id)
+  end
 end

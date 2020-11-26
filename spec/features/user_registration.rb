@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :feature do
-  it "can sign up" do 
+  it "can sign up" do
     visit root_path
-    
+
     within '#registration' do
       click_on "signup"
     end
-    
+
     within '#new_user' do
       user_attrs = FactoryBot.attributes_for(:user)
       fill_in "Email", with: user_attrs[:email]

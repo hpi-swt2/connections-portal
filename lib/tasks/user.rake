@@ -16,4 +16,4 @@ namespace :devise do
 
     puts "Demo user email: '#{demo_user.email}', password: '#{pw}'"
   end
-end  
+end
