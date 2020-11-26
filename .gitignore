@@ -35,19 +35,13 @@ build-iPhoneSimulator/
 /vendor/bundle
 /lib/bundler/man/
 
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
-
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
 
-# Ignore master key for decrypting credentials and more.
+# Ignore Rails master key for decrypting credentials and more.
 /config/master.key
 
 /public/packs
@@ -72,3 +66,6 @@ yarn-debug.log*
 *.rbc
 capybara-*.html
 .rspec
+
+# Ignore editor configs
+/.vscode
