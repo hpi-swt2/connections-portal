@@ -90,6 +90,8 @@ group :test do
   gem 'faker', '~> 2.14' # https://github.com/faker-ruby/faker
   # Provides one-liners to test common rails functionality, that, if written by hand, would be much longer
   gem 'shoulda-matchers', '~> 4.0' # https://github.com/thoughtbot/shoulda-matchers
+  # SimpleCov is a code coverage analysis tool for Ruby
+  gem 'simplecov', require: false # https://github.com/simplecov-ruby/simplecov
 end
 
 group :production do
