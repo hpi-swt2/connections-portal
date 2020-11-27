@@ -7,7 +7,7 @@ namespace :devise do
     demo_user = User.find_by email: email
 
     # If a demo user was already found, no need to create another
-    if not demo_user
+    unless demo_user
       demo_user = FactoryBot.build(:user, email: email, password: pw, password_confirmation: pw)
       # Don't validate as the password is too short
       demo_user.save(validate: false)

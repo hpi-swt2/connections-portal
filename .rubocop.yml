@@ -31,3 +31,27 @@ Style/Not:
 # Ignore "Missing top-level class documentation comment"
 Style/Documentation:
   Enabled: false
+
+# Ignore "Use `%i` or `%I` for an array of symbols"
+Style/SymbolArray:
+  Enabled: false
+
+# Ignore "Space inside } missing"
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Ignore "Gems should be sorted in an alphabetical order within their section of the Gemfile"
+Bundler/OrderedGems:
+  Enabled: false
+
+# Ignore "Please use Rails.root.join('path/to') instead"
+Rails/FilePath:
+  Enabled: false
+
+# Ignore "Avoid using {...} for multi-line blocks"
+Style/BlockDelimiters:
+  Enabled: false
+
+# Ignore "Omit the default :each argument for RSpec hooks"
+RSpec/HookArgument:
+  Enabled: false

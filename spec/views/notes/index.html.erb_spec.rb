@@ -7,7 +7,7 @@ RSpec.describe "notes/index", type: :view do
 
   it "renders a list of notes" do
     render
-    for note in @notes do
+    @notes.each do |note|
       expect(rendered).to match note.title
       expect(rendered).to match note.content
     end
