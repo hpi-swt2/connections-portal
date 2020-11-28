@@ -84,7 +84,7 @@ RSpec.describe "/notes", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        { title: valid_attributes[:title] + ' updated!' }
+        { title: "#{valid_attributes[:title]} updated!" }
       }
 
       it "updates the requested note" do
