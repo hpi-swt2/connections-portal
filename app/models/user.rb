@@ -1,3 +1,4 @@
+# An application user, uses the `devise` library
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

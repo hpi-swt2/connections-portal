@@ -4,6 +4,45 @@ require:
   - rubocop-rails
   - rubocop-rspec
 
+#
+# Specific excludes & includes
+#
+
+# Okay to have long examples in feature tests, there are usually many steps
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/features/*.rb'
+
+# Ignore LineLength for config files (e.g. with long secret strings)
+Layout/LineLength:
+  Exclude:
+    - 'config/**/*.rb'
+
+# Ignore "Block has too many lines" for specs, `RSpec.describe` blocks can be long
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+# Okay to have more than one expectation in a single block, default: 1
+RSpec/MultipleExpectations:
+  Max: 2
+  Exclude:
+    - 'spec/features/*.rb'
+
+# Only check "Missing top-level class documentation comment" for models
+Style/Documentation:
+  Include:
+    - 'app/models/*.rb'
+
+# Ignore "Prefer $CHILD_STATUS from the stdlib 'English' module (don't forget to require it) over $?"
+Style/SpecialGlobalVars:
+  Exclude:
+    - 'lib/**/*.rake'
+
+#
+# Ignoring entire rules
+#
+
 # Ignore "Prefer single-quoted strings when you don't need string interpolation or special symbols"
 Style/StringLiterals:
   Enabled: false
@@ -28,16 +67,8 @@ Style/NestedParenthesizedCalls:
 Style/Not:
   Enabled: false
 
-# Ignore "Missing top-level class documentation comment"
-Style/Documentation:
-  Enabled: false
-
 # Ignore "Use `%i` or `%I` for an array of symbols"
 Style/SymbolArray:
-  Enabled: false
-
-# Ignore "Space inside } missing"
-Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
 # Ignore "Gems should be sorted in an alphabetical order within their section of the Gemfile"
