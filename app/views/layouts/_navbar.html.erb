@@ -15,10 +15,10 @@
             <%# https://github.com/heartcombo/devise#controller-filters-and-helpers %>
             <% if user_signed_in? %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <%= current_user.username %>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
                   <%= link_to "Visit my profile", user_path(current_user), class: 'dropdown-item' %>
                   <div class="dropdown-divider"></div>
                   <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: 'dropdown-item' %>
