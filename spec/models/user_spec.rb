@@ -34,4 +34,14 @@ RSpec.describe User, type: :model do
     @user.username = ""
     expect(@user).not_to be_valid
   end
+
+  it "creates user name from email" do
+    user = described_class.new({ email: "test-user@example.org" })
+    expect(user.username).to eq("test-user")
+  end
+
+  it "creates user with default status available" do
+    user = described_class.new({ email: "test-user@example.org" })
+    expect(user.current_status).to eq("available")
+  end
 end

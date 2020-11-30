@@ -13,4 +13,12 @@ class User < ApplicationRecord
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
+
+  after_initialize :init
+
+  attribute :current_status, :string, default: "available"
+
+  def init
+    self.username ||= email.split('@')[0]
+  end
 end
