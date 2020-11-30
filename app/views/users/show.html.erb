@@ -1,0 +1,27 @@
+<h1><%= @user.username %></h1>
+
+<table>
+  <tr>
+    <td>Firstname:</td>
+    <td><%= @user.firstname %></td>
+  </tr>
+  <tr>
+    <td>Lastname:</td>
+    <td><%= @user.lastname %></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td>Place of residence:</td>
+    <td><%= @user.place_of_residence %></td>
+  </tr>
+  <tr>
+    <td>Birthdate:</td>
+    <td><%= @user.birthdate %></td>
+  </tr>
+</table>
+
+<%= render 'status_form' %>
+

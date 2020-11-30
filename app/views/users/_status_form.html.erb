@@ -1,0 +1,11 @@
+<%= form_with(model: @user, local: true, url: user_status_url(@user)) do |f| %>
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select :status, User::VALID_STATUS_LIST%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Change status" %>
+  </div>
+<% end %>
+
