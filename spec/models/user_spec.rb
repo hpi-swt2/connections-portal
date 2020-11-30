@@ -9,6 +9,11 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
+  it "is invalid with a status other than 'available' or 'working'" do
+    @user.current_status = "unavailable"
+    expect(@user).not_to be_valid
+  end
+
   it "is not valid with an email without @" do
     @user.email = "testATexample.de"
     expect(@user).not_to be_valid

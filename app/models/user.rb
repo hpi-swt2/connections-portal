@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :notes, dependent: :delete_all
 
   validates :username, :email, presence: true
+  validates :current_status, inclusion: { in: %w[available working] }
 end
