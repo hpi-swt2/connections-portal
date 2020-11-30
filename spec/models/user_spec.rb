@@ -9,6 +9,11 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
+  it "is not valid with an email without @" do
+    @user.email = "testATexample.de"
+    expect(@user).not_to be_valid
+  end
+
   it "is not valid without an email" do
     @user.email = ""
     expect(@user).to_not be_valid
@@ -16,6 +21,12 @@ RSpec.describe User, type: :model do
 
   it "is not valid without a password" do
     @user.password = ""
+    @user.password_confirmation = ""
+    expect(@user).not_to be_valid
+  end
+
+  it "is not valid without a username" do
+    @user.username = ""
     expect(@user).not_to be_valid
   end
 end
