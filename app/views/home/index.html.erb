@@ -21,12 +21,14 @@
       <thead>
       <tr>
         <th>Email</th>
+        <th width="100"></th>
       </tr>
       </thead>
       <tbody>
       <% User.all.each do |user| %>
         <tr>
           <td><%= user.email %></td>
+          <td align="center"><%= link_to 'Show', user %></td>
         </tr>
       <% end %>
       </tbody>
