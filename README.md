@@ -29,7 +29,8 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 * `sqlite3 --version` Ensure [SQLite3 database installation](https://guides.rubyonrails.org/getting_started.html#installing-sqlite3)
 * `node --version; yarn -v` Ensure [Node.js and Yarn installation](https://guides.rubyonrails.org/getting_started.html#installing-node-js-and-yarn)
 * `bundle -v` Ensure [Bundler](https://rubygems.org/gems/bundler) installation (with `gem install bundler`)
-* `bundle install --without production && yarn install --check-files` Install dependencies
+* `bundle config set without 'production' && bundle install` Install bundle dependencies
+* `yarn install --check-files` Install yarn dependencies
 * `rails db:migrate` Setup the database, run migrations
 * `rake devise:create_demo_user` Create a demo user (note _email & password_)
 * `rails s` Start the Rails development server (default: _localhost:3000_) and log in using the demo credentials
