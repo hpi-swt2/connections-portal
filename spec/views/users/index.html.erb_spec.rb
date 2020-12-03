@@ -11,4 +11,9 @@ RSpec.describe "users/index", type: :view do
       expect(rendered).to match user.email
     end
   end
+
+  it "has an + button to add a contact" do
+    render
+    expect(rendered).to have_text('+', count: @users.length)
+  end
 end
