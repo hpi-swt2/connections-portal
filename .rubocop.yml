@@ -43,6 +43,11 @@ Style/Documentation:
   Include:
     - 'app/models/*.rb'
 
+# Ignore empty lines in schema.rb. File is generated.
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'db/schema.rb'
+
 #
 # Ignoring entire rules
 #
@@ -97,4 +102,8 @@ Style/SpecialGlobalVars:
 
 # Ignore "Use $stdout instead of STDOUT"
 Style/GlobalStdStream:
+  Enabled: false
+
+# Ignore "Use underscores(_) as thousands separator and separate every 3 digits with them."
+Style/NumericLiterals:
   Enabled: false
