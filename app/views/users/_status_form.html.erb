@@ -1,4 +1,4 @@
-<%= form_with(model: @user, local: true, url: user_status_url(@user)) do |f| %>
+<%= form_with(model: @user, local: true, url: update_status_user_path(@user)) do |f| %>
   <div class="field">
     <%= f.label :status %>
     <%= f.select :status, User::VALID_STATUS_LIST%>
