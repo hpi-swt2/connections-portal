@@ -16,7 +16,7 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
     end
 
     it 'is expands after being clicked on' do
-      page.execute_script('document.getElementById("navbarProfileDropdown").click()')
+      toggle_profile_dropdown
 
       profile_dropdown = page.find('#navbarProfileDropdown + div')
       expect(profile_dropdown['class']).to include('show')
@@ -27,7 +27,12 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
     end
 
     it 'contains a link to the users edit profile page' do
+      toggle_profile_dropdown
+      expect(page).to have_link('Edit my profile', href: edit_user_registration_path(@user))
+    end
 
+    def toggle_profile_dropdown
+      page.execute_script('document.getElementById("navbarProfileDropdown").click()')
     end
   end
 
