@@ -48,9 +48,10 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 
 ### Testing
 * `bundle exec rspec` Run the full test suite
-  * `-f doc` Nicer test output
-  * `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
+  * `-f doc` More detailed test output
   * `-e 'search keyword in test name'` Specify what tests to run dynamically
+  * `--exclude-pattern "spec/features/**/*.rb"` Exclude feature tests (which are typically fairly slow)
+* `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
 * `bundle exec rspec --profile` Examine run time of tests
 
 ### Linting
