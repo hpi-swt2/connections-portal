@@ -20,12 +20,12 @@ RSpec.describe User, type: :model do
   end
 
   it "should have an empty contacts list" do
-    expect(@user.contactlist).to be_empty
+    expect(@user.contacts).to be_empty
   end
 
   it "should have a contact after adding one" do
     contact = FactoryBot.build(:user)
-    @user.contactlist.add(contact)
-    expect(@user.contactlist).to include(contact)
+    @user.contacts << contact
+    expect(@user.contacts).to include(contact)
   end
 end
