@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "users/index", type: :view do
+RSpec.describe "home/index", type: :view do
   before(:each) do
     @users = assign(:users, FactoryBot.create_list(:user, 3))
   end
