@@ -61,4 +61,11 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Include Devise helpers for RSpec tests
+  # https://github.com/heartcombo/devise#controller-tests
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  # https://github.com/heartcombo/devise#integration-tests
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
