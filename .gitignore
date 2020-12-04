@@ -71,3 +71,4 @@ capybara-*.html
 
 # Ignore editor configs
 /.vscode
+/.idea
