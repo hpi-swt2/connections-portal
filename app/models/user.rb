@@ -19,6 +19,10 @@ class User < ApplicationRecord
   attribute :current_status, :string, default: "available"
 
   def init
-    self.username ||= email.split('@')[0]
+    self.username ||= email.split('@', 2)[0]
+  end
+
+  def select_status_list
+    VALID_STATUS_LIST.map {|status| [I18n.t("user.status.#{status}"), status]}
   end
 end

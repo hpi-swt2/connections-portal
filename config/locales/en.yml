@@ -36,3 +36,8 @@ en:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+  user:
+    status:
+      available: 'available'
+      working: 'working'
+

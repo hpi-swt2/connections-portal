@@ -1,11 +1,10 @@
-<%= form_with(model: @user, local: true, url: update_status_user_path(@user)) do |f| %>
+<%= form_for(@user, local: true, url: update_status_user_path(@user)) do |f| %>
   <div class="field">
-    <%= f.label :status %>
-    <%= f.select :status, User::VALID_STATUS_LIST%>
+    <%= f.label :current_status %>
+    <%= f.select(:current_status, @user.select_status_list) %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change status" %>
+    <%= f.submit "Change current status" %>
   </div>
 <% end %>
-
