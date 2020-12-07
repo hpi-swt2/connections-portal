@@ -23,5 +23,8 @@
   </tr>
 </table>
 
-<%= render 'status_form' %>
-
+<% if user_signed_in? && current_user.id == @user.id %>
+  <%= render 'status_form' %>
+<% else %>
+  <p>Current status: <%= @user.current_status %></p>
+<% end %>
