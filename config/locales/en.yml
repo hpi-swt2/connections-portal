@@ -30,14 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  questions:
-    confirmation: 'Are you sure?'
   confirmation:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+  navigation:
+    visit_profile: 'Visit my profile'
+    edit_profile: 'Edit my profile'
+  questions:
+      confirmation: 'Are you sure?'
   user:
     status:
       available: 'available'
       working: 'working'
-

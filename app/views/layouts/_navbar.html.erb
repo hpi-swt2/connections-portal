@@ -19,9 +19,9 @@
                   <%= current_user.username %>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
-                  <%= link_to "Visit my profile", user_path(current_user), class: 'dropdown-item' %>
+                  <%= link_to I18n.t('navigation.visit_profile'), user_path(current_user), class: 'dropdown-item' %>
                   <div class="dropdown-divider"></div>
-                  <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: 'dropdown-item' %>
+                  <%= link_to I18n.t('navigation.edit_profile'), edit_user_registration_path(current_user), class: 'dropdown-item' %>
                 </div>
             </li>
             <li class="nav-item">
