@@ -24,4 +24,11 @@ RSpec.describe "Users profile page", type: :feature do
     visit user_path(user2)
     expect(page).not_to have_select('user[current_status]')
   end
+
+  it 'shows current status when showing different user' do
+    user2.current_status = "available"
+    user2.save
+    visit user_path(user2)
+    expect(page).to have_text(I18n.t('user.status.available'))
+  end
 end

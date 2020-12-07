@@ -23,6 +23,6 @@ class User < ApplicationRecord
   end
 
   def select_status_list
-    VALID_STATUS_LIST.map {|status| [I18n.t("user.status.#{status}"), status]}
+    VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end
 end
