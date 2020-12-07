@@ -9,6 +9,13 @@ FactoryBot.define do
     lastname { random_name }
     place_of_residence { 'Potsdam' }
     birthdate { Time.zone.today }
+
+    factory :user_without_username do
+      before(:create) do |user|
+        user.username = nil
+        user.init
+      end
+    end
   end
 end
 

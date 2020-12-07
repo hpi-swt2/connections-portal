@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
   end
 
   it "creates user name from email" do
-    user = described_class.new({ email: "test-user@example.org" })
+    user = FactoryBot.create(:user_without_username, email: "test-user@example.org")
     expect(user.username).to eq("test-user")
   end
 

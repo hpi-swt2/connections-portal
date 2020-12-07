@@ -32,8 +32,7 @@ RSpec.describe "Users", type: :feature do
       fill_in "Password confirmation", with: "wrong_password"
       find('input[type="submit"]').click
     end
-
     expect(page).to have_css(".alert-danger", count: 1)
-    expect(page).to have_content("prohibited this user")
+    expect(page).to have_content(I18n.t('errors.messages.not_saved.one', resource: 'user'))
   end
 end
