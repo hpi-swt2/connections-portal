@@ -1,0 +1,18 @@
+<h1>My Contacts</h1>
+
+<% if user_signed_in? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% current_user.contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.email %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
