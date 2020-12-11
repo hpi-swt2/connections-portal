@@ -1,0 +1,2 @@
+module SocialAccountsHelper
+end

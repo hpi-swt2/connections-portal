@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'social_accounts/new'
   get 'home/index'
   resources :notes
   # https://github.com/heartcombo/devise/wiki/
