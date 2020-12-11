@@ -9,5 +9,8 @@ Rails.application.routes.draw do
 
   resources :users, only: :show do
     patch 'add_contact', on: :member
+    resources :social_accounts
   end
+
+
 end
