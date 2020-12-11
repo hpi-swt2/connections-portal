@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
+
   def show
-    render params[:page]
+    @contacts = current_user.contacts
+
   end
 end
