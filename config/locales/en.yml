@@ -40,6 +40,14 @@ en:
   questions:
       confirmation: 'Are you sure?'
   user:
+    attributes:
+      firstname: 'Firstname'
+      lastname: 'Lastname'
+      email: 'Email'
+      place_of_residence: 'Place of residence'
+      birthdate: 'Birthdate'
     status:
+      change: 'Change current status'
+      current: 'Current status'
       available: 'available'
       working: 'working'
