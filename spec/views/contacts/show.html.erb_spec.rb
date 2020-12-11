@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "contacts/show", type: :view do
   before(:each) do
-    @users = assign(:users, FactoryBot.create_list(:user, 3))
-    sign_in @users.first
+    @user1 = FactoryBot.create :user
+    @user2 = FactoryBot.create :user
+    sign_in @user1
+    @user1.contacts << @user2
   end
 
-  it "renders a list of users" do
+  it "show an added contact" do
     render
-    @users.each do |user|
-      expect(rendered).to match user.email
-    end
+    expect(rendered).to have_text @user2.email
   end
 end
