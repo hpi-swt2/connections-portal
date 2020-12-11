@@ -18,4 +18,14 @@ RSpec.describe User, type: :model do
     @user.password = ""
     expect(@user).not_to be_valid
   end
+
+  it "should have an empty contacts list" do
+    expect(@user.contacts).to be_empty
+  end
+
+  it "should have a contact after adding one" do
+    contact = FactoryBot.build(:user)
+    @user.contacts << contact
+    expect(@user.contacts).to include(contact)
+  end
 end
