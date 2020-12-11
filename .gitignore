@@ -68,7 +68,3 @@ yarn-debug.log*
 *.rbc
 capybara-*.html
 .rspec
-
-# Ignore editor configs
-/.vscode
-/.idea
