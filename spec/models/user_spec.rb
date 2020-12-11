@@ -28,4 +28,8 @@ RSpec.describe User, type: :model do
     @user.contacts << contact
     expect(@user.contacts).to include(contact)
   end
+
+  it "should have no relationship to social accounts" do
+      expect(@user.social_accounts).to be_empty
+  end
 end

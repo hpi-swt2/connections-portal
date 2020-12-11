@@ -1,5 +1,8 @@
 # An application user, uses the `devise` library
 class User < ApplicationRecord
+  # Every user can have multiple social accounts like GitHub, Telegram, ...
+  has_many :social_accounts
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # https://github.com/heartcombo/devise/wiki/

@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(version: 2020_12_11_153726) do
   end
 
   create_table "social_accounts", force: :cascade do |t|
+    t.integer "user_id"
     t.string "social_network"
     t.string "user_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
