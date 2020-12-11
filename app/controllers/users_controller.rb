@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update_status]
+  before_action :authorize, except: :show
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def edit; end
+
+  def update
+    return render :edit unless @user.update(user_params)
+
+    redirect_to @user
+  end
 
   def update_status
-    return redirect_to root_path unless user_is_current_user?
-
     @user.current_status = params[:user][:current_status]
     @user.save
     redirect_to @user
@@ -13,11 +21,16 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def user_params
+    params.require(:user).permit(:username, :firstname, :lastname, :birthdate, :place_of_residence)
   end
 
-  def user_is_current_user?
-    user_signed_in? && current_user.id.to_s == params[:id]
+  def authorize
+    authenticate_user!
+    if current_user.id.to_s == params[:id]
+      @user = current_user
+    else
+      redirect_to root_path
+    end
   end
 end

@@ -28,10 +28,17 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
       end
     end
 
-    it 'contains a link to the users edit profile page' do
+    it 'contains a link to the account settings page' do
       toggle_profile_dropdown
       within '#navbarProfileDropdown + div' do
         expect(page).to have_link(href: edit_user_registration_path(@user))
+      end
+    end
+
+    it 'contains a link to the users edit profile page' do
+      toggle_profile_dropdown
+      within '#navbarProfileDropdown + div' do
+        expect(page).to have_link(href: edit_user_path(@user))
       end
     end
 

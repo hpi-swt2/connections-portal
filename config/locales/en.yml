@@ -37,10 +37,12 @@ en:
   navigation:
     visit_profile: 'Visit my profile'
     edit_profile: 'Edit my profile'
+    account_settings: 'Account settings'
   questions:
       confirmation: 'Are you sure?'
   user:
     attributes:
+      username: 'Username'
       firstname: 'Firstname'
       lastname: 'Lastname'
       email: 'Email'
