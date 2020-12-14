@@ -1,0 +1,30 @@
+<h1><%= @user.username %></h1>
+
+<table>
+  <tr>
+    <td><%= I18n.t('user.attributes.firstname') %></td>
+    <td><%= @user.firstname %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('user.attributes.lastname') %></td>
+    <td><%= @user.lastname %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('user.attributes.email') %></td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('user.attributes.place_of_residence') %></td>
+    <td><%= @user.place_of_residence %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('user.attributes.birthdate') %></td>
+    <td><%= @user.birthdate %></td>
+  </tr>
+</table>
+
+<% if user_signed_in? && current_user.id == @user.id %>
+  <%= render 'status_form' %>
+<% else %>
+  <p><%= "#{I18n.t('user.status.current')}: #{@user.current_status}" %></p>
+<% end %>
