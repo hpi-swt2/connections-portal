@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: %i[show edit update] do
-    patch 'status', to: 'users#update_status', as: 'update_status', on: :member
+    member do
+      patch 'status', to: 'users#update_status', as: 'update_status'
+      patch 'add_contact'
+    end
   end
 end
