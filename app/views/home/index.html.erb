@@ -1,4 +1,73 @@
-<div class="jumbotron">
+<!--<meta http-equiv="refresh" content="2" />-->
+<div class="row" id="dashboard-row">
+  <div class="col-sm" id="control-container">
+    <div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Set status
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">available</a>
+          <a class="dropdown-item" href="#">working</a> <!-- should be done dynamically-->
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4>List of users:</h4>
+      <ul>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+        <li class="list-group-item">Person Personson</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md" id="chat-container">
+    <p>Global chat</p>
+    <ul>
+      <li class="list-group-item">Chat 1</li>
+      <li class="list-group-item">What's going on guys?</li>
+      <li class="list-group-item">Nothing special so far</li>
+      <li class="list-group-item">Ima hacking sum stuff</li>
+      <li class="list-group-item">Nice, any new RCEs found?</li>
+      <li class="list-group-item">Yea this connections portal seems quite insecure. BAL LLL LL L LL LL L L LL L L LL L LL</li>
+      <li class="list-group-item">Not good to hear.</li>
+    </ul>
+  </div>
+  <div class="col-sm" id="activities-container">
+    <div class="card">
+      <label for="activity-textarea">Post new activity</label>
+      <textarea id="activity-textarea" name="activity-textarea" rows="4" cols="10"></textarea>
+      <button class="btn-secondary">Post</button>
+    </div>
+    <div>
+      <h3>Last activities</h3>
+      <ul>
+      <li class="list-group-item">Activity 1</li>
+      <li class="list-group-item">Activity 2</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-sm" id="proposals-container">
+    <h3>Current proposals</h3>
+      <div class="card">
+        <h4>Tim Tom</h4>
+        <p>Proposal 1</p>
+        <button onclick="alert('Do not press this')" class="btn-secondary">Accept proposal</button>
+      </div>
+      <div class="card">
+        <h4>Hasso P.</h4>
+        <p>Proposal 2</p>
+        <button class="btn-secondary">Accept proposal</button>
+      </div>
+  </div>
+</div>
+
+
+<!-- <div class="jumbotron">
   <h1 class="display-4">Connections Portal</h1>
   <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
   <hr>
@@ -36,4 +105,4 @@
     <br>
 
   <% end %>
-</div>
+</div> -->
