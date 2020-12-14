@@ -26,5 +26,5 @@
 <% if user_signed_in? && current_user.id == @user.id %>
   <%= render 'status_form' %>
 <% else %>
-  <p>Current status: <%= @user.current_status %></p>
+  <p><%= "#{I18n.t('user.status.current')}: #{@user.current_status}" %></p>
 <% end %>
