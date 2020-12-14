@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
-
   before do
     @user = FactoryBot.create(:user)
     sign_in @user
@@ -46,5 +45,4 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
       page.execute_script('document.getElementById("navbarProfileDropdown").click()')
     end
   end
-
 end

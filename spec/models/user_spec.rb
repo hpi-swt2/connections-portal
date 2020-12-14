@@ -45,11 +45,11 @@ RSpec.describe User, type: :model do
     expect(user.current_status).to eq("available")
   end
 
-  it "should have an empty contacts list" do
+  it "has an empty contacts list" do
     expect(@user.contacts).to be_empty
   end
 
-  it "should have a contact after adding one" do
+  it "has a contact after adding one" do
     contact = FactoryBot.build(:user)
     @user.contacts << contact
     expect(@user.contacts).to include(contact)
