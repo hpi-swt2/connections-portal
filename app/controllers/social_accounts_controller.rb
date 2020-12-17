@@ -5,12 +5,15 @@ class SocialAccountsController < ApplicationController
     end
 
     def edit
+        @user = User.find(params[:user_id])
+        @social_account = @user.social_accounts.find(params[:id])
     end
 
     def create
         @user = User.find(params[:user_id])
         @social_account = @user.social_accounts.create(social_account_params)
-        # TODO(Alexander-Dubrawski) Add Redirection 
+        # Redirect to setting since we only add social accounts there
+        redirect_to edit_user_path(@user)
     end
 
     def update

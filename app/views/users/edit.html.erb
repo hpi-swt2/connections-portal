@@ -1,6 +1,6 @@
 <h1>Edit profile</h1>
 <hr />
-
+<h2>Profile</h2>
 <%= form_with(model: @user, local: true) do |form| %>
   <p>
     <%= form.label I18n.t('user.attributes.username') %>
@@ -31,3 +31,16 @@
     <%= form.submit %>
   </p>
 <% end %>
+
+<hr />
+<% if @user.social_accounts.any? %>
+  <h2> Social Accounts </h2>
+  <% @user.social_accounts.each do |social_account| %>
+    <p>
+      <%= render 'social_accounts/social_account_setting', user: @user, social_account: social_account %>
+    </p>
+  <% end %>
+
+<% end %>
+<h3>Add a Social Account</h3>
+<%= render 'social_accounts/form', social_account: @user.social_accounts.build %>

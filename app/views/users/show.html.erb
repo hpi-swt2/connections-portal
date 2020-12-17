@@ -23,23 +23,14 @@
   </tr>
 </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Social network</th>
-      <th>User name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @user.social_accounts.each do |social_account| %>
-      <tr>
-        <td><%= social_account.social_network %></td>
-        <td><%= social_account.user_name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @user.social_accounts.any? %>
+  <h2> Social Accounts </h2>
+  <% @user.social_accounts.each do |social_account| %>
+    <p>
+      <%= render 'social_accounts/social_account', social_account: social_account %>
+    </p>
+  <% end %>
+<% end %>
 
 <% if user_signed_in? && current_user.id == @user.id %>
   <%= render 'status_form' %>

@@ -1,0 +1,13 @@
+<%= form_with(model: [ @user, social_account], local: true) do |form| %>
+    <p>
+        <%= form.label "Social Network" %>
+        <%= form.text_field :social_network %>
+    </p>
+    <p>
+        <%= form.label "Username" %>
+        <%= form.text_field :user_name %>
+    </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
