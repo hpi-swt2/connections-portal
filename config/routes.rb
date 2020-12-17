@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   get "/:contacts" => "contacts#show"
+  get "users/search" => "users#search"
 
-  resources :users, only: %i[show edit update] do
+  resources :users, only: %i[show edit update search] do
     member do
       patch 'status', to: 'users#update_status', as: 'update_status'
       patch 'add_contact'

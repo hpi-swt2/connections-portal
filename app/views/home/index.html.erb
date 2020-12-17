@@ -20,14 +20,20 @@
     <table>
       <thead>
       <tr>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
         <th>Email</th>
       </tr>
       </thead>
       <tbody>
       <% User.all.each do |user| %>
         <tr>
-          <td><%= user.email %></td>
-          <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
+            <td><%= user.username %></td>
+            <td><%= user.firstname %></td>
+            <td><%= user.lastname %></td>
+            <td><%= user.email %></td>
+            <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
         </tr>
       <% end %>
       </tbody>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize, except: %i[show index add_contact]
+  before_action :authorize, except: %i[show index add_contact search]
 
   def show
     @user = User.find(params[:id])
@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+
 
   def add_contact
     authenticate_user!
