@@ -64,8 +64,8 @@ RSpec.configure do |config|
 
   # Include Devise helpers for RSpec tests
   # https://github.com/heartcombo/devise#controller-tests
-  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   # https://github.com/heartcombo/devise#integration-tests
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

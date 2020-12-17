@@ -30,9 +30,26 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  questions:
-    confirmation: 'Are you sure?'
   confirmation:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+  navigation:
+    visit_profile: 'Visit my profile'
+    edit_profile: 'Edit my profile'
+    account_settings: 'Account settings'
+  questions:
+      confirmation: 'Are you sure?'
+  user:
+    attributes:
+      username: 'Username'
+      firstname: 'Firstname'
+      lastname: 'Lastname'
+      email: 'Email'
+      place_of_residence: 'Place of residence'
+      birthdate: 'Birthdate'
+    status:
+      change: 'Change current status'
+      current: 'Current status'
+      available: 'available'
+      working: 'working'
