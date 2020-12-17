@@ -5,6 +5,10 @@ RSpec.describe "Users profile page", type: :feature do
   let(:user2) { FactoryBot.create :user }
 
   before do
+    user.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
+    user.save()
+    user.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
+    user.save()
     sign_in user
     visit user_path(user)
   end
@@ -30,5 +34,12 @@ RSpec.describe "Users profile page", type: :feature do
     user2.save
     visit user_path(user2)
     expect(page).to have_text(I18n.t('user.status.available'))
+  end
+
+  it 'show social accounts' do
+    expect(page).to have_text("GitHub")
+    expect(page).to have_text("SomeGitUserName")
+    expect(page).to have_text("Telegram")
+    expect(page).to have_text("SomeTelegramUserName")
   end
 end
