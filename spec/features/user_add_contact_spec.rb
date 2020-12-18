@@ -6,7 +6,7 @@ RSpec.describe "Users", type: :feature do
     @user2 = FactoryBot.create :user
     @user3 = FactoryBot.create :user
     sign_in @user1
-    visit home_index_path
+    visit root_path
   end
 
   it "adds a contact when the button is clicked" do

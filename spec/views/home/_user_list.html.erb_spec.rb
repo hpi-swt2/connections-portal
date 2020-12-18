@@ -1,10 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "home/index", type: :view do
-  before(:each) do
-    @users = assign(:users, FactoryBot.create_list(:user, 3))
-    sign_in @users.first
-  end
+RSpec.describe "home/_user_list", type: :view do
+  before { @users = assign(:users, FactoryBot.create_list(:user, 3)) }
 
   it "renders a list of users" do
     render

@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :feature do
-  before do
-    visit root_path
-
-    within '#registration' do
-      click_on "signup"
-    end
-  end
+  before { visit new_user_registration_path }
 
   it "can sign up" do
     within '#new_user' do
