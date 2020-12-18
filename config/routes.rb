@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'home/index'
   resources :notes
   # https://github.com/heartcombo/devise/wiki/
   devise_for :users
