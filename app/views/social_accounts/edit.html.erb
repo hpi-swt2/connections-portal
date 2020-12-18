@@ -1,6 +1,21 @@
 <h1>Edit Social Account</h1>
 
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
+  <% if @social_account.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+          <%= pluralize(@social_account.errors.count, "error") %> 
+          prohibited this article from being saved:
+          <!-- TODO(ct): I18N -->
+      </h2>
+      <ul>
+      <% @social_account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :social_network %>
     <%= form.text_field :social_network %>
@@ -14,6 +29,7 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>
 
 <%= link_to 'Back', edit_user_path(@user) %>

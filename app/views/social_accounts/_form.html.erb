@@ -1,4 +1,4 @@
-<%= form_with(model: [ @user, social_account], local: true) do |form| %>
+<%= form_with(model: [@user, social_account], local: true) do |form| %>
     <p>
         <%= form.label "Social Network" %>
         <%= form.text_field :social_network %>
