@@ -1,0 +1,23 @@
+<%= render 'status' %>
+
+<div class="tab-content">
+  <div id="users" class="tab-pane fade in active">
+    <%= render 'user_list' %>
+  </div>
+  <div id="chat" class="tab-pane fade">
+    <%= render 'chat' %>
+  </div>
+  <div id="activities" class="tab-pane fade">
+    <%= render 'activities' %>
+  </div>
+  <div id="proposals" class="tab-pane fade">
+    <%= render 'proposals' %>
+  </div>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#users">Users</a></li>
+  <li><a data-toggle="tab" href="#chat">Chat</a></li>
+  <li><a data-toggle="tab" href="#activities">Activities</a></li>
+  <li><a data-toggle="tab" href="#proposals">Proposals</a></li>
+</ul>
