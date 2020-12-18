@@ -23,12 +23,26 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-
   def add_contact
     authenticate_user!
     current_user.contacts << User.find(params[:id])
     current_user.save
     redirect_to home_index_path
+  end
+
+  def search
+     if params[:q].blank?
+        @results = User.all
+     else
+        search_pattern = params[:q].downcase
+        @results = []
+        User.all.each do |user|
+
+           if user.user_identifier.include? search_pattern
+              @results << user
+           end
+        end
+     end
   end
 
   private

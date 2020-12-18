@@ -10,7 +10,13 @@
       </tr>
       </thead>
       <tbody>
-      <% User.all.each do |user| %>
+      <%= form_tag("/users/search", method: "get") do %>
+        <%= label_tag(:q, "Search for:") %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Search") %>
+      <% end %>
+
+      <% @results.each do |user| %>
         <tr>
           <td><%= user.username %></td>
           <td><%= user.firstname %></td>
@@ -19,6 +25,7 @@
           <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
         </tr>
       <% end %>
+
       </tbody>
     </table>
 </div>
