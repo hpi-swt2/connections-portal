@@ -2,10 +2,100 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+#dashboard-row {
+  height: 80vh;
+}
+
 #chat-container {
   flex-grow: 2;
+  max-height: 100%;
 }
 
 .container {
   max-width: unset;
+}
+
+.center-heading {
+  text-align: center;
+}
+
+#chat-messages {
+  background: #fff;
+  border-width: 0;
+  border-radius: .25rem;
+  margin-bottom: 1.5rem;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.avatar-container a {
+  height: max-content;
+}
+
+.avatar {
+  display: flex;
+  line-height: 1;
+  white-space: nowrap;
+  font-weight: 700;
+  border-radius: 500px;
+  box-shadow: 0 5px 10px 0 rgba(50, 50, 50, .15);
+  font-size: 1.5em;
+  align-items: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+}
+
+.avatar img {
+  border-radius: inherit;
+  width: 100%
+}
+
+.chat-item {
+  min-width: 0;
+  word-wrap: break-word;
+  padding: .75em .5em;
+}
+
+.chat-item-me {
+  flex-direction: row-reverse !important;
+}
+
+.chat-item-me .chat-author {
+  display: none;
+}
+
+.chat-item-me .chat-content {
+  background-color: #c1d1ff;
+}
+
+.chat-item>* {
+  padding-left: .625rem;
+  padding-right: .625rem
+}
+
+.chat-content {
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  padding: .75em 1em;
+  color: #424242;
+}
+
+.chat-author {
+  color: #dd640c;
+  font-weight: bold;
+}
+
+.chat-date {
+  margin-top: .5em;
+  text-align: right;
+}
+
+.text-sm {
+  font-size: .825rem
+}
+
+.w-48 {
+  width: 48px !important;
+  height: 48px !important
 }
