@@ -1,13 +1,28 @@
 <%= form_with(model: [@user, social_account], local: true) do |form| %>
-    <p>
-        <%= form.label "Social Network" %>
-        <%= form.text_field :social_network %>
-    </p>
-    <p>
-        <%= form.label "Username" %>
-        <%= form.text_field :user_name %>
-    </p>
+  <% if social_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= I18n.t 'errors.messages.not_saved.other', count: social_account.errors.count, resource: SocialAccount %></h2>
+      <ul>
+        <% social_account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <p>
-    <%= form.submit %>
+      <%= form.label :social_network %>
+      <%= form.text_field :social_network %>
+  </p>
+  <p>
+      <%= form.label :user_name %>
+      <%= form.text_field :user_name %>
+  </p>
+
+  <p>
+    <%= form.submit "Create Social Account"
+      # necessary because rails derives the model name with the wrong spelling
+      # from class name
+     %>
   </p>
 <% end %>

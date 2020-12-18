@@ -51,6 +51,27 @@ it 'show social account' do
     fill_in "User name", with: ""
     find('input[type="submit"]').click
 
-    expect(page).to have_text("blank")
+    expect(page).to have_text("can't be blank")
+  end
+
+  it 'can add social account' do
+    visit edit_user_path(user)
+
+    fill_in "Social network", with: "LinkedIn"
+    fill_in "User name", with: "IAmForBusiness"
+    find_button("Create Social Account").click
+
+    expect(page).to have_text("LinkedIn")
+    expect(page).to have_text("IAmForBusiness")
+  end
+
+  it 'shows error upon addition with invalid values' do
+    visit edit_user_path(user)
+
+    fill_in "Social network", with: ""
+    fill_in "User name", with: ""
+    find_button("Create Social Account").click
+
+    expect(page).to have_text("can't be blank")
   end
 end
