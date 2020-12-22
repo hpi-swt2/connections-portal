@@ -13,10 +13,14 @@ class ContactRequestsController < ApplicationController
 
   def destroy
     current_user.contact_requests.delete(params[:id])
-    redirect_to view_contact_request_user_path(current_user)
+    redirect_to user_contact_requests_path(current_user), notice: t("user.contact_request.denied")
   end
 
   def accept
-
+    user = User.find(params[:id])
+    user.contacts << current_user
+    user.save
+    current_user.contact_requests.delete(params[:id])
+    redirect_to user_contact_requests_path(current_user), notice: t("user.contact_request.approved")
   end
 end

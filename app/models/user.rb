@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_many :notes, dependent: :delete_all
   has_and_belongs_to_many :contacts,
                           class_name: 'User',
-                          foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
 
   has_and_belongs_to_many :contact_requests,

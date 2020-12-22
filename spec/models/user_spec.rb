@@ -70,7 +70,7 @@ RSpec.describe User, type: :model do
     expect(contact.contact_requests).to_not include(@user)
   end
 
-  it "should have different contact and request lists" do
+  it "has different contact and request lists" do
     contact = FactoryBot.create(:user)
     @user.contacts << contact
     expect(@user.contacts).to include(contact)

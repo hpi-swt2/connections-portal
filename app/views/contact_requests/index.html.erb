@@ -8,11 +8,11 @@
     </tr>
     </thead>
     <tbody>
-    <% @requests.each do |request| %>
+    <% @requests.each do |requester| %>
       <tr>
-        <td><%= request.email %></td>
-        <td><%= button_to '✓', accept_user_contact_request_path(current_user, request), method: :patch%></td>
-        <td><%= button_to '❌', user_contact_request_path(current_user, request), method: :delete %></td>
+        <td><%= requester.email %></td>
+        <td><%= button_to '✓', accept_user_contact_request_path(current_user, requester), method: :patch%></td>
+        <td><%= button_to '❌', user_contact_request_path(current_user, requester), method: :delete %></td>
       </tr>
     <% end %>
     </tbody>

@@ -27,13 +27,11 @@
       <% User.all.each do |user| %>
         <tr>
           <td><%= user.email %></td>
-          <td><%= button_to '+', user_contact_requests_path(user), method: :post %></td>
+          <td><%= button_to '+', user_contact_requests_path(user), method: :post, id: user.id %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
-
     <br>
-
   <% end %>
 </div>

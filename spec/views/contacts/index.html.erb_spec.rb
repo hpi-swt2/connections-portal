@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "contacts/show", type: :view do
+RSpec.describe "contacts/index", type: :view do
   before(:each) do
     @user1 = FactoryBot.create :user
     @user2 = FactoryBot.create :user

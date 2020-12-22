@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize, except: %i[show index add_contact]
+  before_action :authorize, except: %i[show index]
 
   def show
     @user = User.find(params[:id])
