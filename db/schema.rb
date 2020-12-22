@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 2020_12_22_090231) do
   end
 
   create_table "users_contact_requests", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "contact_request_id"
-    t.index ["contact_request_id"], name: "index_users_contact_requests_on_contact_request_id"
-    t.index ["user_id"], name: "index_users_contact_requests_on_user_id"
+    t.integer "requested_user_id"
+    t.integer "requesting_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requested_user_id"], name: "index_users_contact_requests_on_requested_user_id"
+    t.index ["requesting_user_id"], name: "index_users_contact_requests_on_requesting_user_id"
   end
 
   create_table "users_users", id: false, force: :cascade do |t|

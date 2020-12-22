@@ -2,7 +2,7 @@
 
 <% if user_signed_in? %>
 
-  <p><%= button_to 'View my requests', view_contact_request_user_path(current_user), method: :get,  :form =>{:id => current_user.id}%></p>
+  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get %></p>
 
   <table>
     <thead>

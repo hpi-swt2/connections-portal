@@ -11,8 +11,8 @@
     <% @requests.each do |request| %>
       <tr>
         <td><%= request.email %></td>
-        <td><%= button_to 'x', deny_contact_request_user_path(request), method: :patch,  :form =>{:id => request.id}%></td>
-
+        <td><%= button_to '✓', accept_user_contact_request_path(current_user, request), method: :patch%></td>
+        <td><%= button_to '❌', user_contact_request_path(current_user, request), method: :delete %></td>
       </tr>
     <% end %>
     </tbody>
