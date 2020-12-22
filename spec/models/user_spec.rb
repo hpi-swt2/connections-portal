@@ -54,4 +54,29 @@ RSpec.describe User, type: :model do
     @user.contacts << contact
     expect(@user.contacts).to include(contact)
   end
+
+  it "adds user to contact request list of other user" do
+    contact = FactoryBot.create(:user)
+    contact.contact_requests << @user
+    expect(contact.contact_requests).to include(@user)
+    expect(contact.contacts).to_not include(@user)
+  end
+
+  it "deletes contact request after denying it" do
+    contact = FactoryBot.create(:user)
+    contact.contact_requests << @user
+    expect(contact.contact_requests).to include(@user)
+    contact.contact_requests.delete(@user)
+    expect(contact.contact_requests).to_not include(@user)
+  end
+
+  it "should have different contact and request lists" do
+    contact = FactoryBot.create(:user)
+    @user.contacts << contact
+    expect(@user.contacts).to include(contact)
+    request = FactoryBot.create(:user)
+    @user.contact_requests << request
+    expect(@user.contact_requests).to include(request)
+    expect(@user.contact_requests).to_not include(contact)
+  end
 end

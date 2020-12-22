@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update] do
     member do
       patch 'status', to: 'users#update_status', as: 'update_status'
-      patch 'add_contact'
+      patch 'send_contact_request'
+      get 'view_contact_request'
+      patch 'deny_contact_request'
     end
   end
 end

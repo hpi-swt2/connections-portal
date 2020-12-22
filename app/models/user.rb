@@ -13,6 +13,11 @@ class User < ApplicationRecord
                           foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
 
+  has_and_belongs_to_many :contact_requests,
+                          class_name: 'User',
+                          foreign_key: 'user_id',
+                          association_foreign_key: 'contact_id'
+
   VALID_STATUS_LIST = %w[available working].freeze
 
   validates :username, :email, presence: true

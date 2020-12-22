@@ -23,11 +23,22 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def add_contact
+  def send_contact_request
     authenticate_user!
-    current_user.contacts << User.find(params[:id])
-    current_user.save
+    new_contact = User.find(params[:id])
+    new_contact.contact_requests << current_user.id
+    new_contact.save
     redirect_to home_index_path
+  end
+
+  def view_contact_request
+    @requests = current_user.contact_requests
+    render 'contacts/requests'
+  end
+
+  def deny_contact_request
+    current_user.contact_requests.delete(params[:id])
+    redirect_to view_contact_request_user_path(current_user)
   end
 
   private

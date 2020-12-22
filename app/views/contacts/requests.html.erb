@@ -1,0 +1,20 @@
+<h1>My Contact Request</h1>
+
+<% if user_signed_in? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.email %></td>
+        <td><%= button_to 'x', deny_contact_request_user_path(request), method: :patch,  :form =>{:id => request.id}%></td>
+
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
