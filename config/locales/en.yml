@@ -38,6 +38,8 @@ en:
     visit_profile: 'Visit my profile'
     edit_profile: 'Edit my profile'
     account_settings: 'Account settings'
+    log_in: 'Log-In'
+    sign_up: 'Sign-Up'
   questions:
       confirmation: 'Are you sure?'
   user:
@@ -53,3 +55,8 @@ en:
       current: 'Current status'
       available: 'available'
       working: 'working'
+  dashboard:
+    user_list: 'Users'
+    global_chat: 'Global Chat'
+    last_activities: 'Last Activities'
+    current_proposals: 'Current Proposals'
