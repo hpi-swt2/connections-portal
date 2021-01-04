@@ -12,4 +12,7 @@ Rails.application.routes.draw do
       patch 'add_contact'
     end
   end
+
+  resources :activity, only: :create
+
 end

@@ -1,0 +1,13 @@
+<%= javascript_pack_tag 'activity' %>
+<%= form_with(url: activity_index_path, method: :post) do |f| %>
+    <div class="card form-group">
+      <label for="activity-textarea">Post new activity</label>
+      <textarea  class="form-control" id="activity-textarea" name="activity[content]" rows="3" placeholder="Just start typing here..."></textarea>
+      <div style="display:none">
+        <%= f.text_field :"activity[user]" , value: current_user.id %>
+      </div>
+      <button id="add-activity-button" type="submit" class="btn-secondary">Post</button>
+    </div>
+<% end %>
+
+
