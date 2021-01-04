@@ -59,4 +59,5 @@ en:
     user_list: 'Users'
     global_chat: 'Global Chat'
     last_activities: 'Last Activities'
-    current_proposals: 'Current Proposals'
+    current_proposals: 'Proposals'
+    accept_proposal: 'Accept'

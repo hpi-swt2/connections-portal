@@ -8,9 +8,13 @@
   height: 80vh;
 }
 
+
+#dashboard-row>div {
+  max-height: 100%;
+}
+
 #chat-container {
   flex-grow: 2;
-  max-height: 100%;
 }
 
 .container {
@@ -21,7 +25,7 @@
   text-align: center;
 }
 
-#chat-messages {
+.scroll-list {
   background: #fff;
   border-width: 0;
   border-radius: .25rem;
@@ -119,4 +123,17 @@
 
 .scroll-styled::-webkit-scrollbar-thumb {
   background-color: #e1e8ed;
+}
+
+.proposal {
+  border-radius: .75rem;
+  background-color: #0e4da4;
+  color: white;
+  margin: .75em .5em;
+  min-width: 0;
+  word-wrap: break-word;
+}
+
+.proposal .card-text {
+  text-align: justify;
 }
