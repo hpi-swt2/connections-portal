@@ -1,23 +1,43 @@
-<%= render 'status' %>
+<div id="dashboard">
+  <div id="status">
+    <%= render 'status' %>
+  </div>
 
-<div class="tab-content">
-  <div id="users" class="tab-pane fade in active">
-    <%= render 'user_list' %>
+  <div id="content">
+    <div class="tab-content">
+      <div id="users" class="tab-pane fade show active">
+        <%= render 'user_list' %>
+      </div>
+      <div id="chat" class="tab-pane fade">
+        <%= render 'chat' %>
+      </div>
+      <div id="activities" class="tab-pane fade">
+        <%= render 'activities' %>
+      </div>
+      <div id="proposals" class="tab-pane fade">
+        <%= render 'proposals' %>
+      </div>
+    </div>
   </div>
-  <div id="chat" class="tab-pane fade">
-    <%= render 'chat' %>
-  </div>
-  <div id="activities" class="tab-pane fade">
-    <%= render 'activities' %>
-  </div>
-  <div id="proposals" class="tab-pane fade">
-    <%= render 'proposals' %>
+
+  <div id="navigation">
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#users">
+          <i class="fa fa-group"></i>
+        </a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#chat">
+          <i class="fa fa-comments"></i>
+        </a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#activities">
+          <i class="fa fa-bell"></i>
+        </a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#proposals">
+          <i class="fa fa-envelope-open"></i>
+        </a></li>
+    </ul>
   </div>
 </div>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#users">Users</a></li>
-  <li><a data-toggle="tab" href="#chat">Chat</a></li>
-  <li><a data-toggle="tab" href="#activities">Activities</a></li>
-  <li><a data-toggle="tab" href="#proposals">Proposals</a></li>
-</ul>

@@ -1,0 +1,25 @@
+.container {
+  max-width: unset;
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}
+
+#dashboard {
+  height: 100%;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+}
+
+#status, #navigation {
+  flex-grow: 0;
+}
+
+#content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
