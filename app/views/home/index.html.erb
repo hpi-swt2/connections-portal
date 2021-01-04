@@ -1,99 +1,76 @@
 <!--<meta http-equiv="refresh" content="2" />-->
-<div class="row" id="dashboard-row">
-  <div class="col-sm" id="control-container">
-    <div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Set status
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">available</a>
-          <a class="dropdown-item" href="#">working</a> <!-- should be done dynamically-->
+
+<% unless user_signed_in? %>
+  <div class="jumbotron">
+        <h1 class="display-4">Connections Portal</h1>
+    <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
+    <hr>
+    <p>We hope you enjoy using it!
+          <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
+    <p class="lead" id="registration">
+      <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+      <%=  link_to (fa_icon 'sign-in', text: 'Log-In'), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin"  %>
+      <%=  link_to (fa_icon 'user-plus', text: 'Sign-Up'), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup"  %>
+    </p>
+  </div>
+<%  end %>
+
+<% if user_signed_in? %>
+  <div class="row" id="dashboard-row">
+    <div class="col-sm" id="control-container">
+      <div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Set status
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">available</a>
+            <a class="dropdown-item" href="#">working</a> <!-- should be done dynamically-->
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <h1 class="center-heading">Users</h1>
-      <ul>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-        <li class="list-group-item">Person Personson</li>
-      </ul>
-    </div>
-  </div>
-
-  <%= render 'chat' %>
-
-  <div class="col-sm" id="activities-container">
-    <div class="card">
-      <label for="activity-textarea">Post new activity</label>
-      <textarea id="activity-textarea" name="activity-textarea" rows="4" cols="10"></textarea>
-      <button class="btn-secondary">Post</button>
-    </div>
-    <div>
-      <h1 class="center-heading">Last Activities</h1>
-      <ul>
-      <li class="list-group-item">Activity 1</li>
-      <li class="list-group-item">Activity 2</li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-sm" id="proposals-container">
-    <h1 class="center-heading">Current Proposals</h1>
-      <div class="card">
-        <h4>Tim Tom</h4>
-        <p>Proposal 1</p>
-        <button onclick="alert('Do not press this')" class="btn-secondary">Accept proposal</button>
+      <div>
+        <h1 class="center-heading">Users</h1>
+        <ul>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+          <li class="list-group-item">Person Personson</li>
+        </ul>
       </div>
+    </div>
+
+    <%= render 'chat' %>
+
+    <div class="col-sm" id="activities-container">
       <div class="card">
-        <h4>Hasso P.</h4>
-        <p>Proposal 2</p>
-        <button class="btn-secondary">Accept proposal</button>
+        <label for="activity-textarea">Post new activity</label>
+        <textarea id="activity-textarea" name="activity-textarea" rows="4" cols="10"></textarea>
+        <button class="btn-secondary">Post</button>
       </div>
+      <div>
+        <h1 class="center-heading">Last Activities</h1>
+        <ul>
+        <li class="list-group-item">Activity 1</li>
+        <li class="list-group-item">Activity 2</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm" id="proposals-container">
+      <h1 class="center-heading">Current Proposals</h1>
+        <div class="card">
+          <h4>Tim Tom</h4>
+          <p>Proposal 1</p>
+          <button onclick="alert('Do not press this')" class="btn-secondary">Accept proposal</button>
+        </div>
+        <div class="card">
+          <h4>Hasso P.</h4>
+          <p>Proposal 2</p>
+          <button class="btn-secondary">Accept proposal</button>
+        </div>
+    </div>
   </div>
-</div>
-
-
-<!-- <div class="jumbotron">
-  <h1 class="display-4">Connections Portal</h1>
-  <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
-  <hr>
-  <p>We hope you enjoy using it!
-    <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
-  <p class="lead" id="registration">
-    <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
-    <% if not user_signed_in? %>
-      <%= link_to (fa_icon 'sign-in', text: 'Log-In'), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin" %>
-      <%= link_to (fa_icon 'user-plus', text: 'Sign-Up'), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup" %>
-    <% end %>
-  </p>
-  <% if user_signed_in? %>
-    <hr>
-    <p>You are currently logged in as <%= current_user.email %>.</p>
-    <p>There are <%= Note.count %> stored notes.</p>
-
-    <h2>Users</h2>
-    <table>
-      <thead>
-      <tr>
-        <th>Email</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% User.all.each do |user| %>
-        <tr>
-          <td><%= user.email %></td>
-          <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-
-  <% end %>
-</div> -->
+<% end %>
