@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
     expect(contact.contacts).to_not include(@user)
   end
 
-  it "deletes contact request after denying it" do
+  it "adds and deletes contact request" do
     contact = FactoryBot.create(:user)
     contact.contact_requests << @user
     expect(contact.contact_requests).to include(@user)
