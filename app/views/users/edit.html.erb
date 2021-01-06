@@ -35,11 +35,13 @@
 <hr />
 <% if @user.social_accounts.any? %>
   <h2> Social Accounts </h2>
-  <% @user.social_accounts.each do |social_account| %>
-    <p>
-      <%= render 'social_accounts/social_account_setting', user: @user, social_account: social_account %>
-    </p>
-  <% end %>
+  <table>
+    <% @user.social_accounts.each do |social_account| %>
+      <tr>
+        <%= render 'social_accounts/social_account_setting', user: @user, social_account: social_account %>
+      </tr>
+    <% end %>
+  </table>
 
 <% end %>
 <h3>Add a Social Account</h3>
