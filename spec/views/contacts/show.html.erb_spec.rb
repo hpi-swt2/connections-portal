@@ -5,7 +5,7 @@ RSpec.describe "contacts/show", type: :view do
     @user1 = FactoryBot.create :user
     @user2 = FactoryBot.create :user
     sign_in @user1
-    @user1.contacts << @user2
+    assign(:contacts, [@user2])
   end
 
   it "show an added contact" do
