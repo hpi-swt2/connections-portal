@@ -24,7 +24,7 @@ RSpec.describe "SocialAccounts", type: :request do
             user = FactoryBot.build(:user)
             user.save
             post "/users/1/social_accounts", params: { social_account: {social_network: "GitHub", user_name: "Foo" }}
-            expect(response).to have_http_status(:success)
+            expect(response).to redirect_to(edit_user_url(user))
             expect(user.social_accounts.count).to eq(1)
             end
         end
@@ -36,7 +36,7 @@ RSpec.describe "SocialAccounts", type: :request do
             user = FactoryBot.build(:user)
             user.save
             post "/users/1/social_accounts", params: { social_account: {social_network: "", user_name: "" }}
-            expect(response).to have_http_status(:unsuccess)
+            expect(response).to render_template("users/edit")
             expect(user.social_accounts.count).to eq(0)
             end
         end

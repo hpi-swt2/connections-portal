@@ -5,7 +5,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def edit; end
+  def edit
+    @user = User.find(params[:id])
+    @social_account = @user.social_accounts.build
+  end
 
   def update
     return render :edit unless @user.update(user_params)

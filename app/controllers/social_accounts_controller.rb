@@ -13,13 +13,14 @@ class SocialAccountsController < ApplicationController
     @user = User.find(params[:user_id])
     @social_account = SocialAccount.new(social_account_params)
     @social_account.user_id = @user.id
+    # If the account was created successfully we want to finish the request by redirecting to the edit user page.
     if @social_account.save
       # Redirect to setting since we only add social accounts there
       redirect_to edit_user_path(@user)
     else
-      @user.social_accounts.destroy(@social_account)
-      @social_account.destroy
-      render :edit
+      # If the account was created unsuccessfully we want to render the users edit form but still be in the processing of
+      # the current request so that the user can correct her/his input.
+      render "users/edit"
     end
   end
 
