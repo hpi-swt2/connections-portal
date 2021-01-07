@@ -29,7 +29,8 @@ RSpec.describe "Users", type: :feature do
     visit user_contact_requests_path(@requested_user)
     find("form[action='#{user_contact_request_path(@requested_user, @requesting_user)}']").find("input").click
     expect(page).to_not have_text(@requesting_user.email)
-    expect(@requesting_user.contacts).to_not include(@requested_user)
-    expect(@requested_user.contact_requests).to include(@requesting_user)
+    expect(@requesting_user.contacts).not_to include(@requested_user)
+    @requested_user.reload
+    expect(@requested_user.contact_requests).not_to include(@requesting_user)
   end
 end
