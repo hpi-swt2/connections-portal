@@ -13,7 +13,7 @@ RSpec.describe "home/index", type: :view do
     end
   end
 
-  it "has an + button to add a contact" do
+  it "has an + button to add a contact except for one" do
     render
     expect(rendered).to have_button('+', count: (@users.length - 1))
   end

@@ -25,10 +25,12 @@
       </thead>
       <tbody>
       <% User.all.each do |user| %>
-        <tr>
-          <td><%= user.email %></td>
-          <td><%= button_to '+', user_contact_requests_path(user), method: :post, id: user.id %></td>
-        </tr>
+        <% if not user == current_user %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= button_to '+', user_contact_requests_path(user), method: :post, id: user.id %></td>
+          </tr>
+        <% end %>
       <% end %>
       </tbody>
     </table>
