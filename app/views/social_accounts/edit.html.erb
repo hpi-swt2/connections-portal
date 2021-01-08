@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= form.label :social_network %>
-    <%= form.text_field :social_network %>
+    <%= form.select(:social_network, options_for_select([["GitHub", "GitHub"], ["Telegram", "Telegram"], ["LinkedIn", "LinkedIn"]])) %>
   </div>
 
   <div class="field">
