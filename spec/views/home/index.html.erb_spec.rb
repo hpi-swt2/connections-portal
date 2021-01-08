@@ -15,6 +15,11 @@ RSpec.describe "home/index", type: :view do
 
   it "has an + button to add a contact" do
     render
-    expect(rendered).to have_button('+', count: @users.length)
+    expect(rendered).to have_button('+', count: (@users.length - 1))
+  end
+
+  it "should not be possible to see myself in the list of all users" do
+    render
+    expect(rendered).to_not have_text(@users.first.email, count: 2)
   end
 end
