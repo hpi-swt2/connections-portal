@@ -6,5 +6,6 @@ FactoryBot.define do
     content { "The content of #{title.downcase}" }
     # https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#implicit-definition
     user factory: :user
+    creator_user factory: :user
   end
 end

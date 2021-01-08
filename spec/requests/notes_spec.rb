@@ -14,12 +14,26 @@ require 'rails_helper'
 
 RSpec.describe "/notes", type: :request do
   # As you add validations to the `Note` model, be sure to update the factory as well
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+  end
+
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:note, user_id: FactoryBot.create(:user).id)
+    FactoryBot.attributes_for(
+      :note,
+      user_id: @user.id,
+      creator_user_id: @user.id
+    )
   }
 
   let(:invalid_attributes) {
-    FactoryBot.attributes_for(:note, user_id: nil, title: '')
+    FactoryBot.attributes_for(
+      :note,
+      user_id: nil,
+      creator_user_id: nil,
+      title: ''
+    )
   }
 
   describe "GET /index" do
