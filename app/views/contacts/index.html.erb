@@ -1,0 +1,21 @@
+<h1>My Contacts</h1>
+
+<% if user_signed_in? %>
+
+  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get %></p>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.email %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

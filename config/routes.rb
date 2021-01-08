@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: %i[show edit update] do
+    patch 'status', to: 'users#update_status', as: 'update_status', on: :member
+
     resources :social_accounts
-    member do
-      patch 'status', to: 'users#update_status', as: 'update_status'
-      patch 'add_contact'
+    resources :contacts, only: %i[index]
+    resources :contact_requests, only: %i[index create destroy] do
+      patch 'accept', on: :member
     end
   end
-
 end
