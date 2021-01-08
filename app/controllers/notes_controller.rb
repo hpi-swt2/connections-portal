@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.all
+    @notes = current_user.notes
   end
 
   # GET /notes/1
@@ -20,7 +20,7 @@ class NotesController < ApplicationController
   # POST /notes
   def create
     @note = Note.new(note_params)
-
+    @note.creator_user_id = current_user.id
     if @note.save
       redirect_to @note, notice: I18n.t('confirmation.resource_creation', resource: Note)
     else

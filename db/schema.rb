@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "creator_user_id", null: false
+    t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -47,6 +49,15 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_contact_requests", id: false, force: :cascade do |t|
+    t.integer "requested_user_id"
+    t.integer "requesting_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requested_user_id"], name: "index_users_contact_requests_on_requested_user_id"
+    t.index ["requesting_user_id"], name: "index_users_contact_requests_on_requesting_user_id"
+  end
+
   create_table "users_users", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "contact_id"
@@ -56,4 +67,5 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
 
   add_foreign_key "activities", "users"
   add_foreign_key "notes", "users"
+  add_foreign_key "notes", "users", column: "creator_user_id"
 end

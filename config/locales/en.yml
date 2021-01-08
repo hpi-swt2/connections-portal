@@ -60,6 +60,9 @@ en:
       available: 'available'
       working: 'working'
       free_for_chat: 'free for chat'
+    contact_request:
+      approved: 'Contact request approved'
+      denied: 'Contact request denied'
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'

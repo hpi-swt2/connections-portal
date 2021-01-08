@@ -13,6 +13,12 @@ class User < ApplicationRecord
                           class_name: 'User',
                           association_foreign_key: 'contact_id'
 
+  has_and_belongs_to_many :contact_requests,
+                          class_name: 'User',
+                          join_table: 'users_contact_requests',
+                          foreign_key: 'requested_user_id',
+                          association_foreign_key: 'requesting_user_id'
+
   VALID_STATUS_LIST = %w[available working free_for_chat].freeze
 
   validates :username, :email, presence: true
@@ -24,6 +30,10 @@ class User < ApplicationRecord
 
   def init
     self.username ||= email.split('@', 2)[0]
+  end
+
+  def notes
+    Note.where('creator_user_id = ?', self.id)
   end
 
   def select_status_list

@@ -10,6 +10,11 @@
 /test/version_tmp/
 /tmp/
 
+# ignore local ide settings
+/.vagrant/
+/.idea/
+/.github/
+
 # Used by dotenv library to load environment variables.
 # .env
 

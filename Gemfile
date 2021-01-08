@@ -47,7 +47,8 @@ gem 'bootstrap', '~> 4.5', '>= 4.5.2' # https://github.com/twbs/bootstrap-rubyge
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5' # https://github.com/bokmann/font-awesome-rails
 # jQuery JavaScript framework packaged for Rails
 gem 'jquery-rails', '~> 4.4' # https://github.com/rails/jquery-rails
-
+# State of the art fixtures
+gem 'factory_bot_rails', '~> 6.1' # https://github.com/thoughtbot/factory_bot_rails
 #
 # Gems that depend on the build kind (development/test/production)
 #
@@ -61,8 +62,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1' # https://github.com/rspec/rspec-rails
   # Extension of rspec-rails for controller and request specs
   gem 'rails-controller-testing' # https://github.com/rails/rails-controller-testing
-  # State of the art fixtures
-  gem 'factory_bot_rails', '~> 6.1' # https://github.com/thoughtbot/factory_bot_rails
   # Ruby static code analyzer (a.k.a. linter) and code formatter
   gem 'rubocop', '~> 0.93.1', require: false # https://github.com/rubocop-hq/rubocop
   # Rails Extension for Rubocop
