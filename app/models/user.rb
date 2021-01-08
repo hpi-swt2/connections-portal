@@ -34,6 +34,10 @@ class User < ApplicationRecord
     self.username ||= email.split('@', 2)[0]
   end
 
+  def notes
+    Note.where('creator_user_id = ?', self.id)
+  end
+
   def select_status_list
     VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end

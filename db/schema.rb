@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2020_12_22_090231) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "creator_user_id", null: false
+    t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -65,4 +67,5 @@ ActiveRecord::Schema.define(version: 2020_12_22_090231) do
   end
 
   add_foreign_key "notes", "users"
+  add_foreign_key "notes", "users", column: "creator_user_id"
 end

@@ -33,4 +33,19 @@ RSpec.describe Note, type: :model do
     expect { @note.destroy }.to_not raise_error
     expect { user.reload }.to_not raise_error
   end
+
+  it "is not valid without a creator user" do
+    @note.creator_user = nil
+    expect(@note).not_to be_valid
+  end
+
+  it "persists a creator user" do
+    expect(@note.creator_user).to be_instance_of(User)
+  end
+
+  it "can be destroyed without interfering with the connected creator user" do
+    user = @note.creator_user
+    expect { @note.destroy }.to_not raise_error
+    expect { user.reload }.to_not raise_error
+  end
 end
