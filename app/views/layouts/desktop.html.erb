@@ -8,11 +8,13 @@
 </head>
 
 <body>
-  <%= render "layouts/navbar" %>
-  <div class="container pt-3">
-    <% if notice %><div class="alert alert-success notice" role="alert"><%= notice %></div><% end %>
-    <% if alert %><div class="alert alert-danger" role="alert"><%= alert %></div><% end %>
-    <%= yield %>
+  <div id="app">
+    <%= render "layouts/navbar" %>
+    <div id="content" class="container pt-3">
+      <% if notice %><div class="alert alert-success notice" role="alert"><%= notice %></div><% end %>
+      <% if alert %><div class="alert alert-danger" role="alert"><%= alert %></div><% end %>
+      <%= yield %>
+    </div>
   </div>
 </body>
 
