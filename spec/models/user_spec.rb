@@ -56,18 +56,18 @@ RSpec.describe User, type: :model do
   end
 
   it "should have no relationship to social accounts" do
-      expect(@user.social_accounts).to be_empty
+    expect(@user.social_accounts).to be_empty
   end
 
   it "can have many social accounts" do
-      user_with_social_accounts = User.create(email: "foofoofoo@exmaple.com", password: "super_save_password")
-      user_with_social_accounts.save
-      user_with_social_accounts.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
-      user_with_social_accounts.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
+    user_with_social_accounts = User.create(email: "foofoofoo@exmaple.com", password: "super_save_password")
+    user_with_social_accounts.save
+    user_with_social_accounts.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
+    user_with_social_accounts.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
 
-      expect(user_with_social_accounts.social_accounts).not_to be_empty
-      expect(user_with_social_accounts.social_accounts[0].social_network).to eq("GitHub")
-      expect(user_with_social_accounts.social_accounts[1].social_network).to eq("Telegram")
+    expect(user_with_social_accounts.social_accounts).not_to be_empty
+    expect(user_with_social_accounts.social_accounts[0].social_network).to eq("GitHub")
+    expect(user_with_social_accounts.social_accounts[1].social_network).to eq("Telegram")
   end
 
   it "adds user to contact request list of other user" do
