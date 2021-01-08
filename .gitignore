@@ -1,5 +1,4 @@
 *.gem
-*.rbc
 /.config
 /coverage/
 /InstalledFiles
@@ -13,7 +12,6 @@
 # ignore local ide settings
 /.vagrant/
 /.idea/
-/.github/
 
 # Used by dotenv library to load environment variables.
 # .env
