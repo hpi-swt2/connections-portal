@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
-  it "is invalid with a status other than 'available' or 'working'" do
+  it "is invalid with an unknown status" do
     @user.current_status = "unavailable"
     expect(@user).not_to be_valid
   end
@@ -78,5 +78,18 @@ RSpec.describe User, type: :model do
     @user.contact_requests << request
     expect(@user.contact_requests).to include(request)
     expect(@user.contact_requests).to_not include(contact)
+  end
+
+  describe "status scope" do
+    before do
+      @user1 = FactoryBot.create :user, current_status: 'working'
+      @user2 = FactoryBot.create :user, current_status: 'free_for_chat'
+    end
+
+    it "shows only users with the given status" do
+      users = described_class.with_status('working')
+      expect(users).to include(@user1)
+      expect(users).not_to include(@user2)
+    end
   end
 end
