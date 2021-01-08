@@ -1,32 +1,13 @@
 <!--<meta http-equiv="refresh" content="2" />-->
-<% unless user_signed_in? %>
-  <div class="jumbotron">
-        <h1 class="display-4">Connections Portal</h1>
-    <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
-    <hr>
-    <p>We hope you enjoy using it!
-          <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
-    <p class="lead" id="registration">
-      <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
-      <%=  link_to (fa_icon 'sign-in', text: I18n.t('navigation.log_in')), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin"  %>
-      <%=  link_to (fa_icon 'user-plus', text: I18n.t('navigation.sign_up')), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup"  %>
-    </p>
-  </div>
-<%  end %>
-
-<% if user_signed_in? %>
-  <div class="row" id="dashboard-row">
-    <div class="col-sm" id="users-container">
-      <%= render 'users' %>
-    </div>
-    <div class="col-md" id="chat-container">
-      <%= render 'chat' %>
-    </div>
-    <div class="col-sm" id="activities-container">
-      <%= render 'activities' %>
-    </div>
-    <div class="col-sm" id="proposals-container">
-      <%= render 'proposals' %>
-    </div>
-  </div>
-<% end %>
+<div class="jumbotron">
+      <h1 class="display-4">Connections Portal</h1>
+  <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
+  <hr>
+  <p>We hope you enjoy using it!
+        <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
+  <p class="lead" id="registration">
+    <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+    <%=  link_to (fa_icon 'sign-in', text: I18n.t('navigation.log_in')), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin"  %>
+    <%=  link_to (fa_icon 'user-plus', text: I18n.t('navigation.sign_up')), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup"  %>
+  </p>
+</div>
