@@ -55,6 +55,7 @@ en:
       current: 'Current status'
       available: 'available'
       working: 'working'
+      free_for_chat: 'free for chat'
   dashboard:
     user_list: 'Users'
     global_chat: 'Global Chat'

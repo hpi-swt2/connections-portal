@@ -25,6 +25,10 @@ RSpec.describe "Users profile page", type: :feature do
     expect(page).not_to have_select('user[current_status]')
   end
 
+  it 'contains the "free for chat" status' do
+    expect(page).to have_select('user[current_status]', with_options: ['free for chat'])
+  end
+
   it 'shows current status when showing different user' do
     user2.current_status = "available"
     user2.save

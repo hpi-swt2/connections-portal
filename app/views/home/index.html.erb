@@ -1,5 +1,4 @@
 <!--<meta http-equiv="refresh" content="2" />-->
-
 <% unless user_signed_in? %>
   <div class="jumbotron">
         <h1 class="display-4">Connections Portal</h1>
@@ -16,14 +15,8 @@
 <%  end %>
 
 <% if user_signed_in? %>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Set status
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">available</a>
-      <a class="dropdown-item" href="#">working</a> <!-- should be done dynamically-->
-    </div>
+  <div>
+      <%= render 'status_dropdown' %>
   </div>
   <div class="row" id="dashboard-row">
     <div class="col-sm" id="users-container">

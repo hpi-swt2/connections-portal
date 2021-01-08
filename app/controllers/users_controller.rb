@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   def update_status
     @user.current_status = params[:user][:current_status]
     @user.save
-    redirect_to @user
   end
 
   def index
