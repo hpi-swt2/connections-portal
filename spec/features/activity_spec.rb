@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Activities', type: :feature do
+RSpec.describe 'Activities', driver: :selenium_headless, type: :feature, js: true do
   let(:user) { FactoryBot.create :user }
 
   before do
@@ -16,13 +16,12 @@ RSpec.describe 'Activities', type: :feature do
     fill_in 'activity-textarea', with: 'This is an activity'
     find('#add-activity-button').click
     sleep(0.5) # async
-    expect(user.activities.any? { |activity| activity.content == 'This is an activity' }).to be_truthy
+    expect(user.activities).to be_any { |activity| activity.content == 'This is an activity' }
   end
 
-  # it 'has an cleared text box after a successful submit' do
-  #  fill_in 'activity-textarea', with: 'This is an activity'
-  #  find('#add-activity-button').click
-  #  print page.html
-  #  expect(page).to have_field('activity-textarea', text: '')
-  # end
+  it 'has an cleared text box after a successful submit' do
+    fill_in 'activity-textarea', with: 'This is an activity'
+    find('#add-activity-button').click
+    expect(page).to have_field('activity-textarea', text: '')
+  end
 end
