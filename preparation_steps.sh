@@ -90,7 +90,7 @@ sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27home#index\x27\n&/;p;}' config/rout
 # remove notes helper spec. We don't have any note helpers so we don't need to test them
 # rm spec/helpers/notes_helper_spec.rb
 
-# remove notice from app/view/notes/index.html.erb and app/view/notes/show.html.erb, as it is already stated in app/views/layouts/application.html.erb
+# remove notice from app/view/notes/index.html.erb and app/view/notes/show.html.erb, as it is already stated in app/views/layouts/desktop.html.erb
 sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/index.html.erb
 sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/show.html.erb
 
