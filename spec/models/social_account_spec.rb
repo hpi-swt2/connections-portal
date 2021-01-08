@@ -9,12 +9,12 @@ RSpec.describe SocialAccount, type: :model do
     expect(@social_account).to be_valid
   end
 
-  it "is not valid without an social network" do
+  it "is not valid without a social network" do
     @social_account.social_network = ""
     expect(@social_account).to_not be_valid
   end
 
-  it "is not valid without an user_name" do
+  it "is not valid without a user name" do
     @social_account.user_name = ""
     expect(@social_account).to_not be_valid
   end
