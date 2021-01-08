@@ -1,0 +1,18 @@
+<div>
+  <h4>List of users:</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

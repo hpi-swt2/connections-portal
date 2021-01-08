@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   def update_status
     @user.current_status = params[:user][:current_status]
     @user.save
-    redirect_to @user
   end
 
   def index
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
     authenticate_user!
     current_user.contacts << User.find(params[:id])
     current_user.save
-    redirect_to home_index_path
+    redirect_to root_path
   end
 
   private

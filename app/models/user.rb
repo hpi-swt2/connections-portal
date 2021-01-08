@@ -13,7 +13,7 @@ class User < ApplicationRecord
                           class_name: 'User',
                           association_foreign_key: 'contact_id'
 
-  VALID_STATUS_LIST = %w[available working].freeze
+  VALID_STATUS_LIST = %w[available working free_for_chat].freeze
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }

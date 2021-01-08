@@ -1,0 +1,6 @@
+<%= form_for(current_user, url: update_status_user_path(current_user), method: :patch) do |f| %>
+  <div class="status-dropdown">
+    <%= f.label :current_status %>
+    <%= f.select(:current_status, current_user.select_status_list, {}, {onchange: "this.form.submit()", class: "form-control"}) %>
+  </div>
+<% end %>
