@@ -13,9 +13,9 @@ RSpec.describe "Homes", type: :request do
     end
 
     context 'when not signed in' do
-      it 'redirects to the sign in page' do
+      it 'returns http success' do
         get root_path
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to have_http_status(:success)
       end
     end
   end

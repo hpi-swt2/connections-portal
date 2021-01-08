@@ -5,7 +5,7 @@ RSpec.describe "Dashboard", driver: :selenium_headless, type: :feature, js: true
 
   before do
     sign_in user
-    visit home_index_path
+    visit root_path
   end
 
   it 'has a dropdown to select status' do

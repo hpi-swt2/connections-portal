@@ -4,15 +4,13 @@
   <thead>
   <tr>
     <th>Email</th>
-    <th width="100"></th>
   </tr>
   </thead>
-
   <tbody>
-  <% @users.each do |user| %>
+  <% User.all.each do |user| %>
     <tr>
       <td><%= user.email %></td>
-      <td align="center"><%= link_to 'Show', user %></td>
+      <td><%= button_to '+', add_contact_user_path(user), method: :patch, id: user.id %></td>
     </tr>
   <% end %>
   </tbody>

@@ -5,7 +5,7 @@ RSpec.describe 'Activities', driver: :selenium_headless, type: :feature, js: tru
 
   before do
     sign_in user
-    visit home_index_path
+    visit root_path
   end
 
   it 'can be added in a text area' do

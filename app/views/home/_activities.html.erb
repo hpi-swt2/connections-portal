@@ -1,9 +1,5 @@
 <h1 class="center-heading"><%= I18n.t('dashboard.last_activities') %></h1>
-<div class="card">
-  <label for="activity-textarea">Post new activity</label>
-  <textarea id="activity-textarea" name="activity-textarea" rows="4" cols="10"></textarea>
-  <button class="btn-secondary">Post</button>
-</div>
+<%= render 'create_activity' %>
 <div id="activities" class="scroll-list scroll-styled">
   <div class="activity-card">
     <div class="activity-card-body d-flex flex-row">
