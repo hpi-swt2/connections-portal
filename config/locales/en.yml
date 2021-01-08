@@ -34,6 +34,10 @@ en:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+  denial:
+    resource_creation: '%{resource} could not be created.'
+    resource_deletion: '%{resource} could not be deleted.'
+    resource_update: '%{resource} could not be updated.'
   navigation:
     visit_profile: 'Visit my profile'
     edit_profile: 'Edit my profile'
@@ -53,3 +57,5 @@ en:
       current: 'Current status'
       available: 'available'
       working: 'working'
+  activity:
+    post: 'Post new activity'

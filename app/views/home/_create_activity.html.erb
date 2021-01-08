@@ -1,12 +1,8 @@
-<%= form_with(url: activity_index_path, method: :post) do |f| %>
-    <div class="card form-group">
-      <label for="activity-textarea">Post new activity</label>
-      <textarea  class="form-control" id="activity-textarea" name="activity[content]" rows="3" placeholder="Just start typing here..."></textarea>
-      <div style="display:none">
-        <%= f.text_field :"activity[user]" , value: current_user.id %>
-      </div>
-      <button id="add-activity-button" onclick="document.getElementById('activity-textarea').textContent = ''" type="submit" class="btn-secondary">Post</button>
-    </div>
+<%= form_with(model: Activity.new) do |f| %>
+  <div class="form-group">
+    <%= f.label :content, I18n.t('activity.post') %>
+    <%= f.text_area :content, class: 'form-control', id: "activity-textarea",
+                    rows: "3", placeholder: "Just start typing here..." %>
+    <%= f.submit class: "btn-secondary", id: "add-activity-button"%>
+  </div>
 <% end %>
-
-

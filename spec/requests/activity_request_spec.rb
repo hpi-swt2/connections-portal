@@ -1,12 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe "Activities", type: :request do
+  before { @user = FactoryBot.create :user }
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/activity/create"
-      expect(response).to have_http_status(:success)
+  let(:headers) { { ACCEPT: "application/javascript, text/html" } }
+
+  describe "POST" do
+    context "when logged in" do
+      before { sign_in @user }
+
+      it "accepts new activity" do
+        post activities_path, params: { activity: { content: "Some content" } }, headers: headers
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "denies an activity without content" do
+        post activities_path, params: { activity: { content: nil } }
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "without logging in" do
+      it "redirects to the login page" do
+        post activities_path, params: { activity: { content: "Some content" } }, headers: headers
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
-
 end

@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_many :activities, dependent: :delete_all
   has_and_belongs_to_many :contacts,
                           class_name: 'User',
-                          foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
 
   VALID_STATUS_LIST = %w[available working].freeze
