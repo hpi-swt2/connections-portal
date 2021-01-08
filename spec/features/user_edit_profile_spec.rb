@@ -22,13 +22,20 @@ it 'show social account' do
 
   it 'provides link to edit social account' do
     visit edit_user_path(user)
-
-    paragraph = find("p", :text => "GitHub")
-    editLink = paragraph.find("a", text: "Edit")
-    editLink.click
+    page.find(:css, 'a[href="/users/1/social_accounts/1/edit"]').click
 
     expect(find_field("Social network").value).to eq "GitHub"
     expect(find_field("User name").value).to eq "SomeGitUserName"
+  end
+
+  it 'provides link to remove social account' do
+    visit edit_user_path(user)
+    
+    # TODO(): we should specifically access the link which makes an delete request
+    page.find(:css, 'a[href="/users/1/social_accounts/2"]').click
+
+    expect(find_field("Social network").value).not_to eq "Telegram"
+    expect(find_field("User name").value).not_to eq "SomeTelegramUserName"
   end
 
   it 'changes social account values' do

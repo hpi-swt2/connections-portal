@@ -35,8 +35,10 @@ class SocialAccountsController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:user_id])
+    @social_account = @user.social_accounts.find(params[:id])
     @social_account.destroy
-    # TODO(Alexander-Dubrawski) Add Redirection 
+    redirect_to edit_user_path(@user)
   end
 
   private
