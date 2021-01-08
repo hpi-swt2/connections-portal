@@ -9,10 +9,9 @@ Rails.application.routes.draw do
   get "/users/search" => "users#search"
 
   resources :users, only: %i[show edit update search] do
-    patch 'status', to: 'users#update_status', as: 'update_status', on: :member
-    resources :contacts, only: %i[index]
-    resources :contact_requests, only: %i[index create destroy] do
-      patch 'accept', on: :member
+    member do
+      patch 'status', to: 'users#update_status', as: 'update_status'
+      patch 'add_contact'
     end
   end
 end

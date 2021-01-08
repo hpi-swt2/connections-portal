@@ -54,6 +54,3 @@ en:
       available: 'available'
       working: 'working'
     search: 'Search'
-    contact_request:
-      approved: 'Contact request approved'
-      denied: 'Contact request denied'

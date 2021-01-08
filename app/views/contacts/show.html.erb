@@ -1,9 +1,6 @@
 <h1>My Contacts</h1>
 
 <% if user_signed_in? %>
-
-  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get %></p>
-
   <table>
     <thead>
     <tr>

@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
-  def index
+
+  def show
     @contacts = current_user.contacts
   end
 end

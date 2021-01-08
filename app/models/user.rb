@@ -10,13 +10,8 @@ class User < ApplicationRecord
   has_many :notes, dependent: :delete_all
   has_and_belongs_to_many :contacts,
                           class_name: 'User',
+                          foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
-
-  has_and_belongs_to_many :contact_requests,
-                          class_name: 'User',
-                          join_table: 'users_contact_requests',
-                          foreign_key: 'requested_user_id',
-                          association_foreign_key: 'requesting_user_id'
 
   VALID_STATUS_LIST = %w[available working].freeze
 
