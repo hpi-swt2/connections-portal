@@ -7,10 +7,13 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @social_account = @user.social_accounts.build
+    # prototype for create social account form
+    @social_account = @user.social_accounts.build #
   end
 
   def update
+    # prototype for create social account form
+    @social_account = @user.social_accounts.build
     return render :edit unless @user.update(user_params)
 
     redirect_to @user
