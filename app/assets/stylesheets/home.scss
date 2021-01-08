@@ -23,6 +23,7 @@
 
 .center-heading {
   text-align: center;
+  font-weight: 600;
 }
 
 .scroll-list {
@@ -136,4 +137,52 @@
 
 .proposal .card-text {
   text-align: justify;
+}
+
+.activity-card {
+  background-color: #f0f0f0;
+  border-radius: .5rem;
+  margin: .75em .5em;
+}
+
+.activity-card-body {
+  padding: .75rem;
+}
+
+.activity-icon {
+  text-align: center;
+}
+
+.activity-icon span {
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  font-size: 1.2em;
+  background-color: #e1e1e1;
+}
+
+.activity-user {
+  font-style: italic;
+}
+
+.activity-type,
+.activity-text{
+  font-size: .9em;
+  color: #818181;
+}
+
+.activity-info {
+  position: relative;
+}
+
+.activity-post-time {
+  font-size: 12px;
+  text-align: center;
+}
+
+.activity-more {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

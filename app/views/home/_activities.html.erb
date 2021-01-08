@@ -3,10 +3,47 @@
   <textarea id="activity-textarea" name="activity-textarea" rows="4" cols="10"></textarea>
   <button class="btn-secondary">Post</button>
 </div>
-<div>
-  <h1 class="center-heading"><%= I18n.t('dashboard.last_activities') %></h1>
-  <ul>
-    <li class="list-group-item">Activity 1</li>
-    <li class="list-group-item">Activity 2</li>
-  </ul>
+<h1 class="center-heading"><%= I18n.t('dashboard.last_activities') %></h1>
+<div id="activities" class="scroll-list scroll-styled">
+  <div class="activity-card">
+    <div class="activity-card-body d-flex flex-row">
+      <div class="activity-icon">
+        <span class="avatar"><i class="fa fa-user"></i></span>
+      </div>
+      <div class="col">
+        <div class="activity-user">Peter Mustermann</div>
+        <div class="activity-type">Has changed his state to</div>
+        <div class="activity-text">"Nice 2 Meet U"</div>
+      </div>
+      <div class="activity-info">
+        <div class="activity-post-time">
+          1 min
+        </div>
+        <div class="activity-more">
+          <i class="fa fa-ellipsis-v"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card">
+    <div class="activity-card-body d-flex flex-row">
+      <div class="activity-icon">
+        <span class="avatar"><i class="fa fa-user"></i></span>
+      </div>
+      <div class="col">
+        <div class="activity-user">Peter Mustermann</div>
+        <div class="activity-type">Has changed his state to</div>
+        <div class="activity-text">"Nice 2 Meet U"</div>
+      </div>
+      <div class="activity-info">
+        <div class="activity-post-time">
+          1 min
+        </div>
+        <div class="activity-more">
+          <i class="fa fa-ellipsis-v"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
