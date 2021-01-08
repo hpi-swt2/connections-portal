@@ -59,9 +59,10 @@ en:
       current: 'Current status'
       available: 'available'
       working: 'working'
+      free_for_chat: 'free for chat'
   activity:
     post: 'Post new activity'
-      free_for_chat: 'free for chat'
+    placeholder: 'Just start typing here...'
   dashboard:
     user_list: 'Users'
     global_chat: 'Global Chat'

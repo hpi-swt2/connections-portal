@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= f.label :content, I18n.t('activity.post') %>
     <%= f.text_area :content, class: 'form-control', id: "activity-textarea",
-                    rows: "3", placeholder: "Just start typing here..." %>
+                    rows: "3", placeholder: I18n.t('activity.placeholder') %>
     <%= f.submit class: "btn-secondary", id: "add-activity-button"%>
   </div>
 <% end %>

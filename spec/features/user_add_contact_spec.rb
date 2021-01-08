@@ -10,7 +10,7 @@ RSpec.describe "Users", type: :feature do
   end
 
   it "adds a contact when the button is clicked" do
-    find_by(id: @user2.id.to_s).click_button
+    find_by_id(@user2.id.to_s).click_button
 
     expect(@user1.contacts).to include(@user2)
   end
