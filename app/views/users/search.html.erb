@@ -1,31 +1,37 @@
 <div class="jumbotron">
     <h2>Users</h2>
+
+    <div class="row">
+        <div class="col">
+            <%= form_tag("/users/search", method: "get") do %>
+            <%= label_tag(:q, "Search for:") %>
+            <%= text_field_tag(:q) %>
+            <%= submit_tag("Search") %>
+            <% end %>
+        </div>
+    </div>
+
     <table>
-      <thead>
-      <tr>
-        <th>Username</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-      </tr>
-      </thead>
-      <tbody>
-      <%= form_tag("/users/search", method: "get") do %>
-        <%= label_tag(:q, "Search for:") %>
-        <%= text_field_tag(:q) %>
-        <%= submit_tag("Search") %>
-      <% end %>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
 
-      <% @results.each do |user| %>
-        <tr>
-          <td><%= user.username %></td>
-          <td><%= user.firstname %></td>
-          <td><%= user.lastname %></td>
-          <td><%= user.email %></td>
-          <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
-        </tr>
-      <% end %>
+            <% @results.each do |user| %>
+            <tr>
+                <td><%= user.username %></td>
+                <td><%= user.firstname %></td>
+                <td><%= user.lastname %></td>
+                <td><%= user.email %></td>
+                <td><%= button_to '+', add_contact_user_path(user), method: :patch,  :form =>{:id => user.id}%></td>
+            </tr>
+            <% end %>
 
-      </tbody>
+        </tbody>
     </table>
 </div>
