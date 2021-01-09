@@ -2,6 +2,7 @@
     <h2>Users</h2>
 
     <div class="row">
+        <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
         <div class="col">
             <%= form_tag("/users/search", method: "get") do %>
             <%= label_tag(:q, "Search for:") %>
