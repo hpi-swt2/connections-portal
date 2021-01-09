@@ -15,7 +15,7 @@
 
   <p>
     <%= form.label :social_network %>
-    <%= form.select(:social_network, options_for_select([["GitHub", "GitHub"], ["Telegram", "Telegram"], ["LinkedIn", "LinkedIn"]])) %>
+    <%= form.select(:social_network, options_for_select($supported_social_networks)) %>
   </p>
   <p>
       <%= form.label :user_name %>

@@ -1,5 +1,6 @@
 <%= render 'social_accounts/social_account', social_account: social_account %>
 <td>
-  <%= link_to 'Edit', edit_user_social_account_path(user, social_account) %>
-  <%= link_to 'Remove', user_social_account_path(user, social_account), method: :delete %>
+    <%= link_to 'Edit', edit_user_social_account_path(user, social_account) %>
+    <%= link_to 'Remove', user_social_account_path(user, social_account), method: :delete %>
+    <%= link_to 'Link', generate_link(social_account) %>
 </td>
