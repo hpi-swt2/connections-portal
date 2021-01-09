@@ -45,9 +45,9 @@ RSpec.describe "SocialAccounts", driver: :selenium_headless, type: :request do
     it "deletes a social account" do
       user = FactoryBot.build(:user)
       user.save
-      user.social_accounts.create(social_network: "Telegram", user_name: "foo")
+      social_account = user.social_accounts.create(social_network: "Telegram", user_name: "foo")
       user.save
-      delete "/users/#{user.id}/social_accounts/1"
+      delete "/users/#{user.id}/social_accounts/#{social_account.id}"
       expect(response).to have_http_status(:redirect)
       expect(user.social_accounts.count).to eq(0)
     end
