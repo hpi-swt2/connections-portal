@@ -1,6 +1,6 @@
 class SocialAccountsController < ApplicationController
   include SocialAccountsHelper
-  before_action :set_social_account, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, :set_social_account, only: [:show, :edit, :update, :destroy]
   helper_method :generate_link,  :get_supported_social_networks
 
   def new
@@ -56,5 +56,12 @@ class SocialAccountsController < ApplicationController
 
   def social_account_params
     params.require(:social_account).permit(:social_network, :user_name)
+  end
+
+  def authorize
+    authenticate_user!
+    if !(current_user.id.to_s == params[:user_id])
+      redirect_to root_path
+    end
   end
 end
