@@ -13,10 +13,12 @@ class UsersController < ApplicationController
 
   def update
     # prototype for create social account form
+    if @user.update(user_params)
+       redirect_to @user
+       return
+    end
     @social_account = @user.social_accounts.build
-    return render :edit unless @user.update(user_params)
-
-    redirect_to @user
+    render :edit
   end
 
   def update_status
