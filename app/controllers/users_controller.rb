@@ -1,34 +1,7 @@
 class UsersController < ApplicationController
+  include SocialAccountsHelper
   before_action :authorize, except: %i[show index]
-  $supported_social_networks = [["GitHub", "GitHub"], ["Telegram", "Telegram"], ["Facebook", "Facebook"], ["Twitter", "Twitter"], ["GitLab@HPI", "GitLab@HPI"], ["Slack", "Slack"], ["Discord", "Discord"]]
-
-  def generate_link(social_account)
-    network = social_account.social_network
-      if network == "GitHub"
-        return "https://github.com/#{social_account.user_name}"
-      end
-      if network == "Telegram"
-        return "https://t.me/#{social_account.user_name}"
-      end
-      if network == "Facebook"
-        return "https://www.facebook.com/#{social_account.user_name}"
-      end
-      if network == "Twitter"
-        return "https://twitter.com/#{social_account.user_name}"
-      end
-      if network == "GitLab@HPI"
-        return "https://twitter.com/#{social_account.user_name}"
-      end
-      if network == "Slack"
-        return "https://slack.com/"
-      end
-      if network == "Discord"
-        return "https://discordapp.com/#{social_account.user_name}"
-      end
-      return "#"
-  end
-
-  helper_method :generate_link
+  helper_method :generate_link,  :get_supported_social_networks
 
 
   def show

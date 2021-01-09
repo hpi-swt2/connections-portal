@@ -15,7 +15,7 @@
 
   <p>
     <%= form.label :social_network %>
-    <%= form.select(:social_network, options_for_select($supported_social_networks)) %>
+    <%= form.select(:social_network, options_for_select(get_supported_social_networks)) %>
   </p>
   <p>
       <%= form.label :user_name %>
