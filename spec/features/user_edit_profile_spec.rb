@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users profile page", type: :feature do
+RSpec.describe "Users profile page", driver: :selenium_headless, type: :feature do
   let(:user) { FactoryBot.create :user }
 
   before do
@@ -22,7 +22,7 @@ it 'show social account' do
 
   it 'provides link to edit social account' do
     visit edit_user_path(user)
-    page.find(:css, 'a[href="/users/1/social_accounts/1/edit"]').click
+    page.all(:link, 'Edit')[0].click
     expect(find_field("Social network").value).to eq "GitHub"
     expect(find_field("User name").value).to eq "SomeGitUserName"
   end
@@ -31,7 +31,7 @@ it 'show social account' do
     visit edit_user_path(user)
     
     # TODO(): we should specifically access the link which makes an delete request
-    page.find(:css, 'a[href="/users/1/social_accounts/2"]').click
+    page.all(:link, 'Remove')[1].click
 
     expect(find_field("Social network").value).not_to eq "Telegram"
     expect(find_field("User name").value).not_to eq "SomeTelegramUserName"
