@@ -30,11 +30,18 @@ it 'show social account' do
   it 'provides link to remove social account' do
     visit edit_user_path(user)
     
-    # TODO(): we should specifically access the link which makes an delete request
     page.all(:link, 'Remove')[1].click
 
     expect(find_field("Social network").value).not_to eq "Telegram"
     expect(find_field("User name").value).not_to eq "SomeTelegramUserName"
+  end
+
+  it 'provides link to social account website' do
+    visit edit_user_path(user)
+    
+    link = page.all(:link, 'Link')[0][:href]
+
+    expect(link).to eq "https://#{user.social_accounts[0].social_network.downcase}.com/#{user.social_accounts[0].user_name}"
   end
 
   it 'changes social account values' do
