@@ -1,7 +1,7 @@
 <%= form_for(@user, local: true, url: update_status_user_path(@user)) do |f| %>
   <div class="field">
     <%= f.label :current_status %>
-    <%= f.select(:current_status, @user.select_status_list) %>
+    <%= f.select(:current_status, User.select_status_list) %>
   </div>
 
   <div class="actions">

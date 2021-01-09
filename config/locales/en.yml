@@ -59,7 +59,9 @@ en:
       current: 'Current status'
       available: 'available'
       working: 'working'
+      offline: 'offline'
       free_for_chat: 'free for chat'
+      filter: 'Filter by status:'
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
