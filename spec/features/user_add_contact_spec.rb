@@ -8,7 +8,7 @@ RSpec.describe "Users", type: :feature do
 
   it "adds a contact request when the button is clicked" do
     sign_in @requesting_user
-    visit home_index_path
+    visit users_path
     find("form[action='#{user_contact_requests_path(@requested_user)}']").find("input").click
     expect(@requested_user.contact_requests).to_not be_empty
     expect(@requested_user.contact_requests).to include(@requesting_user)
