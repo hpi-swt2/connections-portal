@@ -6,6 +6,13 @@ html, body {
   height: 100%;
 }
 
+.alert {
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #app {
   padding: 0;
   display: flex;
