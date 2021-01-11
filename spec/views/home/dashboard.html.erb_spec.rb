@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "home/dashboard", type: :view do
-
-  context "user signed in" do
+  context "when user is signed in" do
     before(:each) do
       @users = assign(:users, FactoryBot.create_list(:user, 3))
       sign_in @users.first
@@ -34,5 +33,4 @@ RSpec.describe "home/dashboard", type: :view do
       end
     end
   end
-
 end
