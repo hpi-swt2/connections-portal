@@ -72,3 +72,13 @@ en:
     last_activities: 'Last Activities'
     current_proposals: 'Proposals'
     accept_proposal: 'Accept'
+  index:
+    portal_name: 'Connection Portal'
+    description: 'A digital tool for organizing and arranging networks, relationships and human connections.'
+    greeting: 'We hope you enjoy using it!'
+    give_feedback: 'Give feedback!'
+  navbar:
+    notes: 'Notes'
+    home: 'Home'
+    users: 'Users'
+    my-contacts: 'My contacts'
