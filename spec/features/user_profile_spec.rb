@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.describe "Users profile page", type: :feature do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
+  let(:social_account1) { FactoryBot.create :social_account }
+  let(:social_account2) { FactoryBot.create :social_account }
 
   before do
-    user.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
-    user.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
+    user.social_accounts.push(social_account1)
+    user.social_accounts.push(social_account2)
     user.save()
     sign_in user
     visit user_path(user)
@@ -36,9 +38,9 @@ RSpec.describe "Users profile page", type: :feature do
   end
 
   it 'show social accounts' do
-    expect(page).to have_text("GitHub")
-    expect(page).to have_text("SomeGitUserName")
-    expect(page).to have_text("Telegram")
-    expect(page).to have_text("SomeTelegramUserName")
+    expect(page).to have_text(social_account1.social_network)
+    expect(page).to have_text(social_account1.user_name)
+    expect(page).to have_text(social_account2.social_network)
+    expect(page).to have_text(social_account2.user_name)
   end
 end

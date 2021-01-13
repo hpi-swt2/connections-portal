@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Users profile page", driver: :selenium_headless, type: :feature do
   let(:user) { FactoryBot.create :user }
+  let(:social_account1) { FactoryBot.create :social_account }
+  let(:social_account2) { FactoryBot.create :social_account }
 
   before do
-    user.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
-    user.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
+    user.social_accounts.push(social_account1)
+    user.social_accounts.push(social_account2)
     user.save()
     sign_in user
 end
@@ -13,45 +15,45 @@ end
 it 'show social account' do
     visit edit_user_path(user)
 
-    expect(page).to have_text("GitHub")
-    expect(page).to have_text("SomeGitUserName")
-    expect(page).to have_text("Telegram")
-    expect(page).to have_text("SomeTelegramUserName")
+    expect(page).to have_text(social_account1.social_network)
+    expect(page).to have_text(social_account1.user_name)
+    expect(page).to have_text(social_account2.social_network)
+    expect(page).to have_text(social_account2.user_name)
   end
 
   it 'provides link to edit social account' do
     visit edit_user_path(user)
-    find_link(href: edit_user_social_account_path(user, user.social_accounts[0])).click
+    find_link(href: edit_user_social_account_path(user, social_account1.id)).click
     # Checks that social account and user name are the default value of the input
-    expect(page.find('#social_account_social_network').value).to eq "GitHub"
-    expect(page.find('#social_account_user_name').value).to eq "SomeGitUserName"
+    expect(page.find('#social_account_social_network').value).to eq social_account1.social_network
+    expect(page.find('#social_account_user_name').value).to eq social_account1.user_name
   end
 
   it 'provides link to remove social account' do
     visit edit_user_path(user)  
-    user_social_account_path(user, user.social_accounts[1])
-    find_link("Remove", href: user_social_account_path(user, user.social_accounts[1])).click
-    page.should have_no_content("SomeTelegramUserName")
+    user_social_account_path(user, social_account1.id)
+    find_link("Remove", href: user_social_account_path(user, social_account1.id)).click
+    page.should have_no_content(social_account1.user_name)
   end
 
   it 'provides link to social account website' do
     visit edit_user_path(user)
-    expect(page).to have_link(href: "https://#{user.social_accounts[0].social_network.downcase}.com/#{user.social_accounts[0].user_name}")
+    expect(page).to have_link(href: "https://#{social_account1.social_network.downcase}.com/#{social_account1.user_name}")
   end
 
   it 'changes social account values' do
-    visit edit_user_social_account_path(user, user.social_accounts[0])
+    visit edit_user_social_account_path(user, social_account1.id)
 
-    find('#social_account_user_name').set("SomeOtherGitUserName")
+    find('#social_account_user_name').set("SomeOtherUserName")
     find('input[type="submit"]').click
   
-    expect(page).to_not have_text("SomeGitUserName")
-    expect(page).to have_text("GitHub")
-    expect(page).to have_text("SomeOtherGitUserName")
+    expect(page).to_not have_text(social_account1.user_name)
+    expect(page).to have_text(social_account1.social_network)
+    expect(page).to have_text("SomeOtherUserName")
   end
 
   it 'shows error upon edit with invalid values' do
-    visit edit_user_social_account_path(user, user.social_accounts[0])
+    visit edit_user_social_account_path(user, social_account1.id)
 
     find('#social_account_user_name').set("")
     find('input[type="submit"]').click

@@ -8,13 +8,13 @@ module SocialAccountsHelper
         return "https://t.me/#{social_account.user_name}"
       end
       if network == "Facebook"
-        return "https://www.facebook.com/#{social_account.user_name}"
+        return "https://facebook.com/#{social_account.user_name}"
       end
       if network == "Twitter"
         return "https://twitter.com/#{social_account.user_name}"
       end
       if network == "GitLab@HPI"
-        return "https://twitter.com/#{social_account.user_name}"
+        return "https://gitlab.hpi.de.com/#{social_account.user_name}"
       end
       if network == "Slack"
         return "https://slack.com/"
