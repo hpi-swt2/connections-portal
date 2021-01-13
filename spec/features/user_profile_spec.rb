@@ -6,7 +6,6 @@ RSpec.describe "Users profile page", type: :feature do
 
   before do
     user.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
-    user.save()
     user.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
     user.save()
     sign_in user
