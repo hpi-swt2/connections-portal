@@ -31,6 +31,15 @@ class User < ApplicationRecord
   end
 
   def user_identifier
-      (username + ' ' + (firstname || '') + ' ' + (lastname || '') + ' ' + email).downcase
+    "#{username} #{(firstname || '')} #{(lastname || '')} #{email}".downcase
   end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['firstname LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
+
 end

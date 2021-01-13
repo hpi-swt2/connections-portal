@@ -31,18 +31,7 @@ class UsersController < ApplicationController
   end
 
   def search
-     if params[:q].blank?
-        @results = User.all
-     else
-        search_pattern = params[:q].downcase
-        @results = []
-        User.all.each do |user|
-
-           if user.user_identifier.include? search_pattern
-              @results << user
-           end
-        end
-     end
+    @users = User.search(params[:search])
   end
 
   private
