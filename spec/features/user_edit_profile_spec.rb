@@ -21,7 +21,7 @@ it 'show social account' do
 
   it 'provides link to edit social account' do
     visit edit_user_path(user)
-    find_link(href: "/users/#{user.id}/social_accounts/#{user.social_accounts[0].id}/edit").click
+    find_link(href: edit_user_social_account_path(user, user.social_accounts[0])).click
     # Checks that social account and user name are the default value of the input
     expect(page.find('#social_account_social_network').value).to eq "GitHub"
     expect(page.find('#social_account_user_name').value).to eq "SomeGitUserName"
@@ -29,7 +29,8 @@ it 'show social account' do
 
   it 'provides link to remove social account' do
     visit edit_user_path(user)  
-    find_link("Remove", href: "/users/#{user.id}/social_accounts/#{user.social_accounts[1].id}").click
+    user_social_account_path(user, user.social_accounts[1])
+    find_link("Remove", href: user_social_account_path(user, user.social_accounts[1])).click
     page.should have_no_content("SomeTelegramUserName")
   end
 
