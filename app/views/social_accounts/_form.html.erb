@@ -1,11 +1,11 @@
-<%= form_with(model: [@user, social_account], local: true) do |form| %>
+<%= form_with(model: [@user, @social_account], local: true) do |form| %>
   <% if self.controller.is_a?(SocialAccountsController) %>
     <!-- If a different controller is rendering this view, it is not trying to save a note, so possible validation errors are not relevant -->
-    <% if social_account.errors.any? %>
+    <% if @social_account.errors.any? %>
       <div id="error_explanation">
-        <h4><%= I18n.t 'errors.messages.not_saved.other', count: social_account.errors.count, resource: SocialAccount %></h4>
+        <h4><%= I18n.t 'errors.messages.not_saved.other', count: @social_account.errors.count, resource: SocialAccount %></h4>
         <ul>
-          <% social_account.errors.full_messages.each do |message| %>
+          <% @social_account.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
