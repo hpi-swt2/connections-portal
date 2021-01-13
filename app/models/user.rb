@@ -38,4 +38,8 @@ class User < ApplicationRecord
   def select_status_list
     VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end
+
+  def name
+    firstname + ' ' + lastname
+  end
 end
