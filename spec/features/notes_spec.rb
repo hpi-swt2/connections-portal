@@ -27,7 +27,7 @@ describe "Notes", type: :feature do
   it "shows just the notes created by the user" do
     @another_note = FactoryBot.create(:note, creator_user: @alice)
     sign_in @alice
-    #note is shown when alice is logged in
+    # note is shown when alice is logged in
     visit notes_path
     expect(page).to have_text(@another_note.title)
     sign_out @alice
@@ -36,5 +36,4 @@ describe "Notes", type: :feature do
     visit notes_path
     expect(page).not_to have_text(@another_note.title)
   end
-
 end
