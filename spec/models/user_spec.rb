@@ -61,7 +61,6 @@ RSpec.describe User, type: :model do
 
   it "can have many social accounts" do
     user_with_social_accounts = FactoryBot.create(:user)
-    #user_with_social_accounts.save
     user_with_social_accounts.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
     user_with_social_accounts.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
 
