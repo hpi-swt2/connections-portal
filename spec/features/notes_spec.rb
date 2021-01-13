@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-describe "Notes", type: :feature do
+describe 'Notes', type: :feature do
   let(:alice) { FactoryBot.create :user }
   let(:bob) { FactoryBot.create :user }
   let(:new_note) { FactoryBot.create :note }
 
   # TODO: Split up
-  it "can create a new note" do
+  it 'can create a new note' do
     sign_in alice
     visit new_note_path
-    fill_in "Title", with: new_note.title
-    fill_in "Content", with: new_note.content
-    fill_in "User", with: bob.id
-    click_button "Create Note"
+    fill_in 'Title', with: new_note.title
+    fill_in 'Content', with: new_note.content
+    fill_in 'User', with: bob.id
+    click_button 'Create Note'
 
     visit notes_path
     expect(page).to have_text(new_note.title)
@@ -20,7 +20,7 @@ describe "Notes", type: :feature do
     expect(page).to have_text(bob.id)
   end
 
-  it "shows just the notes created by the user" do
+  it 'shows just the notes created by the user' do
     another_note = FactoryBot.create(:note, creator_user: alice)
     sign_in alice
     # note is shown when alice is logged in

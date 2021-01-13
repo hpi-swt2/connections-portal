@@ -53,10 +53,6 @@ Layout/EmptyLinesAroundBlockBody:
 # Ignoring entire rules
 #
 
-# Ignore "Prefer single-quoted strings when you don't need string interpolation or special symbols"
-Style/StringLiterals:
-  Enabled: false
-
 # Ignore "Missing frozen string literal comment"
 Style/FrozenStringLiteralComment:
   Enabled: false

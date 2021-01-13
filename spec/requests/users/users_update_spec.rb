@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Update user", type: :request do
+RSpec.describe 'Update user', type: :request do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
   let(:attributes) { FactoryBot.attributes_for(:user) }
@@ -27,7 +27,7 @@ RSpec.describe "Update user", type: :request do
   end
 
   context 'when signed in as another user' do
-    it "redirects to the root page" do
+    it 'redirects to the root page' do
       sign_in user2
       patch user_path(user), params: { user: attributes }
       expect(response).to redirect_to(root_path)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Dashboard", driver: :selenium_headless, type: :feature, js: true do
+RSpec.describe 'Dashboard', driver: :selenium_headless, type: :feature, js: true do
   let(:user) { FactoryBot.create :user }
 
   before do

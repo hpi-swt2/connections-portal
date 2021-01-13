@@ -2,7 +2,7 @@ require 'English'
 
 # https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#linting-factories
 namespace :factory_bot do
-  desc "Verify that all FactoryBot factories are valid"
+  desc 'Verify that all FactoryBot factories are valid'
   task lint: :environment do
     puts "Factories: #{FactoryBot.factories.instance_variable_get('@items').keys}"
     if Rails.env.test?

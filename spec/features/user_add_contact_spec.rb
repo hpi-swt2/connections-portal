@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Contact request", type: :feature do
+RSpec.describe 'Contact request', type: :feature do
   let(:requesting_user) { FactoryBot.create :user }
   let!(:requested_user) { FactoryBot.create :user }
 
-  it "adds a contact request when the button is clicked" do
+  it 'adds a contact request when the button is clicked' do
     sign_in requesting_user
     visit users_path
-    find("form[action='#{user_contact_requests_path(requested_user)}']").find("input").click
+    find("form[action='#{user_contact_requests_path(requested_user)}']").find('input').click
     expect(requested_user.contact_requests).not_to be_empty
     expect(requested_user.contact_requests).to include(requesting_user)
   end
@@ -16,7 +16,7 @@ RSpec.describe "Contact request", type: :feature do
     sign_in requested_user
     requested_user.contact_requests << requesting_user
     visit user_contact_requests_path(requested_user)
-    click_button("✓")
+    click_button('✓')
     expect(page).not_to have_text(requested_user.email)
     expect(requesting_user.contacts).to include(requested_user)
   end
@@ -25,7 +25,7 @@ RSpec.describe "Contact request", type: :feature do
     sign_in requested_user
     requested_user.contact_requests << requesting_user
     visit user_contact_requests_path(requested_user)
-    find("form[action='#{user_contact_request_path(requested_user, requesting_user)}']").find("input").click
+    find("form[action='#{user_contact_request_path(requested_user, requesting_user)}']").find('input').click
     expect(page).not_to have_text(requesting_user.email)
     expect(requesting_user.contacts).not_to include(requested_user)
     requested_user.reload

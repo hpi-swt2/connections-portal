@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "contact_requests/index", type: :view do
+RSpec.describe 'contact_requests/index', type: :view do
   let(:user) { FactoryBot.create :user }
 
   before do

@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 # Ruby 2.7.2 released 2020-10-02: https://www.ruby-lang.org/en/news/2020/10/02/ruby-2-7-2-released/
@@ -97,5 +97,5 @@ end
 
 group :production do
   # https://devcenter.heroku.com/articles/sqlite3
-  gem "pg" # production database runs on postgres
+  gem 'pg' # production database runs on postgres
 end
