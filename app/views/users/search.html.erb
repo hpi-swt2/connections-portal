@@ -1,26 +1,18 @@
 <div class="jumbotron">
     <h2>Users</h2>
 
-    <div class="row">
-        <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
-<!--        <div class="col">
-
-            <%#= form_tag("/users/search", method: "get") do %>
-            <%#= label_tag(:q, "Search for:") %>
-            <%#= text_field_tag(:q) %>
-            <%#= submit_tag("Search") %>
-            <%# end %>
-            </div>-->
+      <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
 
 
-      <% form_tag users_search_path, :method => 'get' do %>
-        <p>
-          <%= text_field_tag :search, params[:search] %>
-          <%= submit_tag "Search", :firstname => nil %>
-        </p>
-      <% end %>
-
-    </div>
+<div class="row">
+  <div class="col">
+  <%= form_tag("/users/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :firstname => nil %>
+  <% end %>
+  </div>
+</div>
 
     <table>
         <thead>
@@ -35,6 +27,9 @@
 
         <% @users.each do |user| %>
           <tr>
+            <td><%= user.username%></td>
+            <td><%= user.firstname%></td>
+            <td><%= user.lastname%></td>
             <td><%= user.email %></td>
             <% unless current_user.contacts.include? user or user.contact_requests.include? current_user %>
               <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
@@ -45,3 +40,12 @@
         </tbody>
     </table>
 </div>
+
+<!--       <div class="col">
+
+            <%#= form_tag("/users/search", method: "get") do %>
+            <%#= label_tag(:q, "Search for:") %>
+            <%#= text_field_tag(:q) %>
+            <%#= submit_tag("Search") %>
+            <%# end %>
+           </div>-->
