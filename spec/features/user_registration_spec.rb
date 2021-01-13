@@ -15,7 +15,7 @@ RSpec.describe "Users", type: :feature do
     expect(page).to have_current_path root_path
     expect(page).to have_css(".alert-success", count: 1)
     # See config/locales/devise.en.yml
-    expect(page).to have_content(I18n.t 'devise.registrations.signed_up')
+    expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
   end
 
   it "can not signup without matching passwords" do

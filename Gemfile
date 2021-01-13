@@ -35,7 +35,7 @@ gem 'devise-i18n', '~> 1.9', '>= 1.9.2' # https://github.com/tigrish/devise-i18n
 gem 'devise-bootstrap-views', '~> 1.1' # https://github.com/hisea/devise-bootstrap-views
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # https://github.com/tzinfo/tzinfo-data
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby] # https://github.com/tzinfo/tzinfo-data
 
 #
 # Packaged JS, CSS libraries and helpers
@@ -57,7 +57,7 @@ group :development, :test do
   # Sqlite3 as the database for ActiveRecord.
   gem 'sqlite3', '~> 1.4' # https://www.sqlite.org/index.html
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] # https://github.com/deivid-rodriguez/byebug
+  gem 'byebug', platforms: %i[mri mingw x64_mingw] # https://github.com/deivid-rodriguez/byebug
   # RSpec testing framework as a drop-in alternative to Rails' default testing framework, Minitest
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1' # https://github.com/rspec/rspec-rails
   # Extension of rspec-rails for controller and request specs

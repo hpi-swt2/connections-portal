@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Activities", type: :request do
-  before { @user = FactoryBot.create :user }
-
   let(:headers) { { ACCEPT: "application/javascript, text/html" } }
 
   describe "POST" do
     context "when logged in" do
-      before { sign_in @user }
+      before { sign_in FactoryBot.create(:user) }
 
       it "accepts new activity" do
         post activities_path, params: { activity: { content: "Some content" } }, headers: headers

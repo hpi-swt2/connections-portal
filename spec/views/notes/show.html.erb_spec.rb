@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "notes/show", type: :view do
-  before(:each) do
+  before do
     assign(:note, FactoryBot.create(:note))
     render
   end
