@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-  get 'home/index'
   resources :notes
   # https://github.com/heartcombo/devise/wiki/
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: 'home#index'
-  get "/:contacts" => "contacts#show"
-  get "/users/search" => "users#search"
+  root to: 'home#dashboard'
+  get "users/search" => "user#search"
 
-  resources :users, only: %i[show edit update search] do
-    member do
-      patch 'status', to: 'users#update_status', as: 'update_status'
-      patch 'add_contact'
+  resources :users, only: %i[show edit update index search] do
+    patch 'status', to: 'users#update_status', as: 'update_status', on: :member
+
+    resources :contacts, only: %i[index]
+    resources :contact_requests, only: %i[index create destroy] do
+      patch 'accept', on: :member
     end
   end
+
+  resources :activities, only: :create
 end

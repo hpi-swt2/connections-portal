@@ -8,12 +8,19 @@ class User < ApplicationRecord
   # The dependent: option allows to specify that associated records should be deleted when the owner is deleted
   # https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html >> Deleting from Associations
   has_many :notes, dependent: :delete_all
+  has_many :activities, dependent: :delete_all
   has_and_belongs_to_many :contacts,
                           class_name: 'User',
                           foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
 
-  VALID_STATUS_LIST = %w[available working].freeze
+  has_and_belongs_to_many :contact_requests,
+                          class_name: 'User',
+                          join_table: 'users_contact_requests',
+                          foreign_key: 'requested_user_id',
+                          association_foreign_key: 'requesting_user_id'
+
+  VALID_STATUS_LIST = %w[available working free_for_chat].freeze
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
@@ -24,6 +31,10 @@ class User < ApplicationRecord
 
   def init
     self.username ||= email.split('@', 2)[0]
+  end
+
+  def notes
+    Note.where('creator_user_id = ?', self.id)
   end
 
   def select_status_list

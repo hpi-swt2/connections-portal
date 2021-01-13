@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :feature do
   before(:each) do
-    @user1 = FactoryBot.create :user
-    @user2 = FactoryBot.create :user
-    @user3 = FactoryBot.create :user
-    sign_in @user1
-    visit home_index_path
+    @requesting_user = FactoryBot.create :user
+    @requested_user = FactoryBot.create :user
+  end
+
+  it "adds a contact request when the button is clicked" do
+    sign_in @requesting_user
+    visit users_path
+    find("form[action='#{user_contact_requests_path(@requested_user)}']").find("input").click
+    expect(@requested_user.contact_requests).to_not be_empty
+    expect(@requested_user.contact_requests).to include(@requesting_user)
   end
 
   it "adds a contact when the button is clicked" do

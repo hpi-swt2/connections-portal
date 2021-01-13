@@ -6,10 +6,10 @@ RSpec.describe "Update user status", type: :request do
   let(:status_params) { { user: { current_status: 'working' } } }
 
   context 'when signed in as appropriate user' do
-    it "redirects to the show page" do
+    it "returns http success" do
       sign_in user
       patch update_status_user_path(user), params: status_params
-      expect(response).to redirect_to(user_path(user))
+      expect(response).to have_http_status(:success)
     end
   end
 

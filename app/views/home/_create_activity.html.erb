@@ -1,0 +1,8 @@
+<%= form_with(model: Activity.new) do |f| %>
+  <div class="form-group">
+    <%= f.label :content, I18n.t('activity.post') %>
+    <%= f.text_area :content, class: 'form-control', id: "activity-textarea",
+                    rows: "3", placeholder: I18n.t('activity.placeholder') %>
+    <%= f.submit class: "btn-secondary", id: "add-activity-button"%>
+  </div>
+<% end %>
