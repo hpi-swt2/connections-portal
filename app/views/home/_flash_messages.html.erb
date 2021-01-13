@@ -1,0 +1,7 @@
+<div id="error_explanation">
+  <% flash.each do |level, log| %>
+      <div class='alert alert-<%= level %>'>
+          <li><%= log %></li>
+      </div>
+  <% end %>
+</div>
