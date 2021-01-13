@@ -1,15 +1,19 @@
 <h1><%=  I18n.t 'social_accounts.edit.heading' %></h1>
 
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
-  <% if @social_account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= I18n.t 'errors.messages.not_saved.other', count: @social_account.errors.count, resource: SocialAccount %></h2>
-      <ul>
-        <% @social_account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+    <% if @social_account.errors.any? %>
+      <div id="error_explanation">
+        <% flash.each do |level, log| %>
+            <div class='alert alert-<%= level %>'>
+              <h4><%= log[:heading] %></h4>
+              <% log[:messages].each do |message| %>
+                <ul>
+                  <li><%= message %></li>
+                </ul>
+              <% end %>
+            </div>
         <% end %>
-      </ul>
-    </div>
+      </div>
   <% end %>
 
   <div class="field">

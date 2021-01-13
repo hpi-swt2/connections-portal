@@ -19,6 +19,7 @@ class SocialAccountsController < ApplicationController
     else
       # If the account was created unsuccessfully we want to render the users edit form but still be in the processing of
       # the current request so that the user can correct her/his input.
+      handle_error
       render "users/edit"
     end
   end
@@ -29,6 +30,7 @@ class SocialAccountsController < ApplicationController
       redirect_to edit_user_path(@social_account.user_id)
     else
       @user = User.find(@social_account.user_id)
+      handle_error
       render :edit
     end
   end
@@ -47,6 +49,14 @@ class SocialAccountsController < ApplicationController
   end
 
   private
+
+  def handle_error
+      messages = @social_account.errors.full_messages
+      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: SocialAccount
+      log = {heading: error_heading, messages: messages}
+      flash[:danger] = log
+  end
+
   def set_social_account
     @social_account = SocialAccount.find(params[:id])
   end
