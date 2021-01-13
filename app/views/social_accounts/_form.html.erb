@@ -1,17 +1,6 @@
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
-    <% if @social_account.errors.any? %>
-      <div id="error_explanation">
-        <% flash.each do |level, log| %>
-            <div class='alert alert-<%= level %>'>
-              <h4><%= log[:heading] %></h4>
-              <% log[:messages].each do |message| %>
-                <ul>
-                  <li><%= message %></li>
-                </ul>
-              <% end %>
-            </div>
-        <% end %>
-      </div>
+  <% if @social_account.errors.any? %>
+    <%= render 'social_accounts/flash_messages'%>
   <% end %>
 
   <p>
