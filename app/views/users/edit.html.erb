@@ -46,7 +46,7 @@
 <hr />
 
 <% if @user.social_accounts.any? %>
-  <h2> Social Accounts </h2>
+  <h2> <%= I18n.t 'user.edit.social_accounts_heading' %> </h2>
   <% @user.social_accounts.each do |social_account| %>
     <% if !social_account.new_record? %>
       <p>
@@ -56,5 +56,5 @@
   <% end %>
 <% end %>
 
-<h3>Add a Social Account</h3>
+<h3>  <%= I18n.t 'user.edit.add_social_accounts_heading'  %></h3>
 <%= render 'social_accounts/form', social_account: @social_account %>

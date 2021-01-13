@@ -56,3 +56,22 @@ en:
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
+    edit:
+      add_social_account_label: 'Create Social Account'
+      social_accounts_heading: 'Social Accounts'
+      add_social_accounts_heading: 'Add a Social Account'
+  social_accounts:
+    attributes:
+      social_network: 'Social network'
+      username: 'Username'
+    edit:
+      heading: 'Edit Social Account'
+      update_label: 'Update social account'
+      back_label: 'Back'
+    social_account_view:
+      edit_label: 'Edit'
+      remove_label: 'Remove'
+      link_label: 'Link'
+
+
+

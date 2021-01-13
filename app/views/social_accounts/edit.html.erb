@@ -1,4 +1,4 @@
-<h1>Edit Social Account</h1>
+<h1><%=  I18n.t 'social_accounts.edit.heading' %></h1>
 
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
   <% if @social_account.errors.any? %>
@@ -13,18 +13,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :social_network %>
+    <%= form.label I18n.t 'social_accounts.attributes.social_network' %>
     <%= form.select(:social_network, options_for_select(get_supported_social_networks)) %>
   </div>
 
   <div class="field">
-    <%= form.label :user_name %>
+    <%= form.label I18n.t 'social_accounts.attributes.username'  %>
     <%= form.text_field :user_name %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit I18n.t 'social_accounts.edit.update_label'%>
   </div>
 <% end %>
 
-<%= link_to 'Back', edit_user_path(@user) %>
+<%= link_to (I18n.t 'social_accounts.edit.back_label'), edit_user_path(@user) %>
