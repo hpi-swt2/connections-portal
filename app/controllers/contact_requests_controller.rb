@@ -4,7 +4,7 @@ class ContactRequestsController < ApplicationController
     requested_user = User.find(params[:user_id])
     requested_user.contact_requests << current_user
     requested_user.save
-    redirect_to home_index_path
+    redirect_to root_path
   end
 
   def index

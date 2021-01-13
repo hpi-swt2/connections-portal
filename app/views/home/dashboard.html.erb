@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="row" id="dashboard-row">
+  <div class="col-sm" id="users-container">
+    <%= render 'users' %>
+  </div>
+  <div class="col-md" id="chat-container">
+    <%= render 'chat' %>
+  </div>
+  <div class="col-sm" id="activities-container">
+    <%= render 'activities' %>
+  </div>
+  <div class="col-sm" id="proposals-container">
+    <%= render 'proposals' %>
+  </div>
+</div>
