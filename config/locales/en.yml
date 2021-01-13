@@ -62,6 +62,8 @@ en:
       add_social_accounts_heading: 'Add a Social Account'
       edit_profile_heading: 'Edit profile'
       profile_heading: 'Profile'
+    show:
+      social_accounts_heading: 'Social Accounts'
   social_accounts:
     attributes:
       social_network: 'Social network'
