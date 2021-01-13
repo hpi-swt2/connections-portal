@@ -3,9 +3,6 @@ class SocialAccountsController < ApplicationController
   before_action :authorize, :set_social_account, only: [:show, :edit, :update, :destroy]
   helper_method :generate_link,  :get_supported_social_networks
 
-  def new
-  end
-
   def edit
     @user = User.find(params[:user_id])
     @social_account = @user.social_accounts.find(params[:id])

@@ -1,22 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "SocialAccounts", driver: :selenium_headless, type: :request do
-  describe "GET /new" do
-    it "returns http success" do
-      get "/social_accounts/new"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /users/:user_id/social_accounts/new" do
-    it "returns http success" do
-      user = FactoryBot.build(:user)
-      user.save
-      sign_in user
-      get "/users/#{user.id}/social_accounts/new"
-      expect(response).to have_http_status(:success)
-    end
-  end
 
   describe "POST /users/:user_id/social_accounts" do
     context "with valid parameters" do
