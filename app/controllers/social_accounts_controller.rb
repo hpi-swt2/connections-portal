@@ -5,7 +5,7 @@ class SocialAccountsController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
-    @social_account = @user.social_accounts.find(params[:id])
+    set_social_account
   end
 
   def create
@@ -33,7 +33,7 @@ class SocialAccountsController < ApplicationController
     end
   end
 
-  def index
+  def show
     # WORKAROUND because URL is wrong after creating an invalid account from
     # the user edit page
     redirect_to user_path(params[:user_id])
@@ -41,7 +41,7 @@ class SocialAccountsController < ApplicationController
 
   def destroy
     @user = User.find(params[:user_id])
-    @social_account = @user.social_accounts.find(params[:id])
+    set_social_account
     @social_account.destroy
     redirect_to edit_user_path(@user)
   end
@@ -57,7 +57,7 @@ class SocialAccountsController < ApplicationController
 
   def authorize
     authenticate_user!
-    if !(current_user.id.to_s == params[:user_id])
+    if current_user.id.to_s != params[:user_id]
       redirect_to root_path
     end
   end

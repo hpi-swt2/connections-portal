@@ -5,7 +5,6 @@ RSpec.describe "Users profile page", driver: :selenium_headless, type: :feature 
 
   before do
     user.social_accounts.create(social_network: "GitHub", user_name: "SomeGitUserName")
-    user.save()
     user.social_accounts.create(social_network: "Telegram", user_name: "SomeTelegramUserName")
     user.save()
     sign_in user
