@@ -22,32 +22,27 @@ it 'show social account' do
 
   it 'provides link to edit social account' do
     visit edit_user_path(user)
-    page.all(:link, 'Edit')[0].click
-    expect(find_field("Social network").value).to eq "GitHub"
-    expect(find_field("User name").value).to eq "SomeGitUserName"
+    find_link(href: "/users/#{user.id}/social_accounts/#{user.social_accounts[0].id}/edit").click
+    # Checks that social account and user name are the default value of the input
+    expect(page.find('#social_account_social_network').value).to eq "GitHub"
+    expect(page.find('#social_account_user_name').value).to eq "SomeGitUserName"
   end
 
   it 'provides link to remove social account' do
-    visit edit_user_path(user)
-    
-    page.all(:link, 'Remove')[1].click
-
-    expect(find_field("Social network").value).not_to eq "Telegram"
-    expect(find_field("User name").value).not_to eq "SomeTelegramUserName"
+    visit edit_user_path(user)  
+    find_link("Remove", href: "/users/#{user.id}/social_accounts/#{user.social_accounts[1].id}").click
+    page.should have_no_content("SomeTelegramUserName")
   end
 
   it 'provides link to social account website' do
     visit edit_user_path(user)
-    
-    link = page.all(:link, 'Link')[0][:href]
-
-    expect(link).to eq "https://#{user.social_accounts[0].social_network.downcase}.com/#{user.social_accounts[0].user_name}"
+    expect(page).to have_link(href: "https://#{user.social_accounts[0].social_network.downcase}.com/#{user.social_accounts[0].user_name}")
   end
 
   it 'changes social account values' do
     visit edit_user_social_account_path(user, user.social_accounts[0])
 
-    fill_in "User name", with: "SomeOtherGitUserName"
+    find('#social_account_user_name').set("SomeOtherGitUserName")
     find('input[type="submit"]').click
   
     expect(page).to_not have_text("SomeGitUserName")
@@ -58,7 +53,7 @@ it 'show social account' do
   it 'shows error upon edit with invalid values' do
     visit edit_user_social_account_path(user, user.social_accounts[0])
 
-    fill_in "User name", with: ""
+    find('#social_account_user_name').set("")
     find('input[type="submit"]').click
 
     expect(page).to have_text("can't be blank")
@@ -67,8 +62,8 @@ it 'show social account' do
   it 'can add social account' do
     visit edit_user_path(user)
 
-    fill_in "User name", with: "IAmForBusiness"
-    find_button("Create Social Account").click
+    find('#social_account_user_name').set("IAmForBusiness")
+    find_button((I18n.t 'user.edit.add_social_account_label')).click
 
     expect(page).to have_text("GitHub")
     expect(page).to have_text("IAmForBusiness")
@@ -77,8 +72,8 @@ it 'show social account' do
   it 'shows error upon addition with invalid values' do
     visit edit_user_path(user)
 
-    fill_in "User name", with: ""
-    find_button("Create Social Account").click
+    find('#social_account_user_name').set("")
+    find_button((I18n.t 'user.edit.add_social_account_label')).click
 
     expect(page).to have_text("can't be blank")
   end
