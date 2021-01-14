@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "Update user status", type: :request do
+RSpec.describe 'Update user status', type: :request do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
   let(:status_params) { { user: { current_status: 'working' } } }
 
   context 'when signed in as appropriate user' do
-    it "returns http success" do
+    it 'returns http success' do
       sign_in user
       patch update_status_user_path(user), params: status_params
       expect(response).to have_http_status(:success)
@@ -14,7 +14,7 @@ RSpec.describe "Update user status", type: :request do
   end
 
   context 'when signed in as another user' do
-    it "redirects to the root page" do
+    it 'redirects to the root page' do
       sign_in user2
       patch update_status_user_path(user), params: status_params
       expect(response).to redirect_to(root_path)
