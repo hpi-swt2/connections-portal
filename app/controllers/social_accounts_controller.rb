@@ -36,15 +36,11 @@ class SocialAccountsController < ApplicationController
   end
 
   def show
-    # WORKAROUND because URL is wrong after creating an invalid account from
-    # the user edit page
-    redirect_to edit_user_path(params[:user_id])
+    @user = User.find(@social_account.user_id)
+    render :edit
   end
 
   def index
-    # WORKAROUND because URL is wrong after creating an invalid account from
-    # the user edit page
-    redirect_to edit_user_path(params[:user_id])
   end
 
   def destroy
