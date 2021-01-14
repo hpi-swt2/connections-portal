@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def update
     # prototype for create social account form
     return redirect_to @user if @user.update(user_params)
+    handle_error
     @social_account = @user.social_accounts.build
     render :edit
   end
@@ -39,6 +40,13 @@ class UsersController < ApplicationController
 
   private
 
+  def handle_error
+      messages = @user.errors.full_messages
+      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: SocialAccount
+      log = {heading: error_heading, messages: messages}
+      flash[:danger] = log
+  end
+
   def user_params
     params.require(:user).permit(:username, :firstname, :lastname, :birthdate, :place_of_residence)
   end
@@ -48,6 +56,7 @@ class UsersController < ApplicationController
     if current_user.id.to_s == params[:id]
       @user = current_user
     else
+      flash[:danger] = I18n.t 'errors.messages.authentication_failed'
       redirect_to root_path
     end
   end

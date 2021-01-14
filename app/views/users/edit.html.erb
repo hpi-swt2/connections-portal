@@ -3,14 +3,7 @@
 <h2><%= I18n.t('user.edit.profile_heading') %></h2>
 <%= form_with(model: @user, local: true) do |form| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h4><%= I18n.t 'errors.messages.not_saved.other', count: @user.errors.count, resource: SocialAccount %></h4>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= render 'users/flash_messages'%>
   <% end %>
 
   <p>

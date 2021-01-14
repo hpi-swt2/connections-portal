@@ -1,6 +1,6 @@
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
   <% if @social_account.errors.any? %>
-    <%= render 'social_accounts/flash_messages'%>
+    <%= render 'users/flash_messages'%>
   <% end %>
 
   <p>
