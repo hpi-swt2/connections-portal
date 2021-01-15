@@ -106,6 +106,7 @@ RSpec.describe User, type: :model do
       expect(user.sent_contact_request?(contact)).to be true
     end
   end
+  # rubocop:disable RSpec/MultipleMemoizedHelpers
 
   describe 'status scope' do
     let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
@@ -117,6 +118,8 @@ RSpec.describe User, type: :model do
       expect(users).not_to include(user2)
     end
   end
+
+  # rubocop:enable RSpec/MultipleMemoizedHelpers
 
   describe 'display name' do
     it 'contains the first and last name if present' do
