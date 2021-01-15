@@ -24,14 +24,31 @@ class User < ApplicationRecord
                           association_foreign_key: 'requesting_user_id'
   # rubocop:enable Rails/HasAndBelongsToMany
 
-  VALID_STATUS_LIST = %w[available working free_for_chat].freeze
+  VALID_STATUS_LIST = %w[available working free_for_chat offline nice_to_meet_you].freeze
+
+  # class methods
+  def self.select_status_list
+    VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
+  end
+
+  VALID_STATUS_LIST.each do |status|
+    define_singleton_method :"status_#{status}" do
+      status
+    end
+  end
+
+  def self.filter_status
+    status_nice_to_meet_you
+  end
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
 
   after_initialize :init
 
-  attribute :current_status, :string, default: 'available'
+  attribute :current_status, :string, default: User.status_available
+
+  scope :with_status, ->(status) { where(current_status: status) }
 
   def init
     self.username ||= email.split('@', 2)[0]
@@ -45,7 +62,7 @@ class User < ApplicationRecord
     Note.where('creator_user_id = ?', id)
   end
 
-  def select_status_list
-    VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
+  def display_name
+    [firstname, lastname].filter(&:present?).join(' ').presence || username
   end
 end
