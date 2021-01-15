@@ -32,7 +32,7 @@ it 'show social account' do
   it 'provides link to remove social account' do
     visit edit_user_path(user)  
     user_social_account_path(user, social_account1.id)
-    find_link("Remove", href: user_social_account_path(user, social_account1.id)).click
+    find_link((I18n.t 'social_accounts.social_account_view.remove_label'), href: user_social_account_path(user, social_account1.id)).click
     page.should have_no_content(social_account1.user_name)
   end
 
@@ -65,7 +65,7 @@ it 'show social account' do
     visit edit_user_path(user)
 
     find('#social_account_user_name').set("IAmForBusiness")
-    find_button((I18n.t 'user.edit.add_social_account_label')).click
+    find_button((I18n.t 'social_accounts.edit.add_social_account_label')).click
 
     expect(page).to have_text("GitHub")
     expect(page).to have_text("IAmForBusiness")
@@ -75,7 +75,7 @@ it 'show social account' do
     visit edit_user_path(user)
 
     find('#social_account_user_name').set("")
-    find_button((I18n.t 'user.edit.add_social_account_label')).click
+    find_button((I18n.t 'social_accounts.edit.add_social_account_label')).click
 
     expect(page).to have_text("can't be blank")
   end

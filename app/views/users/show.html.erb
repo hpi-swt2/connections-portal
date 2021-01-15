@@ -24,7 +24,7 @@
 </table>
 
 <% if @user.social_accounts.any? %>
-  <h2> <%= I18n.t('user.show.social_accounts_heading') %> </h2>
+  <h2> <%= I18n.t('social_accounts.show.social_accounts_heading') %> </h2>
   <table>
     <% @user.social_accounts.each do |social_account| %>
       <tr>

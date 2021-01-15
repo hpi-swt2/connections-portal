@@ -64,13 +64,8 @@ en:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
     edit:
-      add_social_account_label: 'Create Social Account'
-      social_accounts_heading: 'Social Accounts'
-      add_social_accounts_heading: 'Add a Social Account'
       edit_profile_heading: 'Edit profile'
       profile_heading: 'Profile'
-    show:
-      social_accounts_heading: 'Social Accounts'
   social_accounts:
     attributes:
       social_network: 'Social network'
@@ -79,10 +74,15 @@ en:
       heading: 'Edit Social Account'
       update_label: 'Update social account'
       back_label: 'Back'
+      add_social_account_label: 'Create Social Account'
+      social_accounts_heading: 'Social Accounts'
+      add_social_accounts_heading: 'Add a Social Account'
     social_account_view:
       edit_label: 'Edit'
       remove_label: 'Remove'
       link_label: 'Link'
+    show:
+      social_accounts_heading: 'Social Accounts'
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'
