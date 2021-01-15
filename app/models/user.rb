@@ -49,7 +49,7 @@ class User < ApplicationRecord
     VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end
 
-  def search(search)
+  def self.search(search)
     if search
       User.where('username LIKE ?', "%#{search}%").or(User.where('firstname LIKE ?', "%#{search}%"))
           .or(User.where('lastname LIKE ?', "%#{search}%")).or(User.where('email LIKE ?', "%#{search}%"))
