@@ -46,7 +46,7 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
     end
   end
 
-  describe 'anonymous page' do
+  describe 'public page' do
     before do
       sign_out user
       visit root_path
