@@ -49,6 +49,7 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
   describe 'anonymous page' do
     before do
       sign_out user
+      visit root_path
     end
 
     it 'does not contain a link to the notes page' do
