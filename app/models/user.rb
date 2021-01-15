@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def self.search(search)
-    if search
+    if search.present?
       User.where('username LIKE ?', "%#{search}%").or(User.where('firstname LIKE ?', "%#{search}%"))
           .or(User.where('lastname LIKE ?', "%#{search}%")).or(User.where('email LIKE ?', "%#{search}%"))
     else

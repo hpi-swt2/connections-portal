@@ -47,6 +47,7 @@ en:
   questions:
       confirmation: 'Are you sure?'
   user:
+    lists: 'Users'
     attributes:
       username: 'Username'
       firstname: 'Firstname'
@@ -60,7 +61,9 @@ en:
       available: 'available'
       working: 'working'
       free_for_chat: 'free for chat'
-    search: 'Search'
+    search:
+      index: 'Search'
+      for: 'Search for:'
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
