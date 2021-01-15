@@ -5,7 +5,6 @@ class SocialAccountsController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
-    set_social_account
   end
 
   def create
@@ -45,7 +44,6 @@ class SocialAccountsController < ApplicationController
 
   def destroy
     @user = User.find(params[:user_id])
-    set_social_account
     @social_account.destroy
     redirect_to edit_user_path(@user)
   end
