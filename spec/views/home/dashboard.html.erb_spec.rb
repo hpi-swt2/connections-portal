@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'home/dashboard', type: :view do
-  let(:users) { FactoryBot.create_list :user, 3 , current_status: User.filter_status }
+  let(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status }
 
   before { assign(:users, users) }
 
