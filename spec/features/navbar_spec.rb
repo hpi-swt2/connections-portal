@@ -48,15 +48,15 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
 
   describe 'anonymous page' do
     before do
-      sign_out
+      sign_out user
     end
 
     it 'does not contain a link to the notes page' do
-      expect(page).not_to have_link(href: notes_path())
+      expect(page).not_to have_link(href: notes_path)
     end
 
     it 'does not contain a link to the users page' do
-      expect(page).not_to have_link(href: users_path())
+      expect(page).not_to have_link(href: users_path)
     end
   end
 end
