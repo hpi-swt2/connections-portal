@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
-  it "is invalid with a status other than 'available' or 'working'" do
+  it 'is invalid with an unknown status' do
     user.current_status = 'unavailable'
     expect(user).not_to be_valid
   end
@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
 
   it 'creates user with default status available' do
     user = described_class.new({ email: 'test-user@example.org' })
-    expect(user.current_status).to eq('available')
+    expect(user.current_status).to eq(described_class.status_available)
   end
 
   it 'has an empty contacts list' do
@@ -104,6 +104,39 @@ RSpec.describe User, type: :model do
       expect(user.sent_contact_request?(contact)).to be false
       user.contacts << contact
       expect(user.sent_contact_request?(contact)).to be true
+    end
+  end
+
+  describe 'status scope' do
+    let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
+    let(:user2) { FactoryBot.create :user, current_status: described_class.status_free_for_chat }
+
+    it 'returns only users with the given status' do
+      users = described_class.with_status(described_class.status_working)
+      expect(users).to include(user1)
+      expect(users).not_to include(user2)
+    end
+  end
+
+  describe 'display name' do
+    it 'contains the first and last name if present' do
+      user = FactoryBot.build(:user, firstname: 'Hasso', lastname: 'Plattner', username: 'hasso01')
+      expect(user.display_name).to eq('Hasso Plattner')
+    end
+
+    it 'contains the last name if present' do
+      user = FactoryBot.build(:user, firstname: '', lastname: 'Plattner', username: 'hasso01')
+      expect(user.display_name).to eq('Plattner')
+    end
+
+    it 'contains the first name if present' do
+      user = FactoryBot.build(:user, firstname: 'Hasso', lastname: '', username: 'hasso01')
+      expect(user.display_name).to eq('Hasso')
+    end
+
+    it 'contains the username if neither first nor lastname are present' do
+      user = FactoryBot.build(:user, firstname: '', lastname: '', username: 'hasso01')
+      expect(user.display_name).to eq('hasso01')
     end
   end
 end
