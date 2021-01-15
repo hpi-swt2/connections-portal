@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users profile page", driver: :selenium_headless, js: true, type: :feature do
+RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type: :feature do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
   let(:social_account1) { FactoryBot.create :social_account }
@@ -17,7 +17,7 @@ RSpec.describe "Users profile page", driver: :selenium_headless, js: true, type:
   it 'can change status by selecting item in status dropdown' do
     user.update(current_status: 'working')
     target_status = 'free_for_chat'
-    find("#user_current_status").find(:option, text: I18n.t("user.status.#{target_status}")).select_option
+    find('#user_current_status').find(:option, text: I18n.t("user.status.#{target_status}")).select_option
     user.reload
     expect(user.current_status).to eq(target_status)
   end
@@ -36,7 +36,7 @@ RSpec.describe "Users profile page", driver: :selenium_headless, js: true, type:
   end
 
   it 'shows current status when showing different user' do
-    user2.current_status = "available"
+    user2.current_status = 'available'
     user2.save
     visit user_path(user2)
     expect(page).to have_text(I18n.t('user.status.available'))

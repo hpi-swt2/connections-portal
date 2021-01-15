@@ -5,7 +5,7 @@
 
   <p>
     <%= form.label I18n.t 'social_accounts.attributes.social_network'%>
-    <%= form.select(:social_network, options_for_select(get_supported_social_networks)) %>
+    <%= form.select(:social_network, options_for_select(get_supported_social_networks, @social_account.social_network)) %>
   </p>
   <p>
       <%= form.label I18n.t 'social_accounts.attributes.username' %>
