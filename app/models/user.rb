@@ -26,6 +26,21 @@ class User < ApplicationRecord
 
   VALID_STATUS_LIST = %w[available working free_for_chat offline nice_to_meet_you].freeze
 
+  # class methods
+  def self.select_status_list
+    VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
+  end
+
+  VALID_STATUS_LIST.each do |status|
+    define_singleton_method :"status_#{status}" do
+      status
+    end
+  end
+
+  def self.filter_status
+    status_nice_to_meet_you
+  end
+
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
 
@@ -49,20 +64,5 @@ class User < ApplicationRecord
 
   def display_name
     [firstname, lastname].filter(&:present?).join(' ').presence || username
-  end
-
-  # class methods
-  def self.select_status_list
-    VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
-  end
-
-  VALID_STATUS_LIST.each do |status|
-    define_singleton_method :"status_#{status}" do
-      status
-    end
-  end
-
-  def self.filter_status
-    status_nice_to_meet_you
   end
 end
