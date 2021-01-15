@@ -76,5 +76,17 @@ RSpec.describe User, type: :model do
       expect(user.contact_requests).to include(request)
       expect(user.contact_requests).not_to include(contact)
     end
+
+    it 'determines other users which the user has send a contact request to' do
+      expect(user.sent_contact_request?(request)).to be false
+      request.contact_requests << user
+      expect(user.sent_contact_request?(request)).to be true
+    end
+
+    it 'determines other users which are in my contacts' do
+      expect(user.sent_contact_request?(contact)).to be false
+      user.contacts << contact
+      expect(user.sent_contact_request?(contact)).to be true
+    end
   end
 end
