@@ -19,13 +19,32 @@ RSpec.describe '/notes', type: :request do
       get notes_url
       expect(response).to be_successful
     end
+
+    context 'when not signed in' do
+      before { sign_out user }
+
+      it 'redirects to the login page' do
+        get notes_url
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
   describe 'GET /show' do
+    let!(:note) { Note.create! valid_attributes }
+
     it 'renders a successful response' do
-      note = Note.create! valid_attributes
       get note_url(note)
       expect(response).to be_successful
+    end
+
+    context 'when not signed in' do
+      before { sign_out user }
+
+      it 'redirects to the login page' do
+        get note_url(note)
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
   end
 
@@ -34,13 +53,32 @@ RSpec.describe '/notes', type: :request do
       get new_note_url
       expect(response).to be_successful
     end
+
+    context 'when not signed in' do
+      before { sign_out user }
+
+      it 'redirects to the login page' do
+        get new_note_url
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
   describe 'GET /edit' do
+    let!(:note) { Note.create! valid_attributes }
+
     it 'render a successful response' do
-      note = Note.create! valid_attributes
       get edit_note_url(note)
       expect(response).to be_successful
+    end
+
+    context 'when not signed in' do
+      before { sign_out user }
+
+      it 'redirects to the login page' do
+        get edit_note_url(note)
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
   end
 
@@ -55,6 +93,15 @@ RSpec.describe '/notes', type: :request do
       it 'redirects to the created note' do
         post notes_url, params: { note: valid_attributes }
         expect(response).to redirect_to(note_url(Note.last))
+      end
+
+      context 'when not signed in' do
+        before { sign_out user }
+
+        it 'redirects to the login page' do
+          post notes_url, params: { note: valid_attributes }
+          expect(response).to redirect_to(new_user_session_path)
+        end
       end
     end
 
@@ -77,19 +124,27 @@ RSpec.describe '/notes', type: :request do
       let(:new_attributes) do
         { title: "#{valid_attributes[:title]} updated!" }
       end
+      let!(:note) { Note.create! valid_attributes }
 
       it 'updates the requested note' do
-        note = Note.create! valid_attributes
         patch note_url(note), params: { note: new_attributes }
         note.reload
         expect(note.title).to eq(new_attributes[:title])
       end
 
       it 'redirects to the note' do
-        note = Note.create! valid_attributes
         patch note_url(note), params: { note: new_attributes }
         note.reload
         expect(response).to redirect_to(note_url(note))
+      end
+
+      context 'when not signed in' do
+        before { sign_out user }
+
+        it 'redirects to the login page' do
+          patch note_url(note), params: { note: new_attributes }
+          expect(response).to redirect_to(new_user_session_path)
+        end
       end
     end
 
@@ -103,17 +158,26 @@ RSpec.describe '/notes', type: :request do
   end
 
   describe 'DELETE /destroy' do
+    let!(:note) { Note.create! valid_attributes }
+
     it 'destroys the requested note' do
-      note = Note.create! valid_attributes
       expect do
         delete note_url(note)
       end.to change(Note, :count).by(-1)
     end
 
     it 'redirects to the notes list' do
-      note = Note.create! valid_attributes
       delete note_url(note)
       expect(response).to redirect_to(notes_url)
+    end
+
+    context 'when not signed in' do
+      before { sign_out user }
+
+      it 'redirects to the login page' do
+        delete note_url(note)
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
   end
 end
