@@ -24,7 +24,6 @@ jobs:
 
   # Label of the runner job
   CI:
-    needs: Linter
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
@@ -75,7 +74,7 @@ jobs:
           bundle exec rspec spec/
 
   Deployment:
-    needs: CI # assures, that the job "CI" completed successful before this job is started
+    needs: [CI, Linter] # assures that the job "CI" completed successful before this job is started
     runs-on: ubuntu-latest
 
     # The both deployment steps contain two safeguards.
