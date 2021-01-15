@@ -40,6 +40,10 @@ class User < ApplicationRecord
     self.username ||= email.split('@', 2)[0]
   end
 
+  def sent_contact_request?(user)
+    (user.contact_requests.include? self) or (contacts.include? user)
+  end
+
   def notes
     Note.where(creator_user_id: id)
   end

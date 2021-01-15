@@ -9,7 +9,9 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
-      <td><%= button_to '+', user_contact_requests_path(user), method: :post, id: user.id %></td>
+      <% if @users_to_add.include? user %>
+        <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
