@@ -55,7 +55,6 @@ en:
       place_of_residence: 'Place of residence'
       birthdate: 'Birthdate'
     status:
-      change: 'Change current status'
       current: 'Current status'
       available: 'available'
       working: 'working'
