@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  before_action :authorize
   before_action :set_note, only: %i[show edit update destroy]
 
   # GET /notes
@@ -44,6 +45,15 @@ class NotesController < ApplicationController
   end
 
   private # Everything below this line is private
+
+  def authorize
+    authenticate_user!
+    if current_user.nil?
+      redirect_to root_path
+    else
+      @user = current_user
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_note

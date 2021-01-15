@@ -13,10 +13,10 @@ RSpec.describe 'Edit user', type: :request do
   end
 
   context 'when signed in as another user' do
-    it 'redirects to the root page' do
+    it 'redirects to the index page' do
       sign_in user2
       get edit_user_path(user)
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(users_path)
     end
   end
 

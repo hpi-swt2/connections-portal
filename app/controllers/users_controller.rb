@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize, except: %i[show index]
+  before_action :authorize
 
   def show
     @user = User.find(params[:id])
@@ -40,10 +40,15 @@ class UsersController < ApplicationController
 
   def authorize
     authenticate_user!
-    if current_user.id.to_s == params[:id]
-      @user = current_user
-    else
-      redirect_to root_path
+    return redirect_to root_path, alert: I18n.t('denial.unauthorized') if current_user.nil?
+
+    if params.key?(:id)
+      if !User.exists?(params[:id])
+        redirect_to users_path, alert: I18n.t('denial.not_found')
+      elsif current_user.id.to_s != params[:id]
+        redirect_to users_path, alert: I18n.t('denial.forbidden')
+      end
     end
+    @user = current_user
   end
 end
