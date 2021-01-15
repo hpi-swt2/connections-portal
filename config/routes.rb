@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#dashboard'
-  #get 'users/search' => 'users#search'
 
-  resources :users, only: %i[show edit update index search] do
+  resources :users, only: %i[show edit update index] do
     patch 'status', to: 'users#update_status', as: 'update_status', on: :member
     get 'search', to: 'users#search', on: :collection
     resources :contacts, only: %i[index]
