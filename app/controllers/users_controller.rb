@@ -20,6 +20,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
+    end
   end
 
   def add_contact
