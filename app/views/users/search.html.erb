@@ -4,15 +4,15 @@
       <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
 
 
-<div class="row">
-  <div class="col">
-  <%= form_tag("/users/search", method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "Search", :firstname => nil %>
-  <% end %>
-  </div>
-</div>
+    <div class="row">
+        <div class="col">
+          <%= form_tag("/users/search", method: "get") do %>
+          <%= label_tag(:search, "Search for:") %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search" %>
+          <% end %>
+        </div>
+    </div>
 
     <table>
         <thead>
@@ -40,12 +40,3 @@
         </tbody>
     </table>
 </div>
-
-<!--       <div class="col">
-
-            <%#= form_tag("/users/search", method: "get") do %>
-            <%#= label_tag(:q, "Search for:") %>
-            <%#= text_field_tag(:q) %>
-            <%#= submit_tag("Search") %>
-            <%# end %>
-           </div>-->

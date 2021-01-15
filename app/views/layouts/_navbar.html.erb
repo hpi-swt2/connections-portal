@@ -8,17 +8,18 @@
         <%= link_to (fa_icon 'home', text: I18n.t('navbar.home')), root_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <%= link_to (fa_icon 'sticky-note', text:I18n.t('navbar.notes') ), notes_path, class: 'nav-link' %>
+        <%= link_to (fa_icon 'sticky-note', text: I18n.t('navbar.notes') ), notes_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
         <%= link_to (fa_icon 'users', text: I18n.t('navbar.users')), users_path, class: 'nav-link' %>
       </li>
      <li class="nav-item"> 
-        <%= link_to (fa_icon 'search', text: "Search"), "/users/search", class: 'nav-link' %>
+        <%= link_to (fa_icon 'search', text: 'Search'), users_search_path, class: 'nav-link' %>
      </li>
       <% if user_signed_in? %>
         <li class="nav-item"> <%= link_to (fa_icon 'users', text: I18n.t('navbar.my-contacts')), user_contacts_path(current_user), class: 'nav-link' %> </li>
-      <% end %> </ul>
+      <% end %>
+    </ul>
     <ul class="navbar-nav ml-auto">
       <%# https://github.com/heartcombo/devise#controller-filters-and-helpers %>
       <% if user_signed_in? %>

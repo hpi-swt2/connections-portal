@@ -30,10 +30,6 @@ RSpec.describe 'Contact request', type: :feature do
     expect(requesting_user.contacts).not_to include(requested_user)
     requested_user.reload
     expect(requested_user.contact_requests).not_to include(requesting_user)
-end
-
- it "adds a contact when the button is clicked" do
-    find_by_id(@user2.id.to_s).click_button
-    expect(@user1.contacts).to include(@user2)
   end
+
 end
