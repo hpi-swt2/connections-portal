@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <script>document.current_user = <%= user_signed_in? ? current_user.id : -1 %></script>
   <div id="app">
     <%= render "layouts/navbar" %>
     <div id="content" class="container pt-3">

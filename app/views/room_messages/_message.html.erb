@@ -1,0 +1,12 @@
+<div class="chat-item <% if message.user == current_user  %> chat-item-me <% end %> d-flex flex-row">
+  <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
+  <div class="chat-content">
+    <a href="<%= user_path(message.user) %>" class="chat-author"><%= message.user.username %></a>
+    <div class="text-sm">
+      <%= message.message %>
+    </div>
+    <div class="chat-date text-sm d-md-block">
+      <%= message.created_at.strftime('%Y-%m-%d %H:%M') %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :room_messages
+  resources :rooms
   resources :notes
   # https://github.com/heartcombo/devise/wiki/
   devise_for :users
