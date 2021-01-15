@@ -95,13 +95,11 @@ RSpec.describe '/notes', type: :request do
         expect(response).to redirect_to(note_url(Note.last))
       end
 
-      context 'when not signed in' do
-        before { sign_out user }
+      it 'redirects to the login page when not signed in' do
+        sign_out user
 
-        it 'redirects to the login page' do
-          post notes_url, params: { note: valid_attributes }
-          expect(response).to redirect_to(new_user_session_path)
-        end
+        post notes_url, params: { note: valid_attributes }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -138,13 +136,11 @@ RSpec.describe '/notes', type: :request do
         expect(response).to redirect_to(note_url(note))
       end
 
-      context 'when not signed in' do
-        before { sign_out user }
+      it 'redirects to the login page when not signed in' do
+        sign_out user
 
-        it 'redirects to the login page' do
-          patch note_url(note), params: { note: new_attributes }
-          expect(response).to redirect_to(new_user_session_path)
-        end
+        patch note_url(note), params: { note: new_attributes }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 

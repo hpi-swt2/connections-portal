@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
     if params.key?(:id)
       redirect_to users_path, alert: I18n.t('denial.not_found') unless User.exists?(params[:id])
-      @user = current_user if current_user.id.to_s == params[:id]
+      update_user
     end
     @user = current_user
   end
@@ -60,5 +60,9 @@ class UsersController < ApplicationController
       return false
     end
     true
+  end
+
+  def update_user
+    @user = current_user if current_user.id.to_s == params[:id]
   end
 end
