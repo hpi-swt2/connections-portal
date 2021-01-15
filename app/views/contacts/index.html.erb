@@ -13,7 +13,7 @@
     <tbody>
     <% @contacts.each do |contact| %>
       <tr>
-        <td><%= contact.email %></td>
+        <td><%= link_to contact.email, contact %></td>
       </tr>
     <% end %>
     </tbody>
