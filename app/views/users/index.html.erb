@@ -4,15 +4,15 @@
   <thead>
   <tr>
     <th>Email</th>
-    <th width="100"></th>
   </tr>
   </thead>
-
   <tbody>
   <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
-      <td align="center"><%= link_to 'Show', user %></td>
+      <% if @users_to_add.include? user %>
+        <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

@@ -16,11 +16,20 @@ class UsersController < ApplicationController
   def update_status
     @user.current_status = params[:user][:current_status]
     @user.save
-    redirect_to @user
   end
 
   def index
     @users = User.all
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
+    end
+  end
+
+  def add_contact
+    authenticate_user!
+    current_user.contacts << User.find(params[:id])
+    current_user.save
+    redirect_to root_path
   end
 
   private

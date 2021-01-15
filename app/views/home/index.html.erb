@@ -1,39 +1,12 @@
 <div class="jumbotron">
-  <h1 class="display-4">Connections Portal</h1>
-  <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
+      <h1 class="display-4"><%= I18n.t('index.portal_name') %></h1>
+  <p class="lead"><%= I18n.t('index.description') %></p>
   <hr>
-  <p>We hope you enjoy using it!
-    <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
+  <p> <%= I18n.t('index.greeting') %>
+        <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank"><%= I18n.t('index.give_feedback') %></a></p>
   <p class="lead" id="registration">
     <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
-    <% if not user_signed_in? %>
-      <%= link_to (fa_icon 'sign-in', text: 'Log-In'), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin" %>
-      <%= link_to (fa_icon 'user-plus', text: 'Sign-Up'), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup" %>
-    <% end %>
+    <%=  link_to (fa_icon 'sign-in', text: I18n.t('navigation.log_in')), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin"  %>
+    <%=  link_to (fa_icon 'user-plus', text: I18n.t('navigation.sign_up')), new_user_registration_path, class: 'btn btn-secondary btn-lg', id: "signup"  %>
   </p>
-  <% if user_signed_in? %>
-    <hr>
-    <p>You are currently logged in as <%= current_user.email %>.</p>
-    <p>There are <%= Note.count %> stored notes.</p>
-
-    <h2>Users</h2>
-    <table>
-      <thead>
-      <tr>
-        <th>Email</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% User.all.each do |user| %>
-        <% if not user == current_user %>
-          <tr>
-            <td><%= user.email %></td>
-            <td><%= button_to '+', user_contact_requests_path(user), method: :post, id: user.id %></td>
-          </tr>
-        <% end %>
-      <% end %>
-      </tbody>
-    </table>
-    <br>
-  <% end %>
 </div>
