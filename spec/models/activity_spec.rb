@@ -7,11 +7,11 @@ RSpec.describe Activity, type: :model do
 
   it 'rejects with empty content' do
     activity = described_class.new(content: '', user: FactoryBot.create(:user))
-    expect(activity).to_not be_valid
+    expect(activity).not_to be_valid
   end
 
   it 'rejects with no user' do
     activity = described_class.new(content: 'This Is My Last Activity', user: nil)
-    expect(activity).to_not be_valid
+    expect(activity).not_to be_valid
   end
 end

@@ -7,8 +7,24 @@ on:
     branches: [ main, dev ]
 
 jobs:
+  Linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository contents
+        uses: actions/checkout@v2
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+      - name: Install dependencies
+        run: bundle install
+      - name: RuboCop
+        run: bundle exec rubocop
+
   # Label of the runner job
   CI:
+    needs: Linter
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
