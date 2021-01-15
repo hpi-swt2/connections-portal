@@ -35,7 +35,7 @@ RSpec.describe 'Update user', type: :request do
   end
 
   context 'when not signed in' do
-    it 'redirects to the root page' do
+    it 'redirects to the login page' do
       patch user_path(user), params: { user: attributes }
       expect(response).to redirect_to(new_user_session_path)
     end

@@ -18,7 +18,7 @@ RSpec.describe 'Activities', type: :request do
       end
     end
 
-    context 'without logging in' do
+    context 'when not signed in' do
       it 'redirects to the login page' do
         post activities_path, params: { activity: { content: 'Some content' } }, headers: headers
         expect(response).to have_http_status(:unauthorized)

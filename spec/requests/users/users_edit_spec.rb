@@ -21,7 +21,7 @@ RSpec.describe 'Edit user', type: :request do
   end
 
   context 'when not signed in' do
-    it 'redirects to the sign in page' do
+    it 'redirects to the login page' do
       get edit_user_path(user)
       expect(response).to redirect_to(new_user_session_path)
     end
