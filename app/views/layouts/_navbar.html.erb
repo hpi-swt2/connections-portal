@@ -3,17 +3,17 @@
   <div class="navbar-brand"><%= I18n.t('index.portal_name') %></div>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
-        <%= link_to (fa_icon 'home', text: I18n.t('navbar.home')), root_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to (fa_icon 'sticky-note', text:I18n.t('navbar.notes') ), notes_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to (fa_icon 'users', text: I18n.t('navbar.users')), users_path, class: 'nav-link' %>
-      </li>
       <% if user_signed_in? %>
+        <li class="nav-item">
+          <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+          <%= link_to (fa_icon 'home', text: I18n.t('navbar.home')), root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to (fa_icon 'sticky-note', text:I18n.t('navbar.notes') ), notes_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to (fa_icon 'users', text: I18n.t('navbar.users')), users_path, class: 'nav-link' %>
+        </li>
         <li class="nav-item"> <%= link_to (fa_icon 'users', text: I18n.t('navbar.my-contacts')), user_contacts_path(current_user), class: 'nav-link' %> </li>
       <% end %> </ul>
     <ul class="navbar-nav ml-auto">
