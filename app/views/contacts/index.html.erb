@@ -2,7 +2,7 @@
 
 <% if user_signed_in? %>
 
-  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get %></p>
+  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
 
   <% @contacts.each do |contact| %>
    <div class="card">
@@ -37,5 +37,6 @@
         </div>
        </div>
      </div>
+    <br>
     <%end %>
 <% end %>
