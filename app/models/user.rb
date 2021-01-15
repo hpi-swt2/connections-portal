@@ -15,7 +15,6 @@ class User < ApplicationRecord
   # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :contacts,
                           class_name: 'User',
-                          # foreign_key: 'user_id',
                           association_foreign_key: 'contact_id'
 
   has_and_belongs_to_many :contact_requests,
@@ -50,7 +49,7 @@ class User < ApplicationRecord
     VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end
 
-  def self.search(search)
+  def search(search)
     if search
       User.where('username LIKE ?', "%#{search}%").or(User.where('firstname LIKE ?', "%#{search}%"))
           .or(User.where('lastname LIKE ?', "%#{search}%")).or(User.where('email LIKE ?', "%#{search}%"))
