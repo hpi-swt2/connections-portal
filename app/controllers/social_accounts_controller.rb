@@ -68,7 +68,9 @@ class SocialAccountsController < ApplicationController
   def authorize
     authenticate_user!
     if current_user.id.to_s != params[:user_id]
-      flash[:danger] = I18n.t 'errors.messages.authentication_failed'
+      message = I18n.t 'errors.messages.authentication_failed'
+      log = {heading: nil, messages: [message]}
+      flash[:danger] = log
       redirect_to root_path
     end
   end

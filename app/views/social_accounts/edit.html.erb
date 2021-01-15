@@ -2,7 +2,7 @@
 
 <%= form_with(model: [@user, @social_account], local: true) do |form| %>
   <% if @social_account.errors.any? %>
-    <%= render 'users/flash_messages'%>
+    <%= render 'layouts/flash_messages'%>
   <% end %>
 
   <div class="field">

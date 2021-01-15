@@ -3,7 +3,7 @@
 <h2><%= I18n.t('user.edit.profile_heading') %></h2>
 <%= form_with(model: @user, local: true) do |form| %>
   <% if @user.errors.any? %>
-    <%= render 'users/flash_messages'%>
+    <%= render 'layouts/flash_messages'%>
   <% end %>
 
   <p>

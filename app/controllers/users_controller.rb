@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def handle_error
       messages = @user.errors.full_messages
-      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: SocialAccount
+      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: User
       log = {heading: error_heading, messages: messages}
       flash[:danger] = log
   end
@@ -56,7 +56,9 @@ class UsersController < ApplicationController
     if current_user.id.to_s == params[:id]
       @user = current_user
     else
-      flash[:danger] = I18n.t 'errors.messages.authentication_failed'
+      message = I18n.t 'errors.messages.authentication_failed'
+      log = {heading: nil, messages: [message]}
+      flash[:danger] = log
       redirect_to root_path
     end
   end
