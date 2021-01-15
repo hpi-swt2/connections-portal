@@ -1,10 +1,9 @@
-<!--<meta http-equiv="refresh" content="2" />-->
 <div class="jumbotron">
-      <h1 class="display-4">Connections Portal</h1>
-  <p class="lead">A digital tool for organizing and arranging networks, relationships and human connections.</p>
+      <h1 class="display-4"><%= I18n.t('index.portal_name') %></h1>
+  <p class="lead"><%= I18n.t('index.description') %></p>
   <hr>
-  <p>We hope you enjoy using it!
-        <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank">Give feedback!</a></p>
+  <p> <%= I18n.t('index.greeting') %>
+        <a href="https://github.com/hpi-swt2/connections-portal/issues/new" target="_blank"><%= I18n.t('index.give_feedback') %></a></p>
   <p class="lead" id="registration">
     <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
     <%=  link_to (fa_icon 'sign-in', text: I18n.t('navigation.log_in')), new_user_session_path, class: 'btn btn-primary btn-lg', id: "signin"  %>

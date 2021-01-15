@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   before_action :filter_users_status
-
   def dashboard
     if user_signed_in?
       render 'dashboard'
