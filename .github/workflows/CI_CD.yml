@@ -61,7 +61,7 @@ jobs:
       - name: Install yarn packages
         run: yarn install --check-files
 
-      - name: Setup test PostgreSQL database & run tests
+      - name: Run tests in PostgreSQL database
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
