@@ -33,7 +33,10 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:search])
+    @users = User.where.not(id: current_user.id)
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
+    end
   end
 
   private

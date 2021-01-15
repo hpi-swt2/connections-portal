@@ -31,5 +31,4 @@ RSpec.describe 'Contact request', type: :feature do
     requested_user.reload
     expect(requested_user.contact_requests).not_to include(requesting_user)
   end
-
 end

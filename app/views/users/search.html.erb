@@ -31,7 +31,7 @@
             <td><%= user.firstname%></td>
             <td><%= user.lastname%></td>
             <td><%= user.email %></td>
-            <% unless current_user.contacts.include? user or user.contact_requests.include? current_user %>
+            <% if @users_to_add.include? user %>
               <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
             <% end %>
           </tr>
