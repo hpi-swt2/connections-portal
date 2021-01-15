@@ -1,3 +1,9 @@
+# Since we are using nested routes the user should only see the edit view of a social account. All information of the
+# social accounts them self is listed inside the users/edit or users/show views. A request to create a social account
+# is sent from inside the context of a user controller. A request to edit a social account is sent from the context of
+# this controller. If the creation/update of a social account is not valid, we still want to be in the process of the
+# request and give the user the chance to correct the mistake. That means we are still inside the context of this
+# controller but using the edit view from users.
 class SocialAccountsController < ApplicationController
   include SocialAccountsHelper
   before_action :authorize, :set_social_account, only: %i[show edit update destroy]
@@ -24,7 +30,6 @@ class SocialAccountsController < ApplicationController
   end
 
   def update
-    # TODO(ct): @user is nil in this point
     if @social_account.update(social_account_params)
       redirect_to edit_user_path(@social_account.user_id)
     else
@@ -35,11 +40,31 @@ class SocialAccountsController < ApplicationController
   end
 
   def show
-    @user = User.find(@social_account.user_id)
+    # We should only be at this point if:
+    # -> the user sends a request from the edit view rendered by this controller (action update).
+    # -> the update of the user account fails.
+    # -> The user manually try to reload the page. This triggers a get request on the
+    #    route /users/:user_id/social_accounts/:id.
+    # We are still in the context of editing a social account so we are rendering the edit view.
+    # The edit view needs a user instance variable.
+    @user = User.find(params[:user_id])
     render :edit
   end
 
-  def index() end
+  def index
+    # We should only be at this point if:
+    # -> the user sends a request from a form rendered in a view that uses the user controller
+    #    to this controller (action create).
+    # -> the creation of the user account fails.
+    # -> The user manually try to reload the page. This triggers a get request on the
+    #    route /users/:user_id/social_accounts.
+    # We are still in the context of creating a social account so we are rendering the users/edit view.
+    # The edit view needs a user and social_account instance variable from this controller since we
+    # are rendering this view with this controller now.
+    @user = User.find(params[:user_id])
+    @social_account = @user.social_accounts.build
+    render 'users/edit'
+  end
 
   def destroy
     @user = User.find(params[:user_id])
