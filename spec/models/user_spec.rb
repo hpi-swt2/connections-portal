@@ -92,4 +92,26 @@ RSpec.describe User, type: :model do
       expect(users).not_to include(@user2)
     end
   end
+
+  describe 'display name' do
+    it 'contains the first and last name if present' do
+      user = FactoryBot.build(:user, firstname: 'Hasso', lastname: 'Plattner', username: 'hasso01')
+      expect(user.display_name).to eq('Hasso Plattner')
+    end
+
+    it 'contains the last name if present' do
+      user = FactoryBot.build(:user, firstname: '', lastname: 'Plattner', username: 'hasso01')
+      expect(user.display_name).to eq('Plattner')
+    end
+
+    it 'contains the first name if present' do
+      user = FactoryBot.build(:user, firstname: 'Hasso', lastname: '', username: 'hasso01')
+      expect(user.display_name).to eq('Hasso')
+    end
+
+    it 'contains the username if neither first nor lastname are present' do
+      user = FactoryBot.build(:user, firstname: '', lastname: '', username: 'hasso01')
+      expect(user.display_name).to eq('hasso01')
+    end
+  end
 end

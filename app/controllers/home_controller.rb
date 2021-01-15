@@ -10,10 +10,7 @@ class HomeController < ApplicationController
   end
 
   def filter_users_status
-    @status_filter = User.default_status_filter
-    @status_filter = params[:filter_status] if User.filter_status_list.include?(params[:filter_status])
-
-    @users = User.with_status(@status_filter)
-    @users = @users.shuffle
+    @users = User.where.not(id: current_user.id).with_status(User.status_nice_to_meet_you)
+    @users = @users.sample(30)
   end
 end

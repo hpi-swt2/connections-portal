@@ -4,15 +4,8 @@
   <%= render 'status_dropdown' %>
 </div>
 
-<div id="search_status_dropdown">
-  <%= form_with(url: root_path, method: :get) do |f| %>
-      <%= f.label(:filter_status, I18n.t('user.status.filter')) %>
-      <%= f.select(:filter_status, options_for_select(User.select_filter_status_list, @status_filter),
-                   {}, {onchange: "this.form.submit()", class: "form-control"}) %>
-  <% end %>
-</div>
-
 <div id="filtered_user_list" class="user-list scroll-list scroll-styled">
+  <p><%= I18n.t('user.status.user_list') %></p>
   <% @users.each do |user| %>
     <div class="user-list-item d-flex">
       <div class="user-avatar d-flex">

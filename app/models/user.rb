@@ -19,7 +19,7 @@ class User < ApplicationRecord
                           foreign_key: 'requested_user_id',
                           association_foreign_key: 'requesting_user_id'
 
-  VALID_STATUS_LIST = %w[available working free_for_chat offline].freeze
+  VALID_STATUS_LIST = %w[available working free_for_chat offline nice_to_meet_you].freeze
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
@@ -38,20 +38,22 @@ class User < ApplicationRecord
     Note.where('creator_user_id = ?', id)
   end
 
+  def display_name
+    [firstname, lastname].filter(&:present?).join(' ').presence || username
+  end
+
   # class methods
   def self.select_status_list
     VALID_STATUS_LIST.map { |status| [I18n.t("user.status.#{status}"), status] }
   end
 
-  def self.filter_status_list
-    VALID_STATUS_LIST.reject { |status| status == 'offline' }
+  VALID_STATUS_LIST.each do |status|
+    define_singleton_method :"status_#{status}" do
+      status
+    end
   end
 
-  def self.select_filter_status_list
-    filter_status_list.map { |status| [I18n.t("user.status.#{status}"), status] }
-  end
-
-  def self.default_status_filter
-    'free_for_chat'
+  def self.filter_status
+    status_nice_to_meet_you
   end
 end
