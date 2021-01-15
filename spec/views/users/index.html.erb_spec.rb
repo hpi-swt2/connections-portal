@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'users/index', type: :view do
   let(:users) { FactoryBot.create_list(:user, 3) }
+  let(:signed_in_user) { FactoryBot.create(:user) }
 
   before do
     assign(:users, users)
-    sign_in users.first
+    sign_in signed_in_user
   end
 
   context 'with a user that has no contacts and no contact requests sent yet' do
@@ -20,12 +21,16 @@ RSpec.describe 'users/index', type: :view do
       end
     end
 
-    it 'has an + button to send contact request' do
+    it 'has a + button to send contact request' do
       expect(rendered).to have_button('+', count: users.length)
     end
 
     it 'does have a + button for not requested user' do
       expect(rendered).to have_css("form.button_to[action=\"/users/#{users.second.id}/contact_requests\"]")
+    end
+
+    it 'is not possible to see myself in the list of all users' do
+      expect(rendered).not_to have_text(users.first.email, count: users.length)
     end
   end
 
