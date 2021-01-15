@@ -11,7 +11,7 @@ RSpec.describe 'User list', type: :feature do
 
     before { visit root_path }
 
-    it 'does show the right number of users' do
+    it 'shows the right number of users' do
       expect(page).to have_css('div#filtered_user_list div.user-list-item', count: users.length)
     end
 

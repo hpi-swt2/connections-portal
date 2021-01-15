@@ -9,7 +9,13 @@ class HomeController < ApplicationController
   end
 
   def filter_users_status
-    @users = User.where.not(id: current_user.id).with_status(User.status_nice_to_meet_you)
-    @users = @users.sample(30)
+    @users = User.where.not(id: current_user.id).with_status(User.filter_status)
+    @users = @users.sample(maximum_length_user_list)
+  end
+
+  private
+
+  def maximum_length_user_list
+    30
   end
 end

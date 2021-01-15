@@ -94,7 +94,7 @@ RSpec.describe User, type: :model do
     let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
     let(:user2) { FactoryBot.create :user, current_status: described_class.status_free_for_chat }
 
-    it 'shows only users with the given status' do
+    it 'returns only users with the given status' do
       users = described_class.with_status(described_class.status_working)
       expect(users).to include(user1)
       expect(users).not_to include(user2)
