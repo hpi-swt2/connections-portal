@@ -73,13 +73,6 @@ RSpec.describe User, type: :model do
   end
   # rubocop:enable RSpec/MultipleExpectations
 
-  it 'adds user to contact request list of other user' do
-    contact = FactoryBot.create(:user)
-    contact.contact_requests << user
-    expect(contact.contact_requests).to include(user)
-    expect(contact.contacts).not_to include(user)
-  end
-
   describe 'contact requests' do
     it 'adds user to contact request list of other user' do
       contact.contact_requests << user
