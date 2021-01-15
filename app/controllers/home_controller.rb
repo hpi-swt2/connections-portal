@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-  before_action :filter_users_status
   def dashboard
     if user_signed_in?
+      filter_users_status
       render 'dashboard'
     else
       render 'index'

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-<<<<<<< HEAD
-RSpec.describe "home/index", type: :view do
+RSpec.describe 'home/index', type: :view do
   before { render }
 
   it 'renders a login button' do

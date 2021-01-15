@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   after_initialize :init
 
-  attribute :current_status, :string, default: 'available'
+  attribute :current_status, :string, default: User.status_available
 
   scope :with_status, ->(status) { where(current_status: status) }
 

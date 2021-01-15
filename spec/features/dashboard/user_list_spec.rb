@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "User list", type: :feature do
-  let(:user) { FactoryBot.create :user , current_status: User.filter_status }
+RSpec.describe 'User list', type: :feature do
+  let(:user) { FactoryBot.create :user, current_status: User.filter_status }
   let(:working_user) { FactoryBot.create :user, current_status: User.status_working }
 
   before { sign_in user }
@@ -12,7 +12,7 @@ RSpec.describe "User list", type: :feature do
     before { visit root_path }
 
     it 'does show the right number of users' do
-      expect(page).to have_css("div#filtered_user_list div.user-list-item", count: users.length)
+      expect(page).to have_css('div#filtered_user_list div.user-list-item', count: users.length)
     end
 
     it 'does not show the current user' do
@@ -31,7 +31,7 @@ RSpec.describe "User list", type: :feature do
     end
 
     it 'does only show 30 users' do
-      expect(page).to have_css("div#filtered_user_list div.user-list-item", count: 30)
+      expect(page).to have_css('div#filtered_user_list div.user-list-item', count: 30)
     end
   end
 end
