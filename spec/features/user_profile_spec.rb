@@ -9,7 +9,7 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type:
   before do
     user.social_accounts.push(social_account1)
     user.social_accounts.push(social_account2)
-    user.save()
+    user.save
     sign_in user
     visit user_path(user)
   end

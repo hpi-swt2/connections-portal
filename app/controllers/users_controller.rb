@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   include SocialAccountsHelper
   before_action :authorize, except: %i[show index]
-  helper_method :generate_link,  :get_supported_social_networks
-
+  helper_method :generate_link, :supported_social_networks
 
   def show
     @user = User.find(params[:id])
@@ -17,6 +16,7 @@ class UsersController < ApplicationController
   def update
     # prototype for create social account form
     return redirect_to @user if @user.update(user_params)
+
     handle_error
     @social_account = @user.social_accounts.build
     render :edit
@@ -41,10 +41,10 @@ class UsersController < ApplicationController
   private
 
   def handle_error
-      messages = @user.errors.full_messages
-      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: User
-      log = {heading: error_heading, messages: messages}
-      flash[:danger] = log
+    messages = @user.errors.full_messages
+    error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: User
+    log = { heading: error_heading, messages: messages }
+    flash[:danger] = log
   end
 
   def user_params
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       @user = current_user
     else
       message = I18n.t 'errors.messages.authentication_failed'
-      log = {heading: nil, messages: [message]}
+      log = { heading: nil, messages: [message] }
       flash[:danger] = log
       redirect_to root_path
     end

@@ -1,7 +1,7 @@
 class SocialAccountsController < ApplicationController
   include SocialAccountsHelper
-  before_action :authorize, :set_social_account, only: [:show, :edit, :update, :destroy]
-  helper_method :generate_link,  :get_supported_social_networks
+  before_action :authorize, :set_social_account, only: %i[show edit update destroy]
+  helper_method :generate_link, :supported_social_networks
 
   def edit
     @user = User.find(params[:user_id])
@@ -16,10 +16,10 @@ class SocialAccountsController < ApplicationController
       # Redirect to setting since we only add social accounts there
       redirect_to edit_user_path(@user)
     else
-      # If the account was created unsuccessfully we want to render the users edit form but still be in the processing of
-      # the current request so that the user can correct her/his input.
+      # If the account was created unsuccessfully we want to render the users edit form but still be in the processing
+      # of the current request so that the user can correct her/his input.
       handle_error
-      render "users/edit"
+      render 'users/edit'
     end
   end
 
@@ -39,8 +39,7 @@ class SocialAccountsController < ApplicationController
     render :edit
   end
 
-  def index
-  end
+  def index() end
 
   def destroy
     @user = User.find(params[:user_id])
@@ -51,10 +50,10 @@ class SocialAccountsController < ApplicationController
   private
 
   def handle_error
-      messages = @social_account.errors.full_messages
-      error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: SocialAccount
-      log = {heading: error_heading, messages: messages}
-      flash[:danger] = log
+    messages = @social_account.errors.full_messages
+    error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: SocialAccount
+    log = { heading: error_heading, messages: messages }
+    flash[:danger] = log
   end
 
   def set_social_account
@@ -67,11 +66,11 @@ class SocialAccountsController < ApplicationController
 
   def authorize
     authenticate_user!
-    if current_user.id.to_s != params[:user_id]
-      message = I18n.t 'errors.messages.authentication_failed'
-      log = {heading: nil, messages: [message]}
-      flash[:danger] = log
-      redirect_to root_path
-    end
+    return unless current_user.id.to_s != params[:user_id]
+
+    message = I18n.t 'errors.messages.authentication_failed'
+    log = { heading: nil, messages: [message] }
+    flash[:danger] = log
+    redirect_to root_path
   end
 end

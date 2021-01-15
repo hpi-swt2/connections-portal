@@ -6,7 +6,7 @@ FactoryBot.define do
 end
 
 def random_social_network
-  ["GitHub", "Facebook", "Twitter"].sample
+  %w[GitHub Facebook Twitter].sample
 end
 
 def random_name
