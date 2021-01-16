@@ -45,7 +45,6 @@ class UsersController < ApplicationController
 
   def authorize
     authenticate_user!
-    return redirect_to root_path, alert: I18n.t('denial.unauthorized') if current_user.nil?
 
     if params.key?(:id)
       redirect_to users_path, alert: I18n.t('denial.not_found') unless User.exists?(params[:id])

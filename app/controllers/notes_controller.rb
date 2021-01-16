@@ -48,11 +48,7 @@ class NotesController < ApplicationController
 
   def authorize
     authenticate_user!
-    if current_user.nil?
-      redirect_to root_path
-    else
-      @user = current_user
-    end
+    @user = current_user
   end
 
   # Use callbacks to share common setup or constraints between actions.
