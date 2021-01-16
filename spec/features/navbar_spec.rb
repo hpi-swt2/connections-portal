@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
   let(:user) { FactoryBot.create :user }
 
-  it 'is not expanded by default' do
+  describe 'profile dropdown' do
     before do
       sign_in user
       visit root_path
     end
 
-    describe 'profile dropdown' do
+    it 'is not expanded by default' do
       profile_dropdown = page.find('#navbarProfileDropdown + div', visible: :all)
       expect(profile_dropdown['class']).not_to include('show')
     end
