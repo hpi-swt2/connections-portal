@@ -41,6 +41,10 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
       end
     end
 
+    it 'contains a link to the contacts page' do
+      expect(page).to have_link('My contacts')
+    end
+
     def toggle_profile_dropdown
       page.execute_script('document.getElementById("navbarProfileDropdown").click()')
     end
@@ -60,7 +64,7 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
     end
 
     it 'does not contain a link to the contacts page' do
-      expect(page).not_to have_link(href: user_contacts_path)
+      expect(page).not_to have_link('My contacts')
     end
   end
 end
