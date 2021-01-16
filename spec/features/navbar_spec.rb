@@ -58,5 +58,9 @@ RSpec.describe 'Navbar', driver: :selenium_headless, type: :feature, js: true do
     it 'does not contain a link to the users page' do
       expect(page).not_to have_link(href: users_path)
     end
+
+    it 'does not contain a link to the contacts page' do
+      expect(page).not_to have_link(href: contacts_path)
+    end
   end
 end
