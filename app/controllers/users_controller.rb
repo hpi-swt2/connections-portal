@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     return unless params.key?(:id)
 
     redirect_to users_path, alert: I18n.t('denial.not_found') unless User.exists?(params[:id])
-    @user = current_user.id.to_s == params[:id] ? current_user : User.find(params[:id])
+    update_user
   end
 
   def authorize_to_update!
@@ -54,5 +54,9 @@ class UsersController < ApplicationController
 
     redirect_to users_path, alert: I18n.t('denial.forbidden')
     nil
+  end
+
+  def update_user
+    @user = current_user.id.to_s == params[:id] ? current_user : User.find(params[:id])
   end
 end
