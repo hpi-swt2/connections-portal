@@ -1,23 +1,21 @@
 class UsersController < ApplicationController
   before_action :authorize
 
-  def show
-    @user = User.find(params[:id])
-  end
+  def show; end
 
   def edit
-    authorize_to_update!
+    return unless authorize_to_update!
   end
 
   def update
-    authorize_to_update!
+    return unless authorize_to_update!
     return render :edit unless @user.update(user_params)
 
     redirect_to @user
   end
 
   def update_status
-    authorize_to_update!
+    return unless authorize_to_update!
 
     @user.current_status = params[:user][:current_status]
     @user.save
@@ -48,10 +46,13 @@ class UsersController < ApplicationController
     return unless params.key?(:id)
 
     redirect_to users_path, alert: I18n.t('denial.not_found') unless User.exists?(params[:id])
-    @user = current_user if current_user.id.to_s == params[:id]
+    @user = current_user.id.to_s == params[:id] ? current_user : User.find(params[:id])
   end
 
   def authorize_to_update!
-    return redirect_to users_path, alert: I18n.t('denial.forbidden') unless current_user.id.to_s == params[:id]
+    return @user if current_user.id.to_s == params[:id]
+
+    redirect_to users_path, alert: I18n.t('denial.forbidden')
+    nil
   end
 end
