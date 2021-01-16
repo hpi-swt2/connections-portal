@@ -15,7 +15,7 @@ RSpec.describe 'List users', type: :request do
     before { sign_out user }
 
     it 'redirects to the login page' do
-      get users_path()
+      get users_path
       expect(response).to redirect_to(new_user_session_path)
     end
   end
