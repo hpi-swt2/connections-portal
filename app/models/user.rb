@@ -65,4 +65,13 @@ class User < ApplicationRecord
   def display_name
     [firstname, lastname].filter(&:present?).join(' ').presence || username
   end
+
+  def self.search(search)
+    if search.present?
+      User.where('username LIKE ?', "%#{search}%").or(User.where('firstname LIKE ?', "%#{search}%"))
+          .or(User.where('lastname LIKE ?', "%#{search}%")).or(User.where('email LIKE ?', "%#{search}%"))
+    else
+      User.all
+    end
+  end
 end
