@@ -3,7 +3,7 @@ FactoryBot.define do
     email { "#{random_name}@example.com" }
     password { 'password' }
     password_confirmation { 'password' }
-    current_status { 'working' }
+    current_status { User.status_working }
     username { random_name }
     firstname { random_name }
     lastname { random_name }

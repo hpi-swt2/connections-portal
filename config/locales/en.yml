@@ -56,11 +56,13 @@ en:
       place_of_residence: 'Place of residence'
       birthdate: 'Birthdate'
     status:
-      change: 'Change current status'
       current: 'Current status'
       available: 'available'
       working: 'working'
+      offline: 'offline'
       free_for_chat: 'free for chat'
+      nice_to_meet_you: 'nice to meet you'
+      user_list: 'Users who are ready to chat:'
     search:
       index: 'Search'
       for: 'Search for:'
