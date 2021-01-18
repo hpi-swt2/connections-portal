@@ -4,7 +4,12 @@ class RoomMessage < ApplicationRecord
 
   validates :message, presence: true
 
+  def formatted_time
+    created_at.strftime('%Y-%m-%d %H:%M')
+  end
+
   def as_json(options = nil)
     super(options).merge(username: user.username)
   end
+
 end
