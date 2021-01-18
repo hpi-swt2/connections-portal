@@ -15,7 +15,7 @@ describe 'Filter users by key', type: :feature do
   end
 
   it 'is possible to filter by lastname' do
-    visit search_users_path(search: second_user.lastname[2..4])
+    visit search_users_path(search: second_user.lastname[0..2])
     expect(page).to have_text(second_user.lastname)
   end
 
@@ -46,6 +46,6 @@ describe 'Filter users by key', type: :feature do
 
   it 'does not show non-matching users when filtering by email' do
     visit search_users_path(search: user.email[0..2])
-    expect(page).not_to have_text(second_user.email[0..2])
+    expect(page).not_to have_text(second_user.email)
   end
 end
