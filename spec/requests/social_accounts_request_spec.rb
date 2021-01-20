@@ -15,7 +15,7 @@ RSpec.describe 'SocialAccounts', driver: :selenium_headless, type: :request do
         expect(user.social_accounts.count).to eq(1)
       end
 
-      it 'creates a new social account with invalid attributes' do
+      it 'does not creates a new social account with invalid attributes' do
         post user_social_accounts_path(user), params: { social_account: { social_network: '', user_name: '' } }
         expect(response).to render_template('users/edit')
         expect(user.social_accounts.count).to eq(0)

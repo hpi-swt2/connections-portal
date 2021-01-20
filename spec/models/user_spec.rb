@@ -67,7 +67,6 @@ RSpec.describe User, type: :model do
     user_with_social_accounts.social_accounts.create(social_network: 'GitHub', user_name: 'SomeGitUserName')
     user_with_social_accounts.social_accounts.create(social_network: 'Telegram', user_name: 'SomeTelegramUserName')
 
-    expect(user_with_social_accounts.social_accounts).not_to be_empty
     expect(user_with_social_accounts.social_accounts[0].social_network).to eq('GitHub')
     expect(user_with_social_accounts.social_accounts[1].social_network).to eq('Telegram')
   end
