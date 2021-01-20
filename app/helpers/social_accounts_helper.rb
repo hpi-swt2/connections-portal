@@ -1,12 +1,12 @@
 module SocialAccountsHelper
   LINK_MAP = {
-    "GitHub" => ->(name) { "https://github.com/#{name}" },
-    "Telegram" => ->(name) { "https://t.me/#{name}" },
-    "Facebook" => ->(name) { "https://facebook.com/#{name}" },
-    "Twitter" => ->(name) { "https://twitter.com/#{name}" },
-    "GitLab@HPI" => ->(name) { "https://gitlab.hpi.de.com/#{name}" },
-    "Slack" => proc { "https://slack.com/" },
-    "Discord" => ->(name) { "https://discordapp.com/#{name}" }
+    'GitHub' => ->(name) { "https://github.com/#{name}" },
+    'Telegram' => ->(name) { "https://t.me/#{name}" },
+    'Facebook' => ->(name) { "https://facebook.com/#{name}" },
+    'Twitter' => ->(name) { "https://twitter.com/#{name}" },
+    'GitLab@HPI' => ->(name) { "https://gitlab.hpi.de.com/#{name}" },
+    'Slack' => proc { 'https://slack.com/' },
+    'Discord' => ->(name) { "https://discordapp.com/#{name}" }
   }.freeze
 
   def generate_link(social_account)
