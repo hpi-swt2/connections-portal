@@ -61,8 +61,6 @@ RSpec.describe User, type: :model do
     expect(user_with_no_social_accounts.social_accounts).to be_empty
   end
 
-  # rubocop:disable RSpec/MultipleExpectations
-
   it 'can have many social accounts' do
     user_with_social_accounts.social_accounts.create(social_network: 'GitHub', user_name: 'SomeGitUserName')
     user_with_social_accounts.social_accounts.create(social_network: 'Telegram', user_name: 'SomeTelegramUserName')
@@ -70,7 +68,6 @@ RSpec.describe User, type: :model do
     expect(user_with_social_accounts.social_accounts[0].social_network).to eq('GitHub')
     expect(user_with_social_accounts.social_accounts[1].social_network).to eq('Telegram')
   end
-  # rubocop:enable RSpec/MultipleExpectations
 
   describe 'contact requests' do
     it 'adds user to contact request list of other user' do
