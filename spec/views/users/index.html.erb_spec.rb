@@ -30,21 +30,22 @@ RSpec.describe 'users/index', type: :view do
     end
 
     it 'is not possible to see myself in the list of all users' do
-      expect(rendered).not_to have_text(users.first.email, count: users.length)
+      expect(rendered).not_to have_text(signed_in_user, count: users.length)
     end
   end
 
   it 'does not have a + button for already requested user' do
-    users.second.contact_requests << users.first
-    users_to_send_requests_to(users.first)
+    users.second.contact_requests << signed_in_user
+    users_to_send_requests_to(signed_in_user)
     render
     expect(rendered).not_to have_css("form.button_to[action=\"/users/#{users.second.id}/contact_requests\"]")
   end
 
   it 'does not have a + button for already existing contacts' do
-    users.first.contacts << users.second
-    users_to_send_requests_to(users.first)
+    signed_in_user.contacts << users.second
+    users_to_send_requests_to(signed_in_user)
     render
+    expect(rendered).to have_css("form.button_to[action=\"/users/#{users.first.id}/contact_requests\"]")
     expect(rendered).not_to have_css("form.button_to[action=\"/users/#{users.second.id}/contact_requests\"]")
   end
 
