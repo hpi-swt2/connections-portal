@@ -17,5 +17,4 @@ describe 'Filter users by key', type: :feature do
   it 'is not possible to see myself in the users list' do
     expect(page).not_to have_text(user.email)
   end
-
 end
