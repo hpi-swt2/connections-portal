@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     patch 'status', to: 'users#update_status', as: 'update_status', on: :member
 
     resources :social_accounts
+    get 'search', to: 'users#search', on: :collection
     resources :contacts, only: %i[index]
     resources :contact_requests, only: %i[index create destroy] do
       patch 'accept', on: :member
