@@ -5,8 +5,8 @@ module SocialAccountsHelper
     'Facebook' => ->(name) { "https://facebook.com/#{name}" },
     'Twitter' => ->(name) { "https://twitter.com/#{name}" },
     'GitLab@HPI' => ->(name) { "https://gitlab.hpi.de/#{name}" },
-    'Slack' => proc { "https://slack.com/" },
-    'Discord' => proc { "https://discordapp.com/" }
+    'Slack' => proc { 'https://slack.com/' },
+    'Discord' => proc { 'https://discordapp.com/' }
   }.freeze
 
   def generate_link(social_account)
