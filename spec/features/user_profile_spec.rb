@@ -3,8 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type: :feature do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
+  let(:social_account1) { FactoryBot.create :social_account }
+  let(:social_account2) { FactoryBot.create :social_account }
 
   before do
+    user.social_accounts.push(social_account1)
+    user.social_accounts.push(social_account2)
+    user.save
     sign_in user
     visit user_path(user)
   end
@@ -35,5 +40,12 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type:
     user2.save
     visit user_path(user2)
     expect(page).to have_text(I18n.t('user.status.available'))
+  end
+
+  it 'show social accounts' do
+    expect(page).to have_text(social_account1.social_network)
+    expect(page).to have_text(social_account1.user_name)
+    expect(page).to have_text(social_account2.social_network)
+    expect(page).to have_text(social_account2.user_name)
   end
 end
