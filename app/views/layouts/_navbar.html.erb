@@ -1,6 +1,6 @@
 <%# https://getbootstrap.com/docs/4.5/components/navbar/ %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <div class="container">
+
     <div class="navbar-header">
       <div class="navbar-brand">Connection Portal</div>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" style="position:absolute;right:10px;">
@@ -29,15 +29,15 @@
             <div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
               <%= link_to I18n.t('navigation.visit_profile'), user_path(current_user), class: 'dropdown-item' %>
               <div class="dropdown-divider"></div>
-                    <%= link_to I18n.t('navigation.edit_profile'), edit_user_path(current_user), class: 'dropdown-item' %>
-                    <%= link_to I18n.t('navigation.account_settings'), edit_user_registration_path(current_user), class: 'dropdown-item' %>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <%= link_to (fa_icon 'sign-out', text: 'Log Out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
-              </li>
-              <% end %>
-          </ul>
-      </div>
-  </div>
+              <%= link_to I18n.t('navigation.edit_profile'), edit_user_path(current_user), class: 'dropdown-item' %>
+              <%= link_to I18n.t('navigation.account_settings'), edit_user_registration_path(current_user), class: 'dropdown-item' %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <%= link_to (fa_icon 'sign-out', text: 'Log Out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
 </nav>

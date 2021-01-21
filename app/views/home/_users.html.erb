@@ -1,0 +1,22 @@
+<h1 class="center-heading"><%= I18n.t('dashboard.user_list') %></h1>
+
+<div>
+  <%= render 'common/status_dropdown' %>
+</div>
+
+<div id="filtered_user_list" class="user-list scroll-list scroll-styled">
+  <p><%= I18n.t('user.status.user_list') %></p>
+  <% @users.each do |user| %>
+    <div class="user-list-item d-flex">
+      <div class="user-avatar d-flex">
+        <span><i class="fa fa-user"></i></span>
+      </div>
+      <div class="col user-name">
+        <%= user.display_name %>
+      </div>
+      <div class="user-meeting d-flex">
+        <span><i class="fa fa-phone fa-flip-horizontal"></i></span>
+      </div>
+    </div>
+  <% end %>
+</div>

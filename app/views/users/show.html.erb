@@ -23,8 +23,19 @@
   </tr>
 </table>
 
+<% if @user.social_accounts.any? %>
+  <h2> <%= I18n.t('social_accounts.show.social_accounts_heading') %> </h2>
+  <table>
+    <% @user.social_accounts.each do |social_account| %>
+      <tr>
+        <%= render 'social_accounts/social_account', social_account: social_account %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <% if user_signed_in? && current_user.id == @user.id %>
-  <%= render 'status_form' %>
+  <%= render 'common/status_dropdown' %>
 <% else %>
   <p><%= "#{I18n.t('user.status.current')}: #{@user.current_status}" %></p>
 <% end %>

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_090231) do
+ActiveRecord::Schema.define(version: 2021_01_04_104008) do
+
+  create_table "activities", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string "title"
@@ -21,6 +29,15 @@ ActiveRecord::Schema.define(version: 2020_12_22_090231) do
     t.integer "creator_user_id", null: false
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "social_accounts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "social_network"
+    t.string "user_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_12_22_090231) do
     t.index ["user_id"], name: "index_users_users_on_user_id"
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "notes", "users", column: "creator_user_id"
 end

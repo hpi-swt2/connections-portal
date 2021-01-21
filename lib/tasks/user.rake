@@ -1,5 +1,5 @@
 namespace :devise do
-  desc "Create demo user"
+  desc 'Create demo user'
   task create_demo_user: :environment do
     email = 'demo@example.com'
     pw = 'demo'
@@ -11,7 +11,7 @@ namespace :devise do
       demo_user = FactoryBot.build(:user, email: email, password: pw, password_confirmation: pw)
       # Don't validate as the password is too short
       demo_user.save(validate: false)
-      puts "Created demo user"
+      puts 'Created demo user'
     end
 
     puts "Demo user email: '#{demo_user.email}', password: '#{pw}'"

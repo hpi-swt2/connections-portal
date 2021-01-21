@@ -1,5 +1,4 @@
 *.gem
-*.rbc
 /.config
 /coverage/
 /InstalledFiles
@@ -11,10 +10,8 @@
 /tmp/
 
 # ignore local ide settings
-.vagrant/
-.idea/
-.github/
-ubuntu-bionic-18.04-cloudimg-console.log
+/.vagrant/
+/.idea/
 
 # Used by dotenv library to load environment variables.
 # .env
