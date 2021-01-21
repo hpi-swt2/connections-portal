@@ -9,6 +9,16 @@ module SocialAccountsHelper
     'Discord' => ->(name) { "https://discordapp.com/#{name}" }
   }.freeze
 
+  ICON_MAP = {
+      'GitHub' => "fa-github",
+      'Telegram' => "fa-telegram",
+      'Facebook' => "fa-facebook" ,
+      'Twitter' => "fa-twitter",
+      'GitLab@HPI' => "fa-gitlab",
+      'Slack' => "fa-slack",
+      'Discord' => "fa-discord"
+  }
+
   def generate_link(social_account)
     LINK_MAP[social_account.social_network]&.call(social_account.user_name)
   end
@@ -17,5 +27,9 @@ module SocialAccountsHelper
     %w[GitHub Telegram Facebook Twitter GitLab@HPI Slack Discord].map do |network|
       [network, network]
     end
+  end
+
+  def generate_icon(social_account)
+    ICON_MAP[social_account.social_network]
   end
 end
