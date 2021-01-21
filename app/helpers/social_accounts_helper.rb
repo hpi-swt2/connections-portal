@@ -10,14 +10,14 @@ module SocialAccountsHelper
   }.freeze
 
   ICON_MAP = {
-      'GitHub' => "fa-github",
-      'Telegram' => "fa-telegram",
-      'Facebook' => "fa-facebook" ,
-      'Twitter' => "fa-twitter",
-      'GitLab@HPI' => "fa-gitlab",
-      'Slack' => "fa-slack",
-      'Discord' => "fa-discord"
-  }
+    'GitHub' => "fa-github",
+    'Telegram' => "fa-telegram",
+    'Facebook' => "fa-facebook" ,
+    'Twitter' => "fa-twitter",
+    'GitLab@HPI' => "fa-gitlab",
+    'Slack' => "fa-slack",
+    'Discord' => "fa-discord"
+  }.freeze
 
   def generate_link(social_account)
     LINK_MAP[social_account.social_network]&.call(social_account.user_name)
