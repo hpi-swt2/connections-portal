@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <%= render 'layouts/shared_head' %>
   <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,10 +8,11 @@
 </head>
 
 <body>
-  <div class="container pt-3">
+<%= render "layouts/navbar" %>
+  <div class="container pt-0">
     <% if notice %><div class="alert alert-success notice" role="alert"><%= notice %></div><% end %>
     <% if alert %><div class="alert alert-danger" role="alert"><%= alert %></div><% end %>
-    <%= yield %>
+      <%= yield %>
   </div>
 </body>
 
