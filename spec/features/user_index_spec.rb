@@ -41,7 +41,4 @@ describe 'Filter users by key', type: :feature do
     expect(page).to have_css("form[action='#{user_contact_requests_path(users.first)}']")
     expect(page).not_to have_css("form[action='#{user_contact_requests_path(users.second)}']")
   end
-
 end
-
-

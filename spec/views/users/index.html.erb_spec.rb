@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'users/index', type: :view do
   let(:users) { FactoryBot.create_list(:user, 5) }
-  let(:users_to_add) { users[0..2]}
+  let(:users_to_add) { users[0..2] }
   let(:signed_in_user) { FactoryBot.create(:user) }
 
   before do
@@ -23,7 +23,6 @@ RSpec.describe 'users/index', type: :view do
       expect(rendered).to have_css("form.button_to[action=\"/users/#{user.id}/contact_requests\"]")
     end
   end
-
 
   it 'does not have a + button for users not in `users_to_add`' do
     (users - users_to_add).each do |user|
