@@ -5,38 +5,58 @@
   <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
 
   <% @contacts.each do |contact| %>
-   <div class="card">
-     <div class="card-body">
-       <div class="container">
-         <div class="row">
-           <div class="col-xs">
-             <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
-           </div>
-           <div class="col-10">
-             <h5 class="card-title"><%= contact.name %></h5>
-             <p class="card-link"><i><%= contact.email %></i></p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col">
-             <a href="https://github.com">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="rounded-circle" style="width: 50px">
-             </a>
-           </div>
-           <div class="col">
-             <a href="https://github.com">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="rounded-circle" style="width: 50px">
-             </a>
-           </div>
-           <div class="col">
-             <a href="https://github.com">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="rounded-circle" style="width: 50px">
-             </a>
-           </div>
-         </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs">
+              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+            </div>
+            <div class="col-10">
+              <h5 class="card-title"><%= contact.name %></h5>
+              <p class="card-link"><i><%= contact.email %></i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <a href="https://github.com">
+                <i class="fa fa-github fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa fa-telegram fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa fa-facebook-official fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa fa-twitter fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa fa-gitlab fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa slack fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a href="TODO">
+                <i class="fa discord fa-4x" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
         </div>
-       </div>
-     </div>
+      </div>
+    </div>
     <br>
-    <%end %>
+  <%end %>
 <% end %>
