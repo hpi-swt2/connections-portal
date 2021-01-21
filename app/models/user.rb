@@ -79,6 +79,6 @@ class User < ApplicationRecord
   end
 
   def name
-    firstname + ' ' + lastname
+    "#{firstname} #{lastname}"
   end
 end
