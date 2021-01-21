@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
+  create_table "social_accounts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "social_network"
+    t.string "user_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

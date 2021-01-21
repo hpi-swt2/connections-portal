@@ -1,0 +1,5 @@
+<%= render 'social_accounts/social_account', social_account: social_account %>
+<td>
+    <%= link_to (I18n.t 'social_accounts.social_account_view.edit_label'), edit_user_social_account_path(user, social_account) %>
+    <%= link_to (I18n.t 'social_accounts.social_account_view.remove_label'), user_social_account_path(user, social_account), method: :delete %>
+</td>
