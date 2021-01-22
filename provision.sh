@@ -47,6 +47,7 @@ eval "$(rbenv init -)"
 
 # Migrate database
 rails db:migrate
+rails db:seed
 
 # Create demo user
 rake devise:create_demo_user
