@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe RoomMessage, type: :model do
-
   let(:room_message) { FactoryBot.build :room_message }
 
   it 'is creatable using a factory' do
@@ -27,5 +26,4 @@ RSpec.describe RoomMessage, type: :model do
     room_message.created_at = Time.utc(2021, 7, 8, 9, 10)
     expect(room_message.formatted_time).to eq '2021-07-08 09:10'
   end
-
 end

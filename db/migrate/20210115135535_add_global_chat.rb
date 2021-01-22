@@ -6,5 +6,4 @@ class AddGlobalChat < ActiveRecord::Migration[6.0]
   def down
     Room.delete_by id: Room::GLOBAL_CHAT_ID
   end
-
 end

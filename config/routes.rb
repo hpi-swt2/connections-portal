@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :room_messages, only: :create
   resources :notes
   # https://github.com/heartcombo/devise/wiki/

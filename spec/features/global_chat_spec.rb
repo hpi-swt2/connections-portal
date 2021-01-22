@@ -38,8 +38,8 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     expect(page).to have_text(message.formatted_time)
   end
 
-  it 'should update messages' do
-    user2 =  FactoryBot.create :user
+  it 'updates the messages' do
+    user2 = FactoryBot.create :user
     in_browser(:one) do
       sign_in user
       visit root_path
@@ -58,5 +58,4 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
       expect(page).to have_text(message)
     end
   end
-
 end

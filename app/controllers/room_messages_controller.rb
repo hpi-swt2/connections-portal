@@ -1,5 +1,4 @@
 class RoomMessagesController < ApplicationController
-
   before_action :authenticate_user!
 
   def create
@@ -22,5 +21,4 @@ class RoomMessagesController < ApplicationController
           .merge(user: current_user,
                  room: @room)
   end
-
 end
