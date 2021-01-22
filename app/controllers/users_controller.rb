@@ -1,3 +1,5 @@
+require 'set'
+
 class UsersController < ApplicationController
   include SocialAccountsHelper
   before_action :authorize, except: %i[show index search]
@@ -42,10 +44,25 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:search]).where.not(id: current_user.id)
-    @users_to_add = @users.reject do |user|
-      current_user.sent_contact_request?(user)
-    end
+    use_wildcards = true
+    @users_to_add = Set[]
+    @contacts = Set[]
+    if current_user and params[:search] and use_wildcards
+      patterns = params[:search].split()
+      @user = User.find(current_user.id)
+      for pattern in patterns do
+        @contacts.merge(@user.contacts.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").to_set)
+        @users_to_add.merge(User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").where.not(id: current_user.id).to_set)
+      @users_to_add - @contacts
+    if current_user and params[:search] and !use_wildcards
+      patterns = params[:search].split()
+      @user = User.find(current_user.id)
+      for pattern in patterns do
+        @contacts = @user.contacts.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").to_set
+        @users_to_add = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").where.not(id: current_user.id).to_set
+      @users_to_add - @contacts
+    if !current_user and params[:search]
+      @users_to_add = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
   end
 
   private
