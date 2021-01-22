@@ -6,5 +6,5 @@ class Room < ApplicationRecord
 
   GLOBAL_CHAT_ID = 1
 
-  scope :global_chat_room, -> { where(id: GLOBAL_CHAT_ID).first }
+  scope :global_chat_room, -> { find(GLOBAL_CHAT_ID) }
 end
