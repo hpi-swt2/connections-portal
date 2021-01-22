@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html >> Deleting from Associations
   has_many :notes, dependent: :delete_all
   has_many :activities, dependent: :delete_all
-  has_many :call_participants, dependent: :destroy
+  has_many :call_participants, dependent: :delete_all, inverse_of: :user
   has_many :jitsi_calls, through: :call_participants
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
