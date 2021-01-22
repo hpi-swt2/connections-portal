@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update index] do
     patch 'status', to: 'users#update_status', as: 'update_status', on: :member
 
+    resources :social_accounts
+    get 'search', to: 'users#search', on: :collection
     resources :contacts, only: %i[index]
     resources :contact_requests, only: %i[index create destroy] do
       patch 'accept', on: :member

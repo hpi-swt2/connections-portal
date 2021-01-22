@@ -20,7 +20,7 @@ RSpec.describe 'Update user', type: :request do
     context 'with invalid params' do
       let(:attributes) { super().merge(username: '') }
 
-      it 'renders the edit page' do
+      it 'renders the user edit page' do
         expect(response).to render_template(:edit)
       end
     end

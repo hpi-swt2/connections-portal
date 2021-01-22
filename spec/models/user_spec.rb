@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.build :user }
+  let(:contact) { FactoryBot.create :user }
+  let(:request) { FactoryBot.create :user }
+  let(:user_with_social_accounts) { FactoryBot.create :user }
 
   it 'is creatable using a factory' do
     expect(user).to be_valid
@@ -53,10 +56,20 @@ RSpec.describe User, type: :model do
     expect(user.contacts).to include(contact)
   end
 
-  describe 'contact requests' do
-    let(:contact) { FactoryBot.create :user }
-    let(:request) { FactoryBot.create :user }
+  it 'has no relationship to social accounts' do
+    user_with_no_social_accounts = FactoryBot.build(:user)
+    expect(user_with_no_social_accounts.social_accounts).to be_empty
+  end
 
+  it 'can have many social accounts' do
+    user_with_social_accounts.social_accounts.create(social_network: 'GitHub', user_name: 'SomeGitUserName')
+    user_with_social_accounts.social_accounts.create(social_network: 'Telegram', user_name: 'SomeTelegramUserName')
+
+    expect(user_with_social_accounts.social_accounts[0].social_network).to eq('GitHub')
+    expect(user_with_social_accounts.social_accounts[1].social_network).to eq('Telegram')
+  end
+
+  describe 'contact requests' do
     it 'adds user to contact request list of other user' do
       contact.contact_requests << user
       expect(contact.contact_requests).to include(user)
@@ -89,6 +102,7 @@ RSpec.describe User, type: :model do
       expect(user.sent_contact_request?(contact)).to be true
     end
   end
+  # rubocop:disable RSpec/MultipleMemoizedHelpers
 
   describe 'status scope' do
     let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
@@ -100,6 +114,8 @@ RSpec.describe User, type: :model do
       expect(users).not_to include(user2)
     end
   end
+
+  # rubocop:enable RSpec/MultipleMemoizedHelpers
 
   describe 'display name' do
     it 'contains the first and last name if present' do
