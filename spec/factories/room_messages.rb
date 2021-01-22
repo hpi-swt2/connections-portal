@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :room_message do
-    association :room
     association :user
-    message { 'MyMessage' }
+    message { "MyMessage: #{('a'..'z').to_a.shuffle.join}"  }
+    room { Room.global_chat_room }
   end
 end

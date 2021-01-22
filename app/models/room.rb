@@ -5,4 +5,6 @@ class Room < ApplicationRecord
            inverse_of: :room
 
   GLOBAL_CHAT_ID = 1
+
+  scope :global_chat_room, -> { where(id: GLOBAL_CHAT_ID).first }
 end
