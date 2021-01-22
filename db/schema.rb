@@ -31,15 +31,6 @@ ActiveRecord::Schema.define(version: 2021_01_15_135535) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
-  create_table "social_accounts", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "social_network"
-    t.string "user_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_social_accounts_on_user_id"
-  end
-
   create_table "room_messages", force: :cascade do |t|
     t.integer "room_id", null: false
     t.integer "user_id", null: false
@@ -55,6 +46,15 @@ ActiveRecord::Schema.define(version: 2021_01_15_135535) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_rooms_on_name", unique: true
+  end
+
+  create_table "social_accounts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "social_network"
+    t.string "user_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
