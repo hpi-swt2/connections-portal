@@ -10,6 +10,6 @@ class RoomMessage < ApplicationRecord
   end
 
   def as_json(options = nil)
-    super(options).merge(username: user.username)
+    super(options).merge(display_name: user.display_name)
   end
 end

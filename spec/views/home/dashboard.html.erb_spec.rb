@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'home/dashboard', type: :view do
   let(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status }
-  let(:room_messages) {   FactoryBot.create_list :room_message, 3, room: Room.find(Room::GLOBAL_CHAT_ID) }
+  let(:room_messages) { FactoryBot.create_list :room_message, 3, room: Room.find(Room::GLOBAL_CHAT_ID) }
 
-  before { assign(:users, users) }
-  before { assign(:room_messages, room_messages)}
+  before do
+    assign(:users, users)
+    assign(:room_messages, room_messages)
+  end
 
   context 'when user is signed in' do
     before do

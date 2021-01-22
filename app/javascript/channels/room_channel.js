@@ -23,7 +23,7 @@ $(function () {
                 received: function (data) {
                     const content = messageTemplate.children().clone(true, true);
 
-                    content.find('[data-role="message-author"]').text(data.username);
+                    content.find('[data-role="message-author"]').text(data.display_name);
                     content.find('[data-role="message-author"]').attr('href', `/users/${data.user_id}`);
                     content.find('[data-role="message-text"]').text(data.message);
                     content.find('[data-role="message-date"]').text(formatDate(new Date(data.updated_at)));
