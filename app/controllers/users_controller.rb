@@ -1,16 +1,25 @@
 class UsersController < ApplicationController
-  before_action :authorize, except: %i[show index]
+  include SocialAccountsHelper
+  before_action :authorize, except: %i[show index search]
+  helper_method :generate_link, :supported_social_networks
 
   def show
     @user = User.find(params[:id])
   end
 
-  def edit; end
+  def edit
+    @user = User.find(params[:id])
+    # prototype for create social account form
+    @social_account = @user.social_accounts.build #
+  end
 
   def update
-    return render :edit unless @user.update(user_params)
+    # prototype for create social account form
+    return redirect_to @user if @user.update(user_params)
 
-    redirect_to @user
+    handle_error
+    @social_account = @user.social_accounts.build
+    render :edit
   end
 
   def update_status
@@ -19,7 +28,10 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.where.not(id: current_user.id)
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
+    end
   end
 
   def add_contact
@@ -29,7 +41,21 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @users = User.search(params[:search]).where.not(id: current_user.id)
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
+    end
+  end
+
   private
+
+  def handle_error
+    messages = @user.errors.full_messages
+    error_heading = I18n.t 'errors.messages.not_saved.other', count: messages.count, resource: User
+    log = { heading: error_heading, messages: messages }
+    flash[:danger] = log
+  end
 
   def user_params
     params.require(:user).permit(:username, :firstname, :lastname, :birthdate, :place_of_residence)
@@ -40,6 +66,9 @@ class UsersController < ApplicationController
     if current_user.id.to_s == params[:id]
       @user = current_user
     else
+      message = I18n.t 'errors.messages.authentication_failed'
+      log = { heading: nil, messages: [message] }
+      flash[:danger] = log
       redirect_to root_path
     end
   end

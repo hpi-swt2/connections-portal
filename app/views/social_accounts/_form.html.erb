@@ -1,0 +1,18 @@
+<%= form_with(model: [@user, @social_account], local: true) do |form| %>
+  <% if @social_account.errors.any? %>
+    <%= render 'layouts/flash_messages'%>
+  <% end %>
+
+  <p>
+    <%= form.label I18n.t 'social_accounts.attributes.social_network'%>
+    <%= form.select(:social_network, options_for_select(supported_social_networks, @social_account.social_network)) %>
+  </p>
+  <p>
+      <%= form.label I18n.t 'social_accounts.attributes.username' %>
+      <%= form.text_field :user_name %>
+  </p>
+
+  <p>
+    <%= form.submit submit_label%>
+  </p>
+<% end %>

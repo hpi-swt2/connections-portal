@@ -47,6 +47,7 @@ en:
   questions:
       confirmation: 'Are you sure?'
   user:
+    lists: 'Users'
     attributes:
       username: 'Username'
       firstname: 'Firstname'
@@ -55,14 +56,39 @@ en:
       place_of_residence: 'Place of residence'
       birthdate: 'Birthdate'
     status:
-      change: 'Change current status'
       current: 'Current status'
       available: 'available'
       working: 'working'
+      offline: 'offline'
       free_for_chat: 'free for chat'
+      nice_to_meet_you: 'nice to meet you'
+      user_list: 'Users who are ready to chat:'
+    search:
+      index: 'Search'
+      for: 'Search for:'
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
+    edit:
+      edit_profile_heading: 'Edit profile'
+      profile_heading: 'Profile'
+  social_accounts:
+    attributes:
+      social_network: 'Social network'
+      username: 'Username'
+    edit:
+      heading: 'Edit Social Account'
+      update_label: 'Update social account'
+      back_label: 'Back'
+      add_social_account_label: 'Create Social Account'
+      social_accounts_heading: 'Social Accounts'
+      add_social_accounts_heading: 'Add a Social Account'
+    social_account_view:
+      edit_label: 'Edit'
+      remove_label: 'Remove'
+      link_label: 'Link'
+    show:
+      social_accounts_heading: 'Social Accounts'
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'
@@ -82,3 +108,4 @@ en:
     home: 'Home'
     users: 'Users'
     my-contacts: 'My contacts'
+    search: 'Search'

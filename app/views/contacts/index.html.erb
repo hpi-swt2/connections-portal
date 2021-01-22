@@ -2,20 +2,35 @@
 
 <% if user_signed_in? %>
 
-  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get %></p>
+  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.email %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <% @contacts.each do |contact| %>
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs">
+              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+            </div>
+            <div class="col-10">
+              <h5 class="card-title"><%= contact.name %></h5>
+              <p class="card-link"><i><%= contact.email %></i></p>
+            </div>
+          </div>
+          <% if contact.social_accounts.any? %>
+            <div class="row">
+              <% contact.social_accounts.each do |social_account| %>
+                <div class="col">
+                  <a href=<%= generate_link(social_account) %>>
+                    <i class="fa <%= generate_icon(social_account) %> fa-4x" aria-hidden="true"></i>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br>
+  <%end %>
 <% end %>
