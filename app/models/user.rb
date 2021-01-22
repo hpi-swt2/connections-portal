@@ -77,4 +77,8 @@ class User < ApplicationRecord
       User.all
     end
   end
+
+  def name
+    "#{firstname} #{lastname}"
+  end
 end
