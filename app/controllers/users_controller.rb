@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.where.not(id: current_user.id)
-    @users_to_add = @users.reject do |user|
+    @users = User.all
+    @users_to_add = (@users - [current_user]).reject do |user|
       current_user.sent_contact_request?(user)
     end
   end
