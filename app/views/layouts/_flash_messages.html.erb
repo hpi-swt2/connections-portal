@@ -1,12 +1,17 @@
 <% flash.each do |level, log| %>
     <div class='alert alert-<%= level %>'>
-      <% if !log[:heading].nil? %>
-        <h4><%= log[:heading] %></h4>
+      <% if log.is_a? String %>
+        <li><%= log %></li>
       <% end %>
-      <% log[:messages].each do |message| %>
-        <ul>
-          <li><%= message %></li>
-        </ul>
+      <% if !log.is_a? String %>
+        <% if !log[:heading].nil? %>
+          <h4><%= log[:heading] %></h4>
+        <% end %>
+        <% log[:messages].each do |message| %>
+          <ul>
+            <li><%= message %></li>
+          </ul>
+        <% end %>
       <% end %>
     </div>
 <% end %>
