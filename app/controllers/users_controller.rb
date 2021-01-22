@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def edit
     return unless authorize_to_update!
+
     @user = User.find(params[:id])
     # prototype for create social account form
     @social_account = @user.social_accounts.build
