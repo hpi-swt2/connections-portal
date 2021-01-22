@@ -93,7 +93,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: "connections-portal-dev" #Must be unique in Heroku
           heroku_email: "hpi.swt2+heroku@gmail.com"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev'
 
         # https://github.com/marketplace/actions/deploy-to-heroku
       - uses: akhileshns/heroku-deploy@v3.6.8
@@ -101,4 +101,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: "connections-portal-main" #Must be unique in Heroku
           heroku_email: "hpi.swt2+heroku@gmail.com"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
