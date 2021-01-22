@@ -18,7 +18,11 @@
         </li>
         <% if user_signed_in? %>
           <li class="nav-item"> <%= link_to (fa_icon 'users', text: "My Contacts"), user_contacts_path(current_user), class: 'nav-link' %> </li>
-        <% end %> </ul>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to (fa_icon 'search', text: 'Search'), "/search", class: 'nav-link' %>
+        </li>
+      </ul>
       <ul class="navbar-nav ml-auto">
         <%# https://github.com/heartcombo/devise#controller-filters-and-helpers %>
         <% if user_signed_in? %>
