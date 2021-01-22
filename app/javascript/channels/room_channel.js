@@ -11,7 +11,6 @@ $(function () {
         const $element = $(element),
             room_id = $element.data('room-id'),
             messageTemplate = $('[data-role="message-template"]');
-        console.log(messageTemplate)
 
         $element.animate({scrollTop: $element.prop("scrollHeight")}, 1000)
 
@@ -22,8 +21,6 @@ $(function () {
             },
             {
                 received: function (data) {
-                    console.log('Got new message!');
-                    console.log(data);
                     const content = messageTemplate.children().clone(true, true);
 
                     content.find('[data-role="message-author"]').text(data.username);
@@ -34,7 +31,6 @@ $(function () {
                     if (data.user_id === document.current_user) {
                         content.addClass('chat-item-me')
                     }
-                    console.log(content);
                     $element.append(content);
                     $element.animate({scrollTop: $element.prop("scrollHeight")}, 1000);
                 }
