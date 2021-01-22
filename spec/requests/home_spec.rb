@@ -9,14 +9,14 @@ RSpec.describe 'Homes', type: :request do
         sign_in user
         get root_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('Last Activities')
+        expect(response.body).to include(I18n.t('dashboard.last_activities'))
       end
     end
 
     context 'when not signed in' do
       it 'returns http success' do
         get root_path
-        expect(response.body).not_to include('Last Activities')
+        expect(response.body).not_to include(I18n.t('dashboard.last_activities'))
       end
     end
   end
