@@ -2,8 +2,9 @@ require 'set'
 
 class UsersController < ApplicationController
   include SocialAccountsHelper
+  include UsersHelper
   before_action :authorize, except: %i[show index search]
-  helper_method :generate_link, :supported_social_networks
+  helper_method :generate_link, :supported_social_networks, :search_record
 
   def show
     @user = User.find(params[:id])
@@ -47,29 +48,23 @@ class UsersController < ApplicationController
     use_wildcards = false
     @users = Set[]
     @contacts = Set[]
-    if current_user and params[:search] and use_wildcards 
-      patterns = params[:search].split()
+    if current_user and params[:search] and use_wildcards
       @user = User.find(current_user.id)
-      for pattern in patterns do
-        @contacts.merge(@user.contacts.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").to_set)
-        @users.merge(User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").where.not(id: current_user.id).to_set)
-      end
+      @users = search_record(params[:search], User)
+      @contacts = search_record(params[:search], @user.contacts)
       @users - @contacts
     end
     if current_user and params[:search] and !use_wildcards
-      patterns = params[:search].split()
       @user = User.find(current_user.id)
-      for pattern in patterns do
-        @contacts = @user.contacts.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").to_set
-        @users = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").where.not(id: current_user.id).to_set
-      end
+      @users = search_record(params[:search], User, false)
+      @contacts = search_record(params[:search], @user.contacts, false)
       @users - @contacts
     end
     if !current_user and params[:search] and use_wildcards 
-      @users = User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
+      @users = search_record(params[:search], User)
     end
     if !current_user and params[:search] and !use_wildcards
-      @users = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
+      @users = search_record(params[:search], User, false)
     end
   end
 
