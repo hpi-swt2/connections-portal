@@ -45,24 +45,29 @@ class UsersController < ApplicationController
 
   def search
     use_wildcards = true
-    @users_to_add = Set[]
+    @users = Set[]
     @contacts = Set[]
-    if current_user and params[:search] and use_wildcards
+    if current_user and params[:search] and use_wildcards 
       patterns = params[:search].split()
       @user = User.find(current_user.id)
       for pattern in patterns do
         @contacts.merge(@user.contacts.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").to_set)
-        @users_to_add.merge(User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").where.not(id: current_user.id).to_set)
-      @users_to_add - @contacts
+        @users.merge(User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").where.not(id: current_user.id).to_set)
+      end
+      @users - @contacts
+    end
     if current_user and params[:search] and !use_wildcards
       patterns = params[:search].split()
       @user = User.find(current_user.id)
       for pattern in patterns do
         @contacts = @user.contacts.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").to_set
-        @users_to_add = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").where.not(id: current_user.id).to_set
-      @users_to_add - @contacts
+        @users = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").where.not(id: current_user.id).to_set
+      end
+      @users - @contacts
+    end
     if !current_user and params[:search]
-      @users_to_add = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
+      @users = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
+    end
   end
 
   private
