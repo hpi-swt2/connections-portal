@@ -81,6 +81,7 @@ jobs:
     # github.event_name == 'push' assures that the pull requests, for which the CI should run too, are not deployed to Heroku
     # github.ref == 'refs/heads/<branch name>' assures that in the current step, only one of the branches is deployed. 
     #   This was made because the two different deployments (main and dev) each have their own Heroku-App.
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
 
     steps:
       - name: Checkout repository
