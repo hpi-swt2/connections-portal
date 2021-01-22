@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    use_wildcards = true
+    use_wildcards = false
     @users = Set[]
     @contacts = Set[]
     if current_user and params[:search] and use_wildcards 
@@ -65,7 +65,10 @@ class UsersController < ApplicationController
       end
       @users - @contacts
     end
-    if !current_user and params[:search]
+    if !current_user and params[:search] and use_wildcards 
+      @users = User.where('firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
+    end
+    if !current_user and params[:search] and !use_wildcards
       @users = User.where('firstname = ? OR lastname = ? OR username = ? OR email = ?', "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}")
     end
   end
