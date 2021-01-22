@@ -12,14 +12,14 @@ RSpec.describe RoomMessage, type: :model do
     expect(room_message).not_to be_valid
   end
 
-  it 'json should contain the username key' do
+  it 'json should contain the display name key' do
     room_message.save
-    expect(room_message.as_json).to have_key :username
+    expect(room_message.as_json).to have_key :display_name
   end
 
-  it 'json should have the correct username' do
+  it 'json should have the correct display name' do
     room_message.save
-    expect(room_message.as_json[:username]).to eq(room_message.user.username)
+    expect(room_message.as_json[:display_name]).to eq(room_message.user.display_name)
   end
 
   it 'formats time' do
