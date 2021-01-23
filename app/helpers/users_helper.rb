@@ -1,10 +1,10 @@
 require 'set'
 
 module UsersHelper
-  def search_record(pattern, record, use_wildcard = true)
-    patterns = params[:search].split()
+  def search_record(arguments, record, use_wildcard = true)
+    patterns = arguments.split()
     matches = Set[]
-    if use_wildcard
+    if !use_wildcard
       query = 'firstname = ? OR lastname = ? OR username = ? OR email = ?'
       for pattern in patterns do
         matches.merge(record.where(query, "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").to_set)

@@ -13,22 +13,55 @@
         flex: 1;
         margin: 3px;
     }
+    .stack {
+        display: flex;
+        flex-direction: column;
+    }
+    .stack > * + * {
+        margin-top: 2rem;
+    }
+    .contact {
+        display: flex;
+        border: 2px solid #D1D5DB;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    .profile-image{
+        padding: 2px;
+        flex: 1;
+    }
+    .user-info{
+        flex: 4;
+        display: block;
+    }
+
 </style>
 
-<div class="row">
-    <div class="col">
-      <%= form_tag(search_users_path, method: "get", class: "form-tag justify-content-between") do %>
-        <%= text_field_tag :search, params[:search] ,placeholder: "Username, email, ...", class: "text-field form-control my-2 my-sm-0"%>
-        <%= submit_tag I18n.t('user.search.index') , class: "submit-button btn btn-outline-secondary my-2 my-sm-0", type: "button"%>
-      <% end %>
+<div class="stack">
+  <%= form_tag(search_users_path, method: "get", class: "form-tag justify-content-between") do %>
+    <%= text_field_tag :search, params[:search] ,placeholder: "Username, email, ...", class: "text-field form-control my-2 my-sm-0"%>
+    <%= submit_tag I18n.t('user.search.index') , class: "submit-button btn btn-outline-secondary my-2 my-sm-0"%>
+  <% end %>
+
+
+ <% @users.each do |user| %>
+    <div class="contact">
+        <div class="profile-image">
+             <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+        </div>
+        <div class="user-info">
+            <h3><%= user.username%></h3>
+            <div><%= "#{user.firstname} #{user.lastname}"%></div>
+            <div><%= user.email %></div>
+        </div>
+    </div>
+ <% end %>
 </div>
 
 
 
-
-
 </div>
-<table>
+<!-- <table>
     <thead>
         <tr>
             <th><%= I18n.t('user.attributes.username') %></th>
@@ -59,5 +92,5 @@
     <% end %>
 
     </tbody>
-</table>
+</table> -->
 

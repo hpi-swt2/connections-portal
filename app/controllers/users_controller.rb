@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       @users - @contacts
     end
     if !current_user and params[:search] 
-      @users = search_record(params[:search], User. use_wildcards)
+      @users = search_record(params[:search], User, use_wildcards)
     end
   end
 
