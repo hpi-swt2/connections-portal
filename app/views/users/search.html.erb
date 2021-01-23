@@ -1,43 +1,63 @@
+<!-- Todo: move styling to css file -->
 
-      <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
-    <div class="row">
-        <div class="col">
-          <%= form_tag(search_users_path, method: "get",  style: "display: flex; width: 100%;", class: "justify-content-between") do %>
-            <%= text_field_tag :search, params[:search] ,placeholder: "Username, email, ...", style: "flex: 5; margin: 3px;", class: "form-control my-2 my-sm-0"%>
-            <%= submit_tag I18n.t('user.search.index') , style: "flex: 1; margin: 3px;", class: "btn btn-outline-secondary my-2 my-sm-0", type: "button"%>
-          <% end %>
-    </div>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th><%= I18n.t('user.attributes.username') %></th>
-                <th><%= I18n.t('user.attributes.firstname')%></th>
-                <th><%= I18n.t('user.attributes.lastname')%></th>
-                <th><%= I18n.t('user.attributes.email')%></th>
-            </tr>
-        </thead>
-        <tbody>
+<style>
+    .form-tag {
+        display: flex;
+        width: 100%;
+    }
+    .text-field {
+        flex: 5;
+        margin: 3px;
+    }
+    .submit-button {
+        flex: 1;
+        margin: 3px;
+    }
+</style>
 
-        <% @contacts.each do |user| %>
-          <tr>
-            <td><%= user.username%></td>
-            <td><%= user.firstname%></td>
-            <td><%= user.lastname%></td>
-            <td><%= user.email %></td>
-          </tr>
-        <% end %>
+<div class="row">
+    <div class="col">
+      <%= form_tag(search_users_path, method: "get", class: "form-tag justify-content-between") do %>
+        <%= text_field_tag :search, params[:search] ,placeholder: "Username, email, ...", class: "text-field form-control my-2 my-sm-0"%>
+        <%= submit_tag I18n.t('user.search.index') , class: "submit-button btn btn-outline-secondary my-2 my-sm-0", type: "button"%>
+      <% end %>
+</div>
 
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.username%></td>
-            <td><%= user.firstname%></td>
-            <td><%= user.lastname%></td>
-            <td><%= user.email %></td>
-            <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
-          </tr>
-        <% end %>
 
-        </tbody>
-    </table>
+
+
+
+</div>
+<table>
+    <thead>
+        <tr>
+            <th><%= I18n.t('user.attributes.username') %></th>
+            <th><%= I18n.t('user.attributes.firstname')%></th>
+            <th><%= I18n.t('user.attributes.lastname')%></th>
+            <th><%= I18n.t('user.attributes.email')%></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% @contacts.each do |user| %>
+      <tr>
+        <td><%= user.username%></td>
+        <td><%= user.firstname%></td>
+        <td><%= user.lastname%></td>
+        <td><%= user.email %></td>
+      </tr>
+    <% end %>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username%></td>
+        <td><%= user.firstname%></td>
+        <td><%= user.lastname%></td>
+        <td><%= user.email %></td>
+        <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+</table>
 
