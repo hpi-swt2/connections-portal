@@ -18,7 +18,7 @@
         flex-direction: column;
     }
     .stack > * + * {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
     .contact {
         display: flex;
@@ -28,11 +28,28 @@
     }
     .profile-image{
         padding: 2px;
-        flex: 1;
+        flex: 2;
+        margin-right: 8px;
+        object-fit: contain;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+    }
+    .cover {
+      object-fit: cover;
     }
     .user-info{
-        flex: 4;
+        flex: 5;
         display: block;
+    }
+    a::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
     }
 
 </style>
@@ -45,16 +62,17 @@
 
 
  <% @users.each do |user| %>
-    <div class="contact">
-        <div class="profile-image">
-             <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+    <label class="contact">
+        <%= link_to "", user_path(user) %>
+        <div class="profile-image my-2 my-sm-0 ">
+             <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
         </div>
-        <div class="user-info">
+        <div class="user-info my-2 my-sm-0">
             <h3><%= user.username%></h3>
             <div><%= "#{user.firstname} #{user.lastname}"%></div>
             <div><%= user.email %></div>
         </div>
-    </div>
+    </label>
  <% end %>
 </div>
 
