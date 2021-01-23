@@ -1,17 +1,10 @@
-<div class="jumbotron">
-    <h2><%= I18n.t('user.lists') %></h2>
 
       <%# https://getbootstrap.com/docs/5.0/layout/grid/#auto-layout-columns %>
-
-
     <div class="row">
-        <div class="col">
-          <%= form_tag(search_users_path, method: "get") do %>
-            <%= label_tag(:search, I18n.t('user.search.for') ) %>
-            <%= text_field_tag :search, params[:search] %>
-            <%= submit_tag I18n.t('user.search.index') %>
+          <%= form_tag(search_users_path, method: "get",  style: "display: flex; width: 100%") do %>
+            <%= text_field_tag :search, params[:search] , style: "flex: 5", class: "form-control mr-sm-2"%>
+            <%= submit_tag I18n.t('user.search.index') , style: "flex: 1", class: "btn btn-outline-secondary my-2 my-sm-0", type: "button"%>
           <% end %>
-        </div>
     </div>
 
     <table>
@@ -46,4 +39,4 @@
 
         </tbody>
     </table>
-</div>
+

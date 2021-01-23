@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    use_wildcards = false
+    use_wildcards = true
     @users = Set[]
     @contacts = Set[]
     if current_user and params[:search]
