@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       @user = User.find(current_user.id)
       @users = search_record(params[:search], User, use_wildcards)
       @contacts = search_record(params[:search], @user.contacts, use_wildcards)
-      @users - @contacts
+      @users = @users - @contacts
     end
     if !current_user and params[:search] 
       @users = search_record(params[:search], User, use_wildcards)
