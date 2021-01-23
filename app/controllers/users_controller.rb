@@ -48,23 +48,14 @@ class UsersController < ApplicationController
     use_wildcards = false
     @users = Set[]
     @contacts = Set[]
-    if current_user and params[:search] and use_wildcards
+    if current_user and params[:search]
       @user = User.find(current_user.id)
-      @users = search_record(params[:search], User)
-      @contacts = search_record(params[:search], @user.contacts)
+      @users = search_record(params[:search], User, use_wildcards)
+      @contacts = search_record(params[:search], @user.contacts, use_wildcards)
       @users - @contacts
     end
-    if current_user and params[:search] and !use_wildcards
-      @user = User.find(current_user.id)
-      @users = search_record(params[:search], User, false)
-      @contacts = search_record(params[:search], @user.contacts, false)
-      @users - @contacts
-    end
-    if !current_user and params[:search] and use_wildcards 
-      @users = search_record(params[:search], User)
-    end
-    if !current_user and params[:search] and !use_wildcards
-      @users = search_record(params[:search], User, false)
+    if !current_user and params[:search] 
+      @users = search_record(params[:search], User. use_wildcards)
     end
   end
 
