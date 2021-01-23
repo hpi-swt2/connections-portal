@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'home/dashboard', type: :view do
   let(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status }
-  let(:room_messages) { FactoryBot.create_list :room_message, 3, room: Room.find(Room::GLOBAL_CHAT_ID) }
+  let(:room_messages) { FactoryBot.create_list :room_message, 3, room: Room.global_chat_room }
 
   before do
     assign(:users, users)
