@@ -25,22 +25,30 @@
         border: 2px solid #D1D5DB;
         border-radius: 2px;
         padding: 5px;
+        position: relative;
     }
     .profile-image{
         padding: 2px;
-        flex: 2;
+        flex: 1;
         margin-right: 8px;
-        object-fit: contain;
+        padding-top: calc(.5 * 1.5rem);
+        padding-bottom: calc(.5 * 1.5rem);
     }
     img {
-      height: 100%;
-      width: 100%;
+        height: 75px;
+        width: 75px;
     }
+    @media screen and (max-width: 600px) {
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    } 
     .cover {
       object-fit: cover;
     }
     .user-info{
-        flex: 5;
+        flex: 4;
         display: block;
     }
     a::after {
@@ -50,6 +58,9 @@
         left: 0;
         bottom: 0;
         right: 0;
+    }
+    .email {
+         font-style: italic;
     }
 
 </style>
@@ -68,9 +79,10 @@
              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
         </div>
         <div class="user-info my-2 my-sm-0">
-            <h3><%= user.username%></h3>
+            <h5><%= user.username%></h5>
             <div><%= "#{user.firstname} #{user.lastname}"%></div>
-            <div><%= user.email %></div>
+            <div class="email"><%= user.email %></div>
+            <div>Friend</div>
         </div>
     </label>
  <% end %>
