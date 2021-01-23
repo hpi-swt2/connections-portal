@@ -8,10 +8,10 @@
 <%= form_with(model: RoomMessage.new, remote: true) do |f| %>
   <div class="input-group" id="chat-new-message">
     <%= f.text_area :message, class: 'form-control',
-                    rows: "2", placeholder: I18n.t('activity.placeholder') %>
+                    rows: "2", placeholder: I18n.t('chat.placeholder') %>
     <%= f.hidden_field :room_id, value: Room::GLOBAL_CHAT_ID %>
     <div class="input-group-append inputWithIcon">
-      <%= f.submit class: "btn btn-primary", id: "post-chat-button", value: 'Send' %>
+      <%= f.submit class: "btn btn-primary", id: "post-chat-button", value: I18n.t('chat.send') %>
       <i class="fa fa-paper-plane" aria-hidden="true"></i>
     </div>
   </div>

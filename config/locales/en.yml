@@ -92,6 +92,9 @@ en:
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'
+  chat:
+    placeholder: 'Just start typing here...'
+    send: 'Send'
   dashboard:
     user_list: 'Users'
     global_chat: 'Global Chat'
