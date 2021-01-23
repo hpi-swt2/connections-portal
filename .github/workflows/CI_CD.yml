@@ -24,7 +24,6 @@ jobs:
 
   # Label of the runner job
   CI:
-    needs: Linter
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
@@ -62,7 +61,7 @@ jobs:
       - name: Install yarn packages
         run: yarn install --check-files
 
-      - name: Setup test PostgreSQL database & run tests
+      - name: Run tests in PostgreSQL database
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -75,13 +74,14 @@ jobs:
           bundle exec rspec spec/
 
   Deployment:
-    needs: CI # assures, that the job "CI" completed successful before this job is started
+    needs: [CI, Linter] # assures that the job "CI" completed successful before this job is started
     runs-on: ubuntu-latest
 
     # The both deployment steps contain two safeguards.
     # github.event_name == 'push' assures that the pull requests, for which the CI should run too, are not deployed to Heroku
     # github.ref == 'refs/heads/<branch name>' assures that in the current step, only one of the branches is deployed. 
     #   This was made because the two different deployments (main and dev) each have their own Heroku-App.
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
 
     steps:
       - name: Checkout repository
@@ -93,7 +93,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: "connections-portal-dev" #Must be unique in Heroku
           heroku_email: "hpi.swt2+heroku@gmail.com"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev'
 
         # https://github.com/marketplace/actions/deploy-to-heroku
       - uses: akhileshns/heroku-deploy@v3.6.8
@@ -101,4 +101,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: "connections-portal-main" #Must be unique in Heroku
           heroku_email: "hpi.swt2+heroku@gmail.com"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
