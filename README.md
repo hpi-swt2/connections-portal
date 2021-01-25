@@ -32,6 +32,7 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 * `bundle config set without 'production' && bundle install` Install gem dependencies from `Gemfile`
 * `yarn install --check-files` Install JS dependencies from `package.json`
 * `rails db:migrate` Setup the database, run migrations
+* `rails db:seed` Initialize database with default values (e.g. global chat)
 * `rake devise:create_demo_user` Create a demo user (note _email & password_)
 * `rails s` Start the Rails development server (default: _localhost:3000_) and log in using the demo credentials
 * `bundle exec rspec` Run the tests (using the [RSpec](http://rspec.info/) test framework)

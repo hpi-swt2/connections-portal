@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def dashboard
     if user_signed_in?
       filter_users_status
+      @room_messages = Room.global_chat_room.room_messages
       render 'dashboard'
     else
       render 'index'
