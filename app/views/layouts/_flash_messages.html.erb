@@ -1,13 +1,16 @@
 <% flash.each do |level, log| %>
     <div class='alert alert-<%= level %>'>
-      <% if !log[:heading].nil? %>
-        <h4><%= log[:heading] %></h4>
-      <% end %>
-      <% log[:messages].each do |message| %>
-        <ul>
-          <li><%= message %></li>
-        </ul>
+      <% if log.respond_to?(:each) %>
+        <% if log[:heading].nil? %>
+          <h4><%= log[:heading] %></h4>
+        <% end %>
+        <% log[:messages].each do |message| %>
+          <ul>
+            <li><%= message %></li>
+          </ul>
+        <% end %>
+      <% else %>
+        <h4><%= log %></h4>
       <% end %>
     </div>
 <% end %>
-

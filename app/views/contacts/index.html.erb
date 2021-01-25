@@ -5,7 +5,7 @@
   <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
 
   <% @contacts.each do |contact| %>
-    <div class="card">
+    <a class="card" href=<% user_contacts_path(contact) %>>
       <div class="card-body">
         <div class="container">
           <div class="row">
@@ -30,7 +30,7 @@
           <% end %>
         </div>
       </div>
-    </div>
+    </a>
     <br>
   <%end %>
 <% end %>

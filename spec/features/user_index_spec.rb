@@ -9,7 +9,7 @@ describe 'Filter users by key', type: :feature do
     sign_in signed_in_user
   end
 
-  context 'with a user that has no contacts and contact requests send yet' do
+  context 'with a user that has no contacts and contact requests sent yet' do
     before do
       visit users_path
     end
@@ -18,8 +18,8 @@ describe 'Filter users by key', type: :feature do
       expect(page).to have_button('+', count: users.length)
     end
 
-    it 'is not possible to see myself in the users list' do
-      expect(page).not_to have_text(signed_in_user.email)
+    it 'does have a + button for myself' do
+      expect(page).not_to have_css("form[action='#{user_contact_requests_path(signed_in_user)}']")
     end
 
     it 'does have a + button for not yet requested user' do
