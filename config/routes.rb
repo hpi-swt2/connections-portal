@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: :create
+  resources :jitsi_calls, only: :create
 end

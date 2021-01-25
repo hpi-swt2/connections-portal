@@ -15,7 +15,11 @@
         <%= user.display_name %>
       </div>
       <div class="user-meeting d-flex">
-        <span><i class="fa fa-phone fa-flip-horizontal"></i></span>
+        <%= form_with model: JitsiCall.new do |f| %>
+          <%= f.hidden_field :user_id, value: user.id %>
+          <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>
