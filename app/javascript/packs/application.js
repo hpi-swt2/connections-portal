@@ -20,3 +20,9 @@ require("bootstrap")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// include jQuery in window scope to access it in views
+window.$ = window.jQuery = require('jquery');
+
+// make Rails accessible to views
+window.Rails = require("@rails/ujs");

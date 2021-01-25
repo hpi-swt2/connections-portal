@@ -8,10 +8,8 @@ function formatDate(date) {
 
 $(function () {
     $('[data-channel-subscribe="room"]').each(function (index, element) {
-        const $element = $(element),
-            room_id = $element.data('room-id'),
-            messageTemplate = $('[data-role="message-template"]');
-
+        const $element = $(element);
+        const room_id = $element.data('room-id');
         $element.animate({scrollTop: $element.prop("scrollHeight")}, 1000)
 
         consumer.subscriptions.create(
@@ -21,6 +19,9 @@ $(function () {
             },
             {
                 received: function (data) {
+                    const $element = $($('[data-channel-subscribe="room"]')[0]),
+                        messageTemplate = $('[data-role="message-template"]');
+
                     const content = messageTemplate.children().clone(true, true);
 
                     content.find('[data-role="message-author"]').text(data.display_name);

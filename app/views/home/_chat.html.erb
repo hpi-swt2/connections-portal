@@ -5,7 +5,7 @@
                message: room_message %>
   <% end %>
 </div>
-<%= form_with(model: RoomMessage.new, remote: true) do |f| %>
+<%= form_with(model: RoomMessage.new, remote: true, id: 'chat-input') do |f| %>
   <div class="input-group" id="chat-new-message">
     <%= f.text_area :message, class: 'form-control',
                     rows: "2", placeholder: I18n.t('chat.placeholder') %>
@@ -29,3 +29,17 @@
   </div>
 </div>
 
+<script>
+  document.querySelector('[data-channel-subscribe="room"]')
+    $('[data-channel-subscribe="room"]').each(function (index, element) {
+        const $element = $(element);
+        // scroll to bottom of chat
+        $element.scrollTop($element.prop("scrollHeight"))
+    });
+
+    $('#room_message_message').keypress(function (e) {
+        if ((e.which === 13 || e.keyCode === 13) && !e.shiftKey) {
+            Rails.fire(document.getElementById('chat-input'), 'submit');
+        }
+    });
+</script>
