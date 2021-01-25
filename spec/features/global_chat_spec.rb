@@ -41,6 +41,13 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     expect(page).to have_text(message.formatted_time)
   end
 
+  it 'shows the correct timestamp after reload' do
+    post_message(message)
+    message = RoomMessage.all.last
+    visit root_path
+    expect(page).to have_text(message.formatted_time)
+  end
+
   def login(user)
     visit new_user_session_path
     fill_in 'user[email]', with: user.email

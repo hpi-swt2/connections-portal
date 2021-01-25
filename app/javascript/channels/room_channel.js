@@ -1,11 +1,5 @@
 import consumer from './consumer'
 
-function formatDate(date) {
-    return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) +
-        " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
-
-}
-
 $(function () {
     $('[data-channel-subscribe="room"]').each(function (index, element) {
         const $element = $(element);
@@ -25,9 +19,9 @@ $(function () {
                     const content = messageTemplate.children().clone(true, true);
 
                     content.find('[data-role="message-author"]').text(data.display_name);
-                    content.find('[data-role="message-author"]').attr('href', `/users/${data.user_id}`);
+                    content.find('[data-role="message-author"]').attr('href', data.user_link);
                     content.find('[data-role="message-text"]').text(data.message);
-                    content.find('[data-role="message-date"]').text(formatDate(new Date(data.updated_at)));
+                    content.find('[data-role="message-date"]').text(data.send_date);
 
                     if (data.user_id === document.current_user) {
                         content.addClass('chat-item-me')
