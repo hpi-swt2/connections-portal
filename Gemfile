@@ -70,6 +70,8 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 1.43', '>= 1.43.2', require: false # https://github.com/rubocop-hq/rubocop-rspec
   # Performance optimization analysis for your projects
   gem 'rubocop-performance', '~> 1.8', '>= 1.8.1', require: false # https://github.com/rubocop-hq/rubocop-performance
+  # Generate a coverage badge
+  gem 'simplecov-small-badge', require: false # https://github.com/MarcGrimme/simplecov-small-badge
 end
 
 group :development do

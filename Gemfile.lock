@@ -186,6 +186,8 @@ GEM
     rainbow (3.0.0)
     rake (13.0.3)
     regexp_parser (1.8.2)
+    repo-small-badge (0.2.7)
+      victor (~> 0.2.8)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -248,6 +250,9 @@ GEM
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
+    simplecov-small-badge (0.2.4)
+      repo-small-badge (~> 0.2.7)
+      simplecov (~> 0.17)
     simplecov_json_formatter (0.1.2)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -266,6 +271,7 @@ GEM
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
+    victor (0.2.8)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -317,6 +323,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 4.0)
   simplecov
+  simplecov-small-badge
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
