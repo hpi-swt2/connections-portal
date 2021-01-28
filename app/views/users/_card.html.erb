@@ -1,0 +1,35 @@
+<div class="card shadow rounded-lg">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs">
+          <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+        </div>
+        <a class="col-10" href=<%= user_path(user) %>>
+          <h3 class="card-title"><%= user.name %></h3>
+          <p class="card-link"><i><%= user.email %></i></p>
+        </a>
+        <% if mode == :add %>
+          <div class="col-xs">
+            <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+            <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id %>
+          </div>
+        <% end %>
+      </div>
+      <% if mode == :overview %>
+        <div class="row">
+          <% if user.social_accounts.any? %>
+            <% user.social_accounts.each do |social_account| %>
+              <div class="col-2">
+                <a href=<%= generate_link(social_account) %>>
+                  <i class="fa <%= generate_icon(social_account) %> fa-3x" aria-hidden="true"></i>
+                </a>
+              </div>
+            <% end %>
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

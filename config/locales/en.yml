@@ -72,6 +72,7 @@ en:
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
+      send: 'Send contact request'
     edit:
       edit_profile_heading: 'Edit profile'
       profile_heading: 'Profile'

@@ -2,35 +2,11 @@
 
 <% if user_signed_in? %>
 
-  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
-
-  <% @contacts.each do |contact| %>
-    <div class="card shadow rounded-lg">
-      <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs">
-              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
-            </div>
-            <a class="col-10"  href=<%= user_path(contact)%>>
-              <h3 class="card-title"><%= contact.name %></h3>
-              <p class="card-link"><i><%= contact.email %></i></p>
-            </a>
-          </div>
-          <div class="row">
-          <% if contact.social_accounts.any? %>
-              <% contact.social_accounts.each do |social_account| %>
-                <div class="col-2">
-                  <a href=<%= generate_link(social_account) %>>
-                    <i class="fa <%= generate_icon(social_account) %> fa-3x" aria-hidden="true"></i>
-                  </a>
-                </div>
-              <% end %>
-          <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-  <%end %>
+  <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary" %></p>
+  <div>
+    <% @contacts.each do |contact| %>
+      <%= render partial: 'users/card', locals: { user: contact, mode: :overview } %>
+      <br>
+    <% end %>
 <% end %>
+</div>
