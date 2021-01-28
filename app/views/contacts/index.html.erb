@@ -10,7 +10,11 @@
         <div class="container">
           <div class="row">
             <div class="col-xs">
-              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+              <% if contact.avatar.attached? %>
+                <%= image_tag contact.avatar, height: 50, width: 50,  class: "rounded-circle" %>
+              <% else %>
+                <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+              <% end %>
             </div>
             <div class="col-10">
               <h5 class="card-title"><%= contact.name %></h5>

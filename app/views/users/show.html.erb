@@ -1,5 +1,13 @@
 <h1><%= @user.username %></h1>
 
+<div>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, height: 200, width: 200, class: "rounded-circle" %>
+  <% else %>
+    <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 200px">
+  <% end %>
+</div>
+
 <table>
   <tr>
     <td><%= I18n.t('user.attributes.firstname') %></td>

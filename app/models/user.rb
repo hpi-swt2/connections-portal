@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   # Every user can have multiple social accounts like GitHub, Telegram, ...
   has_many :social_accounts, dependent: :delete_all
+  has_one_attached :avatar
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

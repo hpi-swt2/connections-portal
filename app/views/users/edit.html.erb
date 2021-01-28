@@ -7,6 +7,10 @@
   <% end %>
 
   <p>
+    <%= form.file_field :avatar %>
+  </p>
+
+  <p>
     <%= form.label I18n.t('user.attributes.username') %>
     <%= form.text_field :username %>
   </p>
