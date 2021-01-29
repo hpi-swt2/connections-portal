@@ -18,4 +18,22 @@ RSpec.describe 'Header and Footer', driver: :selenium_headless, type: :feature, 
       expect(page).not_to have_link('My contacts')
     end
   end
+
+  describe 'notification' do
+    let(:alice) { FactoryBot.create :user }
+    let(:bob) { FactoryBot.create :user }
+
+    before do
+      alice.contact_requests << bob #bob added a contact request for alice
+      sign_in alice
+      visit notes_path
+    end
+
+    it 'shows the number of notifications in the navbar' do
+      save_and_open_page
+      element = page.find('nav.navbar')
+      expect(element).to have_text '1'
+    end
+
+  end
 end

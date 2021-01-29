@@ -1,8 +1,15 @@
 <%# https://getbootstrap.com/docs/4.5/components/navbar/ %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="navbar-brand">Connection Portal</div>
-  <form class="form-inline">
-    <i class="fa fa-bell" style="color: white; padding: 10px"></i>
-    <a href="<%= search_users_path %>"><i class="fa fa-search" style="color: white; padding: 10px"></i> </a>
-  </form>
+  <% if user_signed_in? %>
+    <form class="form-inline">
+      <% if current_user.contact_requests.any? %>
+        <i class="fa fa-bell" style="color: red; padding: 3px"></i>
+        <span class="badge badge-pill badge-danger"> <%=  current_user.contact_requests.length %> </span>
+      <% else %>
+        <i class="fa fa-bell" style="color: white; padding: 10px"></i>
+      <% end %>
+      <a href="<%= search_users_path %>"><i class="fa fa-search" style="color: white; padding: 10px"></i> </a>
+    </form>
+  <% end %>
 </nav>
