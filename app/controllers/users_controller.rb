@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   helper_method :generate_link, :supported_social_networks, :search_record
 
   def show
-    @user = User.find(params[:id])
+    if authenticate_user!
+      @user = User.find(params[:id])
+      return
+    end
+    redirect_to(new_user_session_path)
   end
 
   def edit

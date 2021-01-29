@@ -21,7 +21,8 @@ describe 'Filter users by key', type: :feature do
 
   it 'is possible to filter by username' do
     visit search_users_path(search: second_user.username[0..2])
-    expect(page).to have_text(second_user.username)
+    # It is possible to search for the user via its user name but the user name it self is not displayed.
+    expect(page).to have_text(second_user.firstname)
   end
 
   it 'is possible to filter by email' do
