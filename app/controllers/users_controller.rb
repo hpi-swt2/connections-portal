@@ -13,6 +13,12 @@ class UsersController < ApplicationController
     @social_account = @user.social_accounts.build
   end
 
+  def edit_profile
+    return unless authorize_to_update!
+
+    @user = User.find(params[:id])
+  end
+
   def update
     return unless authorize_to_update!
     # prototype for create social account form
