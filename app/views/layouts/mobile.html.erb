@@ -12,6 +12,8 @@
   <div class="container pt-0">
     <% if notice %><div class="alert alert-success notice" role="alert"><%= notice %></div><% end %>
     <% if alert %><div class="alert alert-danger" role="alert"><%= alert %></div><% end %>
+
+    <%= render 'common/popup' %>
       <%= yield %>
   </div>
 </body>
