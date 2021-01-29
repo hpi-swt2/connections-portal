@@ -1,7 +1,7 @@
 # A model to store role and state for users participating in a jitsi call
 class CallParticipant < ApplicationRecord
   VALID_STATES = %w[accepted rejected requested timeout].freeze
-  VALID_ROLES = %w[initiator participant].freeze
+  VALID_ROLES = %w[initiator guest].freeze
 
   validates :state, inclusion: VALID_STATES
   validates :role, inclusion: VALID_ROLES

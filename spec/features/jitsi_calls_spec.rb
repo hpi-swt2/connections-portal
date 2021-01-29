@@ -12,7 +12,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
   context 'when a call is created' do
     let(:call) { user1.jitsi_calls.first }
     let(:initiator) { call.call_participants.where(user: user1).first }
-    let(:participant) { call.call_participants.where(user: user2).first }
+    let(:guest) { call.call_participants.where(user: user2).first }
 
     before do
       within("#init-call-#{user2.id}") do
@@ -31,7 +31,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     end
 
     it 'the invited user has the participant role' do
-      expect(participant.role).to eq 'participant'
+      expect(guest.role).to eq 'guest'
     end
 
     it 'the state of the initiator is accepted' do
@@ -39,7 +39,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     end
 
     it 'the state of the participant is requested' do
-      expect(participant.state).to eq 'requested'
+      expect(guest.state).to eq 'requested'
     end
   end
 end
