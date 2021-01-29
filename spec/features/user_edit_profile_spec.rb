@@ -76,6 +76,26 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, type: :feature 
     expect(page).to have_text('IAmForBusiness')
   end
 
+  it 'can hide & show social account' do
+    visit edit_user_path(user)
+    find_link(
+      (I18n.t 'social_accounts.social_account_view.hide_label'),
+      href: user_social_account_path(user, social_account1.id)
+    ).click
+
+    visit user_path(user)
+    expect(page).not_to have_content(socialAccount1.id)
+
+    visit edit_user_path(user)
+    find_link(
+      (I18n.t 'social_accounts.social_account_view.show_label'),
+      href: user_social_account_path(user, social_account1.id)
+    ).click
+
+    visit user_path(user)
+    expect(page).to have_content(socialAccount1.id)
+  end
+
   it 'shows error upon addition with invalid values' do
     visit edit_user_path(user)
 
