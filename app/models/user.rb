@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :activities, dependent: :delete_all
   has_many :call_participants, dependent: :delete_all, inverse_of: :user
   has_many :jitsi_calls, through: :call_participants
+  #after_commit :add_default_avatar, on: %i[create update]
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
@@ -85,4 +86,20 @@ class User < ApplicationRecord
   def name
     "#{firstname} #{lastname}"
   end
+
+  private
+
+=begin
+  def add_default_avatar
+    unless avatar.attached?
+      avatar.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'assets', 'images', 'default_avatar.png'
+          )
+        ),filename: 'default_avatar.png', content_type: 'image/png'
+      )
+    end
+=end
+  #end
 end
