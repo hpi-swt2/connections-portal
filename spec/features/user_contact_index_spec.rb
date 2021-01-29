@@ -16,8 +16,4 @@ describe 'Browse contacts', type: :feature do
     expect(page).to have_text contact.email
     expect(page).to have_text contact.name
   end
-
-  it 'has link to social profile' do
-    expect(page).to have_link(generate_link(social_account))
-  end
 end
