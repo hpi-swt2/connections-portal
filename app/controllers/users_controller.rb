@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   helper_method :generate_link, :supported_social_networks, :search_record
 
   def show
-     @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def edit
