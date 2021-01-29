@@ -16,7 +16,9 @@ RSpec.describe JitsiCall, type: :model do
     let(:participants) { FactoryBot.create_list :user, 2 }
 
     before do
-      participants.each { |p| jitsi_call.call_participants.create(user: p, state: 'accepted', role: 'participant') }
+      participants.each do |p|
+        jitsi_call.call_participants.create(user: p, state: CallParticipant::VALID_STATES[0], role: 'participant')
+      end
     end
 
     it 'has associated users' do

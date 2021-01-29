@@ -146,7 +146,9 @@ RSpec.describe User, type: :model do
 
     before do
       user.save
-      jitsi_calls.each { |j| user.call_participants.create(jitsi_call: j, state: 'accepted', role: 'participant') }
+      jitsi_calls.each do |j|
+        user.call_participants.create(jitsi_call: j, state: CallParticipant::VALID_STATES[0], role: 'participant')
+      end
     end
 
     it 'has associated jitsi calls' do
