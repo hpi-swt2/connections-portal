@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :social_account do
     social_network { random_social_network }
     user_name { random_name }
+    hidden { random_boolean }
   end
 end
 
@@ -11,4 +12,8 @@ end
 
 def random_name
   ('a'..'z').to_a.shuffle.join
+end
+
+def random_boolean
+  [true, false].sample
 end

@@ -32,4 +32,16 @@ RSpec.describe 'SocialAccounts', driver: :selenium_headless, type: :request do
       expect(user.social_accounts.count).to eq(0)
     end
   end
+
+  describe 'PATCH /users/:user_id/social_accounts/:id' do
+    it 'hides a social account' do
+      patch update_visibility_user_social_account(user), params: { hidden: true }
+      expect(response).to redirect_to(edit_user_url(user))
+    end
+
+    it 'shows a social account' do
+      patch update_visibility_user_social_account(user), params: { hidden: false }
+      expect(response).to redirect_to(edit_user_url(user))
+    end
+  end
 end
