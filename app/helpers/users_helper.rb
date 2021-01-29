@@ -1,20 +1,25 @@
 require 'set'
 
 module UsersHelper
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Style/OptionalBooleanParameter
+
   def search_record(arguments, record, use_wildcard = true)
-    patterns = arguments.split()
+    patterns = arguments.split
     matches = Set[]
-    if !use_wildcard
+    unless use_wildcard
       query = 'firstname = ? OR lastname = ? OR username = ? OR email = ?'
-      for pattern in patterns do
-        matches.merge(record.where(query, "#{pattern}", "#{pattern}", "#{pattern}", "#{pattern}").to_set)
+      patterns.each do |pattern|
+        matches.merge(record.where(query, pattern.to_s, pattern.to_s, pattern.to_s, pattern.to_s).to_set)
       end
       return matches
     end
     query = 'firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ?'
-    for pattern in patterns do
-       matches.merge(record.where(query, "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").to_set)
+    patterns.each do |pattern|
+      matches.merge(record.where(query, "%#{pattern}%", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%").to_set)
     end
-    return matches
+    matches
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Style/OptionalBooleanParameter
 end

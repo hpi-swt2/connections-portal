@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   before_action :authorize, except: %i[show index search]
   helper_method :generate_link, :supported_social_networks, :search_record
 
-
   def show; end
 
   def edit
@@ -48,21 +47,23 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def search
     use_wildcards = true
     @users = Set[]
     @contacts = Set[]
-    if current_user and params[:search]
+    if current_user && params[:search]
       @user = User.find(current_user.id)
       @users = search_record(params[:search], User, use_wildcards)
       @contacts = search_record(params[:search], @user.contacts, use_wildcards)
-      @users = @users - @contacts
-      @users = @users - Set[@user]
+      @users -= @contacts
+      @users -= Set[@user]
     end
-    if !current_user and params[:search] 
-      @users = search_record(params[:search], User, use_wildcards)
-    end
+    @users = search_record(params[:search], User, use_wildcards) if !current_user && params[:search]
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   private
 
