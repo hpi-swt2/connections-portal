@@ -6,17 +6,19 @@ class UsersController < ApplicationController
   before_action :authorize, except: %i[show index search]
   helper_method :generate_link, :supported_social_networks, :search_record
 
-  def show
-    @user = User.find(params[:id])
-  end
+
+  def show; end
 
   def edit
+    return unless authorize_to_update!
+
     @user = User.find(params[:id])
     # prototype for create social account form
-    @social_account = @user.social_accounts.build #
+    @social_account = @user.social_accounts.build
   end
 
   def update
+    return unless authorize_to_update!
     # prototype for create social account form
     return redirect_to @user if @user.update(user_params)
 
@@ -26,13 +28,15 @@ class UsersController < ApplicationController
   end
 
   def update_status
+    return unless authorize_to_update!
+
     @user.current_status = params[:user][:current_status]
     @user.save
   end
 
   def index
-    @users = User.where.not(id: current_user.id)
-    @users_to_add = @users.reject do |user|
+    @users = User.all
+    @users_to_add = (@users - [current_user]).reject do |user|
       current_user.sent_contact_request?(user)
     end
   end
@@ -75,13 +79,23 @@ class UsersController < ApplicationController
 
   def authorize
     authenticate_user!
-    if current_user.id.to_s == params[:id]
-      @user = current_user
-    else
-      message = I18n.t 'errors.messages.authentication_failed'
-      log = { heading: nil, messages: [message] }
-      flash[:danger] = log
-      redirect_to root_path
-    end
+    return unless params.key?(:id)
+
+    redirect_to users_path, alert: I18n.t('denial.not_found') unless User.exists?(params[:id])
+    update_user
+  end
+
+  def authorize_to_update!
+    return @user if current_user.id.to_s == params[:id]
+
+    message = I18n.t 'errors.messages.authentication_failed'
+    log = { heading: nil, messages: [message] }
+    flash[:danger] = log
+    redirect_to users_path, alert: I18n.t('denial.forbidden')
+    nil
+  end
+
+  def update_user
+    @user = current_user.id.to_s == params[:id] ? current_user : User.find(params[:id])
   end
 end

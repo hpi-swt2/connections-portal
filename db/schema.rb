@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_104008) do
+ActiveRecord::Schema.define(version: 2021_01_25_133601) do
 
   create_table "activities", force: :cascade do |t|
     t.text "content"
@@ -18,6 +18,21 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "call_participants", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "jitsi_call_id", null: false
+    t.string "role"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jitsi_calls", force: :cascade do |t|
+    t.string "room_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -29,6 +44,23 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
     t.integer "creator_user_id", null: false
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "room_messages", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_room_messages_on_room_id"
+    t.index ["user_id"], name: "index_room_messages_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 
   create_table "social_accounts", force: :cascade do |t|
@@ -77,4 +109,6 @@ ActiveRecord::Schema.define(version: 2021_01_04_104008) do
   add_foreign_key "activities", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "notes", "users", column: "creator_user_id"
+  add_foreign_key "room_messages", "rooms"
+  add_foreign_key "room_messages", "users"
 end

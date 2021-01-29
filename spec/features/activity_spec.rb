@@ -18,7 +18,7 @@ RSpec.describe 'Activities', driver: :selenium_headless, type: :feature, js: tru
     expect(user.activities.map(&:content)).to include('This is an activity')
   end
 
-  it 'has an cleared text box after a successful submit' do
+  it 'has a cleared text box after a successful submit' do
     fill_in 'activity-textarea', with: 'This is an activity'
     find('#add-activity-button').click
     expect(page).to have_field('activity-textarea', text: '')

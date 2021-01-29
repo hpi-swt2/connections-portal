@@ -1,6 +1,7 @@
 class ContactRequestsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
-    # authenticate_user!
     requested_user = User.find(params[:user_id])
     requested_user.contact_requests << current_user
     requested_user.save

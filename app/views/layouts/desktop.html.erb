@@ -8,8 +8,9 @@
 </head>
 
 <body>
-<%= render "layouts/navbar" %>
   <div id="app">
+    <%= render "layouts/navbar" %>
+    <script>document.current_user = <%= user_signed_in? ? current_user.id : -1 %></script>
     <div id="content" class="container pt-3">
       <% if notice %>
         <div class="alert alert-success alert-dismissible fade show notice" role="alert">

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :room_messages, only: :create
   resources :notes
   # https://github.com/heartcombo/devise/wiki/
   devise_for :users
@@ -18,4 +19,5 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: :create
+  resources :jitsi_calls, only: :create
 end
