@@ -4,5 +4,6 @@
   <form class="form-inline">
     <i class="fa fa-bell" style="color: white; padding: 10px"></i>
     <%= link_to (fa_icon 'search'), "/search", style:  "color: white; padding: 10px"%>
+    <%= link_to (fa_icon 'sign-out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
   </form>
 </nav>

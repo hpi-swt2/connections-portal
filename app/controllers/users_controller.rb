@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   before_action :authorize, except: %i[show index search]
   helper_method :generate_link, :supported_social_networks, :search_record
 
-  def show; end
+  def show
+     @user = User.find(params[:id])
+  end
 
   def edit
     return unless authorize_to_update!

@@ -21,11 +21,21 @@
         margin-top: .5rem;
     }
     .contact {
-        display: flex;
-        border: 2px solid #E5E7EB;
         border-radius: 8px;
         padding: 5px;
+        box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    }
+    .contact-info {
+        display: flex;  
+        justify-content: center;
+        align-items: center;
         position: relative;
+    }
+    .social-account-info {
+        margin-top: .5rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;  
     }
     .profile-image{
         padding: 2px;
@@ -40,8 +50,8 @@
     }
     @media screen and (max-width: 600px) {
         img {
-            height: 100%;
-            width: 100%;
+            height: 50px;
+            width: 50px;
         }
     } 
     .cover {
@@ -50,6 +60,8 @@
     .user-info{
         flex: 4;
         display: block;
+        line-height: 50%;
+
     }
     a::after {
         content: '';
@@ -61,12 +73,17 @@
     }
     .email {
          font-style: italic;
+         font-size: small;
     }
     .add_button {
         flex: 1;
         height: 100%;
         width: 100%;
+        border-radius: 99999px;
+        background: #343B3F;
+        font-size: small;
     }
+
 </style>
 
 <div class="stack">
@@ -77,34 +94,45 @@
 
 
  <% @contacts.each do |user| %>
-    <label class="contact">
-        <%= link_to "", user_path(user) %>
-        <div class="profile-image my-2 my-sm-0 ">
-             <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
+    <div class=contact>
+        <label class="contact-info">
+            <%= link_to "", user_path(user) %>
+            <div class="profile-image my-2 my-sm-0 ">
+                 <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
+            </div>
+            <div class="user-info my-2 my-sm-0">
+                <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
+                <div class="email"><%= user.email %></div>
+            </div>
+        </label>
+        <div class="social-account-info">
+            <% user.social_accounts.each do |social_account| %>
+                <label class="contact-info">
+                    <a href=<%= generate_link(social_account) %>>
+                        <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+                    </a>
+                </label>
+            <% end %>
         </div>
-        <div class="user-info my-2 my-sm-0">
-            <h5><%= user.username%></h5>
-            <div><%= "#{user.firstname} #{user.lastname}"%></div>
-            <div class="email"><%= user.email %></div>
-            <div>Friend</div>
-        </div>
-    </label>
+    </div>
  <% end %>
 
 <% @users.each do |user| %>
-    <label class="contact">
+<div class=contact>
+    <label class="contact-info">
         <div class="profile-image my-2 my-sm-0 ">
              <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
         </div>
         <div class="user-info my-2 my-sm-0">
-            <h5><%= user.username%></h5>
-            <div><%= "#{user.firstname} #{user.lastname}"%></div>
+            <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
             <div class="email"><%= user.email %></div>
         </div>
         <% if @user %>
             <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
         <% end %>
     </label>
+    </div>
 <% end %>
+
 </div>
 
