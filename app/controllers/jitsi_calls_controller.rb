@@ -2,11 +2,11 @@ class JitsiCallsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    room_name = SecureRandom.uuid
-    @jitsi_call = JitsiCall.new(room_name: room_name)
+    @jitsi_call = JitsiCall.new(room_name: SecureRandom.uuid)
     if @jitsi_call.save && User.exists?(call_params[:participant_id])
       assign_participants
-    else redirect_to root_path, alert: I18n.t('denial.resource_creation', resource: JitsiCall)
+    else
+      redirect_to root_path, alert: I18n.t('denial.resource_creation', resource: JitsiCall)
     end
   end
 

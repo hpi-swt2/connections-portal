@@ -20,7 +20,7 @@ RSpec.describe 'Jitsi Call', type: :request do
 
     context 'without logging in' do
       it 'redirects to login page' do
-        post jitsi_calls_path, params: { jitsi_call: { participant_id: 0 } }
+        post jitsi_calls_path, params: { jitsi_call: { participant_id: participant.id } }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
