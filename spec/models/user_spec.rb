@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.build :user }
-  let(:contact) { FactoryBot.create :user }
-  let(:request) { FactoryBot.create :user }
   let(:user_with_social_accounts) { FactoryBot.create :user }
 
   it 'is creatable using a factory' do
@@ -46,16 +44,6 @@ RSpec.describe User, type: :model do
     expect(user.current_status).to eq(described_class.status_available)
   end
 
-  it 'has an empty contacts list' do
-    expect(user.contacts).to be_empty
-  end
-
-  it 'has a contact after adding one' do
-    contact = FactoryBot.build(:user)
-    user.contacts << contact
-    expect(user.contacts).to include(contact)
-  end
-
   it 'has no relationship to social accounts' do
     user_with_no_social_accounts = FactoryBot.build(:user)
     expect(user_with_no_social_accounts.social_accounts).to be_empty
@@ -69,7 +57,24 @@ RSpec.describe User, type: :model do
     expect(user_with_social_accounts.social_accounts[1].social_network).to eq('Telegram')
   end
 
+  describe 'contacts' do
+    let(:contact) { FactoryBot.create :user }
+
+    it 'has an empty contacts list' do
+      expect(user.contacts).to be_empty
+    end
+
+    it 'has a contact after adding one' do
+      contact = FactoryBot.build(:user)
+      user.contacts << contact
+      expect(user.contacts).to include(contact)
+    end
+  end
+
   describe 'contact requests' do
+    let(:contact) { FactoryBot.create :user }
+    let(:request) { FactoryBot.create :user }
+
     it 'adds user to contact request list of other user' do
       contact.contact_requests << user
       expect(contact.contact_requests).to include(user)
@@ -102,7 +107,6 @@ RSpec.describe User, type: :model do
       expect(user.sent_contact_request?(contact)).to be true
     end
   end
-  # rubocop:disable RSpec/MultipleMemoizedHelpers
 
   describe 'status scope' do
     let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
@@ -114,8 +118,6 @@ RSpec.describe User, type: :model do
       expect(users).not_to include(user2)
     end
   end
-
-  # rubocop:enable RSpec/MultipleMemoizedHelpers
 
   describe 'display name' do
     it 'contains the first and last name if present' do
@@ -136,6 +138,33 @@ RSpec.describe User, type: :model do
     it 'contains the username if neither first nor lastname are present' do
       user = FactoryBot.build(:user, firstname: '', lastname: '', username: 'hasso01')
       expect(user.display_name).to eq('hasso01')
+    end
+  end
+
+  context 'with jitsi calls' do
+    let(:jitsi_calls) { FactoryBot.create_list :jitsi_call, 2 }
+
+    before do
+      user.save
+      jitsi_calls.each do |call|
+        user.call_participants.create(
+          jitsi_call: call,
+          state: CallParticipant::VALID_STATES[0],
+          role: CallParticipant::VALID_ROLES[0]
+        )
+      end
+    end
+
+    it 'has associated jitsi calls' do
+      expect(user.jitsi_calls).to include(*jitsi_calls)
+    end
+
+    it 'has call participants' do
+      expect(user.call_participants.map(&:jitsi_call_id)).to include(*jitsi_calls.map(&:id))
+    end
+
+    it 'destroys all participants when destroyed' do
+      expect { user.destroy }.to change(CallParticipant, :count).from(jitsi_calls.size).to(0)
     end
   end
 end

@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(version: 2021_01_25_133601) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
+  create_table "call_participants", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "jitsi_call_id", null: false
+    t.string "role"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jitsi_calls", force: :cascade do |t|
+    t.string "room_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "content"
