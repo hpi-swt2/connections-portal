@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'List users', type: :request do
-  let(:user1) { FactoryBot.create :user }
-  let(:user2) { FactoryBot.create :user }
-  let(:user3) { FactoryBot.create :user }
+  let(:user) { FactoryBot.create :user }
 
   before { sign_in user }
 
