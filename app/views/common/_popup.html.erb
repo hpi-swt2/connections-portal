@@ -8,52 +8,63 @@
   </div>
 </div>
 <script>
-
-    function generatePopup(text, icon, buttons = [], timeout = 5000) {
+    /**
+     * @function generatePopup
+     * @param {String} text Text to be shown in the popup, e.g. "Waiting for response"
+     * @param {String} icon A font-awesome icon tag, e.g. 'fa-phone'
+     * @param {Array} buttons Array of buttons to be rendered, that are given in the form of objects with the properties:
+     *     <br>
+     *     - `label` - What text is on the button<br>
+     *     - `action` - A function that is executed on click <br>
+     *     - `hideAfterClick` - Determines if the popup should be hidden on click, default value is true
+     * @param {Number} timeout milliseconds after which the popup disappears, a value of -1 means no fade out (default)
+     * @example
+     * generatePopup("A text", "fa-phone", [{"label": "Accept", "action":() => alert('Have fun!')}], 1337)
+     */
+    function generatePopup(text, icon, buttons = [], timeout = -1) {
         const $popup = $(".popup");
         $popup.fadeIn("slow");
         $(".popup-text").text(text);
         $(".popup-icon").addClass(icon);
-        /*
-         * Buttons are given in the form of objects with the properties
-         * label: What's on the button
-         * action: A function that is executed on click
-         * hideAfterClick: Determines if the popup should be hidden on click, default value is true
-         */
 
+        $(".popup-button-row").text("");
         buttons.forEach(buttonSpec => {
             let $buttonContainer = $("<div class='col'></div>").appendTo(".popup-button-row");
             let $button = $(document.createElement("button"));
             $button.addClass("btn btn-outline-light btn-sm");
             $button.click(() => {
-                if(!("hideAfterClick" in buttonSpec) || buttonSpec.hideAfterClick){
-                    $popup.hide();
+                if (!("hideAfterClick" in buttonSpec) || buttonSpec.hideAfterClick) {
+                    hidePopup();
                 }
                 (buttonSpec.action)();
             });
             $button.text(buttonSpec.label);
             $button.appendTo($buttonContainer);
         });
-        $popup.delay(timeout).fadeOut();
+        if (timeout !== -1) {
+            $popup.delay(timeout).fadeOut();
+        }
     }
 
-    $('document').ready(() => {
+    function hidePopup() {
+        $(".popup").stop().fadeOut();
+    }
+
+    function popupExample() {
         generatePopup(
             "You have been invited to a call by Alfred Nobel",
-            "fa-phone", [
+            "fa-phone",
+            [
                 {
                     "label": "Accept",
-                    "action": ()=> alert('Have fun!')
+                    "action": () => alert('Have fun!')
                 },
                 {
-                    "label":"Deny",
-                    "action" : ()=> alert("Maybe nex"),
+                    "label": "Deny",
+                    "action": () => alert("Maybe next time ¯\\_(ツ)_/¯"),
                     "hideAfterClick": false
                 }
-                ],
-            324532);
-
-    });
-
-
+            ],
+            30000);
+    }
 </script>
