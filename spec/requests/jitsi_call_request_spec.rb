@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Jitsi Call', type: :request do
   describe 'POST' do
-    context 'when logged in' do
-      let(:participant) { FactoryBot.create(:user) }
+    let(:participant) { FactoryBot.create(:user) }
 
+    context 'when logged in' do
       before { sign_in FactoryBot.create(:user) }
 
       it 'creates a new call' do
