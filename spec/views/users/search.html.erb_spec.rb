@@ -2,15 +2,23 @@ require 'rails_helper'
 
 RSpec.describe 'users/search', type: :view do
   let(:users) { FactoryBot.create_list(:user, 3) }
+  let(:contacts) { FactoryBot.create_list(:user, 3) }
+  let(:user1) { FactoryBot.create :user }
 
   before do
+    assign(:contacts, contacts)
     assign(:users, users)
-    assign(:users_to_add, users)
-    sign_in users.first
+    sign_in user1
     render
   end
 
-  it 'renders a list of users before searching' do
+  it 'renders a list of contacts' do
+    contacts.each do |contact|
+      expect(rendered).to match contact.email
+    end
+  end
+
+  it 'renders a list of users' do
     users.each do |user|
       expect(rendered).to match user.email
     end

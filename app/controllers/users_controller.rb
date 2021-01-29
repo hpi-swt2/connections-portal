@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if !current_user
+    unless current_user
       redirect_to(new_user_session_path)
       return
     end
