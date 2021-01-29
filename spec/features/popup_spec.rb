@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Popup', type: :feature, driver: :selenium_headless, js: true do
-
   let(:user) { FactoryBot.create :user }
 
   before do
@@ -67,5 +66,4 @@ RSpec.describe 'Popup', type: :feature, driver: :selenium_headless, js: true do
     sleep(0.5) # Fade out takes 400ms
     expect(page).not_to have_css('.popup')
   end
-
 end
