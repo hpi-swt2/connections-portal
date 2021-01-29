@@ -12,6 +12,7 @@
 # ignore local ide settings
 /.vagrant/
 /.idea/
+ubuntu-bionic-18.04-cloudimg-console.log
 
 # Used by dotenv library to load environment variables.
 # .env

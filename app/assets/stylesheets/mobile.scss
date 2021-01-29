@@ -27,6 +27,7 @@ $primary-active: #ef8d47;
 $primary-hover: #cc5908;
 $danger: #c60505;
 $success: #00911f;
+$content_size: calc(100% - 48px);
 // $secondary: #dd6108;
 // $success: #dd6108;
 // $info: #dd6108;
@@ -43,5 +44,17 @@ $success: #00911f;
 // app/assets/stylesheets/notes.scss
 @import 'notes';
 // app/assets/stylesheets/home.scss
+html, body {
+  position:relative;
+  height: $content_size; /* Subtract the height of the navbar, change if navbar has new design */
+}
 
 //= require_tree
+
+.container {
+  max-width: unset;
+  height: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
