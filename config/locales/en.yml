@@ -69,6 +69,7 @@ en:
     search:
       index: 'Search'
       for: 'Search for:'
+      place_holder: 'Username, email, ...'
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
