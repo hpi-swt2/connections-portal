@@ -50,6 +50,8 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5' # https://github.com/bokmann/fo
 gem 'jquery-rails', '~> 4.4' # https://github.com/rails/jquery-rails
 # State of the art fixtures
 gem 'factory_bot_rails', '~> 6.1' # https://github.com/thoughtbot/factory_bot_rails
+# to get the active link for footer
+gem 'active_link_to'
 #
 # Gems that depend on the build kind (development/test/production)
 #
