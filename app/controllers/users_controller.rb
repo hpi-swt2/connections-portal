@@ -40,6 +40,10 @@ class UsersController < ApplicationController
   end
 
   def index
+    if !current_user
+      redirect_to(new_user_session_path)
+      return
+    end
     @users = User.all
     @users_to_add = (@users - [current_user]).reject do |user|
       current_user.sent_contact_request?(user)
