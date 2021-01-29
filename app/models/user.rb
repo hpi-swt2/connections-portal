@@ -47,6 +47,7 @@ class User < ApplicationRecord
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
+  validates :avatar, presence: true, blob: { content_type: :image, size_range: 1..5.megabytes }
 
   after_initialize :init
 
