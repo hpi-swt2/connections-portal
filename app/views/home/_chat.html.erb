@@ -1,92 +1,45 @@
 <h1 class="center-heading"><%= I18n.t('dashboard.global_chat') %></h1>
-<div id="chat-messages" class="scroll-list scroll-styled">
-  <div class="chat-item d-flex flex-row">
-    <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
-    <div class="chat-content">
-      <a href="#" class="chat-author">Sam Kuran</a>
-      <div class="text-sm">
-        For what reason would it be advisable for me to think about business content?
-      </div>
-      <div class="chat-date text-sm d-md-block">
-        24.12.20 13:37
-      </div>
+<div id="chat-messages" class="scroll-list scroll-styled" data-channel-subscribe="room" data-room-id="<%= Room::GLOBAL_CHAT_ID %>">
+  <% @room_messages.each do |room_message| %>
+    <%= render 'room_messages/message',
+               message: room_message %>
+  <% end %>
+</div>
+<%= form_with(model: RoomMessage.new, remote: true, id: 'chat-input') do |f| %>
+  <div class="input-group" id="chat-new-message">
+    <%= f.text_area :message, class: 'form-control',
+                    rows: "2", placeholder: I18n.t('chat.placeholder') %>
+    <%= f.hidden_field :room_id, value: Room::GLOBAL_CHAT_ID %>
+    <div class="input-group-append inputWithIcon">
+      <%= f.submit class: "btn btn-primary", id: "post-chat-button", value: I18n.t('chat.send'), data: { disable_with: I18n.t('chat.send') } %>
     </div>
   </div>
+<% end %>
 
-  <div class="chat-item chat-item-me d-flex flex-row">
-    <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
-    <div class="chat-content">
-      <a href="#" class="chat-author">Sam Kuran</a>
-      <div class="text-sm">
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-      </div>
-      <div class="chat-date text-sm d-md-block">
-        24.12.20 13:37
-      </div>
-    </div>
-  </div>
+<div class="d-none" data-role="message-template">
   <div class="chat-item d-flex flex-row">
     <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
     <div class="chat-content">
-      <a href="#" class="chat-author">Sam Kuran</a>
-      <div class="text-sm">
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
+      <a href="#" class="chat-author" data-role="message-author"></a>
+      <div class="text-sm" data-role="message-text">
       </div>
-      <div class="chat-date text-sm d-md-block">
-        24.12.20 13:37
-      </div>
-    </div>
-  </div>
-  <div class="chat-item d-flex flex-row">
-    <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
-    <div class="chat-content">
-      <a href="#" class="chat-author">Sam Kuran</a>
-      <div class="text-sm">
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-      </div>
-      <div class="chat-date text-sm d-md-block">
-        24.12.20 13:37
-      </div>
-    </div>
-  </div>
-  <div class="chat-item d-flex flex-row">
-    <div class="avatar-container d-flex align-items-end"><a href="#"><span class="w-48 avatar"><i class="fa fa-user"></i></span></a></div>
-    <div class="chat-content">
-      <a href="#" class="chat-author">Sam Kuran</a>
-      <div class="text-sm">
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-        For what reason would it be advisable for me to think about business content?
-      </div>
-      <div class="chat-date text-sm d-md-block">
-        24.12.20 13:37
+      <div class="chat-date text-sm d-md-block" data-role="message-date">
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.querySelector('[data-channel-subscribe="room"]')
+    $('[data-channel-subscribe="room"]').each(function (index, element) {
+        const $element = $(element);
+        // scroll to bottom of chat
+        $element.scrollTop($element.prop("scrollHeight"))
+    });
+
+    $('#room_message_message').keypress(function (e) {
+        if ((e.which === 13 || e.keyCode === 13) && !e.shiftKey) {
+            Rails.fire(document.getElementById('chat-input'), 'submit');
+        }
+    });
+</script>
