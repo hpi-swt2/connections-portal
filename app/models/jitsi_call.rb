@@ -12,10 +12,10 @@ class JitsiCall < ApplicationRecord
   end
 
   def initiator
-    meeting_invitations.find_by(role: MeetingInvitation.role_initiator)
+    meeting_invitations.find_by(role: MeetingInvitation.role_initiator).user
   end
 
   def guests
-    meeting_invitations.where(role: MeetingInvitation.role_guest)
+    meeting_invitations.where(role: MeetingInvitation.role_guest).map(&:user)
   end
 end

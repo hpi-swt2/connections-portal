@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe CallParticipant, type: :model do
-  let(:participant) { FactoryBot.build :call_participant }
+RSpec.describe MeetingInvitation, type: :model do
+  let(:invitation) { FactoryBot.build :meeting_invitation }
 
   it 'is creatable using a factory' do
-    expect(participant).to be_valid
+    expect(invitation).to be_valid
   end
 
   it 'is invalid with an unknown state' do
-    participant.state = 'test'
-    expect(participant).not_to be_valid
+    invitation.state = 'test'
+    expect(invitation).not_to be_valid
   end
 
   it 'is invalid with an unknown role' do
-    participant.role = 'test'
-    expect(participant).not_to be_valid
+    invitation.role = 'test'
+    expect(invitation).not_to be_valid
   end
 end

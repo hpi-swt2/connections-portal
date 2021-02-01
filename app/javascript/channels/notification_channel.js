@@ -15,7 +15,7 @@ consumer.subscriptions.create("NotificationChannel", {
             data.popup_text,
             "fa-external-link",
             [],
-            3000
+            5000
         )
         window.open(data.url, '_blank');
     },

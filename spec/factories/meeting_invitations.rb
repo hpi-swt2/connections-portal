@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :call_participant do
-    state { CallParticipant::VALID_STATES.first }
-    role { CallParticipant::VALID_ROLES.first }
+  factory :meeting_invitation do
+    state { MeetingInvitation::VALID_STATES.first }
+    role { MeetingInvitation::VALID_ROLES.first }
     association :jitsi_call
     association :user
   end

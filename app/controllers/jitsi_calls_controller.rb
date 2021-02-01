@@ -4,21 +4,21 @@ class JitsiCallsController < ApplicationController
   def create
     @jitsi_call = JitsiCall.new(room_name: SecureRandom.uuid)
 
-    unless @jitsi_call.save && User.exists?(call_params[:guest_id])
+    if @jitsi_call.save && User.exists?(call_params[:guest_id])
+      assign_participants
+      notify_participants
+      notify_initiator
+    else
       redirect_to root_path, alert: I18n.t('denial.resource_creation', resource: JitsiCall)
     end
-
-    assign_participants
-    notify_participants
-    notify_initiator
   end
 
   def accept
     return unless change_call_state MeetingInvitation.state_accepted
 
+    call = JitsiCall.find(params[:id])
     data = { action: :start_call, url: call.url, popup_text: I18n.t('call.starting') }
 
-    call = JitsiCall.find(params[:id])
     send_notification(current_user, **data)
 
     # only open meeting for initiator if the current user was the first other user to accept the meeting
@@ -44,12 +44,12 @@ class JitsiCallsController < ApplicationController
                                            user: current_user)
     @jitsi_call.meeting_invitations.create(state: MeetingInvitation.state_requested,
                                            role: MeetingInvitation.role_guest,
-                                           user: User.find(call_params[:participant_id]))
+                                           user: User.find(call_params[:guest_id]))
     @jitsi_call.reload
   end
 
   def call_params
-    params.require(:jitsi_call).permit(:participant_id)
+    params.require(:jitsi_call).permit(:guest_id)
   end
 
   private
@@ -62,20 +62,20 @@ class JitsiCallsController < ApplicationController
   def notify_participants
     @jitsi_call.guests.each do |guest|
       send_notification(
-        guest.user,
+        guest,
         action: :invited_to_call,
         accept_text: I18n.t('call.accept'),
         accept_url: accept_jitsi_call_path(@jitsi_call),
         reject_text: I18n.t('call.reject'),
         reject_url: reject_jitsi_call_path(@jitsi_call),
-        popup_text: I18n.t('call.notification_incoming_call', initiator: jitsi_call.initiator.user.display_name)
+        popup_text: I18n.t('call.notification_incoming_call', initiator: @jitsi_call.initiator.display_name)
       )
     end
   end
 
   def notify_initiator
     send_notification(
-      @jitsi_call.initiator.user,
+      @jitsi_call.initiator,
       action: :wait_for_call_guests,
       popup_text: I18n.t('call.waiting'),
       okay: I18n.t('call.ok_waiting')
