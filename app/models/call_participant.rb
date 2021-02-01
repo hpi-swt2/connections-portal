@@ -15,9 +15,9 @@ class MeetingInvitation < ApplicationRecord
     end
   end
 
-  VALID_ROLES.each do |state|
-    define_singleton_method :"state_#{state}" do
-      state
+  VALID_ROLES.each do |role|
+    define_singleton_method :"role_#{role}" do
+      role
     end
   end
 end
