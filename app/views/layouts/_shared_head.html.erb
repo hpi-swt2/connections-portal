@@ -1,3 +1,4 @@
-<title>Connections Portal</title>
+<title><%= I18n.t('index.portal_name') %></title>
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
+<script>document.current_user = <%= user_signed_in? ? current_user.id : -1 %></script>
