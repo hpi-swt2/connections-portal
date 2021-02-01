@@ -20,23 +20,6 @@ consumer.subscriptions.create("NotificationChannel", {
         window.open(data.url, '_blank');
     },
 
-    // The requested call got rejected. Let's stop waiting
-    call_was_rejected(data) {
-        console.log("rejected a call")
-        generatePopup(
-            data.popup_text,
-            "fa-times",
-            [
-                {
-                    "label": data.ok_rejected,
-                    "action": () => {},
-                    "hideAfterClick": true
-                }
-            ],
-            10000
-        )
-    },
-
     // A call is incoming. Let's display it...
     invited_to_call(data) {
         console.log("answer call?", data)
@@ -64,7 +47,21 @@ consumer.subscriptions.create("NotificationChannel", {
             "fa-spinner",
             [
                 {
-                    "label": data.okay,
+                  "label": data.abort_text,
+                  "action": () => $.ajax({ type: "PATCH", url: data.abort_url })
+                }
+            ]
+        )
+    },
+
+    // A simple message that displays some text in a popup
+    simple_message(data) {
+        generatePopup(
+            data.popup_text,
+            "fa-info",
+            [
+                {
+                    "label": data.dismiss,
                     "action": () => {},
                     "hideAfterClick": true
                 }

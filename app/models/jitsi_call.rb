@@ -18,4 +18,8 @@ class JitsiCall < ApplicationRecord
   def guests
     meeting_invitations.where(role: MeetingInvitation.role_guest).map(&:user)
   end
+
+  def invitation(user)
+    meeting_invitations.find_by(user: user)
+  end
 end

@@ -2,9 +2,18 @@ class JitsiCallsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @jitsi_call = JitsiCall.new(room_name: SecureRandom.uuid)
+    unless User.find(call_params[:guest_id])&.current_status == User.filter_status
+      send_notification(
+        current_user,
+        action: :simple_message,
+        popup_text: I18n.t('call.creation_fail'),
+        dismiss: I18n.t('confirmation.dismiss')
+      )
+      return
+    end
 
-    if @jitsi_call.save && User.exists?(call_params[:guest_id])
+    @jitsi_call = JitsiCall.new(room_name: SecureRandom.uuid)
+    if @jitsi_call.save
       assign_participants
       notify_participants
       notify_initiator
@@ -14,28 +23,46 @@ class JitsiCallsController < ApplicationController
   end
 
   def accept
-    return unless change_call_state MeetingInvitation.state_accepted
-
     call = JitsiCall.find(params[:id])
+    return unless call.invitation(current_user).state == MeetingInvitation.state_requested
+
+    change_call_state MeetingInvitation.state_accepted
+
     data = { action: :start_call, url: call.url, popup_text: I18n.t('call.starting') }
-
     send_notification(current_user, **data)
-
-    # only open meeting for initiator if the current user was the first other user to accept the meeting
-    send_notification(call.initiator, **data) if
-      call.meeting_invitations.where(state: MeetingInvitation.state_accepted).count == 2
+    send_notification(call.initiator, **data)
   end
 
   def reject
-    return unless change_call_state MeetingInvitation.state_rejected
-
     call = JitsiCall.find(params[:id])
+    return unless call.invitation(current_user).state == MeetingInvitation.state_requested
+
+    change_call_state MeetingInvitation.state_rejected
+
     send_notification(
       call.initiator,
-      action: :call_was_rejected,
-      popup_text: I18n.t('call.rejected'),
-      ok_rejected: I18n.t('call.ok_rejected')
+      action: :simple_message,
+      popup_text: I18n.t('call.rejected', guest: current_user.display_name),
+      dismiss: I18n.t('confirmation.dismiss')
     )
+  end
+
+  # The initiator cancels a outgoing call
+  def abort
+    call = JitsiCall.find(params[:id])
+    unless call.initiator == current_user && (call.invitation(current_user).state == MeetingInvitation.state_accepted)
+      return
+    end
+    change_call_state MeetingInvitation.state_rejected
+
+    call.guests.each do |guest|
+      send_notification(
+        guest,
+        action: :simple_message,
+        popup_text: I18n.t('call.aborted', initiator: current_user.display_name),
+        dismiss: I18n.t('confirmation.dismiss')
+      )
+    end
   end
 
   def assign_participants
@@ -55,8 +82,7 @@ class JitsiCallsController < ApplicationController
   private
 
   def change_call_state(new_state)
-    invitation = current_user.meeting_invitations.find_by(jitsi_call_id: params[:id])
-    invitation.state = new_state if invitation&.state == MeetingInvitation.state_requested
+    JitsiCall.find(params[:id]).invitation(current_user).state = new_state
   end
 
   def notify_participants
@@ -78,7 +104,8 @@ class JitsiCallsController < ApplicationController
       @jitsi_call.initiator,
       action: :wait_for_call_guests,
       popup_text: I18n.t('call.waiting'),
-      okay: I18n.t('call.ok_waiting')
+      abort_url: abort_jitsi_call_path(@jitsi_call),
+      abort_text: I18n.t('call.abort')
     )
   end
 end
