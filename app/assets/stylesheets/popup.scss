@@ -1,0 +1,45 @@
+$blue: #0e4da4;
+
+.popup {
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  border-radius: .75rem;
+  background-color: $blue;
+  color: white;
+  min-width: 0;
+  word-wrap: break-word;
+  z-index: 5;
+}
+
+.popup-icon-container {
+  margin: auto 10px auto auto;
+}
+
+.popup-icon {
+  padding: 5px;
+  font-size: 2.3em;
+  align-items: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+}
+
+.popup-content {
+  padding: 10px;
+}
+
+@media (min-width: 992px) {
+  .popup {
+    width: 30%;
+    min-width: 300px;
+    max-width: 500px;
+    left: auto;
+    bottom: 20px;
+    right: 20px;
+  }
+}
