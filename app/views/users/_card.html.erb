@@ -6,19 +6,17 @@
           <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
         </div>
         <a class="col-8" href=<%= user_path(user) %>>
-          <h5 class="card-title"><%= user.name %></h5>
+          <h5 class="card-title"><%= user.display_name %></h5>
           <small class="card-link"><i><%= user.email %></i></small>
         </a>
         <% if mode == :add %>
           <div class="col-1">
-            <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
             <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
           </div>
         <% end %>
       </div>
       <% if mode == :overview %>
         <div class="row top-buffer">
-          <% if user.social_accounts.any? %>
             <% user.social_accounts.each do |social_account| %>
               <div class="col-3">
                 <a href=<%= generate_link(social_account) %>>
@@ -26,8 +24,6 @@
                 </a>
               </div>
             <% end %>
-          <% end %>
-
         </div>
       <% end %>
     </div>
