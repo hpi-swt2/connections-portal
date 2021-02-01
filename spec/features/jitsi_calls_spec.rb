@@ -11,8 +11,8 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
 
   context 'when a call is created' do
     let(:call) { user1.jitsi_calls.first }
-    let(:initiator) { call.call_participants.where(user: user1).first }
-    let(:guest) { call.call_participants.where(user: user2).first }
+    let(:initiator_invitation) { call.meeting_invitations.find_by(user: user1) }
+    let(:guest_invitation) { call.meeting_invitations.find_by(user: user2) }
 
     before do
       within("#init-call-#{user2.id}") do
@@ -20,26 +20,26 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
       end
     end
 
-    it 'has the correct participants' do
-      expect(call.call_participants.map(&:user_id)).to include(user1.id)
-      expect(call.call_participants.map(&:user_id)).to include(user2.id)
-      expect(call.call_participants.count).to eq 2
+    it 'has the correct invitations' do
+      expect(call.meeting_invitations.map(&:user_id)).to include(user1.id)
+      expect(call.meeting_invitations.map(&:user_id)).to include(user2.id)
+      expect(call.meeting_invitations.count).to eq 2
     end
 
     it 'the initiator has the initiator role' do
-      expect(initiator.role).to eq 'initiator'
+      expect(initiator_invitation.role).to eq MeetingInvitation.role_initiator
     end
 
     it 'the invited user has the participant role' do
-      expect(guest.role).to eq 'guest'
+      expect(guest_invitation.role).to eq MeetingInvitation.role_guest
     end
 
     it 'the state of the initiator is accepted' do
-      expect(initiator.state).to eq 'accepted'
+      expect(initiator_invitation.state).to eq MeetingInvitation.state_accepted
     end
 
     it 'the state of the participant is requested' do
-      expect(guest.state).to eq 'requested'
+      expect(guest_invitation.state).to eq MeetingInvitation.state_requested
     end
   end
 end

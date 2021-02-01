@@ -2,8 +2,8 @@
 class JitsiCall < ApplicationRecord
   validates :room_name, presence: true
 
-  has_many :call_participants, dependent: :delete_all, inverse_of: :jitsi_call
-  has_many :users, through: :call_participants
+  has_many :meeting_invitations, dependent: :delete_all, inverse_of: :jitsi_call
+  has_many :users, through: :meeting_invitations
 
   BASE_URL = 'https://jitsi.giz.berlin'.freeze
 
@@ -12,10 +12,10 @@ class JitsiCall < ApplicationRecord
   end
 
   def initiator
-    call_participants.find_by(role: 'initiator')
+    meeting_invitations.find_by(role: MeetingInvitation.role_initiator)
   end
 
   def guests
-    call_participants.where(role: 'guest')
+    meeting_invitations.where(role: MeetingInvitation.role_guest)
   end
 end

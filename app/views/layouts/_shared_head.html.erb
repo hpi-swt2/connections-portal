@@ -1,4 +1,6 @@
 <title>Connections Portal</title>
-<meta data-channel-subscribe="notification" data-notification-id="<%= current_user.id %>"/>
+<% if current_user %>
+  <meta data-channel-subscribe="notification" data-notification-id="<%= current_user.id %>"/>
+<% end %>
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>

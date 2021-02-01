@@ -95,6 +95,15 @@ en:
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'
+  call:
+    accept: 'Accept'
+    reject: 'Deny'
+    notification_incoming_call: 'You have been invited to a call by %{initiator}'
+    waiting: 'Please wait for your guests to accept your invitation'
+    starting: 'The call is starting now. You should get redirected'
+    rejected: 'Your call was rejected'
+    ok_waiting: 'Dismiss'
+    ok_rejected: 'Dismiss'
   chat:
     placeholder: 'Just start typing here...'
     send: 'Send'

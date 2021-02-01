@@ -10,32 +10,65 @@ consumer.subscriptions.create("NotificationChannel", {
 
     // The call gets accepted. Lets open Jitsi in a new Tab
     start_call(data) {
-        console.log("accepted a call", data.url)
+        console.log("accepted a call", data.url);
+        generatePopup(
+            data.popup_text,
+            "fa-external-link",
+            [],
+            3000
+        )
         window.open(data.url, '_blank');
     },
 
     // The requested call got rejected. Let's stop waiting
-    reject_call(data) {
+    call_was_rejected(data) {
         console.log("rejected a call")
-        // ToDo: STop waiting/displaying for the opened invite
+        generatePopup(
+            data.popup_text,
+            "fa-times",
+            [
+                {
+                    "label": data.ok_rejected,
+                    "action": () => {},
+                    "hideAfterClick": true
+                }
+            ],
+            10000
+        )
     },
 
     // A call is incoming. Let's display it...
-    request_call(data) {
+    invited_to_call(data) {
         console.log("answer call?", data)
-        const confirmation = confirm("You got a call. Would you like to accept?")
-        if (confirmation) {
-            alert("See console");
-        }
-
-        //         accept_url: accept_jitsi_call_path(@jitsi_call),
-        //         reject_url: reject_jitsi_call_path(@jitsi_call),
-        //         initiator: @jitsi_call.initiator.user.display_name
+        generatePopup(
+            data.popup_text,
+            "fa-phone",
+            [
+                {
+                    "label": data.accept_text,
+                    "action": () => $.ajax({ type: "PATCH", url: data.accept_url })
+                },
+                {
+                    "label": data.reject_text,
+                    "action": () => $.ajax({ type: "PATCH", url: data.reject_url })
+                }
+            ]
+        )
     },
 
     // You requested a call. Let's start waiting
     wait_for_call_guests(data) {
         console.log("waiting for call guests")
-        // ToDo: Display waiting Popup
+        generatePopup(
+            data.popup_text,
+            "fa-spinner",
+            [
+                {
+                    "label": data.okay,
+                    "action": () => {},
+                    "hideAfterClick": true
+                }
+            ]
+        )
     }
 })
