@@ -5,14 +5,14 @@
   <p><%= button_to 'View my requests', user_contact_requests_path(current_user), method: :get, :class => "btn btn-outline-primary"  %></p>
 
   <% @contacts.each do |contact| %>
-    <a class="card" href=<% user_contacts_path(contact) %>>
+    <div class="card" onclick="location.href='<% user_contacts_path(contact) %>';" style="cursor: pointer;">
       <div class="card-body">
         <div class="container">
           <div class="row">
             <div class="col-xs">
                 <%= image_tag contact.avatar, height: 50, width: 50,  class: "rounded-circle" %>
             </div>
-            <div class="col-10">
+            <div class="col">
               <h5 class="card-title"><%= contact.name %></h5>
               <p class="card-link"><i><%= contact.email %></i></p>
             </div>
@@ -30,7 +30,7 @@
           <% end %>
         </div>
       </div>
-    </a>
+    </div>
     <br>
   <%end %>
 <% end %>
