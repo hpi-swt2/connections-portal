@@ -15,7 +15,6 @@ class User < ApplicationRecord
   has_many :activities, dependent: :delete_all
   has_many :call_participants, dependent: :delete_all, inverse_of: :user
   has_many :jitsi_calls, through: :call_participants
-  after_commit :add_default_avatar, on: %i[create update]
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
@@ -50,9 +49,10 @@ class User < ApplicationRecord
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
-  validates :avatar, blob: { content_type: :image, size_range: 1..5.megabytes }
+  validates :avatar,  blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 1..5.megabytes}
 
   after_initialize :init
+  after_commit :set_default_avatar, on: %i[create update]
 
   attribute :current_status, :string, default: User.status_available
 
@@ -89,14 +89,14 @@ class User < ApplicationRecord
 
   private
 
-  def add_default_avatar
+  def set_default_avatar
     unless avatar.attached?
       avatar.attach(
         io: File.open(
           Rails.root.join(
             'app', 'assets', 'images', 'default_avatar.png'
           )
-        ),filename: 'default_avatar.png', content_type: 'image/png'
+        ), filename: 'default_avatar.png', content_type: 'image/png'
       )
     end
   end
