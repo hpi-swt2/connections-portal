@@ -10,11 +10,11 @@
         <div class="container">
           <div class="row">
             <div class="col-xs">
-              <% if contact.avatar.attached? %>
+              <% #if contact.avatar.attached? %>
                 <%= image_tag contact.avatar, height: 50, width: 50,  class: "rounded-circle" %>
-              <% else %>
-                <%= image_tag 'default_avatar.png', height: 50, width: 50, class: "rounded-circle" %>
-              <% end %>
+              <%# else %>
+                <%= #image_tag 'default_avatar.png', height: 50, width: 50, class: "rounded-circle" %>
+              <%# end %>
             </div>
             <div class="col-10">
               <h5 class="card-title"><%= contact.name %></h5>
