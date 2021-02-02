@@ -10,7 +10,7 @@ FactoryBot.define do
     place_of_residence { 'Potsdam' }
     birthdate { Time.zone.today }
     after(:build) do |user|
-      user.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'assets', 'test-image.png')), filename: 'test-image.png', content_type: 'image/png')
+      user.avatar.attach(io: File.open(Rails.root.join('spec', 'support', 'assets', 'avatar-default-test.png')), filename: 'avatar-default-test.png', content_type: 'image/png')
     end
 
     factory :user_without_username do
