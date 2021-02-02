@@ -18,6 +18,7 @@ RSpec.describe 'Contact request', type: :feature do
     click_button('✓')
     expect(page).not_to have_text(requested_user.email)
     expect(requesting_user.contacts).to include(requested_user)
+    expect(requested_user.contacts).to include(requesting_user)
   end
 
   it 'is possible to deny a contact request' do
