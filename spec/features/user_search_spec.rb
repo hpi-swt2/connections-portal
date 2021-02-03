@@ -50,7 +50,7 @@ describe 'Filter users by key', type: :feature do
     end
 
     context 'with part of username' do
-      let(:search) { 'andard_' }
+      let(:search) { 'erli' }
 
       it 'is possible to filter by username' do
         expect(page).to have_text(maximilian.email)
@@ -62,7 +62,7 @@ describe 'Filter users by key', type: :feature do
     end
 
     context 'with part of email' do
-      let(:search) { 'test@exa' }
+      let(:search) { 'est@exa' }
 
       it 'is possible to filter by email' do
         expect(page).to have_text(maximilian.email)

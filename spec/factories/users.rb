@@ -20,14 +20,14 @@ FactoryBot.define do
     trait :maximilian do
       firstname { 'Maximilian' }
       lastname { 'Mustermann' }
-      username { 'standard_user' }
+      username { 'berlin' }
       email { 'test@example.com' }
     end
 
     trait :erika do
       firstname { 'Erika' }
       lastname { 'Musterfrau' }
-      username { 'erika.musterfrau' }
+      username { 'london' }
       email { 'test2@example.com' }
     end
   end
