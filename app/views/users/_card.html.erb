@@ -17,13 +17,13 @@
       </div>
       <% if mode == :overview %>
         <div class="row top-buffer">
-            <% user.social_accounts.each do |social_account| %>
-              <div class="col-3">
-                <a href=<%= generate_link(social_account) %>>
-                  <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
-                </a>
-              </div>
-            <% end %>
+          <% user.social_accounts.each do |social_account| %>
+            <div class="col-3">
+              <a href=<%= generate_link(social_account) %>>
+                <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+              </a>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

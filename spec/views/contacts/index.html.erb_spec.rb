@@ -17,6 +17,10 @@ RSpec.describe 'contacts/index', type: :view do
   end
 
   it 'contains an image' do
-    expect(rendered).to have_css("img[src*='//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120']")
+    expect(rendered).to(
+      have_css(
+        "img[src*='//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120']"
+      )
+    )
   end
 end

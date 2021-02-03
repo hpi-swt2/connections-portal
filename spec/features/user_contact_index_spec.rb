@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Browse contacts', type: :feature do
   let(:user) { FactoryBot.create :user }
   let(:contact) { FactoryBot.create :user }
+  let(:social_account) { FactoryBot.create :social_account }
 
   before do
     user.contacts << contact
