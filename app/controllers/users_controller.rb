@@ -3,15 +3,11 @@ require 'set'
 class UsersController < ApplicationController
   include SocialAccountsHelper
   include UsersHelper
-  before_action :authorize, except: %i[show index search]
+  before_action except: %i[show index search]
   helper_method :generate_link, :supported_social_networks
 
   def show
-    if authenticate_user!
-      @user = User.find(params[:id])
-      return
-    end
-    redirect_to(new_user_session_path)
+    @user = User.find(params[:id])
   end
 
   def edit
