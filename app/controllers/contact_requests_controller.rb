@@ -20,7 +20,7 @@ class ContactRequestsController < ApplicationController
   def accept
     user = User.find(params[:id])
     user.contacts << current_user
-    user.save
+    current_user.contacts << user
     current_user.contact_requests.delete(params[:id])
     redirect_to user_contact_requests_path(current_user), notice: t('user.contact_request.approved')
   end

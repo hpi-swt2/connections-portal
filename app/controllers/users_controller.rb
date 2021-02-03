@@ -37,12 +37,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_contact
-    authenticate_user!
-    current_user.contacts << User.find(params[:id])
-    current_user.save
-    redirect_to root_path
-  end
 
   def search
     @users = User.search(params[:search]).where.not(id: current_user.id)
