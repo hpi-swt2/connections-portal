@@ -20,7 +20,7 @@ RSpec.describe 'Profile picture', type: :feature do
     expect(page).to have_css("img[src*='new-avatar.jpeg']")
   end
 
-  it 'is not possible to upload a picture larger then 5 MB' do
+  it 'is not possible to upload a picture larger than 5 MB' do
     sign_in user
     visit edit_user_path(user)
     attach_file 'user_avatar', 'spec/support/assets/avatar-big.jpeg'
@@ -28,7 +28,7 @@ RSpec.describe 'Profile picture', type: :feature do
     expect(page).to have_text('Avatar File size should be less than 5 MB')
   end
 
-  it 'is only possible to upload pictures of type png, jpg and jpeg' do
+  it 'is not possible to upload files with arbitrary extensions' do
     sign_in user
     visit edit_user_path(user)
     attach_file 'user_avatar', 'spec/support/assets/avatar.gif'

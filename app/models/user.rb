@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
-  validates :avatar,  blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 1..5.megabytes}
+  validates :avatar,  blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 0.01..5.megabytes}
 
   after_initialize :init
   after_commit :set_default_avatar, on: %i[create update]
