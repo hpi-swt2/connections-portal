@@ -10,7 +10,7 @@ describe 'Filter users by key', type: :feature do
 
     before { visit search_users_path }
 
-    it 'does show all other users when no filter is given' do
+    it 'shows all other users when no filter is given' do
       users.each { |user| expect(page).to have_text(user.email) }
     end
 
