@@ -1,0 +1,31 @@
+<div class="card shadow rounded-lg">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs">
+          <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+        </div>
+        <a class="col-8" href=<%= user_path(user) %>>
+          <h5 class="card-title"><%= user.display_name %></h5>
+          <small class="card-link"><i><%= user.email %></i></small>
+        </a>
+        <% if mode == :add %>
+          <div class="col-1">
+            <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
+          </div>
+        <% end %>
+      </div>
+      <% if mode == :overview %>
+        <div class="row top-buffer">
+          <% user.social_accounts.each do |social_account| %>
+            <div class="col-3">
+              <a href=<%= generate_link(social_account) %>>
+                <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
