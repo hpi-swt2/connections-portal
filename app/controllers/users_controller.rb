@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include SocialAccountsHelper
   include UsersHelper
   before_action :authorize, except: %i[show index search]
-  helper_method :generate_link, :supported_social_networks, :search_record
+  helper_method :generate_link, :supported_social_networks
 
   def show
     if authenticate_user!
@@ -57,23 +57,12 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def search
-    use_wildcards = true
-    @users = Set[]
-    @contacts = Set[]
-    if current_user && params[:search]
-      @user = User.find(current_user.id)
-      @users = search_record(params[:search], User, use_wildcards)
-      @contacts = search_record(params[:search], @user.contacts, use_wildcards)
-      @users -= @contacts
-      @users -= Set[@user]
+    @users = User.search(params[:search]).where.not(id: current_user.id)
+    @users_to_add = @users.reject do |user|
+      current_user.sent_contact_request?(user)
     end
-    @users = search_record(params[:search], User, use_wildcards) if !current_user && params[:search]
   end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
 
   private
 

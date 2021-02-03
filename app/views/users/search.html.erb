@@ -6,7 +6,7 @@
     <%= submit_tag I18n.t('user.search.index') , class: "submit-button btn btn-outline-secondary my-2 my-sm-0"%>
   <% end %>
 
-  <% @contacts.each do |user| %>
+  <% @users.each do |user| %>
     <div class=contact>
       <label class="contact-info">
         <%= link_to "", user_path(user) %>
@@ -30,7 +30,7 @@
     </div>
   <% end %>
 
-  <% @users.each do |user| %>
+  <% @users_to_add.each do |user| %>
     <div class=contact>
       <label class="contact-info">
         <div class="profile-image my-2 my-sm-0 ">
@@ -40,9 +40,7 @@
           <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
           <div class="email"><%= user.email %></div>
         </div>
-        <% if @user %>
-          <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
-        <% end %>
+        <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
       </label>
     </div>
   <% end %>

@@ -6,8 +6,8 @@ RSpec.describe 'users/search', type: :view do
   let(:user1) { FactoryBot.create :user }
 
   before do
-    assign(:contacts, contacts)
-    assign(:users, users)
+    assign(:users, contacts)
+    assign(:users_to_add, users)
     sign_in user1
     render
   end
