@@ -1,8 +1,9 @@
 <%# https://getbootstrap.com/docs/4.5/components/navbar/ %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <div class="navbar-brand">Connection Portal</div>
+  <div class="navbar-brand"><%= link_to I18n.t('index.portal_name'), root_path, class: 'portal-link' %></div>
   <form class="form-inline">
     <i class="fa fa-bell" style="color: white; padding: 10px"></i>
     <a href="<%= search_users_path %>"><i class="fa fa-search" style="color: white; padding: 10px"></i> </a>
   </form>
+<%= render 'layouts/navbar_desktop_part' %>
 </nav>

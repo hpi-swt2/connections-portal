@@ -2,14 +2,25 @@ require 'rails_helper'
 
 RSpec.describe 'contacts/index', type: :view do
   let(:user) { FactoryBot.create :user }
+  let(:social_account) { FactoryBot.create :social_account, social_network: 'GitHub', user_name: 'sample_name' }
 
   before do
+    user.social_accounts << social_account
     sign_in FactoryBot.create(:user)
     assign(:contacts, [user])
+    render
   end
 
-  it 'show an added contact' do
-    render
+  it 'shows an added contact' do
     expect(rendered).to have_text user.email
+    expect(rendered).to have_text user.name
+  end
+
+  it 'contains an image' do
+    expect(rendered).to(
+      have_css(
+        "img[src*='//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120']"
+      )
+    )
   end
 end

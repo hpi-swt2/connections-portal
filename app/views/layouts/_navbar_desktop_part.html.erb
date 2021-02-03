@@ -1,0 +1,22 @@
+<%# Loaded only on desktop, directly into the navbar %>
+<ul class="navbar-nav ml-auto navbar-desktop-part">
+  <%# https://github.com/heartcombo/devise#controller-filters-and-helpers %>
+  <% if user_signed_in? %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.display_name %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
+        <%= link_to I18n.t('navigation.visit_profile'), user_path(current_user), class: 'dropdown-item' %>
+        <div class="dropdown-divider"></div>
+        <%= link_to I18n.t('navigation.contacts'), user_contacts_path(current_user), class: 'dropdown-item' %>
+        <div class="dropdown-divider"></div>
+        <%= link_to I18n.t('navigation.edit_profile'), edit_user_path(current_user), class: 'dropdown-item' %>
+        <%= link_to I18n.t('navigation.account_settings'), edit_user_registration_path(current_user), class: 'dropdown-item' %>
+      </div>
+    </li>
+    <li class="nav-item">
+      <%= link_to (fa_icon 'sign-out', text: 'Log Out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
+    </li>
+  <% end %>
+</ul>
