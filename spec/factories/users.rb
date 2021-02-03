@@ -28,7 +28,7 @@ FactoryBot.define do
       firstname { 'Erika' }
       lastname { 'Musterfrau' }
       username { 'erika.musterfrau' }
-      email { 'erika.musterfrau@example.com' }
+      email { 'test2@example.com' }
     end
   end
 end
