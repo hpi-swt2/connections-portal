@@ -1,5 +1,6 @@
 class ContactRequestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_user, only: [:accept]
 
   def create
     requested_user = User.find(params[:user_id])
@@ -18,10 +19,13 @@ class ContactRequestsController < ApplicationController
   end
 
   def accept
-    user = User.find(params[:id])
-    user.contacts << current_user
-    current_user.contacts << user
-    current_user.contact_requests.delete(params[:id])
+    @user.contacts << current_user
+    current_user.contacts << @user
+    current_user.contact_requests.delete(@user)
     redirect_to user_contact_requests_path(current_user), notice: t('user.contact_request.approved')
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

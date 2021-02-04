@@ -37,7 +37,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def search
     @users = User.search(params[:search]).where.not(id: current_user.id)
     @users_to_add = @users.reject do |user|
