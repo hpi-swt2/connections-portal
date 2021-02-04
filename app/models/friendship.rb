@@ -7,8 +7,8 @@ class Friendship < ApplicationRecord
     Friendship.create!(user_id: c.contact_id, contact_id: c.user_id) unless Friendship.find_by(contact_id: c.user_id)
   end
 
-after_destroy do |c|
-  reciprocal = Friendship.find_by(contact_id: c.user_id)
-  reciprocal&.destroy
-end
+  after_destroy do |c|
+    reciprocal = Friendship.find_by(contact_id: c.user_id)
+    reciprocal&.destroy
+  end
 end
