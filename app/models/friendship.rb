@@ -1,4 +1,4 @@
-# A class for handling contacts, when one contact is created the other way is too
+# A class for handling contacts which ensures that the association is always symmetrical
 class Friendship < ApplicationRecord
   self.table_name = 'users_users'
   belongs_to :user, foreign_key: :contact_id, inverse_of: :friendships
