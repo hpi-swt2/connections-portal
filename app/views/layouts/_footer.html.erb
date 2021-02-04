@@ -2,13 +2,11 @@
   <div id="navigation">
     <ul class="nav nav-pills nav-justified">
       <li class="nav-item">
-        <!-- new path to this when dashboard is rewritten -->
         <a class="nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
           <i class="fa fa-home"></i>
         </a></li>
       <li class="nav-item">
-        <!-- please update the path when reworked the chat -->
-        <a id="chat-tab" class="nav-link <%= active_link_to_class(chat_path, active: :exclusive)%>" href="<%= chat_path %>">
+        <a class="nav-link <%= active_link_to_class(chat_path, active: :exclusive)%>" href="<%= chat_path %>">
           <i class="fa fa-comments"></i>
         </a></li>
       <li class="nav-item">
