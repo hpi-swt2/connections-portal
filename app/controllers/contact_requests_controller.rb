@@ -20,7 +20,6 @@ class ContactRequestsController < ApplicationController
 
   def accept
     @user.contacts << current_user
-    current_user.contacts << @user
     current_user.contact_requests.delete(@user)
     redirect_to user_contact_requests_path(current_user), notice: t('user.contact_request.approved')
   end
