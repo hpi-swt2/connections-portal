@@ -19,8 +19,8 @@ class User < ApplicationRecord
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
   # rubocop:disable Rails/HasAndBelongsToMany
-  has_many :friendships, :dependent => :destroy
-  has_many :contacts, :through => :friendships, :source => :user
+  has_many :friendships, dependent: :destroy
+  has_many :contacts, through: :friendships, source: :user
 
   has_and_belongs_to_many :contact_requests,
                           class_name: 'User',
