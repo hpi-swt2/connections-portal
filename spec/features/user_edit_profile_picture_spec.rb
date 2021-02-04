@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Profile picture', type: :feature do
-
   let(:user) { FactoryBot.create :user }
   let(:contact) { FactoryBot.create :user }
 
