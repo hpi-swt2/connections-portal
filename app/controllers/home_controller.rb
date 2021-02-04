@@ -14,9 +14,19 @@ class HomeController < ApplicationController
     @users = @users.sample(maximum_length_user_list)
   end
 
+  def chat
+    if user_signed_in?
+      @room_messages = Room.global_chat_room.room_messages
+      render "home/chat_page"
+    else
+      render 'index'
+    end
+  end
+
   private
 
   def maximum_length_user_list
     30
   end
+
 end

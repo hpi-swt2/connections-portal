@@ -8,11 +8,12 @@
         </a></li>
       <li class="nav-item">
         <!-- please update the path when reworked the chat -->
-        <a class="nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
+        <a id="chat-tab" class="nav-link <%= active_link_to_class(chat_path, active: :exclusive)%>" href="<%= chat_path %>">
           <i class="fa fa-comments"></i>
         </a></li>
       <li class="nav-item">
-        <a class="nav-link <%= active_link_to_class(user_contacts_path(current_user), active: :exclusive)%>" href="<%= user_contacts_path(current_user) %>">
+        <a class="nav-link <%= active_link_to_class(user_contacts_path(current_user), active: :exclusive)%>"
+           href="<%= user_contacts_path(current_user) %>">
           <i class="fa fa-address-book"></i>
         </a></li>
       <li class="nav-item">
@@ -21,7 +22,8 @@
           <i class="fa fa-history"></i>
         </a></li>
       <li class="nav-item">
-        <a class="nav-link <%= active_link_to_class(edit_user_path(current_user), active: :exclusive)%>" href="<%= edit_user_path(current_user) %>">
+        <a class="nav-link <%= active_link_to_class(edit_user_path(current_user), active: :exclusive)%>"
+           href="<%= edit_user_path(current_user) %>">
           <i class="fa fa-cog"></i>
         </a></li>
     </ul>
