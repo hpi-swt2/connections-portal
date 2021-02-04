@@ -1,6 +1,13 @@
 # This migration comes from active_storage (originally 20170806125915)
 class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
   def change
+    create_table_storage_blobs
+    create_table_storage_att
+  end
+
+  private
+
+  def create_table_storage_blobs
     create_table :active_storage_blobs do |t|
       t.string :key, null: false
       t.string :filename, null: false
@@ -12,7 +19,9 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
 
       t.index [:key], unique: true
     end
+  end
 
+  def create_table_storage_att
     create_table :active_storage_attachments do |t|
       t.string :name, null: false
       t.references :record, null: false, polymorphic: true, index: false
