@@ -1,5 +1,25 @@
-<%= render 'social_accounts/social_account', social_account: social_account %>
-<td>
-    <%= link_to (I18n.t 'social_accounts.social_account_view.edit_label'), edit_user_social_account_path(user, social_account) %>
-    <%= link_to (I18n.t 'social_accounts.social_account_view.remove_label'), user_social_account_path(user, social_account), method: :delete %>
-</td>
+<div class="card shadow rounded-lg">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <a href=<%= generate_link(social_account) %>>
+            <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-3">
+          <%= social_account.user_name %>
+        </div>
+        <div class="col-6">
+          <%= link_to (fa_icon 'eye'), generate_link(social_account), style: 'padding: 10px'%>
+          <%= link_to (fa_icon 'edit'), edit_user_social_account_path(user, social_account), style: 'padding: 10px'%>
+          <%= link_to (fa_icon 'trash'), user_social_account_path(user, social_account), style: 'padding: 10px', method: :delete %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+

@@ -5,43 +5,59 @@
   <% if @user.errors.any? %>
     <%= render 'layouts/flash_messages'%>
   <% end %>
+  <%= render partial: 'users/card', locals: { user: @user, mode: :edit } %>
 
-  <p>
-    <%= image_tag @user.avatar, height: 160, width: 160, :style => "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;", class: "rounded-circle" %>
-  </p>
+<!-- Modal for changing ones user data -->
+<div class="modal fade" id="edit_user_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <%= image_tag @user.avatar, height: 160, width: 160, :style => "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;", class: "rounded-circle" %>
+        </p>
 
-  <p>
-    <%= form.file_field :avatar %>
-  </p>
+        <p>
+          <%= form.file_field :avatar %>
+        </p>
 
-  <p>
-    <%= form.label I18n.t('user.attributes.username') %>
-    <%= form.text_field :username %>
-  </p>
+        <p>
+          <%= form.label I18n.t('user.attributes.username') %>
+          <%= form.text_field :username %>
+        </p>
 
-  <p>
-    <%= form.label I18n.t('user.attributes.firstname') %>
-    <%= form.text_field :firstname %>
-  </p>
+        <p>
+          <%= form.label I18n.t('user.attributes.firstname') %>
+          <%= form.text_field :firstname %>
+        </p>
 
-  <p>
-    <%= form.label I18n.t('user.attributes.lastname') %>
-    <%= form.text_field :lastname %>
-  </p>
+        <p>
+          <%= form.label I18n.t('user.attributes.lastname') %>
+          <%= form.text_field :lastname %>
+        </p>
 
-  <p>
-    <%= form.label I18n.t('user.attributes.place_of_residence') %>
-    <%= form.text_field :place_of_residence %>
-  </p>
+        <p>
+          <%= form.label I18n.t('user.attributes.place_of_residence') %>
+          <%= form.text_field :place_of_residence %>
+        </p>
 
-  <p>
-    <%= form.label I18n.t('user.attributes.birthdate') %>
-    <%= form.date_select :birthdate, start_year: 1900, end_year: Time.now.year %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
+        <p>
+          <%= form.label I18n.t('user.attributes.birthdate') %>
+          <%= form.date_select :birthdate, start_year: 1900, end_year: Time.now.year %>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= form.submit(class: "btn btn-primary") %>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>
 
 <hr />
@@ -56,6 +72,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<h3>  <%= I18n.t 'social_accounts.edit.add_social_accounts_heading'  %></h3>
-<%= render 'social_accounts/form', submit_label: (I18n.t 'social_accounts.edit.add_social_account_label') %>

@@ -5,10 +5,15 @@
         <div class="col-xs">
           <%= image_tag user.avatar, height: 65, width: 65, class: "rounded-circle" %>
         </div>
-        <a class="col-8" href=<%= user_path(user) %>>
-          <h5 class="card-title"><%= user.display_name %></h5>
-          <small class="card-link"><i><%= user.email %></i></small>
-        </a>
+        <div class="col-8">
+          <a href=<%= user_path(user) %>>
+            <h5 class="card-title"><%= user.display_name %></h5>
+            <small class="card-link"><i><%= user.email %></i></small>
+          </a>
+          <% if mode == :edit %>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#edit_user_modal"><i class="fa fa-edit"></i></button>
+          <% end %>
+        </div>
         <% if mode == :add %>
           <div class="col-1">
             <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>

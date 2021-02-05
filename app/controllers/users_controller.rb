@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def update
     return unless authorize_to_update!
     # prototype for create social account form
-    return redirect_to @user if @user.update(user_params)
+    return redirect_to edit_user_path if @user.update(user_params)
 
     handle_error
     @social_account = @user.social_accounts.build
