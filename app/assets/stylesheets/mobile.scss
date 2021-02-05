@@ -41,8 +41,8 @@ $content_size: calc(100% - 48px);
 // https://github.com/bokmann/font-awesome-rails
 @import 'font-awesome';
 
-// app/assets/stylesheets/notes.scss
-@import 'notes';
+// app/assets/stylesheets/shared.scss
+@import 'shared';
 @import 'popup';
 // app/assets/stylesheets/home.scss
 html, body {
@@ -62,8 +62,4 @@ html, body {
 
 .navbar-desktop-part {
   display: none;
-}
-
-.portal-link {
-  color: white;
 }
