@@ -15,7 +15,7 @@
     </div>
   <!--     if we want to be able to add the user the link to the contact request should cover the hole card -->
     <% if mode == :add %>
-      <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
+      <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
     <% end %>
   </label>
   <% if mode == :overview %>
