@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Jitsi Call', type: :request do
+RSpec.describe 'Jitsi Call', driver: :selenium_headless, type: :feature, js: true do
   describe 'POST' do
     let(:guest) { FactoryBot.create(:user) }
 
@@ -18,7 +18,7 @@ RSpec.describe 'Jitsi Call', type: :request do
       end
     end
 
-    context 'without logging in' do
+    context 'when not logged in' do
       it 'redirects to login page' do
         post jitsi_calls_path, params: { jitsi_call: { guest_id: guest.id } }
         expect(response).to redirect_to(new_user_session_path)

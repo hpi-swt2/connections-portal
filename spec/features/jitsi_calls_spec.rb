@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: true do
-  let!(:user1) { FactoryBot.create :user }
+  let!(:user1) { FactoryBot.create :user, current_status: User.status_nice_to_meet_you }
   let!(:user2) { FactoryBot.create :user, current_status: User.status_nice_to_meet_you }
 
   before do
@@ -40,6 +40,45 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
 
     it 'the state of the participant is requested' do
       expect(guest_invitation.state).to eq MeetingInvitation.state_requested
+    end
+  end
+
+  context 'with two users' do
+    before do
+      Capybara.using_session(:user1) do
+        sign_in user1
+        visit root_path
+      end
+
+      Capybara.using_session(:user2) do
+        sign_in user2
+        visit root_path
+      end
+    end
+
+    it 'a user can be called when in status "nice to meet you"' do
+
+    end
+
+    it 'a user can not be called when not in status "nice to meet you"' do
+
+    end
+
+    it 'a user receives a popup when another user calls them' do
+
+    end
+
+    it 'a user receives a popup while it calls another user' do
+
+    end
+
+    it 'a calling user receives a notification when the target denied the call' do
+    end
+
+    it 'a calling user gets redirected when the target accept the call' do
+    end
+
+    it 'a user receiving a call gets redirected when he accept the call' do
     end
   end
 end
