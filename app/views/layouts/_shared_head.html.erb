@@ -1,4 +1,7 @@
 <title><%= I18n.t('index.portal_name') %></title>
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
+<% if current_user %>
+  <meta data-channel-subscribe="notification" data-notification-id="<%= current_user.id %>"/>
+<% end %>
 <script>document.current_user = <%= user_signed_in? ? current_user.id : -1 %></script>

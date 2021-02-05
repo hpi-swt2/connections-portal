@@ -34,6 +34,7 @@ en:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+    dismiss: 'Dismiss'
   denial:
     resource_creation: '%{resource} could not be created.'
     resource_deletion: '%{resource} could not be deleted.'
@@ -99,6 +100,16 @@ en:
   activity:
     post: 'Post new activity'
     placeholder: 'Just start typing here...'
+  call:
+    accept: 'Accept'
+    reject: 'Deny'
+    notification_incoming_call: 'You have been invited to a call by %{initiator}'
+    waiting: 'Please wait for your guests to accept your invitation'
+    starting: 'The call is starting now. You should get redirected'
+    rejected: '%{guest} rejected the call'
+    aborted: 'The call was cancelled by %{initiator}'
+    abort: 'Cancel'
+    creation_fail: 'The requested user is currently not ready to meet with you'
   chat:
     placeholder: 'Just start typing here...'
     send: 'Send'

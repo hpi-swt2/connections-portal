@@ -13,8 +13,8 @@ class User < ApplicationRecord
   # https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html >> Deleting from Associations
   has_many :notes, dependent: :delete_all
   has_many :activities, dependent: :delete_all
-  has_many :call_participants, dependent: :delete_all, inverse_of: :user
-  has_many :jitsi_calls, through: :call_participants
+  has_many :meeting_invitations, dependent: :delete_all, inverse_of: :user
+  has_many :jitsi_calls, through: :meeting_invitations
   has_many :friendships, dependent: :destroy, inverse_of: :user
   has_many :contacts, through: :friendships
 

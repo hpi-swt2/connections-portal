@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
   def mobile?
     request.user_agent =~ /Mobile|webOS/
   end
+
+  def send_notification(user, **args)
+    NotificationChannel.broadcast_to user, args
+  end
 end

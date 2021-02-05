@@ -16,7 +16,7 @@
       </div>
       <div class="user-meeting d-flex">
         <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-          <%= f.hidden_field :participant_id, value: user.id %>
+          <%= f.hidden_field :guest_id, value: user.id %>
           <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
           <% end %>
         <% end %>

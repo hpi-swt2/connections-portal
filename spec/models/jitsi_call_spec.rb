@@ -12,29 +12,29 @@ RSpec.describe JitsiCall, type: :model do
     expect(jitsi_call).not_to be_valid
   end
 
-  context 'with participants' do
-    let(:participants) { FactoryBot.create_list :user, 2 }
+  context 'with invitations' do
+    let(:guests) { FactoryBot.create_list :user, 2 }
 
     before do
-      participants.each do |participant|
-        jitsi_call.call_participants.create(
-          user: participant,
-          state: CallParticipant::VALID_STATES[0],
-          role: CallParticipant::VALID_ROLES[0]
+      guests.each do |guest|
+        jitsi_call.meeting_invitations.create(
+          user: guest,
+          state: MeetingInvitation.state_requested,
+          role: MeetingInvitation.role_guest
         )
       end
     end
 
     it 'has associated users' do
-      expect(jitsi_call.users).to include(*participants)
+      expect(jitsi_call.users).to include(*guests)
     end
 
-    it 'has call participants' do
-      expect(jitsi_call.call_participants.map(&:user_id)).to include(*participants.map(&:id))
+    it 'has meeting invitations' do
+      expect(jitsi_call.meeting_invitations.map(&:user_id)).to include(*guests.map(&:id))
     end
 
-    it 'destroys all participants when destroyed' do
-      expect { jitsi_call.destroy }.to change(CallParticipant, :count).from(participants.size).to(0)
+    it 'destroys all invitations when destroyed' do
+      expect { jitsi_call.destroy }.to change(MeetingInvitation, :count).from(guests.size).to(0)
     end
   end
 end
