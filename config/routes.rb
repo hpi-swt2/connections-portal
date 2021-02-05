@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :activities, only: :create
   resources :jitsi_calls, only: :create
 
-  get '/chat', to: 'home#chat', as: 'chat'
+  get 'chat', to: 'home#chat'
 end
