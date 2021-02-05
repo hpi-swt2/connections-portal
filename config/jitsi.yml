@@ -1,0 +1,8 @@
+production:
+  jitsi_url: 'https://jitsi.giz.berlin'
+
+development:
+  jitsi_url: 'https://jitsi.giz.berlin'
+
+test:
+  jitsi_url: 'https://jitsi.giz.berlin'

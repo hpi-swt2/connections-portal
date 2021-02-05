@@ -138,7 +138,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
           end
         end
         Capybara.current_session.switch_to_window(jitsi)
-        sleep(2)
+        sleep(2) # The page is about:blank first
         expect(Capybara.current_session.current_url).to start_with(JitsiCall::BASE_URL)
       end
     end

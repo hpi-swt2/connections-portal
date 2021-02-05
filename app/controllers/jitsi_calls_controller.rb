@@ -18,7 +18,7 @@ class JitsiCallsController < ApplicationController
     call = JitsiCall.find(params[:id])
     return unless call.invitation(current_user).state == MeetingInvitation.state_requested
 
-    change_call_state(call, MeetingInvitation.state_accepted)
+    change_call_invitation_state(call, MeetingInvitation.state_accepted)
 
     data = { action: :start_call, url: call.url, popup_text: I18n.t('call.starting') }
     send_notification(current_user, **data)
@@ -29,7 +29,7 @@ class JitsiCallsController < ApplicationController
     call = JitsiCall.find(params[:id])
     return unless call.invitation(current_user).state == MeetingInvitation.state_requested
 
-    change_call_state(call, MeetingInvitation.state_rejected)
+    change_call_invitation_state(call, MeetingInvitation.state_rejected)
 
     send_notification(
       call.initiator,
@@ -42,6 +42,8 @@ class JitsiCallsController < ApplicationController
   # The initiator cancels a outgoing call
   def abort
     call = JitsiCall.find(params[:id])
+    return if call.started?
+
     unless call.initiator == current_user && (call.invitation(current_user).state == MeetingInvitation.state_accepted)
       return
     end
@@ -65,7 +67,7 @@ class JitsiCallsController < ApplicationController
 
   private
 
-  def change_call_state(call, new_state)
+  def change_call_invitation_state(call, new_state)
     call.invitation(current_user).state = new_state
   end
 
@@ -96,7 +98,7 @@ class JitsiCallsController < ApplicationController
   end
 
   def cancel_call(call)
-    change_call_state(call, MeetingInvitation.state_rejected)
+    change_call_invitation_state(call, MeetingInvitation.state_rejected)
 
     call.guests.each do |guest|
       send_notification(
