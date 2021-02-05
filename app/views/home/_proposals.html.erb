@@ -1,10 +1,13 @@
 <h1 class="center-heading"><%= I18n.t('dashboard.current_proposals') %></h1>
 <% if user_signed_in? %>
 
+
   <div>
-    <% @users.each do |user| %>
+    <% @available_users.each do |user| %>
       <%= render partial: 'users/card', locals: { user: user, mode: :proposition } %>
       <br>
     <% end %>
 <% end %>
 </div>
+
+

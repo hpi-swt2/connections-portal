@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     if user_signed_in?
       filter_users_status
       @room_messages = Room.global_chat_room.room_messages
+      @available_contacts = User.all.where(status == 'available')
       render 'dashboard'
     else
       render 'index'
@@ -22,6 +23,7 @@ class HomeController < ApplicationController
       render 'index'
     end
   end
+
 
   private
 
