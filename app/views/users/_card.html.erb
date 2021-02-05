@@ -1,11 +1,9 @@
 <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class=contact-card>
+  <div class="contact">
   <label class="contact-link">
-<!--     if we show the overview of the user the link to the profile page of the user should cover the hole card -->
-    <% if mode == :overview %>
-      <%= link_to "", user_path(user) %>
-    <% end %>
+    <%= link_to "", user_path(user) %>
     <div class="profile-image my-2 my-sm-0 ">
       <%= image_tag user.avatar, class: "rounded-circle cover" %>
     </div>
@@ -13,11 +11,11 @@
       <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
       <div class="email"><%= user.email %></div>
     </div>
-  <!--     if we want to be able to add the user the link to the contact request should cover the hole card -->
-    <% if mode == :add %>
-      <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
-    <% end %>
   </label>
+  <% if mode == :add %>
+    <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
+  <% end %>
+  </div>
   <% if mode == :overview %>
     <div class="social-account-info">
       <% user.social_accounts.each do |social_account| %>

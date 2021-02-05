@@ -9,14 +9,23 @@
 // The space between the flex entries can be handled via the flex attribute. For example:
 // Profile image get a flex of 1 and user-info of 4. Then user-info gets four times the space of the Profile image
 
+
+
 .contact-card {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .contact-link {
-    display: flex;  
+    flex: 5;
+    display: flex; 
     justify-content: center;
     align-items: center;
     position: relative;
