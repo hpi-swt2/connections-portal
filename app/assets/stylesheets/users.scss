@@ -1,23 +1,34 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// We are using the CSS FlexBox system to style the cards: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
+// Every row of the user card is one FlexBox. For example:
+// | profile-image | user-info |
+// | social account handle | social account handle | ...
+// The space between the flex entries can be handled via the flex attribute. For example:
+// Profile image get a flex of 1 and user-info of 4. Then user-info gets four times the space of the Profile image
+
 .contact-card {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
+
 .contact-link {
     display: flex;  
     justify-content: center;
     align-items: center;
     position: relative;
 }
+
 .social-account-info {
     margin-top: .5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;  
 }
+
 .profile-image{
     padding: 2px;
     flex: 1;
@@ -25,25 +36,32 @@
     padding-top: calc(.5 * 1.5rem);
     padding-bottom: calc(.5 * 1.5rem);
 }
+
 img {
     height: 75px;
     width: 75px;
 }
+
+// Just to handle the mobile version
 @media screen and (max-width: 600px) {
     img {
         height: 50px;
         width: 50px;
     }
 } 
+
 .cover {
   object-fit: cover;
 }
+
 .user-info{
     flex: 4;
     display: block;
     line-height: 50%;
 
 }
+
+// This is a trick so that the link is covering the hole label.
 a::after {
     content: '';
     position: absolute;
@@ -52,10 +70,12 @@ a::after {
     bottom: 0;
     right: 0;
 }
+
 .email {
      font-style: italic;
      font-size: small;
 }
+
 .add_button {
     flex: 1;
     height: 100%;

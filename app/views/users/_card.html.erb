@@ -2,6 +2,7 @@
 
 <div class=contact-card>
   <label class="contact-link">
+<!--     if we show the overview of the user the link to the profile page of the user should cover the hole card -->
     <% if mode == :overview %>
       <%= link_to "", user_path(user) %>
     <% end %>
@@ -12,6 +13,7 @@
       <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
       <div class="email"><%= user.email %></div>
     </div>
+  <!--     if we want to be able to add the user the link to the contact request should cover the hole card -->
     <% if mode == :add %>
       <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
     <% end %>
