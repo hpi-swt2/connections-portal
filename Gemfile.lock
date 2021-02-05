@@ -37,6 +37,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (6.0.3.4)
       activesupport (= 6.0.3.4)
       globalid (>= 0.3.6)
@@ -50,6 +53,8 @@ GEM
       activejob (= 6.0.3.4)
       activerecord (= 6.0.3.4)
       marcel (~> 0.3.1)
+    activestorage-validator (0.1.3)
+      rails (>= 5.2.0)
     activesupport (6.0.3.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -87,6 +92,8 @@ GEM
       xpath (~> 3.2)
     childprocess (3.0.0)
     coderay (1.1.3)
+    composite_primary_keys (12.0.6)
+      activerecord (~> 6.0.0)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     debug_inspector (1.0.0)
@@ -292,12 +299,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
+  activestorage-validator
   better_errors (~> 2.8, >= 2.8.3)
   binding_of_caller (~> 0.8.0)
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.5, >= 4.5.2)
   byebug
   capybara (~> 3.33)
+  composite_primary_keys
   devise (~> 4.7, >= 4.7.3)
   devise-bootstrap-views (~> 1.1)
   devise-i18n (~> 1.9, >= 1.9.2)

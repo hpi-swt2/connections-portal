@@ -16,7 +16,9 @@ RSpec.describe 'User list', type: :feature do
     end
 
     it 'does not show the current user' do
-      expect(page).not_to have_text(user.display_name)
+      within('#filtered_user_list') do
+        expect(page).not_to have_text(user.display_name)
+      end
     end
 
     it 'does not show users with another status' do

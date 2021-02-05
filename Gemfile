@@ -33,9 +33,10 @@ gem 'bootsnap', '>= 1.4.2', require: false # https://github.com/Shopify/bootsnap
 gem 'devise', '~> 4.7', '>= 4.7.3' # https://github.com/plataformatec/devise
 gem 'devise-i18n', '~> 1.9', '>= 1.9.2' # https://github.com/tigrish/devise-i18n
 gem 'devise-bootstrap-views', '~> 1.1' # https://github.com/hisea/devise-bootstrap-views
-
+gem 'activestorage-validator'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby] # https://github.com/tzinfo/tzinfo-data
+gem 'composite_primary_keys'
 
 #
 # Packaged JS, CSS libraries and helpers
@@ -49,6 +50,8 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5' # https://github.com/bokmann/fo
 gem 'jquery-rails', '~> 4.4' # https://github.com/rails/jquery-rails
 # State of the art fixtures
 gem 'factory_bot_rails', '~> 6.1' # https://github.com/thoughtbot/factory_bot_rails
+# to get the active link for footer
+gem 'active_link_to'
 #
 # Gems that depend on the build kind (development/test/production)
 #

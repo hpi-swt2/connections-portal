@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: :create
+
   resources :jitsi_calls, only: :create do
     member do
       patch 'accept'
@@ -25,4 +26,5 @@ Rails.application.routes.draw do
       patch 'abort'
     end
   end
+  get 'chat', to: 'home#chat'
 end

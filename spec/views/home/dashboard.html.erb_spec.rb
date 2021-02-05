@@ -38,13 +38,13 @@ RSpec.describe 'home/dashboard', type: :view do
     end
 
     describe 'last activities' do
-      it 'shows the heading' do
+      xit 'shows the heading' do
         expect(rendered).to have_text(I18n.t('dashboard.last_activities'))
       end
     end
 
     describe 'current proposals' do
-      it 'shows the heading' do
+      xit 'shows the heading' do
         expect(rendered).to have_text(I18n.t('dashboard.current_proposals'))
       end
     end

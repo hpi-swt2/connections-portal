@@ -3,7 +3,7 @@
     <div class="d-flex"><span class="popup-icon-container"><i class="fa popup-icon"></i></span></div>
     <div style="padding-right: 10px">
       <p class="card-text popup-text">No content in this popup</p>
-      <div class="row popup-button-row"></div>
+      <div class="popup-button-row"></div>
     </div>
   </div>
 </div>
@@ -29,9 +29,8 @@
 
         $(".popup-button-row").text("");
         buttons.forEach(buttonSpec => {
-            let $buttonContainer = $("<div class='col'></div>").appendTo(".popup-button-row");
-            let $button = $(document.createElement("button"));
-            $button.addClass("btn btn-outline-light btn-sm");
+            let $button = $(document.createElement("button")).appendTo(".popup-button-row");;
+            $button.addClass("btn popup-button btn-outline-light btn-sm");
             $button.click(() => {
                 if (!("hideAfterClick" in buttonSpec) || buttonSpec.hideAfterClick) {
                     hidePopup();
@@ -39,7 +38,6 @@
                 (buttonSpec.action)();
             });
             $button.text(buttonSpec.label);
-            $button.appendTo($buttonContainer);
         });
         if (timeout !== -1) {
             $popup.delay(timeout).fadeOut();
