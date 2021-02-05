@@ -84,10 +84,12 @@ a::after {
      font-style: italic;
      font-size: small;
 }
-.add_button {
+.button-lable {
     position: relative;
     margin-right: .5rem;
     flex: 1;
+}
+.add_button {
     height: 100%;
     width: 100%;
     border-radius: 99999px;
