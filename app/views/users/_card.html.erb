@@ -7,7 +7,7 @@
       <%= link_to "", user_path(user) %>
     <% end %>
     <div class="profile-image my-2 my-sm-0 ">
-      <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
+      <%= image_tag user.avatar, class: "rounded-circle cover" %>
     </div>
     <div class="user-info my-2 my-sm-0">
       <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
