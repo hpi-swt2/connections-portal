@@ -4,7 +4,7 @@
   <% if user_signed_in? %>
     <form class="form-inline">
       <% if current_user.contact_requests.any? %>
-        <i class="fa fa-bell" style="color: red; padding: 3px"></i>
+        <a href="<%= user_contact_requests_path(current_user) %>"> <i class="fa fa-bell" style="color: red; padding: 3px"></i> </a>
         <span class="badge badge-pill badge-danger"> <%=  current_user.contact_requests.length %> </span>
       <% else %>
         <i class="fa fa-bell" style="color: white; padding: 10px"></i>
