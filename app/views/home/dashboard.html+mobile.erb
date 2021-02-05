@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'home_mobile', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+<div class="refresh-container">
+  <%= link_to (fa_icon 'refresh', text: ''), root_path, class: 'refresh-icon'%>
+</div>
 <div id="dashboard">
   <div id="content">
       <div id="users">
