@@ -1,8 +1,6 @@
-require 'set'
-
 class UsersController < ApplicationController
   include SocialAccountsHelper
-  include UsersHelper
+  before_action :authorize
   before_action except: %i[show index search]
   helper_method :generate_link, :supported_social_networks
 
