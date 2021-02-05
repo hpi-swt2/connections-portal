@@ -1,31 +1,30 @@
-<div class="card shadow rounded-lg">
-  <div class="card-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs">
-          <%= image_tag user.avatar, height: 65, width: 65, class: "rounded-circle" %>
-        </div>
-        <a class="col-8" href=<%= user_path(user) %>>
-          <h5 class="card-title"><%= user.display_name %></h5>
-          <small class="card-link"><i><%= user.email %></i></small>
-        </a>
-        <% if mode == :add %>
-          <div class="col-1">
-            <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
-          </div>
-        <% end %>
-      </div>
-      <% if mode == :overview %>
-        <div class="row top-buffer">
-          <% user.social_accounts.each do |social_account| %>
-            <div class="col-3">
-              <a href=<%= generate_link(social_account) %>>
-                <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
-              </a>
-            </div>
-          <% end %>
-        </div>
+<%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class=contact-card>
+  <label class="contact-link">
+    <% if mode == :overview %>
+      <%= link_to "", user_path(user) %>
+    <% end %>
+    <div class="profile-image my-2 my-sm-0 ">
+      <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
+    </div>
+    <div class="user-info my-2 my-sm-0">
+      <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
+      <div class="email"><%= user.email %></div>
+    </div>
+    <% if mode == :add %>
+      <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
+    <% end %>
+  </label>
+  <% if mode == :overview %>
+    <div class="social-account-info">
+      <% user.social_accounts.each do |social_account| %>
+        <label class="contact-link">
+          <a href=<%= generate_link(social_account) %>>
+            <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+          </a>
+        </label>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
