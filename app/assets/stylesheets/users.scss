@@ -4,12 +4,10 @@
 
 // We are using the CSS FlexBox system to style the cards: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
 // Every row of the user card is one FlexBox. For example:
-// | profile-image | user-info |
+// | profile-image | user-attributes |
 // | social account handle | social account handle | ...
 // The space between the flex entries can be handled via the flex attribute. For example:
 // Profile image get a flex of 1 and user-info of 4. Then user-info gets four times the space of the Profile image
-
-
 
 .user-card {
     border-radius: 8px;
@@ -21,6 +19,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.profile-image{
+    padding: 2px;
+    flex: 1;
+    margin-right: 8px;
+    padding-top: calc(.5 * 1.5rem);
+    padding-bottom: calc(.5 * 1.5rem);
+}
+
+.user-attributes{
+    flex: 4;
+    display: block;
+    line-height: 50%;
+}
+
+.email {
+     font-style: italic;
+     font-size: small;
 }
 
 .user-card-link {
@@ -38,12 +55,18 @@
     align-items: center;  
 }
 
-.profile-image{
-    padding: 2px;
+.button-lable {
+    position: relative;
+    margin-right: .5rem;
     flex: 1;
-    margin-right: 8px;
-    padding-top: calc(.5 * 1.5rem);
-    padding-bottom: calc(.5 * 1.5rem);
+}
+
+.add_button {
+    height: 100%;
+    width: 100%;
+    border-radius: 99999px;
+    background: #343B3F;
+    font-size: small;
 }
 
 img {
@@ -63,13 +86,6 @@ img {
   object-fit: cover;
 }
 
-.user-attributes{
-    flex: 4;
-    display: block;
-    line-height: 50%;
-
-}
-
 // This is a trick so that the link is covering the hole label.
 a::after {
     content: '';
@@ -80,19 +96,3 @@ a::after {
     right: 0;
 }
 
-.email {
-     font-style: italic;
-     font-size: small;
-}
-.button-lable {
-    position: relative;
-    margin-right: .5rem;
-    flex: 1;
-}
-.add_button {
-    height: 100%;
-    width: 100%;
-    border-radius: 99999px;
-    background: #343B3F;
-    font-size: small;
-}

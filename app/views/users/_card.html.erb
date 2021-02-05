@@ -2,21 +2,21 @@
 
 <div class=user-card>
   <div class="user-information">
-  <label class="user-card-link">
-    <%= link_to "", user_path(user) %>
-    <div class="profile-image my-2 my-sm-0 ">
-      <%= image_tag user.avatar, class: "rounded-circle cover" %>
-    </div>
-    <div class="user-attributes my-2 my-sm-0">
-      <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
-      <div class="email"><%= user.email %></div>
-    </div>
-  </label>
-  <% if mode == :add %>
-  <label class="button-lable">
-    <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
-  </label>
-  <% end %>
+    <label class="user-card-link">
+      <%= link_to "", user_path(user) %>
+      <div class="profile-image my-2 my-sm-0 ">
+        <%= image_tag user.avatar, class: "rounded-circle cover" %>
+      </div>
+      <div class="user-attributes my-2 my-sm-0">
+        <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
+        <div class="email"><%= user.email %></div>
+      </div>
+    </label>
+    <% if mode == :add %>
+      <label class="button-lable">
+        <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
+      </label>
+    <% end %>
   </div>
   <% if mode == :overview %>
     <div class="user-social-account-info">
