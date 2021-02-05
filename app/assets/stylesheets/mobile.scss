@@ -41,8 +41,8 @@ $content_size: calc(100% - 48px);
 // https://github.com/bokmann/font-awesome-rails
 @import 'font-awesome';
 
-// app/assets/stylesheets/notes.scss
-@import 'notes';
+// app/assets/stylesheets/shared.scss
+@import 'shared';
 @import 'popup';
 // app/assets/stylesheets/home.scss
 html, body {
@@ -62,4 +62,9 @@ html, body {
 
 .navbar-desktop-part {
   display: none;
+}
+
+// reduce font size for the h1 headers
+h1 {
+  font-size: 2.5rem !important;
 }

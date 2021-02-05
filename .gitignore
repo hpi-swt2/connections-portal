@@ -72,3 +72,6 @@ yarn-debug.log*
 *.rbc
 capybara-*.html
 .rspec
+
+#Ignore storage files
+/storage/*

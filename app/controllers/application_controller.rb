@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   layout :set_layout
 
   before_action :set_variant
+  before_action :configure_permitted_parameters,
+                if: :devise_controller?
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:avatar, :email, :password, :password_confirmation, :current_password)
+    end
+  end
 
   private
 
@@ -21,5 +29,9 @@ class ApplicationController < ActionController::Base
 
   def mobile?
     request.user_agent =~ /Mobile|webOS/
+  end
+
+  def send_notification(user, **args)
+    NotificationChannel.broadcast_to user, args
   end
 end

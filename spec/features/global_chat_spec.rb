@@ -59,21 +59,21 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
   # It seems like one can not use sign_in with multiple sessions
   it 'updates the messages' do
     user2 = FactoryBot.create :user
-    Capybara.using_session(:one) do
+    using_session(:one) do
       login(user)
       visit root_path
     end
 
-    Capybara.using_session(:two) do
+    using_session(:two) do
       login(user2)
       visit root_path
     end
 
-    Capybara.using_session(:one) do
+    using_session(:one) do
       post_message(message)
     end
 
-    Capybara.using_session(:two) do
+    using_session(:two) do
       within('#chat-messages') do
         expect(page).to have_text(user.display_name)
         expect(page).to have_text(message)

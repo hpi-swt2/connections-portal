@@ -1,5 +1,5 @@
 <style>
-    a::after {
+    .footer-nav-link::after {
         content: '';
         position: absolute;
         top: 0;
@@ -18,7 +18,7 @@
       <li class="nav-item">
          <label class="nav-bar-entry">
           <!-- new path to this when dashboard is rewritten -->
-            <a class="nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
+            <a class="nav-link footer-nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
             <i class="fa fa-home"></i>
           </a>
         </label>
@@ -26,14 +26,15 @@
       <li class="nav-item">
         <!-- please update the path when reworked the chat -->
           <label class="nav-bar-entry">
-          <a class="nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
+          <a class="nav-link footer-nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= chat_path %>">
             <i class="fa fa-comments"></i>
           </a>
         </label>
       </li>
       <li class="nav-item">
         <label class="nav-bar-entry">
-          <a class="nav-link <%= active_link_to_class(user_contacts_path(current_user), active: :exclusive)%>" href="<%= user_contacts_path(current_user) %>">
+          <a class="nav-link footer-nav-link <%= active_link_to_class(user_contacts_path(current_user), active: :exclusive)%>" 
+            href="<%= user_contacts_path(current_user) %>">
             <i class="fa fa-address-book"></i>
           </a>
         </label>
@@ -41,14 +42,15 @@
       <li class="nav-item">
         <!-- please add the right path here when history view created -->
         <label class="nav-bar-entry">
-          <a class="nav-link" href="">
+          <a class="nav-link footer-nav-link" href="">
             <i class="fa fa-history"></i>
           </a>
         </label>
       </li>
       <li class="nav-item">
         <label class="nav-bar-entry">
-          <a class="nav-link <%= active_link_to_class(edit_user_path(current_user), active: :exclusive)%>" href="<%= edit_user_path(current_user) %>">
+          <a class="nav-link footer-nav-link <%= active_link_to_class(edit_user_path(current_user), active: :exclusive)%>" 
+            href="<%= edit_user_path(current_user) %>">
             <i class="fa fa-cog"></i>
           </a>
         </label>

@@ -2,9 +2,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="navbar-brand"><%= link_to I18n.t('index.portal_name'), root_path, class: 'portal-link' %></div>
   <form class="form-inline">
-    <i class="fa fa-bell" style="color: white; padding: 10px"></i>
-    <%= link_to (fa_icon 'search'), "/search", style:  "color: white; padding: 10px"%>
-    <%= link_to (fa_icon 'sign-out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
+    <i class="fa fa-bell navbar-item" ></i>
+    <a href="<%= search_users_path %>"><i class="fa fa-search navbar-item"></i> </a>
+    <%= render 'layouts/navbar_mobile_part' %>
   </form>
 <%= render 'layouts/navbar_desktop_part' %>
 </nav>
