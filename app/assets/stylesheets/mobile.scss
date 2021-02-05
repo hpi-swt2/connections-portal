@@ -63,3 +63,8 @@ html, body {
 .navbar-desktop-part {
   display: none;
 }
+
+// reduce font size for the h1 headers
+h1 {
+  font-size: 2.5rem !important;
+}
