@@ -164,7 +164,30 @@ RSpec.describe User, type: :model do
     end
 
     it 'destroys all participants when destroyed' do
-      expect { user.destroy }.to change(CallParticipant, :count).from(jitsi_calls.size).to(0)
+      expect { user.destroy }.to change(CallParticipant, :count).by(-jitsi_calls.size)
+    end
+  end
+
+  context 'with contacts' do
+    let(:contacts) { FactoryBot.create_list :user, 2 }
+
+    before do
+      user.save
+      contacts.each { |contact| user.friendships.create(contact: contact) }
+    end
+
+    it 'has associated contacts' do
+      expect(user.contacts).to include(*contacts)
+    end
+
+    it 'has friendships' do
+      expect(user.friendships.map(&:contact_id)).to include(*contacts.map(&:id))
+    end
+
+    it 'destroys all friendships when destroyed' do
+      user.destroy
+      expect(Friendship.where(user_id: user.id)).to be_empty
+      expect(Friendship.where(contact_id: user.id)).to be_empty
     end
   end
 end
