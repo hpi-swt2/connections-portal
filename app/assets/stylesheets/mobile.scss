@@ -43,6 +43,7 @@ $content_size: calc(100% - 48px);
 
 // app/assets/stylesheets/notes.scss
 @import 'notes';
+@import 'popup';
 // app/assets/stylesheets/home.scss
 html, body {
   position:relative;
@@ -57,4 +58,12 @@ html, body {
   flex-grow: 1;
   overflow-y: auto;
   padding: 1rem;
+}
+
+.navbar-desktop-part {
+  display: none;
+}
+
+.portal-link {
+  color: white;
 }

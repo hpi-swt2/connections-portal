@@ -36,7 +36,7 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, type: :feature 
       (I18n.t 'social_accounts.social_account_view.remove_label'),
       href: user_social_account_path(user, social_account1.id)
     ).click
-    expect(page).not_to have_content(social_account1.user_name)
+    expect(page).not_to have_text(social_account1.user_name)
   end
 
   it 'provides link to social account website' do

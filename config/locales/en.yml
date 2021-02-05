@@ -44,6 +44,7 @@ en:
   navigation:
     visit_profile: 'Visit my profile'
     edit_profile: 'Edit my profile'
+    contacts: 'View contacts'
     account_settings: 'Account settings'
     log_in: 'Log-In'
     sign_up: 'Sign-Up'
@@ -72,6 +73,8 @@ en:
     contact_request:
       approved: 'Contact request approved'
       denied: 'Contact request denied'
+      send: 'Send contact request'
+      view: 'View my requests'
     edit:
       edit_profile_heading: 'Edit profile'
       profile_heading: 'Profile'
@@ -105,7 +108,7 @@ en:
     current_proposals: 'Proposals'
     accept_proposal: 'Accept'
   index:
-    portal_name: 'Connection Portal'
+    portal_name: 'Connections++'
     description: 'A digital tool for organizing and arranging networks, relationships and human connections.'
     greeting: 'We hope you enjoy using it!'
     give_feedback: 'Give feedback!'
