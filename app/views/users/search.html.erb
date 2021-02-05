@@ -2,7 +2,7 @@
 
 <div class="stack">
   <%= form_tag(search_users_path, method: "get", class: "form-tag justify-content-between") do %>
-    <%= text_field_tag :search, params[:search] , placeholder: I18n.t('user.search.place_holder'), class: "text-field form-control my-2 my-sm-0"%>
+    <%= text_field_tag :search, params[:search] , placeholder: I18n.t('user.search.placeholder'), class: "text-field form-control my-2 my-sm-0"%>
     <%= submit_tag I18n.t('user.search.index') , class: "submit-button btn btn-outline-secondary my-2 my-sm-0"%>
   <% end %>
 

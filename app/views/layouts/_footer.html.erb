@@ -3,16 +3,14 @@
     <ul class="nav nav-pills nav-justified">
       <li class="nav-item">
          <label class="nav-bar-entry">
-          <!-- new path to this when dashboard is rewritten -->
             <a class="nav-link footer-nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= root_url %>">
             <i class="fa fa-home"></i>
           </a>
         </label>
       </li>
       <li class="nav-item">
-        <!-- please update the path when reworked the chat -->
           <label class="nav-bar-entry">
-          <a class="nav-link footer-nav-link <%= active_link_to_class(root_path, active: :exclusive)%>" href="<%= chat_path %>">
+          <a class="nav-link footer-nav-link <%= active_link_to_class(chat_path, active: :exclusive)%>" href="<%= chat_path %>">
             <i class="fa fa-comments"></i>
           </a>
         </label>
