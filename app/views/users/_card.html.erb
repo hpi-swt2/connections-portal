@@ -12,7 +12,7 @@
         <% if mode == :add %>
           <% if @users_to_add.include? user %>
             <div class="col-1">
-              <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x" %>
+              <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), method: :post, id: user.id, class: "fa-2x" %>
             </div>
           <% end %>
         <% end %>

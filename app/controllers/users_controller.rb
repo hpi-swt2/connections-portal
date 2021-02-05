@@ -31,13 +31,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    @users_to_add = (@users - [current_user]).reject do |user|
-      current_user.sent_contact_request?(user)
-    end
-  end
-
-  def search
     @users = User.search(params[:search]).where.not(id: current_user.id)
     @users_to_add = @users.reject do |user|
       current_user.sent_contact_request?(user)

@@ -8,7 +8,7 @@ describe 'Filter users by key', type: :feature do
   describe 'without filter' do
     let!(:users) { FactoryBot.create_list(:user, 3) }
 
-    before { visit search_users_path }
+    before { visit users_path }
 
     it 'shows all other users when no filter is given' do
       users.each { |user| expect(page).to have_text(user.email) }
@@ -23,7 +23,7 @@ describe 'Filter users by key', type: :feature do
     let!(:erika) { FactoryBot.create :user, :erika }
     let!(:maximilian) { FactoryBot.create :user, :maximilian }
 
-    before { visit search_users_path(search: search) }
+    before { visit users_path(search: search) }
 
     context 'with part of firstname' do
       let(:search) { 'aximi' }
