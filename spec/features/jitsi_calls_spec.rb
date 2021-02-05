@@ -43,42 +43,118 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     end
   end
 
+  context 'when th guest is not nice to meet you' do
+    let(:initiator_invitation) { call.meeting_invitations.find_by(user: user1) }
+    let(:guest_invitation) { call.meeting_invitations.find_by(user: user2) }
+
+    it 'a call is not created' do
+      user2.current_status = User.status_working
+      user2.save
+      expect do
+        within("#init-call-#{user2.id}") do
+          click_button('button')
+        end
+      end.to_not change {user2.jitsi_calls.count}
+    end
+  end
+
+  def login(user)
+    visit new_user_session_path
+    fill_in 'user[email]', with: user.email
+    fill_in 'user[password]', with: user.password
+    click_button('commit')
+  end
+
   context 'with two users' do
+    def start_call
+      using_session(:user1) do
+        within("#init-call-#{user2.id}") do
+          click_button('button')
+        end
+      end
+    end
+
     before do
-      Capybara.using_session(:user1) do
-        sign_in user1
+      using_session(:user1) do
+        login(user1)
         visit root_path
       end
 
-      Capybara.using_session(:user2) do
-        sign_in user2
+      using_session(:user2) do
+        login(user2)
         visit root_path
       end
     end
 
-    it 'a user can be called when in status "nice to meet you"' do
-
-    end
-
-    it 'a user can not be called when not in status "nice to meet you"' do
-
-    end
-
-    it 'a user receives a popup when another user calls them' do
-
-    end
-
-    it 'a user receives a popup while it calls another user' do
-
+    it 'guest and initiator get popups during dialing' do
+      start_call
+      using_session(:user1) do
+       within('.popup') do
+         expect(page).to have_text(I18n.t('call.waiting'))
+       end
+      end
+      using_session(:user2) do
+        within('.popup') do
+          expect(page).to have_text(I18n.t('call.notification_incoming_call', initiator: user1.display_name))
+        end
+      end
     end
 
     it 'a calling user receives a notification when the target denied the call' do
+      start_call
+      using_session(:user2) do
+        within('.popup') do
+          click_button(I18n.t('call.reject'))
+        end
+      end
+      using_session(:user1) do
+        within('.popup') do
+          expect(page).to have_text(I18n.t('call.rejected', guest: user2.display_name))
+        end
+      end
     end
 
-    it 'a calling user gets redirected when the target accept the call' do
+    it 'a calling user gets redirected when the target accepts the call' do
+      start_call
+      Capybara.using_session(:user2) do
+        within('.popup') do
+          click_button(I18n.t('call.accept'))
+        end
+      end
+      using_session(:user1) do
+        jitsi = Capybara.current_session.windows[1]
+        Capybara.current_session.switch_to_window(jitsi)
+        sleep(2)
+        expect(Capybara.current_session.current_url).to start_with(JitsiCall::BASE_URL)
+      end
     end
 
-    it 'a user receiving a call gets redirected when he accept the call' do
+    it 'a user receiving a call gets redirected when the target accepts the call' do
+      start_call
+      using_session(:user2) do
+        jitsi = window_opened_by do
+          within('.popup') do
+            click_button(I18n.t('call.accept'))
+          end
+        end
+        Capybara.current_session.switch_to_window(jitsi)
+        sleep(2)
+        expect(Capybara.current_session.current_url).to start_with(JitsiCall::BASE_URL)
+      end
+    end
+
+    it 'a caller can cancel the call' do
+      start_call
+      using_session(:user1) do
+        within('.popup') do
+          click_button(I18n.t('call.abort'))
+        end
+      end
+      using_session(:user2) do
+        within('.popup') do
+          expect(page).to have_text(I18n.t('call.aborted', initiator: user1.display_name))
+        end
+      end
     end
   end
 end

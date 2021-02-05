@@ -10,7 +10,6 @@ consumer.subscriptions.create("NotificationChannel", {
 
     // The call gets accepted. Lets open Jitsi in a new Tab
     start_call(data) {
-        console.log("accepted a call", data.url);
         generatePopup(
             data.popup_text,
             "fa-external-link",
@@ -22,7 +21,6 @@ consumer.subscriptions.create("NotificationChannel", {
 
     // A call is incoming. Let's display it...
     invited_to_call(data) {
-        console.log("answer call?", data)
         generatePopup(
             data.popup_text,
             "fa-phone",
@@ -41,7 +39,6 @@ consumer.subscriptions.create("NotificationChannel", {
 
     // You requested a call. Let's start waiting
     wait_for_call_guests(data) {
-        console.log("waiting for call guests")
         generatePopup(
             data.popup_text,
             "fa-spinner",
