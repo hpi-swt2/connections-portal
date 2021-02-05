@@ -53,6 +53,7 @@ class JitsiCallsController < ApplicationController
     unless call.initiator == current_user && (call.invitation(current_user).state == MeetingInvitation.state_accepted)
       return
     end
+
     change_call_state MeetingInvitation.state_rejected
 
     call.guests.each do |guest|

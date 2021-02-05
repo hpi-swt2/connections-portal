@@ -54,7 +54,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
         within("#init-call-#{user2.id}") do
           click_button('button')
         end
-      end.to_not change {user2.jitsi_calls.count}
+      end.not_to change { user2.jitsi_calls.count }
     end
   end
 
@@ -89,9 +89,9 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     it 'guest and initiator get popups during dialing' do
       start_call
       using_session(:user1) do
-       within('.popup') do
-         expect(page).to have_text(I18n.t('call.waiting'))
-       end
+        within('.popup') do
+          expect(page).to have_text(I18n.t('call.waiting'))
+        end
       end
       using_session(:user2) do
         within('.popup') do
