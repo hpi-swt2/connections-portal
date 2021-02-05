@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     handle_error
     @social_account = @user.social_accounts.build
-    render :edit
+    render :edit_profile
   end
 
   def update_status
