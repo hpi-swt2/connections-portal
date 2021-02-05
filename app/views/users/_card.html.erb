@@ -26,6 +26,11 @@
           <% end %>
         </div>
       <% end %>
+      <% if mode == :proposition %>
+        <div class="col-1">
+          <%= link_to (fa_icon 'phone', title: I18n.t('dashboard.call_proposal')), jitsi_calls_path(user), id: user.id, class: "fa-2x"%>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

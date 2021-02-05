@@ -78,4 +78,8 @@ class UsersController < ApplicationController
   def update_user
     @user = current_user.id.to_s == params[:id] ? current_user : User.find(params[:id])
   end
+
+  def available_users
+    @available_users = User.all.where(status = available)
+  end
 end
