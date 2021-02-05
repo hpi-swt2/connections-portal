@@ -7,7 +7,6 @@ describe 'Filter users by key', type: :feature do
 
   describe 'without filter' do
     let!(:users) { FactoryBot.create_list(:user, 3) }
-    let(:second_user) { FactoryBot.create :user }
 
     before { visit search_users_path }
 
