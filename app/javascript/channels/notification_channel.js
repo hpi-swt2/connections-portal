@@ -41,7 +41,7 @@ consumer.subscriptions.create("NotificationChannel", {
     wait_for_call_guests(data) {
         generatePopup(
             data.popup_text,
-            "fa-spinner",
+            "fa-spinner spinning",
             [
                 {
                   "label": data.abort_text,
