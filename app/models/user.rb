@@ -15,7 +15,6 @@ class User < ApplicationRecord
   has_many :activities, dependent: :delete_all
   has_many :meeting_invitations, dependent: :delete_all, inverse_of: :user
   has_many :jitsi_calls, through: :meeting_invitations
-  has_many :jitsi_calls, through: :call_participants
   has_many :friendships, dependent: :destroy, inverse_of: :user
   has_many :contacts, through: :friendships
 
