@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
   include SocialAccountsHelper
   before_action :authorize
-  before_action except: %i[show index search]
   helper_method :generate_link, :supported_social_networks
 
-  def show
-    @user = User.find(params[:id])
-  end
+  def show; end
 
   def edit
     return unless authorize_to_update!
@@ -40,10 +37,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    unless current_user
-      redirect_to(new_user_session_path)
-      return
-    end
     @users = User.all
     @users_to_add = (@users - [current_user]).reject do |user|
       current_user.sent_contact_request?(user)
