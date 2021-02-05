@@ -78,7 +78,8 @@ en:
       view: 'View my requests'
     edit:
       edit_profile_heading: 'Edit profile'
-      profile_heading: 'Profile'
+      profile_settings_heading: 'Profile settings'
+      edit_profile_settings_heading: 'Edit profile settings'
   social_accounts:
     attributes:
       social_network: 'Social network'

@@ -21,7 +21,7 @@ RSpec.describe 'Update user', type: :request do
       let(:attributes) { super().merge(username: '') }
 
       it 'renders the user edit page' do
-        expect(response).to render_template(:edit)
+        expect(response).to render_template(:edit_profile)
       end
     end
   end
