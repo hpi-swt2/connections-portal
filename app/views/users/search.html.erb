@@ -7,42 +7,11 @@
   <% end %>
 
   <% @users.each do |user| %>
-    <div class=contact>
-      <label class="contact-info">
-        <%= link_to "", user_path(user) %>
-        <div class="profile-image my-2 my-sm-0 ">
-          <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
-        </div>
-        <div class="user-info my-2 my-sm-0">
-          <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
-          <div class="email"><%= user.email %></div>
-        </div>
-      </label>
-        <div class="social-account-info">
-          <% user.social_accounts.each do |social_account| %>
-            <label class="contact-info">
-              <a href=<%= generate_link(social_account) %>>
-                <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
-              </a>
-            </label>
-          <% end %>
-        </div>
-    </div>
+    <%= render partial: 'users/card', locals: { user: user, mode: :overview } %>
   <% end %>
 
   <% @users_to_add.each do |user| %>
-    <div class=contact>
-      <label class="contact-info">
-        <div class="profile-image my-2 my-sm-0 ">
-          <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle cover">
-        </div>
-        <div class="user-info my-2 my-sm-0">
-          <h5><%= "#{user.firstname} #{user.lastname}"%></h5>
-          <div class="email"><%= user.email %></div>
-        </div>
-        <%= button_to "+" , user_contact_requests_path(user), method: :post, id: user.id, class: "add_button btn btn-secondary"%>
-      </label>
-    </div>
+    <%= render partial: 'users/card', locals: { user: user, mode: :add } %>
   <% end %>
 
 </div>
