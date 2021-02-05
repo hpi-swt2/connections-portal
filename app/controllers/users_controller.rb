@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     @users_to_add = @users.reject do |user|
       current_user.sent_contact_request?(user)
     end
+    @user_contacts = current_user.contacts
   end
 
   private

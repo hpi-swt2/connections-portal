@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="container">
       <div class="row">
-        <div class="col-xs">
+        <div class="col-1">
           <%= image_tag user.avatar, height: 65, width: 65, class: "rounded-circle" %>
         </div>
         <a class="col-8" href=<%= user_path(user) %>>
@@ -10,11 +10,15 @@
           <small class="card-link"><i><%= user.email %></i></small>
         </a>
         <% if mode == :add %>
-          <% if @users_to_add.include? user %>
-            <div class="col-1">
-              <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), method: :post, id: user.id, class: "fa-2x" %>
-            </div>
-          <% end %>
+          <div class="col-1">
+            <% if @users_to_add.include? user %>
+                <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), method: :post, id: user.id, class: "fa-2x" %>
+            <% elsif @user_contacts.include? user %>
+                <span class="badge badge-success">Contact</span>
+            <% else %>
+                <span class="badge badge-info">Requested</span>
+            <% end %>
+          </div>
         <% end %>
       </div>
       <% if mode == :overview %>
