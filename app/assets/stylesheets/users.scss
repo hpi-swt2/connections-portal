@@ -1,26 +1,6 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
-.form-tag {
-    display: flex;
-    width: 100%;
-}
-.text-field {
-    flex: 5;
-    margin: 3px;
-}
-.submit-button {
-    flex: 1;
-    margin: 3px;
-}
-.stack {
-    display: flex;
-    flex-direction: column;
-}
-.stack > * + * {
-    margin-top: .5rem;
-}
 .contact-card {
     border-radius: 8px;
     padding: 5px;
