@@ -54,7 +54,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
         within("#init-call-#{user2.id}") do
           click_button('button')
         end
-      end.not_to change { user2.jitsi_calls.count }
+      end.not_to(change { user2.jitsi_calls.count })
     end
   end
 

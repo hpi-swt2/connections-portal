@@ -2,15 +2,7 @@ class JitsiCallsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    unless User.find(call_params[:guest_id])&.current_status == User.filter_status
-      send_notification(
-        current_user,
-        action: :simple_message,
-        popup_text: I18n.t('call.creation_fail'),
-        dismiss: I18n.t('confirmation.dismiss')
-      )
-      return
-    end
+    return unless check_user_availability
 
     @jitsi_call = JitsiCall.new(room_name: SecureRandom.uuid)
     if @jitsi_call.save
@@ -54,16 +46,7 @@ class JitsiCallsController < ApplicationController
       return
     end
 
-    change_call_state MeetingInvitation.state_rejected
-
-    call.guests.each do |guest|
-      send_notification(
-        guest,
-        action: :simple_message,
-        popup_text: I18n.t('call.aborted', initiator: current_user.display_name),
-        dismiss: I18n.t('confirmation.dismiss')
-      )
-    end
+    cancel_call(call)
   end
 
   def assign_participants
@@ -89,13 +72,38 @@ class JitsiCallsController < ApplicationController
   def notify_participants
     @jitsi_call.guests.each do |guest|
       send_notification(
+        guest, action: :invited_to_call,
+               accept_text: I18n.t('call.accept'),
+               accept_url: accept_jitsi_call_path(@jitsi_call),
+               reject_text: I18n.t('call.reject'),
+               reject_url: reject_jitsi_call_path(@jitsi_call),
+               popup_text: I18n.t('call.notification_incoming_call', initiator: @jitsi_call.initiator.display_name)
+      )
+    end
+  end
+
+  def check_user_availability
+    is_user_available = User.find(call_params[:guest_id])&.current_status == User.filter_status
+    unless is_user_available
+      send_notification(
+        current_user,
+        action: :simple_message,
+        popup_text: I18n.t('call.creation_fail'),
+        dismiss: I18n.t('confirmation.dismiss')
+      )
+    end
+    is_user_available
+  end
+
+  def cancel_call(call)
+    change_call_state MeetingInvitation.state_rejected
+
+    call.guests.each do |guest|
+      send_notification(
         guest,
-        action: :invited_to_call,
-        accept_text: I18n.t('call.accept'),
-        accept_url: accept_jitsi_call_path(@jitsi_call),
-        reject_text: I18n.t('call.reject'),
-        reject_url: reject_jitsi_call_path(@jitsi_call),
-        popup_text: I18n.t('call.notification_incoming_call', initiator: @jitsi_call.initiator.display_name)
+        action: :simple_message,
+        popup_text: I18n.t('call.aborted', initiator: current_user.display_name),
+        dismiss: I18n.t('confirmation.dismiss')
       )
     end
   end
