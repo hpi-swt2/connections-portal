@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs">
-          <img src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" class="rounded-circle" style="width: 50px">
+          <%= image_tag user.avatar, height: 65, width: 65, class: "rounded-circle" %>
         </div>
         <a class="col-8" href=<%= user_path(user) %>>
           <h5 class="card-title"><%= user.display_name %></h5>

@@ -9,6 +9,10 @@ FactoryBot.define do
     lastname { random_name }
     place_of_residence { 'Potsdam' }
     birthdate { Time.zone.today }
+    after(:build) do |user|
+      user.avatar.attach(io: File.open(Rails.root.join('spec/support/assets/avatar-default-test.png')),
+                         filename: 'avatar-default-test.png', content_type: 'image/png')
+    end
 
     factory :user_without_username do
       before(:create) do |user|
@@ -20,14 +24,14 @@ FactoryBot.define do
     trait :maximilian do
       firstname { 'Maximilian' }
       lastname { 'Mustermann' }
-      username { 'standard_user' }
+      username { 'berlin' }
       email { 'test@example.com' }
     end
 
     trait :erika do
       firstname { 'Erika' }
       lastname { 'Musterfrau' }
-      username { 'erika.musterfrau' }
+      username { 'london' }
       email { 'test2@example.com' }
     end
   end

@@ -43,13 +43,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_contact
-    authenticate_user!
-    current_user.contacts << User.find(params[:id])
-    current_user.save
-    redirect_to root_path
-  end
-
   def search
     @users = User.search(params[:search]).where.not(id: current_user.id)
     @users_to_add = @users.reject do |user|
@@ -67,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :firstname, :lastname, :email, :birthdate, :place_of_residence)
+    params.require(:user).permit(:username, :firstname, :lastname, :email, :birthdate, :place_of_residence, :avatar)
   end
 
   def authorize
