@@ -60,6 +60,14 @@ class User < ApplicationRecord
     self.username ||= email.split('@', 2)[0]
   end
 
+  def has_contact_request?
+    contact_requests.any?
+  end
+
+  def count_contact_requests
+    contact_requests.length
+  end
+
   def sent_contact_request?(user)
     (user.contact_requests.include? self) or (contacts.include? user)
   end

@@ -106,6 +106,18 @@ RSpec.describe User, type: :model do
       user.contacts << contact
       expect(user.sent_contact_request?(contact)).to be true
     end
+
+    it 'determines if there are any contact requests' do
+      expect(user.has_contact_request?).to be false
+      user.contact_requests << contact
+      expect(user.has_contact_request?).to be true
+    end
+
+    it 'counts my contact requests' do
+      expect(user.count_contact_requests).to be 0
+      user.contact_requests << contact
+      expect(user.count_contact_requests).to be 1
+    end
   end
 
   describe 'status scope' do
