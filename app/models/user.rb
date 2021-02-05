@@ -15,14 +15,12 @@ class User < ApplicationRecord
   has_many :activities, dependent: :delete_all
   has_many :call_participants, dependent: :delete_all, inverse_of: :user
   has_many :jitsi_calls, through: :call_participants
+  has_many :friendships, dependent: :destroy, inverse_of: :user
+  has_many :contacts, through: :friendships
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
   # rubocop:disable Rails/HasAndBelongsToMany
-  has_and_belongs_to_many :contacts,
-                          class_name: 'User',
-                          association_foreign_key: 'contact_id'
-
   has_and_belongs_to_many :contact_requests,
                           class_name: 'User',
                           join_table: 'users_contact_requests',
