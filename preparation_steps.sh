@@ -157,7 +157,7 @@ td {
     font-size: $basicFontSize;
 }"
 
-printf '%s' "${notesStylesheet}" >> app/assets/stylesheets/notes.scss
+printf '%s' "${notesStylesheet}" >> app/assets/stylesheets/shared.scss
 
 ####################
 # configuring i18n #
