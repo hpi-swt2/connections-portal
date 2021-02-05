@@ -68,3 +68,15 @@ html, body {
 h1 {
   font-size: 2.5rem !important;
 }
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.nav-bar-entry {
+  position: relative;
+}

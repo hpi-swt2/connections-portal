@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#dashboard'
-  get 'search', to: 'users#search'
 
   resources :users, only: %i[show edit update index] do
     patch 'status', to: 'users#update_status', as: 'update_status', on: :member
