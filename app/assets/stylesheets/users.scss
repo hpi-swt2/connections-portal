@@ -11,19 +11,19 @@
 
 
 
-.contact-card {
+.user-card {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 
-.contact {
+.user-information {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.contact-link {
+.user-card-link {
     flex: 5;
     display: flex; 
     justify-content: center;
@@ -31,7 +31,7 @@
     position: relative;
 }
 
-.social-account-info {
+.user-social-account-info {
     margin-top: .5rem;
     display: flex;
     justify-content: space-around;
@@ -63,7 +63,7 @@ img {
   object-fit: cover;
 }
 
-.user-info{
+.user-attributes{
     flex: 4;
     display: block;
     line-height: 50%;
@@ -85,6 +85,7 @@ a::after {
      font-size: small;
 }
 .add_button {
+    position: relative;
     margin-right: .5rem;
     flex: 1;
     height: 100%;
