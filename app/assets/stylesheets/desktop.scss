@@ -40,12 +40,13 @@ $success: #00911f;
 // https://github.com/bokmann/font-awesome-rails
 @import 'font-awesome';
 
-// app/assets/stylesheets/notes.scss
-@import 'notes';
+// app/assets/stylesheets/shared.scss
+@import 'shared';
 @import 'popup';
 
 //= require_tree
 
-.portal-link {
-  color: white;
+#mobile-logout-button {
+  display: none;
 }
+
