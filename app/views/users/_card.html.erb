@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs">
-          <%= render 'avatar', user: user, size: 65, classes: %i[rounded-circle] %>
+          <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
         </div>
         <a class="col-8" href=<%= user_path(user) %>>
           <h5 class="card-title"><%= user.display_name %></h5>
