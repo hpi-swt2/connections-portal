@@ -64,7 +64,7 @@ class User < ApplicationRecord
     contact_requests.any?
   end
 
-  def count_contact_requests
+  def notification_count
     contact_requests.length
   end
 
