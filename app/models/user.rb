@@ -2,7 +2,6 @@
 class User < ApplicationRecord
   # Every user can have multiple social accounts like GitHub, Telegram, ...
   has_many :social_accounts, dependent: :delete_all
-  has_one_attached :avatar
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -17,6 +16,7 @@ class User < ApplicationRecord
   has_many :jitsi_calls, through: :meeting_invitations
   has_many :friendships, dependent: :destroy, inverse_of: :user
   has_many :contacts, through: :friendships
+  has_one :avatar, dependent: :destroy
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
@@ -47,10 +47,8 @@ class User < ApplicationRecord
 
   validates :username, :email, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
-  validates :avatar, blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 0.01..5.megabytes }
 
   after_initialize :init
-  after_commit :set_default_avatar, on: %i[create update]
 
   attribute :current_status, :string, default: User.status_available
 
@@ -83,19 +81,5 @@ class User < ApplicationRecord
 
   def name
     "#{firstname} #{lastname}"
-  end
-
-  private
-
-  def set_default_avatar
-    if avatar.attached?
-      nil
-    else
-      avatar.attach(
-        io: File.open(
-          Rails.root.join('app/assets/images/default_avatar.png')
-        ), filename: 'default_avatar.png', content_type: 'image/png'
-      )
-    end
   end
 end
