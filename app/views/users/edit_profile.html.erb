@@ -6,7 +6,7 @@
   <% end %>
 
   <p>
-    <%= image_tag @user.avatar, height: 160, width: 160, :style => "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;", class: "rounded-circle" %>
+    <%= render 'avatar', user: @user, size: 160, classes: %i[rounded-circle centered-avatar] %>
   </p>
 
   <p>
