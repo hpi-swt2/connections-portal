@@ -85,6 +85,10 @@ class User < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
+  def unavailable
+    current_status == User.status_working
+  end
+
   private
 
   def set_default_avatar

@@ -5,22 +5,28 @@
 </div>
 
 <div id="filtered_user_list" class="user-list scroll-list scroll-styled">
-  <p><%= I18n.t('user.status.user_list') %></p>
-  <% @users.each do |user| %>
-    <div class="user-list-item d-flex">
-      <div class="user-avatar d-flex">
-        <span><i class="fa fa-user"></i></span>
-      </div>
-      <div class="col user-name">
-        <%= user.display_name %>
-      </div>
-      <div class="user-meeting d-flex">
-        <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-          <%= f.hidden_field :guest_id, value: user.id %>
-          <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
-          <% end %>
-        <% end %>
-      </div>
+  <% if current_user.unavailable %>
+    <div class="busy-container">
+      <p><%= I18n.t('user.status.busy_text') %></p>
     </div>
-  <% end %>
+  <% else %>
+    <p><%= I18n.t('user.status.user_list') %></p>
+    <% @users.each do |user| %>
+      <div class="user-list-item d-flex">
+        <div class="user-avatar d-flex">
+          <span><i class="fa fa-user"></i></span>
+        </div>
+        <div class="col user-name">
+          <%= user.display_name %>
+        </div>
+        <div class="user-meeting d-flex">
+          <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
+            <%= f.hidden_field :guest_id, value: user.id %>
+            <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <%end %>
 </div>

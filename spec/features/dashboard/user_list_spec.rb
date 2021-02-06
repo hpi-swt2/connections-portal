@@ -26,6 +26,23 @@ RSpec.describe 'User list', type: :feature do
     end
   end
 
+  context 'when in working status' do
+    let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status }
+
+    before do
+      user.current_status = 'working'
+      visit root_path
+    end
+
+    it 'does not show available user' do
+      expect(page).not_to have_text(available_user.display_name)
+    end
+
+    it 'has busy text' do
+      expect(page).to have_text(I18n.t('user.status.busy_text'))
+    end
+  end
+
   context 'with many users' do
     before do
       FactoryBot.create_list :user, 35, current_status: User.filter_status
