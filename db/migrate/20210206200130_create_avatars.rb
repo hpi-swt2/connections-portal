@@ -23,8 +23,7 @@ class CreateAvatars < ActiveRecord::Migration[6.0]
     User.all.each do |user|
       Avatar.create!(
         file: content, filename: 'default_avatar.png',
-        filesize: size, mime_type: 'image/png',
-        user_id: user.id
+        filesize: size, mime_type: 'image/png', user_id: user.id
       )
     end
   end
