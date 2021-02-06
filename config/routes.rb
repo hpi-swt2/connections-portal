@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: :create
+  resources :avatars, only: [] do
+    get :serve, on: :member
+    post :upload, on: :collection
+  end
 
   resources :jitsi_calls, only: :create do
     member do
