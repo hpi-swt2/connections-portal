@@ -1,7 +1,7 @@
 <h1><%= @user.username %></h1>
 
 <div>
-  <%= render 'avatar', user: @user, size: 160, style: "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;" %>
+  <%= render 'avatar', user: @user, size: 160, classes: %i[rounded-circle centered-avatar] %>
 </div>
 
 <table>
