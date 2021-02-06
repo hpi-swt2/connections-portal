@@ -87,7 +87,7 @@ img {
 }
 
 // This is a trick so that the link is covering the hole label.
-a::after {
+.custom-link::after {
     content: '';
     position: absolute;
     top: 0;

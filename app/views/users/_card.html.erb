@@ -3,7 +3,7 @@
 <div class=user-card>
   <div class="user-information">
     <label class="user-card-link">
-      <%= link_to "", user_path(user) %>
+      <%= link_to "", user_path(user), class: "custom-link" %>
       <div class="profile-image my-2 my-sm-0 ">
         <%= image_tag user.avatar, class: "rounded-circle cover" %>
       </div>
@@ -14,7 +14,7 @@
     </label>
     <% if mode == :add %>
       <label class="button-lable">
-        <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "add_button btn btn-secondary"%>
+        <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "custom-link add_button btn btn-secondary"%>
       </label>
     <% end %>
   </div>
@@ -22,7 +22,7 @@
     <div class="user-social-account-info">
       <% user.social_accounts.each do |social_account| %>
         <label class="user-card-link">
-          <a href=<%= generate_link(social_account) %>>
+          <a class="custom-link" href=<%= generate_link(social_account) %>>
             <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
           </a>
         </label>
