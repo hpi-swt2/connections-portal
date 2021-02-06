@@ -1,12 +1,7 @@
 <h1><%= @user.username %></h1>
 
 <div>
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, height: 160, width: 160, style: "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;", class: "rounded-circle" %>
-  <% else %>
-    <img class="rounded-circle" height="160" width="160" style="margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"
-         src="https://user-images.githubusercontent.com/48409110/107123576-8aef6b80-689e-11eb-9386-16eecd0ceb9e.png">
-  <% end %>
+  <%= render 'avatar', user: @user, size: 160, style: "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;" %>
 </div>
 
 <table>
