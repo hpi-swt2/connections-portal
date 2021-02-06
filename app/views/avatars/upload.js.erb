@@ -1,0 +1,6 @@
+<% if @saved %>
+  document.getElementById('new_avatar').reset();
+  generatePopup("<%= I18n.t('confirmation.resource_update', resource: Avatar) %>", "fa-info", [], 3000)
+<% else %>
+  generatePopup("<%= I18n.t('denial.resource_update', resource: Avatar) %>", "fa-exclamation", [], 3000)
+<% end %>
