@@ -2,6 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.form-tag {
+    display: flex;
+    width: 100%;
+}
+.text-field {
+    flex: 5;
+    margin: 3px;
+}
+.submit-button {
+    flex: 1;
+    margin: 3px;
+}
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+.stack > * + * {
+    margin-top: .5rem;
+}
+
+
 // We are using the CSS FlexBox system to style the cards: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
 // Every row of the user card is one FlexBox. For example:
 // | profile-image | user-attributes |

@@ -19,14 +19,16 @@
     <% end %>
   </div>
   <% if mode == :overview %>
-    <div class="user-social-account-info">
-      <% user.social_accounts.each do |social_account| %>
-        <label class="user-card-link">
-          <a class="custom-link" href=<%= generate_link(social_account) %>>
-            <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
-          </a>
-        </label>
-      <% end %>
-    </div>
+    <% if user.social_accounts.any? %>
+      <div class="user-social-account-info">
+        <% user.social_accounts.each do |social_account| %>
+          <label class="user-card-link">
+            <a class="custom-link" href=<%= generate_link(social_account) %>>
+              <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+            </a>
+          </label>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
