@@ -85,7 +85,7 @@ class User < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
-  def unavailable
+  def unavailable?
     current_status == User.status_working
   end
 

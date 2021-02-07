@@ -30,7 +30,7 @@ RSpec.describe 'User list', type: :feature do
     let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status }
 
     before do
-      user.current_status = 'working'
+      user.current_status = User.status_working
       visit root_path
     end
 
