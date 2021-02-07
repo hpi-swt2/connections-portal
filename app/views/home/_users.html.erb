@@ -10,11 +10,11 @@
       <p><%= I18n.t('user.status.busy_text') %></p>
     </div>
   <% else %>
-    <% @users.each do |user| %>
-      <% if user == @users[0] %>
+    <% @users.each_with_index do |user, index| %>
+      <% if index == 0 %>
         <h4><%= I18n.t('user.status.start_talk') %></h4>
       <% end %>
-      <% if user == @users[1] %>
+      <% if index == 1 %>
         <h4><%= I18n.t('user.status.or_maybe') %></h4>
       <% end %>
       <div class="user-list-item d-flex">
