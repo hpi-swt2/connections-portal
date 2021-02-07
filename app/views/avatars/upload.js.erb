@@ -1,8 +1,10 @@
 <% if @saved %>
-  document.getElementById('new_avatar').reset();
-  const image = document.getElementById('<%= "avatar-#{current_user.id}" %>')
-  image.src = '<%= "#{serve_avatar_path(current_user.avatar)}?#{Time.now}" %>'
-  generatePopup("<%= I18n.t('confirmation.resource_update', resource: Avatar) %>", "fa-info", [], 3000)
+  {
+    document.getElementById('new_avatar').reset();
+    const image = document.getElementById('<%= "avatar-#{current_user.id}" %>')
+    image.src = '<%= "#{serve_avatar_path(current_user.avatar)}?#{Time.now}" %>'
+    generatePopup("<%= I18n.t('confirmation.resource_update', resource: Avatar) %>", "fa-info", [], 3000)
+  }
 <% else %>
   {
     const error_node = document.createElement('div');
