@@ -50,7 +50,7 @@ RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js
   it 'is not possible to upload an invalid profile picture' do
     visit edit_profile_user_path(user)
     upload_avatar 'spec/support/assets/avatar-big.jpeg'
-    expect(page).to have_text('Filesize must be less than or equal to 5242880')
+    expect(page).to have_text('File size must be less than or equal to 5242880')
   end
 
   private

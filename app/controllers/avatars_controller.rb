@@ -7,7 +7,7 @@ class AvatarsController < ApplicationController
     @saved = @avatar.update(
       file: file.read,
       filename: file.original_filename,
-      filesize: file.size,
+      file_size: file.size,
       mime_type: file.content_type,
       user_id: current_user.id
     )

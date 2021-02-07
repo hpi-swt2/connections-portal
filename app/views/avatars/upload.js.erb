@@ -15,7 +15,7 @@
     <% @avatar.errors.full_messages.each do |message| %>
       list_item = document.createElement('li');
       list_item.textContent = '<%= message %>';
-      list.appendChild(list_item)
+      list.appendChild(list_item);
     <% end %>
     const target = document.getElementById('new_avatar');
     if (target.firstChild.id === 'error_explanation') {

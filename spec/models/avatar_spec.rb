@@ -15,16 +15,16 @@ RSpec.describe Avatar, type: :model do
     expect(FactoryBot.build(:avatar, filename: nil)).not_to be_valid
   end
 
-  it 'is not valid without a filesize' do
-    expect(FactoryBot.build(:avatar, filesize: nil)).not_to be_valid
+  it 'is not valid without a file size' do
+    expect(FactoryBot.build(:avatar, file_size: nil)).not_to be_valid
   end
 
   it 'is not valid if it is bigger than 5MiB' do
-    expect(FactoryBot.build(:avatar, filesize: 5.megabytes + 1)).not_to be_valid
+    expect(FactoryBot.build(:avatar, file_size: Avatar::MAX_FILE_SIZE_MEBIBYTES.megabytes + 1)).not_to be_valid
   end
 
-  it 'is not valid with a rational filesize' do
-    expect(FactoryBot.build(:avatar, filesize: 10.5)).not_to be_valid
+  it 'is not valid with a non integer file size' do
+    expect(FactoryBot.build(:avatar, file_size: 10.5)).not_to be_valid
   end
 
   it 'is not valid without a mime type' do

@@ -87,10 +87,12 @@ class User < ApplicationRecord
   private
 
   def set_default_avatar
+    return if avatar.present?
+
     file = File.open(Rails.root.join('app/assets/images/default_avatar.png'), 'rb')
     self.avatar = Avatar.new(
       file: file.read, filename: 'default_avatar.png',
-      filesize: file.size, mime_type: 'image/png'
+      file_size: file.size, mime_type: 'image/png'
     )
     file.close
   end

@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_224110) do
 
   create_table "avatars", force: :cascade do |t|
     t.string "filename"
-    t.integer "filesize"
+    t.integer "file_size"
     t.string "mime_type"
     t.binary "file"
     t.integer "user_id", null: false

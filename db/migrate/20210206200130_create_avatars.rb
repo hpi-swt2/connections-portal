@@ -2,7 +2,7 @@ class CreateAvatars < ActiveRecord::Migration[6.0]
   def change
     create_table :avatars do |t|
       t.string :filename
-      t.integer :filesize
+      t.integer :file_size
       t.string :mime_type
       t.binary :file
       t.references :user, null: false, foreign_key: true
@@ -23,7 +23,7 @@ class CreateAvatars < ActiveRecord::Migration[6.0]
     User.all.each do |user|
       Avatar.create!(
         file: content, filename: 'default_avatar.png',
-        filesize: size, mime_type: 'image/png', user_id: user.id
+        file_size: size, mime_type: 'image/png', user_id: user.id
       )
     end
   end
