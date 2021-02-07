@@ -49,6 +49,7 @@ class User < ApplicationRecord
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
 
   after_initialize :init
+  after_create_commit :set_default_avatar
 
   attribute :current_status, :string, default: User.status_available
 
@@ -81,5 +82,16 @@ class User < ApplicationRecord
 
   def name
     "#{firstname} #{lastname}"
+  end
+
+  private
+
+  def set_default_avatar
+    file = File.open(Rails.root.join('app/assets/images/default_avatar.png'), 'rb')
+    Avatar.create!(
+      file: file.read, filename: 'default_avatar.png',
+      filesize: file.size, mime_type: 'image/png', user_id: id
+    )
+    file.close
   end
 end
