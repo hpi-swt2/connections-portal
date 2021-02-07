@@ -2,9 +2,9 @@ class AvatarsController < ApplicationController
   before_action :authenticate_user!
 
   def upload
-    avatar = Avatar.find_by(user_id: current_user.id) || Avatar.new
+    @avatar = Avatar.find_by(user_id: current_user.id) || Avatar.new
     file = params[:avatar][:file]
-    @saved = avatar.update(
+    @saved = @avatar.update(
       file: file.read,
       filename: file.original_filename,
       filesize: file.size,
