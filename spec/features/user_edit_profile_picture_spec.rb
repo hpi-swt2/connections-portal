@@ -32,7 +32,7 @@ RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js
   context 'when visiting the user search page' do
     let!(:users) { FactoryBot.create_list :user, 3 }
 
-    it 'shows profile pictures for all users' do
+    it 'shows profile pictures for all other users' do
       visit search_users_path
       users.each do |user|
         expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
