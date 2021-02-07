@@ -192,7 +192,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'has a default profile picture' do
-    expect{ user.save }.to change(Avatar, :count).by(1)
+    expect { user.save }.to change(Avatar, :count).by(1)
     expect(user.avatar.file).to be_present
   end
 end

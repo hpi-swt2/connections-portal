@@ -1,44 +1,64 @@
 require 'rails_helper'
 
-RSpec.describe 'Profile picture', type: :feature do
+RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js: true do
   let(:user) { FactoryBot.create :user }
   let(:contact) { FactoryBot.create :user }
 
-  it 'is a default profile-picture shown on the user-show-page, when no individual picture was set' do
-    sign_in user
+  before { sign_in user }
+
+  it "shows a profile picture on the user's show page" do
     visit user_path(user)
-    expect(page).to have_css("img[src*='avatar-default-test.png']")
+    expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+  end
+
+  it "shows a profile picture on the user's edit profile page" do
+    visit edit_profile_user_path(user)
+    expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+  end
+
+  context "when visiting the user's contacts page" do
+    let!(:contacts) { FactoryBot.create_list :user, 3 }
+
+    before { contacts.each { |contact| user.contacts << contact } }
+
+    it 'shows a profile picture for all contacts' do
+      visit user_contacts_path(user)
+      contacts.each do |contact|
+        expect(page).to have_css("img[src='#{serve_avatar_path(contact.avatar)}']")
+      end
+    end
+  end
+
+  context 'when visiting the user search page' do
+    let!(:users) { FactoryBot.create_list :user, 3 }
+
+    it 'shows profile pictures for all users' do
+      visit search_users_path
+      users.each do |user|
+        expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+      end
+    end
   end
 
   it 'is possible to upload a profile picture' do
-    sign_in user
     visit edit_profile_user_path(user)
-    attach_file 'user_avatar', 'spec/support/assets/new-avatar.jpeg'
-    click_button 'Update User'
-    visit user_path(user)
-    expect(page).to have_css("img[src*='new-avatar.jpeg']")
+    upload_avatar 'spec/support/assets/new-avatar.jpeg'
+    user.reload
+    expect(user.avatar.filename).to eq('new-avatar.jpeg')
   end
 
-  it 'is not possible to upload a picture larger than 5 MB' do
-    sign_in user
+  it 'is not possible to upload an invalid profile picture' do
     visit edit_profile_user_path(user)
-    attach_file 'user_avatar', 'spec/support/assets/avatar-big.jpeg'
-    click_button 'Update User'
-    expect(page).to have_text('Avatar File size should be less than 5 MB')
+    upload_avatar 'spec/support/assets/avatar-big.jpeg'
+    expect(page).to have_text('Filesize must be less than or equal to 5242880')
   end
 
-  it 'is not possible to upload files with arbitrary extensions' do
-    sign_in user
-    visit edit_profile_user_path(user)
-    attach_file 'user_avatar', 'spec/support/assets/avatar.gif'
-    click_button 'Update User'
-    expect(page).to have_text('Avatar is not a valid file format')
-  end
+  private
 
-  it 'is a profile-picture shown on the my-contacts-page' do
-    sign_in user
-    user.contacts << contact
-    visit user_contacts_path(user)
-    expect(page).to have_css("img[src*='avatar-default-test.png']")
+  def upload_avatar(path)
+    attach_file 'avatar_file', path
+    within '#new_avatar' do
+      click_button 'commit'
+    end
   end
 end

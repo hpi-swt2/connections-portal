@@ -15,12 +15,4 @@ RSpec.describe 'contacts/index', type: :view do
     expect(rendered).to have_text user.email
     expect(rendered).to have_text user.name
   end
-
-  it 'contains an image' do
-    expect(rendered).to(
-      have_css(
-        "img[src*='avatar-default-test.png']"
-      )
-    )
-  end
 end
