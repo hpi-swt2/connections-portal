@@ -10,8 +10,13 @@
       <p><%= I18n.t('user.status.busy_text') %></p>
     </div>
   <% else %>
-    <p><%= I18n.t('user.status.user_list') %></p>
     <% @users.each do |user| %>
+      <% if user == @users[0] %>
+        <h4><%= I18n.t('user.status.start_talk') %></h4>
+      <% end %>
+      <% if user == @users[1] %>
+        <h4><%= I18n.t('user.status.or_maybe') %></h4>
+      <% end %>
       <div class="user-list-item d-flex">
         <div class="user-avatar d-flex">
           <span><i class="fa fa-user"></i></span>
@@ -28,5 +33,5 @@
         </div>
       </div>
     <% end %>
-  <%end %>
+  <% end %>
 </div>
