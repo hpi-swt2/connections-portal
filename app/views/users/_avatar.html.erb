@@ -1,2 +1,2 @@
 <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= image_tag serve_avatar_path(user.avatar), height: size, width: size, class: "#{classes.join(' ')}" %>
+<%= image_tag serve_avatar_path(user.avatar), id: "avatar-#{user.id}", height: size, width: size, class: "#{classes.join(' ')}" %>

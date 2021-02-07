@@ -1,6 +1,6 @@
 # A model for storing user avatars in the database
 class Avatar < ApplicationRecord
-  VALID_MIME_TYPES = %w[image/png image/jpg image/jpeg].freeze
+  VALID_MIME_TYPES = %w[image/png image/jpg image/jpeg image/gif].freeze
   MAX_FILE_SIZE_MEGABYTES = 5
 
   validates :filename, :filesize, :file, :mime_type, presence: true
