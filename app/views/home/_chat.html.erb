@@ -19,11 +19,7 @@
 <div class="d-none" data-role="message-template">
   <div class="chat-item d-flex flex-row">
     <div class="avatar-container d-flex align-items-end">
-      <a href="#">
-        <span class="w-48 avatar">
-          <i class="fa fa-user"></i>
-        </span>
-      </a>
+      <%= render 'users/avatar', user: current_user, size: 48, classes: %i[rounded-circle] %>
     </div>
     <div class="chat-content">
       <a href="#" class="chat-author" data-role="message-author"></a>

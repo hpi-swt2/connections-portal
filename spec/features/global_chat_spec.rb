@@ -14,11 +14,6 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     find('#post-chat-button').click
   end
 
-  it 'clears text box after message submit' do
-    post_message(message)
-    expect(page).to have_field('room_message_message', text: '')
-  end
-
   it 'displays the new message' do
     expect(page).not_to have_text(message)
     post_message(message)
@@ -35,17 +30,29 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     end
   end
 
-  it 'shows the correct timestamp' do
-    post_message(message)
-    message = RoomMessage.all.last
-    expect(page).to have_text(message.formatted_time)
-  end
+  context 'with a posted message' do
+    let(:room_message) { RoomMessage.all.last }
+    before do
+      post_message(message)
+      room_message
+    end
 
-  it 'shows the correct timestamp after reload' do
-    post_message(message)
-    message = RoomMessage.all.last
-    visit root_path
-    expect(page).to have_text(message.formatted_time)
+    it 'clears text box after message submit' do
+      expect(page).to have_field('room_message_message', text: '')
+    end
+
+    it 'shows the correct timestamp' do
+      expect(page).to have_text(room_message.formatted_time)
+    end
+
+    it "displays the user's avatar" do
+      expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
+    end
+
+    it 'shows the correct timestamp after reload' do
+      visit root_path
+      expect(page).to have_text(room_message.formatted_time)
+    end
   end
 
   def login(user)

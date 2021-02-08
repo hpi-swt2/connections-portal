@@ -15,7 +15,8 @@ class RoomMessage < ApplicationRecord
     super(options).merge(
       display_name: user.display_name,
       send_date: formatted_time,
-      user_link: user_path(user)
+      user_link: user_path(user),
+      user_avatar: avatar_user_path(user)
     )
   end
 end
