@@ -85,7 +85,7 @@ class JitsiCallsController < ApplicationController
   end
 
   def check_user_availability
-    is_user_available = User.find(call_params[:guest_id])&.current_status == User.filter_status
+    is_user_available = User.filter_status.include? User.find(call_params[:guest_id])&.current_status
     unless is_user_available
       send_notification(
         current_user,

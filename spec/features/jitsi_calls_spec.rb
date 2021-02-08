@@ -43,7 +43,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     end
   end
 
-  context 'when th guest is not nice to meet you' do
+  context 'when the guest is not nice to meet you' do
     let(:initiator_invitation) { call.meeting_invitations.find_by(user: user1) }
     let(:guest_invitation) { call.meeting_invitations.find_by(user: user2) }
 
