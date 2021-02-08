@@ -7,7 +7,7 @@ RSpec.describe 'User list', type: :feature do
   before { sign_in user }
 
   context 'with some users' do
-    let!(:users) { FactoryBot.create_list :user, 5, current_status: User.filter_status.sample }
+    let!(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status.sample }
 
     before { visit root_path }
 
@@ -45,12 +45,12 @@ RSpec.describe 'User list', type: :feature do
 
   context 'with many users' do
     before do
-      FactoryBot.create_list :user, 35, current_status: User.filter_status.sample
+      FactoryBot.create_list :user, 20, current_status: User.filter_status.sample
       visit root_path
     end
 
-    it 'does only show 30 users' do
-      expect(page).to have_css('div#filtered_user_list div.user-card', count: 30)
+    it 'only shows 4 users' do
+      expect(page).to have_css('div#filtered_user_list div.user-card', count: 4)
     end
 
     it 'shows start to talk with... or maybe with...' do

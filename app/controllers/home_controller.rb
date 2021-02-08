@@ -26,6 +26,6 @@ class HomeController < ApplicationController
   private
 
   def maximum_length_user_list
-    30
+    4
   end
 end
