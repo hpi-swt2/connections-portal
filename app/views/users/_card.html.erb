@@ -13,7 +13,7 @@
       </div>
     </label>
     <% if mode == :add %>
-      <label class="button-lable">
+      <label class="button-label">
         <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "custom-link add_button btn btn-secondary"%>
       </label>
     <% end %>
