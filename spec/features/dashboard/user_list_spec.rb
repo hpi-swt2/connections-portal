@@ -50,7 +50,7 @@ RSpec.describe 'User list', type: :feature do
     end
 
     it 'only shows 4 users' do
-      expect(page).to have_css('div#filtered_user_list div.user-card', count: 4)
+      expect(page).to have_css('div#filtered_user_list div.user-card', count: HomeController::MAXIMUM_LENGTH_USER_LIST)
     end
 
     it 'shows start to talk with... or maybe with...' do
