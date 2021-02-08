@@ -1,7 +1,7 @@
 <h2><%= I18n.t('user.edit.edit_profile_settings_heading') %></h2>
 
 <p>
-  <%= render 'avatar', user: @user, size: 160, classes: %i[rounded-circle centered-avatar] %>
+  <%= render 'avatar', user: @user, size: 160 %>
 </p>
 
 <%= form_for Avatar.new, url: upload_avatar_user_path(current_user), remote: true do |f| %>

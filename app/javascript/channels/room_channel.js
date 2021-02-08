@@ -22,6 +22,8 @@ $(function () {
                     content.find('[data-role="message-author"]').attr('href', data.user_link);
                     content.find('[data-role="message-text"]').text(data.message);
                     content.find('[data-role="message-date"]').text(data.send_date);
+                    content.find('.avatar-user-link').attr('href', data.user_link)
+                    content.find('.avatar-image').attr('src', data.user_avatar)
 
                     if (data.user_id === document.current_user) {
                         content.addClass('chat-item-me')
