@@ -32,6 +32,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
 
   context 'with a posted message' do
     let(:room_message) { RoomMessage.all.last }
+
     before do
       post_message(message)
       room_message
@@ -42,16 +43,28 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     end
 
     it 'shows the correct timestamp' do
-      expect(page).to have_text(room_message.formatted_time)
+      within('#chat-messages') do
+        expect(page).to have_text(room_message.formatted_time)
+      end
+    end
+
+    it 'links to the users profile page' do
+      within('#chat-messages') do
+        expect(page).to have_link(href: user_path(user))
+      end
     end
 
     it "displays the user's avatar" do
-      expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
+      within('#chat-messages') do
+        expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
+      end
     end
 
     it 'shows the correct timestamp after reload' do
       visit root_path
-      expect(page).to have_text(room_message.formatted_time)
+      within('#chat-messages') do
+        expect(page).to have_text(room_message.formatted_time)
+      end
     end
   end
 
@@ -84,6 +97,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
       within('#chat-messages') do
         expect(page).to have_text(user.display_name)
         expect(page).to have_text(message)
+        expect(page).to have_link(href: user_path(user))
       end
     end
   end

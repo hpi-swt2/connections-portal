@@ -1,6 +1,6 @@
 <div class="chat-item <% if message.user == current_user  %> chat-item-me <% end %> d-flex flex-row">
   <div class="avatar-container d-flex align-items-end">
-    <%= render 'users/avatar', user: message.user, size: 48, classes: %i[rounded-circle] %>
+    <%= render 'users/avatar', user: message.user, size: 48, classes: [] %>
   </div>
   <div class="chat-content">
     <a href="<%= user_path(message.user) %>" class="chat-author"><%= message.user.display_name %></a>

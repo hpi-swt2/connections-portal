@@ -2,9 +2,9 @@ class HomeController < ApplicationController
   before_action :authorize
 
   def dashboard
-      filter_users_status
-      @room_messages = Room.global_chat_room.room_messages
-      render 'dashboard'
+    filter_users_status
+    @room_messages = Room.global_chat_room.room_messages
+    render 'dashboard'
   end
 
   def chat
