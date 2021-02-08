@@ -16,7 +16,7 @@ class AvatarsController < ApplicationController
   end
 
   def serve
-    avatar = Avatar.find(params[:id])
+    avatar = Avatar.find_by(user_id: params[:id])
     send_data(
       avatar.file,
       type: avatar.mime_type,

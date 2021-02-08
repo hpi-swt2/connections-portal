@@ -12,7 +12,7 @@ RSpec.describe 'Avatar', type: :request do
     context 'when signed in' do
       it "changes the user's avatar" do
         sign_in user
-        post upload_avatars_path, params: params, headers: headers
+        post upload_avatar_user_path(user), params: params, headers: headers
         user.reload
         expect(user.avatar.filename).to eq(file.original_filename)
       end
@@ -20,7 +20,7 @@ RSpec.describe 'Avatar', type: :request do
 
     context 'when not signed in' do
       it 'sets the http status code to unauthorized' do
-        post upload_avatars_path, params: params, headers: headers
+        post upload_avatar_user_path(user), params: params, headers: headers
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -30,14 +30,14 @@ RSpec.describe 'Avatar', type: :request do
     context 'when signed in' do
       it "returns the user's avatar" do
         sign_in user
-        get serve_avatar_path(user.avatar)
+        get avatar_user_path(user)
         expect(response.body).to eq(user.avatar.file)
       end
     end
 
     context 'when not signed in' do
       it 'redirects to the login page' do
-        get serve_avatar_path(user.avatar)
+        get avatar_user_path(user)
         expect(response).to redirect_to(new_user_session_path)
       end
     end

@@ -4,7 +4,7 @@
   <%= render 'avatar', user: @user, size: 160, classes: %i[rounded-circle centered-avatar] %>
 </p>
 
-<%= form_for Avatar.new, url: upload_avatars_path, remote: true do |f| %>
+<%= form_for Avatar.new, url: upload_avatar_user_path(current_user), remote: true do |f| %>
   <p>
     <%= f.file_field :file, accept: Avatar::VALID_MIME_TYPES.join(',') %>
   </p>

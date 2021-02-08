@@ -8,12 +8,12 @@ RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js
 
   it "shows a profile picture on the user's show page" do
     visit user_path(user)
-    expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+    expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
   end
 
   it "shows a profile picture on the user's edit profile page" do
     visit edit_profile_user_path(user)
-    expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+    expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
   end
 
   context "when visiting the user's contacts page" do
@@ -24,7 +24,7 @@ RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js
     it 'shows a profile picture for all contacts' do
       visit user_contacts_path(user)
       contacts.each do |contact|
-        expect(page).to have_css("img[src='#{serve_avatar_path(contact.avatar)}']")
+        expect(page).to have_css("img[src='#{avatar_user_path(contact)}']")
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe 'Profile picture', driver: :selenium_headless, type: :feature, js
     it 'shows profile pictures for all other users' do
       visit search_users_path
       users.each do |user|
-        expect(page).to have_css("img[src='#{serve_avatar_path(user.avatar)}']")
+        expect(page).to have_css("img[src='#{avatar_user_path(user)}']")
       end
     end
   end
