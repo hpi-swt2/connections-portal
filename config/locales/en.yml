@@ -134,3 +134,5 @@ en:
     users: 'Users'
     my-contacts: 'My contacts'
     search: 'Search'
+  avatar:
+    upload: 'Upload'

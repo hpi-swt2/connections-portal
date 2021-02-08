@@ -35,9 +35,11 @@ Layout/LineLength:
     - 'config/**/*.rb'
 
 # Ignore "Block has too many lines" for specs, `RSpec.describe` blocks can be long
+# We have more routes than fit in one block
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+    - 'config/routes.rb'
 
 # Only check "Missing top-level class documentation comment" for models
 Style/Documentation:
