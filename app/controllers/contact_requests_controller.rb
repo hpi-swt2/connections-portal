@@ -3,10 +3,10 @@ class ContactRequestsController < ApplicationController
   before_action :find_user, only: [:accept]
 
   def create
-    requested_user = User.find(params[:user_id])
-    requested_user.contact_requests << current_user
-    requested_user.save
-    redirect_to users_path
+    @requested_user = User.find(params[:user_id])
+    return if @requested_user.contact_requests.include? current_user
+    @requested_user.contact_requests << current_user
+    @saved = @requested_user.save
   end
 
   def index

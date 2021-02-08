@@ -11,7 +11,10 @@
         </a>
         <% if mode == :add %>
           <div class="col-1">
-            <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
+            <%= form_with url: user_contact_requests_path(user), remote: true, id: "add-contact-form-#{user.id}" do |f| %>
+              <%= button_tag(type: 'submit', class: 'fa fa-3x fa-plus-circle user-contact-add-button', title: I18n.t('user.contact_request.send')) do %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
         <% if mode == :call %>
