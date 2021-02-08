@@ -70,6 +70,10 @@ html, body {
   margin-top: 10px;
 }
 
+.user-list:last-child {
+  margin-bottom: 4rem;
+}
+
 .user-list-item {
   padding: .5rem .75rem;
   margin: .5rem .25rem;
@@ -282,4 +286,12 @@ html, body {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+.stack > * + * {
+    margin-top: .5rem;
 }
