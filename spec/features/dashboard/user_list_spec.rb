@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'User list', type: :feature do
-  let(:user) { FactoryBot.create :user, current_status: User.filter_status }
+  let(:user) { FactoryBot.create :user, current_status: User.filter_status.sample }
   let(:working_user) { FactoryBot.create :user, current_status: User.status_working }
 
   before { sign_in user }
 
   context 'with some users' do
-    let!(:users) { FactoryBot.create_list :user, 5, current_status: User.filter_status }
+    let!(:users) { FactoryBot.create_list :user, 5, current_status: User.filter_status.sample }
 
     before { visit root_path }
 
@@ -27,7 +27,7 @@ RSpec.describe 'User list', type: :feature do
   end
 
   context 'when in working status' do
-    let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status }
+    let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status.sample }
 
     before do
       user.current_status = User.status_working
@@ -45,7 +45,7 @@ RSpec.describe 'User list', type: :feature do
 
   context 'with many users' do
     before do
-      FactoryBot.create_list :user, 35, current_status: User.filter_status
+      FactoryBot.create_list :user, 35, current_status: User.filter_status.sample
       visit root_path
     end
 
