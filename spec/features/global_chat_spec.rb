@@ -30,7 +30,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     end
   end
 
-  context 'with a posted message' do
+  context 'with one posted message' do
     let(:room_message) { RoomMessage.all.last }
 
     before do
@@ -48,8 +48,8 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
       end
     end
 
-    it 'links to the users profile page' do
-      within('#chat-messages') do
+    it 'has a link to the users profile page in their avatar' do
+      within('#chat-messages .chat-item .avatar-container') do
         expect(page).to have_link(href: user_path(user))
       end
     end
@@ -75,29 +75,46 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     click_button('commit')
   end
 
-  # Test web socket with multiple sessions
-  # It seems like one can not use sign_in with multiple sessions
-  it 'updates the messages' do
-    user2 = FactoryBot.create :user
-    using_session(:one) do
-      login(user)
-      visit root_path
+  context 'with two users and a post' do
+    # It seems like one can not use sign_in with multiple sessions
+    let(:user2) { FactoryBot.create :user }
+
+    before do
+      using_session(:one) do
+        login(user)
+        visit root_path
+      end
+      using_session(:two) do
+        login(user2)
+        visit root_path
+      end
+      using_session(:one) do
+        post_message(message)
+      end
     end
 
-    using_session(:two) do
-      login(user2)
-      visit root_path
+    it 'receives the messages' do
+      using_session(:two) do
+        within('#chat-messages') do
+          expect(page).to have_text(user.display_name)
+          expect(page).to have_text(message)
+        end
+      end
     end
 
-    using_session(:one) do
-      post_message(message)
+    it "has a link to the user's profile in the username" do
+      using_session(:two) do
+        within('#chat-messages .chat-item .chat-content') do
+          expect(page).to have_link(user.display_name, href: user_path(user))
+        end
+      end
     end
 
-    using_session(:two) do
-      within('#chat-messages') do
-        expect(page).to have_text(user.display_name)
-        expect(page).to have_text(message)
-        expect(page).to have_link(href: user_path(user))
+    it "has a link to the user's profile in the avatar" do
+      using_session(:two) do
+        within('#chat-messages .chat-item .avatar-container') do
+          expect(page).to have_link(href: user_path(user))
+        end
       end
     end
   end
