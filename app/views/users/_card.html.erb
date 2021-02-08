@@ -1,17 +1,28 @@
-<div class="card shadow rounded-lg">
-  <div class="card-body">
-    <div class="container">
+<div class="user-card card shadow rounded-lg">
+  <div class="card-body user-card-body">
+    <div class="container" style="padding-top: 5px;padding-bottom: 5px;">
       <div class="row">
         <div class="col-xs">
           <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
         </div>
-        <a class="col-8" href=<%= user_path(user) %>>
+        <a class="col-6" href=<%= user_path(user) %>>
           <h5 class="card-title"><%= user.display_name %></h5>
           <small class="card-link"><i><%= user.email %></i></small>
         </a>
         <% if mode == :add %>
           <div class="col-1">
             <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
+          </div>
+        <% end %>
+        <% if mode == :call %>
+          <div class="col-2">
+            <div class="user-meeting d-flex">
+              <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
+                <%= f.hidden_field :guest_id, value: user.id %>
+                <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       </div>
