@@ -1,4 +1,4 @@
 <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= link_to user_path(user), class: "avatar-user-link" do %>
-  <%= image_tag avatar_user_path(user), id: "avatar-#{user.id}", height: size, width: size, class: "#{classes.append('avatar-image', 'rounded-circle', 'centered-avatar').join(' ')}" %>
+  <%= image_tag avatar_user_path(user), id: "avatar-#{user.id}", height: size, width: size, class: "avatar-image rounded-circle centered-avatar" %>
 <% end %>

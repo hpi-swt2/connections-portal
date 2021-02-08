@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: true do
   let(:user) { FactoryBot.create :user }
-  let(:message) { "A message: #{('a'..'z').to_a.shuffle.join}" }
+  let(:message_text) { "A message: #{('a'..'z').to_a.shuffle.join}" }
 
   before do
     sign_in user
@@ -15,27 +15,27 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
   end
 
   it 'displays the new message' do
-    expect(page).not_to have_text(message)
-    post_message(message)
-    expect(page).to have_text(message)
+    expect(page).not_to have_text(message_text)
+    post_message(message_text)
+    expect(page).to have_text(message_text)
   end
 
   it 'does not display my own display name' do
     within('#chat-messages') do
       expect(page).not_to have_text(user.display_name)
     end
-    post_message(message)
+    post_message(message_text)
     within('#chat-messages') do
       expect(page).not_to have_text(user.display_name)
     end
   end
 
   context 'with one posted message' do
-    let(:room_message) { RoomMessage.all.last }
+    let(:message) { RoomMessage.all.last }
 
     before do
-      post_message(message)
-      room_message
+      post_message(message_text)
+      message
     end
 
     it 'clears text box after message submit' do
@@ -44,7 +44,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
 
     it 'shows the correct timestamp' do
       within('#chat-messages') do
-        expect(page).to have_text(room_message.formatted_time)
+        expect(page).to have_text(message.formatted_time)
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
     it 'shows the correct timestamp after reload' do
       visit root_path
       within('#chat-messages') do
-        expect(page).to have_text(room_message.formatted_time)
+        expect(page).to have_text(message.formatted_time)
       end
     end
   end
@@ -89,7 +89,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
         visit root_path
       end
       using_session(:one) do
-        post_message(message)
+        post_message(message_text)
       end
     end
 
@@ -97,7 +97,7 @@ RSpec.describe 'Global Chat', driver: :selenium_headless, type: :feature, js: tr
       using_session(:two) do
         within('#chat-messages') do
           expect(page).to have_text(user.display_name)
-          expect(page).to have_text(message)
+          expect(page).to have_text(message_text)
         end
       end
     end
