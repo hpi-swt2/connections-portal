@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def self.filter_status
-    status_nice_to_meet_you
+    [status_nice_to_meet_you, status_available]
   end
 
   validates :username, :email, presence: true
@@ -83,6 +83,10 @@ class User < ApplicationRecord
 
   def name
     "#{firstname} #{lastname}"
+  end
+
+  def unavailable?
+    current_status == User.status_working
   end
 
   private

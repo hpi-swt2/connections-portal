@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 
   def filter_users_status
     @users = User.where.not(id: current_user.id).with_status(User.filter_status)
-    @users = @users.sample(maximum_length_user_list)
+    @users = @users.sample(MAXIMUM_LENGTH_USER_LIST)
   end
 
   def chat
@@ -23,9 +23,5 @@ class HomeController < ApplicationController
     end
   end
 
-  private
-
-  def maximum_length_user_list
-    30
-  end
+  MAXIMUM_LENGTH_USER_LIST = 4
 end
