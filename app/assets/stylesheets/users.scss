@@ -41,6 +41,10 @@
     align-items: center;
 }
 
+.user-information:last-child {
+    margin-right: .5rem;
+}
+
 .profile-image{
     padding: 2px;
     flex: 1;
@@ -48,7 +52,9 @@
     padding-top: calc(.5 * 1.5rem);
     padding-bottom: calc(.5 * 1.5rem);
 }
-
+.phone-button {
+    font-size: 1.5rem;
+}
 .user-attributes{
     flex: 4;
     display: block;
@@ -77,7 +83,6 @@
 
 .button-label {
     position: relative;
-    margin-right: .5rem;
     flex: 1;
 }
 

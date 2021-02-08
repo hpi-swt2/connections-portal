@@ -19,11 +19,9 @@
     <% end %>
     <% if mode == :call %>
       <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-        <label class="button-label">
           <%= f.hidden_field :guest_id, value: user.id %>
           <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
           <% end %>
-        </label>
       <% end %>
     <% end %>
   </div>
