@@ -5,7 +5,7 @@
     <label class="user-card-link">
       <%= link_to "", user_path(user), class: "custom-link" %>
       <div class="profile-image my-2 my-sm-0 ">
-        <%= image_tag user.avatar, class: "rounded-circle cover" %>
+        <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
       </div>
       <div class="user-attributes my-2 my-sm-0">
         <h5><%= user.display_name%></h5>
@@ -16,6 +16,15 @@
       <label class="button-label">
         <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "custom-link add_button btn btn-secondary"%>
       </label>
+    <% end %>
+    <% if mode == :call %>
+      <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
+        <label class="button-label">
+          <%= f.hidden_field :guest_id, value: user.id %>
+          <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+          <% end %>
+        </label>
+      <% end %>
     <% end %>
   </div>
   <% if mode == :overview %>
@@ -32,3 +41,4 @@
     <% end %>
   <% end %>
 </div>
+

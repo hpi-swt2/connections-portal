@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   root to: 'home#dashboard'
 
   resources :users, only: %i[show edit update index] do
-    patch 'status', to: 'users#update_status', as: 'update_status', on: :member
+    member do
+      patch :status, to: 'users#update_status', as: 'update_status'
+      get :edit_profile
+      get :avatar, to: 'avatars#serve'
+      post :upload_avatar, to: 'avatars#upload'
+    end
 
-    get :edit_profile, on: :member
     resources :social_accounts
     get 'search', to: 'users#search', on: :collection
     resources :contacts, only: %i[index]

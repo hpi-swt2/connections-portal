@@ -1,17 +1,23 @@
 <h2><%= I18n.t('user.edit.edit_profile_settings_heading') %></h2>
 
+<p>
+  <%= render 'avatar', user: @user, size: 160, classes: %i[rounded-circle centered-avatar] %>
+</p>
+
+<%= form_for Avatar.new, url: upload_avatar_user_path(current_user), remote: true do |f| %>
+  <p>
+    <%= f.file_field :file, accept: Avatar::VALID_MIME_TYPES.join(',') %>
+  </p>
+
+  <p>
+    <%= f.submit I18n.t('avatar.upload') %>
+  </p>
+<% end %>
+
 <%= form_with(model: @user, local: true) do |form| %>
   <% if @user.errors.any? %>
     <%= render 'layouts/flash_messages'%>
   <% end %>
-
-  <p>
-    <%= image_tag @user.avatar, height: 160, width: 160, :style => "margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;", class: "rounded-circle" %>
-  </p>
-
-  <p>
-    <%= form.file_field :avatar %>
-  </p>
 
   <p>
     <%= form.label I18n.t('user.attributes.username') %>

@@ -68,6 +68,9 @@ en:
       free_for_chat: 'free for chat'
       nice_to_meet_you: 'nice to meet you'
       user_list: 'Users who are ready to chat:'
+      busy_text: "Looks like you're busy. Better not disturb you then."
+      start_talk: 'Start a talk with...'
+      or_maybe: '... or maybe with ...'
     search:
       index: 'Search'
       for: 'Search for:'
@@ -131,3 +134,5 @@ en:
     users: 'Users'
     my-contacts: 'My contacts'
     search: 'Search'
+  avatar:
+    upload: 'Upload'

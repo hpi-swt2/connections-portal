@@ -2,7 +2,6 @@
 class User < ApplicationRecord
   # Every user can have multiple social accounts like GitHub, Telegram, ...
   has_many :social_accounts, dependent: :delete_all
-  has_one_attached :avatar
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -17,6 +16,7 @@ class User < ApplicationRecord
   has_many :jitsi_calls, through: :meeting_invitations
   has_many :friendships, dependent: :destroy, inverse_of: :user
   has_many :contacts, through: :friendships
+  has_one :avatar, dependent: :destroy
 
   # as we do not need to work with the relationship models as independent entities, `has_and_belongs_to_many` is fine
   # https://guides.rubyonrails.org/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
@@ -42,15 +42,14 @@ class User < ApplicationRecord
   end
 
   def self.filter_status
-    status_nice_to_meet_you
+    [status_nice_to_meet_you, status_available]
   end
 
-  validates :username, :email, presence: true
+  validates :username, :email, :avatar, presence: true
   validates :current_status, inclusion: { in: VALID_STATUS_LIST }
-  validates :avatar, blob: { content_type: %w[image/png image/jpg image/jpeg], size_range: 0.01..5.megabytes }
 
   after_initialize :init
-  after_commit :set_default_avatar, on: %i[create update]
+  before_validation :set_default_avatar
 
   attribute :current_status, :string, default: User.status_available
 
@@ -85,17 +84,20 @@ class User < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
+  def unavailable?
+    current_status == User.status_working
+  end
+
   private
 
   def set_default_avatar
-    if avatar.attached?
-      nil
-    else
-      avatar.attach(
-        io: File.open(
-          Rails.root.join('app/assets/images/default_avatar.png')
-        ), filename: 'default_avatar.png', content_type: 'image/png'
-      )
-    end
+    return if avatar.present?
+
+    file = File.open(Rails.root.join('app/assets/images/default_avatar.png'), 'rb')
+    self.avatar = Avatar.new(
+      file: file.read, filename: 'default_avatar.png',
+      file_size: file.size, mime_type: 'image/png'
+    )
+    file.close
   end
 end

@@ -190,4 +190,9 @@ RSpec.describe User, type: :model do
       expect(Friendship.where(contact_id: user.id)).to be_empty
     end
   end
+
+  it 'has a default profile picture' do
+    expect { user.save }.to change(Avatar, :count).by(1)
+    expect(user.avatar.file).to be_present
+  end
 end
