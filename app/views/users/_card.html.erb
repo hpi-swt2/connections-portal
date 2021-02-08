@@ -1,42 +1,42 @@
-<div class="user-card card shadow rounded-lg">
-  <div class="card-body user-card-body">
-    <div class="container" style="padding-top: 5px;padding-bottom: 5px;">
-      <div class="row">
-        <div class="col-xs">
-          <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
-        </div>
-        <a class="col-6" href=<%= user_path(user) %>>
-          <h5 class="card-title"><%= user.display_name %></h5>
-          <small class="card-link"><i><%= user.email %></i></small>
-        </a>
-        <% if mode == :add %>
-          <div class="col-1">
-            <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "fa-2x"%>
-          </div>
-        <% end %>
-        <% if mode == :call %>
-          <div class="col-2">
-            <div class="user-meeting d-flex">
-              <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-                <%= f.hidden_field :guest_id, value: user.id %>
-                <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
+<%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class=user-card>
+  <div class="user-information">
+    <label class="user-card-link">
+      <%= link_to "", user_path(user), class: "custom-link" %>
+      <div class="profile-image my-2 my-sm-0 ">
+        <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
+      </div>
+      <div class="user-attributes my-2 my-sm-0">
+        <h5><%= user.display_name%></h5>
+        <div class="email"><%= user.email %></div>
+      </div>
+    </label>
+    <% if mode == :add %>
+      <label class="button-label">
+        <%= link_to (fa_icon 'plus-circle', title: I18n.t('user.contact_request.send')), user_contact_requests_path(user), id: user.id, class: "custom-link add_button btn btn-secondary"%>
+      </label>
+    <% end %>
+    <% if mode == :call %>
+      <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
+          <%= f.hidden_field :guest_id, value: user.id %>
+          <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+          <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if mode == :overview %>
+    <% if user.social_accounts.any? %>
+      <div class="user-social-account-info">
+        <% user.social_accounts.each do |social_account| %>
+          <label class="user-card-link">
+            <a class="custom-link" href=<%= generate_link(social_account) %>>
+              <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
+            </a>
+          </label>
         <% end %>
       </div>
-      <% if mode == :overview %>
-        <div class="row top-buffer">
-          <% user.social_accounts.each do |social_account| %>
-            <div class="col-3">
-              <a href=<%= generate_link(social_account) %>>
-                <i class="fa <%= generate_icon(social_account) %> fa-2x" aria-hidden="true"></i>
-              </a>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
+
