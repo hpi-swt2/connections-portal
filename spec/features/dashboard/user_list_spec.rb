@@ -12,7 +12,7 @@ RSpec.describe 'User list', type: :feature do
     before { visit root_path }
 
     it 'shows the right number of users' do
-      expect(page).to have_css('div#filtered_user_list div.user-list-item', count: users.length)
+      expect(page).to have_css('div#filtered_user_list div.user-card', count: users.length)
     end
 
     it 'does not show the current user' do
@@ -50,7 +50,7 @@ RSpec.describe 'User list', type: :feature do
     end
 
     it 'does only show 30 users' do
-      expect(page).to have_css('div#filtered_user_list div.user-list-item', count: 30)
+      expect(page).to have_css('div#filtered_user_list div.user-card', count: 30)
     end
 
     it 'shows start to talk with... or maybe with...' do

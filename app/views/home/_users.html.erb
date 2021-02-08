@@ -17,21 +17,7 @@
       <% if index == 1 %>
         <h4><%= I18n.t('user.status.or_maybe') %></h4>
       <% end %>
-      <div class="user-list-item d-flex">
-        <div class="user-avatar d-flex">
-          <span><i class="fa fa-user"></i></span>
-        </div>
-        <div class="col user-name">
-          <%= user.display_name %>
-        </div>
-        <div class="user-meeting d-flex">
-          <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-            <%= f.hidden_field :guest_id, value: user.id %>
-            <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      <%= render partial: 'users/card', locals: { user: user, mode: :call } %>
     <% end %>
   <% end %>
 </div>
