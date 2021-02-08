@@ -52,5 +52,10 @@ RSpec.describe 'User list', type: :feature do
     it 'does only show 30 users' do
       expect(page).to have_css('div#filtered_user_list div.user-list-item', count: 30)
     end
+
+    it 'shows start to talk with... or maybe with...' do
+      expect(page).to have_text(I18n.t('user.status.start_talk'))
+      expect(page).to have_text(I18n.t('user.status.or_maybe'))
+    end
   end
 end
