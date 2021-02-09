@@ -8,23 +8,21 @@
         <%= render 'users/avatar', user: user, size: 65, classes: %i[rounded-circle] %>
       </div>
       <div class="user-attributes my-2 my-sm-0">
-        <h5><%= user.display_name%></h5>
+        <h5><%= user.display_name %></h5>
         <div class="email"><%= user.email %></div>
       </div>
     </label>
     <% if mode == :add %>
-        <div class="col-1">
-            <%= form_with url: user_contact_requests_path(user), remote: true, id: "add-contact-form-#{user.id}" do |f| %>
-              <%= button_tag(type: 'submit', class: 'fa fa-3x fa-plus-circle user-contact-add-button', title: I18n.t('user.contact_request.send')) do %>
-              <% end %>
-            <% end %>
-          </div>
+      <%= form_with url: user_contact_requests_path(user), remote: true, id: "add-contact-form-#{user.id}" do |f| %>
+        <%= button_tag(type: 'submit', class: 'fa fa-3x fa-plus-circle user-contact-add-button', title: I18n.t('user.contact_request.send')) do %>
+        <% end %>
+      <% end %>
     <% end %>
     <% if mode == :call %>
       <%= form_with model: JitsiCall.new, id: "init-call-#{user.id}" do |f| %>
-          <%= f.hidden_field :guest_id, value: user.id %>
-          <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
-          <% end %>
+        <%= f.hidden_field :guest_id, value: user.id %>
+        <%= button_tag(type: 'submit', class: "fa fa-phone fa-flip-horizontal phone-button") do %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
