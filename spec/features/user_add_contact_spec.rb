@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Contact request', type: :feature do
+RSpec.describe 'Contact request', type: :feature, driver: :selenium_headless, js: true do
   let(:requesting_user) { FactoryBot.create :user }
   let!(:requested_user) { FactoryBot.create :user }
 
   it 'adds a contact request when the button is clicked' do
     sign_in requesting_user
-    visit users_path
-    find("form[action='#{user_contact_requests_path(requested_user)}']").find('input').click
+    visit search_users_path
+    find("form[action='#{user_contact_requests_path(requested_user)}']").find('button').click
     expect(requested_user.contact_requests).to include(requesting_user)
   end
 

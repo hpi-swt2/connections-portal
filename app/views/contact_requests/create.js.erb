@@ -1,0 +1,4 @@
+<% if @saved %>
+  generatePopup("<%= I18n.t('confirmation.resource_creation', resource: 'Contact request') %>", "fa-info", [], 3000)
+  document.getElementById('<%= "add-contact-form-#{@requested_user.id}" %>').style.visibility = 'hidden'
+<% end %>
