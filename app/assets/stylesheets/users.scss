@@ -22,9 +22,101 @@
     margin-top: .5rem;
 }
 
-.centered-avatar {
-  margin-bottom: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+// We are using the CSS FlexBox system to style the cards: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
+// Every row of the user card is one FlexBox. For example:
+// | profile-image | user-attributes |
+// | social account handle | social account handle | ...
+// The space between the flex entries can be handled via the flex attribute. For example:
+// Profile image get a flex of 1 and user-info of 4. Then user-info gets four times the space of the Profile image
+
+.user-card {
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+}
+
+.user-information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-information:last-child {
+    margin-right: .5rem;
+}
+
+.profile-image{
+    padding: 2px;
+    flex: 1;
+    margin-right: 8px;
+    padding-top: calc(.5 * 1.5rem);
+    padding-bottom: calc(.5 * 1.5rem);
+}
+.phone-button {
+    font-size: 1.5rem;
+}
+.user-attributes{
+    flex: 4;
+    display: block;
+    line-height: 50%;
+}
+
+.email {
+     font-style: italic;
+     font-size: small;
+}
+
+.user-card-link {
+    flex: 5;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.user-social-account-info {
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+}
+
+.button-label {
+    position: relative;
+    flex: 1;
+}
+
+.add_button {
+    height: 100%;
+    width: 100%;
+    border-radius: 99999px;
+    background: #343B3F;
+    font-size: small;
+}
+
+img {
+    height: 75px;
+    width: 75px;
+}
+
+// Just to handle the mobile version
+@media screen and (max-width: 600px) {
+    img {
+        height: 50px;
+        width: 50px;
+    }
+} 
+
+.cover {
+  object-fit: cover;
+}
+
+// This is a trick so that the link is covering the hole label.
+.custom-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }

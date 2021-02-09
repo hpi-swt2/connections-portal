@@ -4,7 +4,7 @@
   <%= render 'common/status_dropdown' %>
 </div>
 
-<div id="filtered_user_list" class="user-list scroll-list scroll-styled">
+<div id="filtered_user_list" class="user-list scroll-styled stack">
   <% if current_user.unavailable? %>
     <div class="busy-container">
       <p><%= I18n.t('user.status.busy_text') %></p>
