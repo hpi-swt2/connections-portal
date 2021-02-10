@@ -1,0 +1,8 @@
+<span id='mobile-logout-button'>
+  <% if user_signed_in? %>
+    <%= link_to (fa_icon 'sign-out', text: ''),
+                destroy_user_session_path,
+                method: :delete,
+                class: 'nav-link navbar-item' %>
+  <% end %>
+</span>

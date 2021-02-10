@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render 'layouts/shared_head' %>
+  <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<%= render "layouts/navbar" %>
+  <div class="container pt-0">
+    <%= render 'common/alerts' %>
+    <%= render 'common/popup' %>
+    <%= yield %>
+  </div>
+<%= render "layouts/footer" %>
+</body>
+
+</html>

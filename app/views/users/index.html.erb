@@ -1,0 +1,20 @@
+<h1>Users</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.email, user %></td>
+      <% if @users_to_add.include? user %>
+        <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>

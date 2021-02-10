@@ -11,6 +11,7 @@ require:
 #
 # For more information: https://docs.rubocop.org/rubocop/versioning.html
 AllCops:
+  TargetRubyVersion: 2.7
   NewCops: enable
 
 #
@@ -34,9 +35,11 @@ Layout/LineLength:
     - 'config/**/*.rb'
 
 # Ignore "Block has too many lines" for specs, `RSpec.describe` blocks can be long
+# We have more routes than fit in one block
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+    - 'config/routes.rb'
 
 # Only check "Missing top-level class documentation comment" for models
 Style/Documentation:
@@ -52,58 +55,10 @@ Layout/EmptyLinesAroundBlockBody:
 # Ignoring entire rules
 #
 
-# Ignore "Prefer single-quoted strings when you don't need string interpolation or special symbols"
-Style/StringLiterals:
-  Enabled: false
-
-# Ignore "Avoid instance variables – use let, a method call, or a local variable (if possible)"
-RSpec/InstanceVariable:
-  Enabled: false
-
 # Ignore "Missing frozen string literal comment"
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# Ignore "Prefer not_to over to_not"
-RSpec/NotToNot:
-  Enabled: false
-
-# Ignore "Add parentheses to nested method call"
-Style/NestedParenthesizedCalls:
-  Enabled: false
-
-# Ignore "Use ! instead of not"
-Style/Not:
-  Enabled: false
-
-# Ignore "Use `%i` or `%I` for an array of symbols"
-Style/SymbolArray:
-  Enabled: false
-
 # Ignore "Gems should be sorted in an alphabetical order within their section of the Gemfile"
 Bundler/OrderedGems:
-  Enabled: false
-
-# Ignore "Please use Rails.root.join('path/to') instead"
-Rails/FilePath:
-  Enabled: false
-
-# Ignore "Avoid using {...} for multi-line blocks"
-Style/BlockDelimiters:
-  Enabled: false
-
-# Ignore "Omit the default :each argument for RSpec hooks"
-RSpec/HookArgument:
-  Enabled: false
-
-# Ignore "Prefer $CHILD_STATUS from the stdlib 'English' module (don't forget to require it) over $?"
-Style/SpecialGlobalVars:
-  Enabled: false
-
-# Ignore "Use $stdout instead of STDOUT"
-Style/GlobalStdStream:
-  Enabled: false
-
-# Ignore "Use underscores(_) as thousands separator and separate every 3 digits with them."
-Style/NumericLiterals:
   Enabled: false

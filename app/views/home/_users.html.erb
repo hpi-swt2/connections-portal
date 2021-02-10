@@ -1,0 +1,23 @@
+<h1 class="center-heading"><%= I18n.t('dashboard.user_list') %></h1>
+
+<div>
+  <%= render 'common/status_dropdown' %>
+</div>
+
+<div id="filtered_user_list" class="user-list scroll-styled stack">
+  <% if current_user.unavailable? %>
+    <div class="busy-container">
+      <p><%= I18n.t('user.status.busy_text') %></p>
+    </div>
+  <% else %>
+    <% @users.each_with_index do |user, index| %>
+      <% if index == 0 %>
+        <h4><%= I18n.t('user.status.start_talk') %></h4>
+      <% end %>
+      <% if index == 1 %>
+        <h4><%= I18n.t('user.status.or_maybe') %></h4>
+      <% end %>
+      <%= render partial: 'users/card', locals: { user: user, mode: :call } %>
+    <% end %>
+  <% end %>
+</div>

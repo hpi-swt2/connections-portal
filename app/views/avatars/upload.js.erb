@@ -1,0 +1,28 @@
+<% if @saved %>
+  {
+    document.getElementById('new_avatar').reset();
+    const image = document.getElementById('<%= "avatar-#{current_user.id}" %>')
+    image.src = '<%= "#{avatar_user_path(current_user)}?#{Time.now}" %>'
+    generatePopup("<%= I18n.t('confirmation.resource_update', resource: Avatar) %>", "fa-info", [], 3000)
+  }
+<% else %>
+  {
+    const error_node = document.createElement('div');
+    error_node.id = 'error_explanation';
+    const list = document.createElement('ul');
+    error_node.appendChild(list);
+    let list_item;
+    <% @avatar.errors.full_messages.each do |message| %>
+      list_item = document.createElement('li');
+      list_item.textContent = '<%= message %>';
+      list.appendChild(list_item);
+    <% end %>
+    const target = document.getElementById('new_avatar');
+    if (target.firstChild.id === 'error_explanation') {
+        target.replaceChild(error_node, target.firstChild);
+    } else {
+        target.insertBefore(error_node, target.firstChild);
+    }
+    generatePopup("<%= I18n.t('denial.resource_update', resource: Avatar) %>", 'fa-exclamation', [], 3000);
+  }
+<% end %>

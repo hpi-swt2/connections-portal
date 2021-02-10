@@ -1,0 +1,20 @@
+<h1><%= I18n.t('user.edit.edit_profile_heading') %></h1>
+<hr />
+<h2><%= I18n.t('user.edit.profile_settings_heading') %></h2>
+<%= link_to I18n.t('user.edit.edit_profile_settings_heading'), edit_profile_user_path(@user) %>
+
+<hr />
+
+<% if @user.social_accounts.any? %>
+  <h2> <%= I18n.t 'social_accounts.edit.social_accounts_heading' %> </h2>
+  <% @user.social_accounts.each do |social_account| %>
+    <% if !social_account.new_record? %>
+      <p>
+        <%= render 'social_accounts/social_account_setting', user: @user, social_account: social_account %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h3>  <%= I18n.t 'social_accounts.edit.add_social_accounts_heading'  %></h3>
+<%= render 'social_accounts/form', submit_label: (I18n.t 'social_accounts.edit.add_social_account_label') %>

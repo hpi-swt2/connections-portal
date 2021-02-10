@@ -30,9 +30,105 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  questions:
-    confirmation: 'Are you sure?'
   confirmation:
     resource_creation: '%{resource} was successfully created.'
     resource_deletion: '%{resource} was successfully deleted.'
     resource_update: '%{resource} was successfully updated.'
+    dismiss: 'Dismiss'
+  denial:
+    resource_creation: '%{resource} could not be created.'
+    resource_deletion: '%{resource} could not be deleted.'
+    resource_update: '%{resource} could not be updated.'
+    forbidden: 'Access denied.'
+    unauthorized: 'Not authorized.'
+    not_found: 'Not found.'
+  navigation:
+    visit_profile: 'Visit my profile'
+    edit_profile: 'Edit my profile'
+    contacts: 'View contacts'
+    account_settings: 'Account settings'
+    log_in: 'Log-In'
+    sign_up: 'Sign-Up'
+  questions:
+      confirmation: 'Are you sure?'
+  user:
+    lists: 'Users'
+    attributes:
+      username: 'Username'
+      firstname: 'Firstname'
+      lastname: 'Lastname'
+      email: 'Email'
+      place_of_residence: 'Place of residence'
+      birthdate: 'Birthdate'
+    status:
+      current: 'Current status'
+      free_for_chat: 'free for chat'
+      busy: 'busy'
+      busy_text: "Looks like you're busy. Better not disturb you then."
+      start_talk: 'Start a talk with...'
+      or_maybe: '... or maybe with ...'
+    search:
+      index: 'Search'
+      for: 'Search for:'
+      placeholder: 'Username, email, ...'
+    contact_request:
+      approved: 'Contact request approved'
+      denied: 'Contact request denied'
+      send: 'Send contact request'
+      view: 'View my requests'
+    edit:
+      edit_profile_heading: 'Edit profile'
+      profile_settings_heading: 'Profile settings'
+      edit_profile_settings_heading: 'Edit profile settings'
+  social_accounts:
+    attributes:
+      social_network: 'Social network'
+      username: 'Username'
+    edit:
+      heading: 'Edit Social Account'
+      update_label: 'Update social account'
+      back_label: 'Back'
+      add_social_account_label: 'Create Social Account'
+      social_accounts_heading: 'Social Accounts'
+      add_social_accounts_heading: 'Add a Social Account'
+    social_account_view:
+      edit_label: 'Edit'
+      remove_label: 'Remove'
+      link_label: 'Link'
+    show:
+      social_accounts_heading: 'Social Accounts'
+  activity:
+    post: 'Post new activity'
+    placeholder: 'Just start typing here...'
+  call:
+    accept: 'Accept'
+    reject: 'Deny'
+    notification_incoming_call: 'You have been invited to a call by %{initiator}'
+    waiting: 'Please wait for your guests to accept your invitation'
+    starting: 'The call is starting now. You should get redirected'
+    rejected: '%{guest} rejected the call'
+    aborted: 'The call was cancelled by %{initiator}'
+    abort: 'Cancel'
+    creation_fail: 'The requested user is currently not ready to meet with you'
+  chat:
+    placeholder: 'Just start typing here...'
+    send: 'Send'
+  dashboard:
+    user_list: 'Users'
+    global_chat: 'Global Chat'
+    last_activities: 'Last Activities'
+    current_proposals: 'Proposals'
+    accept_proposal: 'Accept'
+  index:
+    portal_name: 'Connections++'
+    description: 'A digital tool for organizing and arranging networks, relationships and human connections.'
+    greeting: 'We hope you enjoy using it!'
+    give_feedback: 'Give feedback!'
+  navbar:
+    notes: 'Notes'
+    home: 'Home'
+    users: 'Users'
+    my-contacts: 'My contacts'
+    search: 'Search'
+  avatar:
+    upload: 'Upload'

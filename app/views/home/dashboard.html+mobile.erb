@@ -1,0 +1,12 @@
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'home_mobile', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="refresh-container">
+  <i class='fa fa-refresh refresh-icon' onclick="location.reload()"></i>
+</div>
+<div id="dashboard">
+  <div id="content">
+      <div id="users">
+        <%= render 'users' %>
+      </div>
+  </div>
+</div>
