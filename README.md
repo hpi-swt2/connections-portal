@@ -1,4 +1,4 @@
-# Connections Portal
+# Connections++
 
 Main branch:
 [![CodeFactor](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/badge/main)](https://www.codefactor.io/repository/github/hpi-swt2/connections-portal/overview/main)
