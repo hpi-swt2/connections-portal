@@ -28,7 +28,7 @@ class User < ApplicationRecord
                           association_foreign_key: 'requesting_user_id'
   # rubocop:enable Rails/HasAndBelongsToMany
 
-  VALID_STATUS_LIST = %w[available working free_for_chat offline nice_to_meet_you].freeze
+  VALID_STATUS_LIST = %w[busy free_for_chat].freeze
 
   # class methods
   def self.select_status_list
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def self.filter_status
-    [status_nice_to_meet_you, status_available]
+    status_free_for_chat
   end
 
   validates :username, :email, :avatar, presence: true
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   after_initialize :init
   before_validation :set_default_avatar
 
-  attribute :current_status, :string, default: User.status_available
+  attribute :current_status, :string, default: User.status_free_for_chat
 
   scope :with_status, ->(status) { where(current_status: status) }
 
@@ -71,6 +71,10 @@ class User < ApplicationRecord
     [firstname, lastname].filter(&:present?).join(' ').presence || username
   end
 
+  def display_status
+    I18n.t("user.status.#{current_status}")
+  end
+
   def self.search(search)
     if search.present?
       User.where('username LIKE ?', "%#{search}%").or(User.where('firstname LIKE ?', "%#{search}%"))
@@ -85,7 +89,7 @@ class User < ApplicationRecord
   end
 
   def unavailable?
-    current_status == User.status_working
+    current_status == User.status_busy
   end
 
   private

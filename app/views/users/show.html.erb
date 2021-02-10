@@ -41,5 +41,5 @@
 <% if user_signed_in? && current_user.id == @user.id %>
   <%= render 'common/status_dropdown' %>
 <% else %>
-  <p><%= "#{I18n.t('user.status.current')}: #{@user.current_status}" %></p>
+  <p><%= "#{I18n.t('user.status.current')}: #{@user.display_status}" %></p>
 <% end %>
