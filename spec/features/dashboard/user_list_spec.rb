@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'User list', type: :feature do
-  let(:user) { FactoryBot.create :user, current_status: User.filter_status.sample }
-  let(:working_user) { FactoryBot.create :user, current_status: User.status_working }
+  let(:user) { FactoryBot.create :user, current_status: User.filter_status }
+  let(:busy_user) { FactoryBot.create :user, current_status: User.status_busy }
 
   before { sign_in user }
 
   context 'with some users' do
-    let!(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status.sample }
+    let!(:users) { FactoryBot.create_list :user, 3, current_status: User.filter_status }
 
     before { visit root_path }
 
@@ -22,15 +22,15 @@ RSpec.describe 'User list', type: :feature do
     end
 
     it 'does not show users with another status' do
-      expect(page).not_to have_text(working_user.display_name)
+      expect(page).not_to have_text(busy_user.display_name)
     end
   end
 
-  context 'when in working status' do
-    let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status.sample }
+  context 'when in busy status' do
+    let!(:available_user) { FactoryBot.create :user, current_status: User.filter_status }
 
     before do
-      user.current_status = User.status_working
+      user.current_status = User.status_busy
       visit root_path
     end
 
@@ -45,7 +45,7 @@ RSpec.describe 'User list', type: :feature do
 
   context 'with many users' do
     before do
-      FactoryBot.create_list :user, 20, current_status: User.filter_status.sample
+      FactoryBot.create_list :user, 20, current_status: User.filter_status
       visit root_path
     end
 

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: true do
-  let!(:user1) { FactoryBot.create :user, current_status: User.status_nice_to_meet_you }
-  let!(:user2) { FactoryBot.create :user, current_status: User.status_nice_to_meet_you }
+  let!(:user1) { FactoryBot.create :user, current_status: User.status_free_for_chat }
+  let!(:user2) { FactoryBot.create :user, current_status: User.status_free_for_chat }
 
   before do
     sign_in user1
@@ -48,7 +48,7 @@ RSpec.describe 'Jitsi Calls', driver: :selenium_headless, type: :feature, js: tr
     let(:guest_invitation) { call.meeting_invitations.find_by(user: user2) }
 
     it 'a call is not created' do
-      user2.current_status = User.status_working
+      user2.current_status = User.status_busy
       user2.save
       expect do
         within("#init-call-#{user2.id}") do

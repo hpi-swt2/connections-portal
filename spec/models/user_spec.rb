@@ -39,9 +39,9 @@ RSpec.describe User, type: :model do
     expect(user.username).to eq('test-user')
   end
 
-  it 'creates user with default status available' do
+  it 'creates user with default status free_for_chat' do
     user = described_class.new({ email: 'test-user@example.org' })
-    expect(user.current_status).to eq(described_class.status_available)
+    expect(user.current_status).to eq(described_class.status_free_for_chat)
   end
 
   it 'has no relationship to social accounts' do
@@ -109,11 +109,11 @@ RSpec.describe User, type: :model do
   end
 
   describe 'status scope' do
-    let(:user1) { FactoryBot.create :user, current_status: described_class.status_working }
+    let(:user1) { FactoryBot.create :user, current_status: described_class.status_busy }
     let(:user2) { FactoryBot.create :user, current_status: described_class.status_free_for_chat }
 
     it 'returns only users with the given status' do
-      users = described_class.with_status(described_class.status_working)
+      users = described_class.with_status(described_class.status_busy)
       expect(users).to include(user1)
       expect(users).not_to include(user2)
     end
@@ -194,5 +194,11 @@ RSpec.describe User, type: :model do
   it 'has a default profile picture' do
     expect { user.save }.to change(Avatar, :count).by(1)
     expect(user.avatar.file).to be_present
+  end
+
+  it 'displays the current status in a readable format' do
+    user.current_status = described_class.status_free_for_chat
+    user.save
+    expect(user.display_status).to eq(I18n.t('user.status.free_for_chat'))
   end
 end

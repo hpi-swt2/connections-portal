@@ -15,7 +15,7 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type:
   end
 
   it 'can change status by selecting item in status dropdown' do
-    user.update(current_status: 'working')
+    user.update(current_status: User.status_busy)
     target_status = User.status_free_for_chat
     find('#user_current_status').find(:option, text: I18n.t("user.status.#{target_status}")).select_option
     user.reload
@@ -31,18 +31,21 @@ RSpec.describe 'Users profile page', driver: :selenium_headless, js: true, type:
     expect(page).not_to have_select('user[current_status]')
   end
 
-  it 'contains the "free for chat" status' do
-    expect(page).to have_select('user[current_status]', with_options: ['free for chat'])
+  it 'contains all defined statuses' do
+    expect(page).to have_select(
+      'user[current_status]',
+      with_options: [I18n.t('user.status.free_for_chat'), I18n.t('user.status.busy')]
+    )
   end
 
   it 'shows current status when showing different user' do
-    user2.current_status = User.status_available
+    user2.current_status = User.status_free_for_chat
     user2.save
     visit user_path(user2)
-    expect(page).to have_text(I18n.t('user.status.available'))
+    expect(page).to have_text(I18n.t('user.status.free_for_chat'))
   end
 
-  it 'show social accounts' do
+  it 'shows social accounts' do
     expect(page).to have_text(social_account1.social_network)
     expect(page).to have_text(social_account1.user_name)
     expect(page).to have_text(social_account2.social_network)
