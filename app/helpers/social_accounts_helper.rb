@@ -16,7 +16,7 @@ module SocialAccountsHelper
     'Twitter' => 'fa-twitter',
     'GitLab@HPI' => 'fa-gitlab',
     'Slack' => 'fa-slack',
-    'Discord' => 'fa-discord'
+    'Discord' => 'fa-gamepad'
   }.freeze
 
   def generate_link(social_account)
